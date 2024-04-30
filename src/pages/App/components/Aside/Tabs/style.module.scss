@@ -1,0 +1,15 @@
+.tabs_item {
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color-bg-layout);
+  }
+}
+
+.tabs_item.tabs_item__active {
+  background-color: var(--color-bg-mask);
+}

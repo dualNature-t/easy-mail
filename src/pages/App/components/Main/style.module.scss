@@ -1,0 +1,45 @@
+$blockArr: "body", "section", "column", "text", "image", "button", "divider",
+  "spacer", "social";
+
+.main_container {
+  margin: 40px 10px;
+  :global {
+    @each $item in $blockArr {
+      .mj-#{$item} {
+        position: relative;
+        outline: 2px solid transparent;
+        transition: outline 0.05s;
+
+        &.hover,
+        &.focus {
+          outline-color: var(--color-primary-border);
+          &:before {
+            content: "#{$item}";
+            display: block;
+            position: absolute;
+            transform: translate(-27px, -150%);
+            padding: 2px 6px;
+            font-size: 15px;
+            color: var(--color-white);
+            background-color: var(--color-primary-border);
+          }
+        }
+
+        &.focus {
+          outline-color: var(--color-primary);
+          &:before {
+            background-color: var(--color-primary);
+          }
+        }
+      }
+      .mj-body.hover:before,
+      .mj-body.focus:before,
+      .mj-section.hover:before,
+      .mj-section.focus:before,
+      .mj-spacer.hover:before,
+      .mj-spacer.focus:before {
+        transform: translate(-2px, -108%);
+      }
+    }
+  }
+}

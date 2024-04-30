@@ -1,0 +1,28 @@
+.header_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 0 10px;
+}
+
+.header_breadcrumb {
+  display: flex;
+  column-gap: 10px;
+
+  & > div::after {
+    content: ">";
+    margin-left: 5px;
+  }
+
+  & > div:last-child::after {
+    content: "";
+  }
+}
+
+.header_operate {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  font-size: 24px;
+}

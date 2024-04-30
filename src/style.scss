@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  height: 100vh;
+}
+
+:root {
+  --color-primary: #13c2c2;
+  --color-primary-active: #08979c;
+  --color-primary-bg: #e6fffb;
+  --color-primary-bg-hover: #b5f5ec;
+  --color-primary-border: #87e8de;
+  --color-primary-border-hover: #5cdbd3;
+  --color-primary-hover: #36cfc9;
+
+  --color-border: #d9d9d9;
+  --color-border-secondary: #f0f0f0;
+  --color-text: rgba(0, 0, 0, 0.88);
+  --color-text-description: rgba(0, 0, 0, 0.45);
+  --color-white: #fff;
+
+  --color-bg-layout: #f5f5f5;
+  --color-bg-mask: rgba(0, 0, 0, 0.45);
+}

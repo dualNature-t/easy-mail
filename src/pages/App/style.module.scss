@@ -1,0 +1,21 @@
+.app_header {
+  height: 40px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.app_content {
+  display: flex;
+  height: calc(100vh - 40px);
+}
+
+.app_aside {
+  width: 330px;
+  border-right: 1px solid var(--color-border);
+}
+
+.app_main {
+  position: relative;
+  height: calc(100vh - 40px);
+  flex: 1;
+  overflow: auto;
+}
