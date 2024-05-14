@@ -103,7 +103,11 @@ const useDropContainer = () => {
 
     const drop = (e: DragEvent) => {
       e.preventDefault();
-      clearEmptyNode();
+      if ((e.target as HTMLElement).classList.contains("drop-block")) {
+        emptyNodeArr.current = [];
+      } else {
+        clearEmptyNode();
+      }
     };
 
     const dragover = (e: DragEvent) => {
@@ -113,17 +117,17 @@ const useDropContainer = () => {
 
     const throttleDragOver = throttle((e: DragEvent) => {
       let target = getNodeByTarget(e.target as HTMLElement, "mj-column");
+
       if (
         dataTransfer?.data.type == "base" &&
         target?.classList.contains("mj-column-empty")
       ) {
+        clearEmptyNode();
         emptyNodeArr.current.push(target);
         target.classList.remove("mj-column-empty");
         target.children[0].children[0].appendChild(block as Node);
         return;
       }
-
-      console.log(emptyNodeArr.current);
 
       const isMergeSection =
         dataTransfer?.type === "move"

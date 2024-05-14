@@ -32,7 +32,7 @@ const useDropBlock = () => {
       block.setAttribute("style", normalStyle);
     };
     const onDrop = (e: DragEvent) => {
-      e.stopPropagation();
+      // e.stopPropagation();
 
       let target: Node | string = "";
 
