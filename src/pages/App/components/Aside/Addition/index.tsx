@@ -12,21 +12,21 @@ import { basicTagNameType, columnTagNameType } from "@/context/appContext";
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
-type dataBelongType = "column" | "base";
+export type dragBlockCategoryType = "column" | "base";
 
-type additionDataType<T> = {
-  type: dataBelongType;
+export type additionDataType<T> = {
+  type: dragBlockCategoryType;
   value: T;
   label: string;
 };
 
-const columnData: additionDataType<
-  columnTagNameType | "mj-column-2" | "mj-column-3" | "mj-column-4"
->[] = [
+const columnData: additionDataType<columnTagNameType>[] = [
   { type: "column", value: "mj-column", label: "一列" },
   { type: "column", value: "mj-column-2", label: "两列" },
   { type: "column", value: "mj-column-3", label: "三列" },
   { type: "column", value: "mj-column-4", label: "四列" },
+  { type: "column", value: "mj-column-left", label: "Left" },
+  { type: "column", value: "mj-column-right", label: "Right" },
 ];
 
 const baseData: additionDataType<basicTagNameType>[] = [

@@ -1,10 +1,24 @@
 import { tagNameMap } from "@/constant";
+import { tagNameType } from "@/context/appContext";
 
-const getNodeByTarget = (node: HTMLElement) => {
+const getNodeByTarget = (
+  node: HTMLElement,
+  target?: tagNameType | tagNameType[]
+) => {
   let result = node;
+  if (!result || result.nodeName === "HTML") return;
+
+  const limitArr = target
+    ? Array.isArray(target)
+      ? target
+      : [target]
+    : tagNameMap;
+
   while (
-    tagNameMap.every((item) => !result.classList.contains(item)) &&
-    result.parentNode?.nodeName !== "BODY"
+    result &&
+    limitArr.every((item) => !result.classList?.contains(item)) &&
+    result.parentNode?.nodeName !== "BODY" &&
+    result.parentNode?.nodeName !== "HTML"
   ) {
     result = result.parentNode as HTMLElement;
   }

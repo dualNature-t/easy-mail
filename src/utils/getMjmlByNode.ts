@@ -56,7 +56,7 @@ const getMjmlByNode = (
       mjml?.children?.[block2Id]?.children?.[block3Id]?.children?.[block4Id];
   }
 
-  return { mjml, idx };
+  return { mjml, idx } as { mjml: appDataType; idx: string };
 };
 
 export default getMjmlByNode;

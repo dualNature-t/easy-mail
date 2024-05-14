@@ -1,0 +1,27 @@
+.property_container {
+  padding: 20px;
+}
+
+.property_title {
+  margin: 0 0 10px;
+}
+
+.property_title__secondary {
+  margin-bottom: 20px !important;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-border-secondary);
+}
+
+.property_formItem {
+  margin-bottom: 12px;
+
+  :global {
+    .ant-form-item-control-input-content {
+      text-align: end;
+    }
+  }
+}
+
+.property_formItem_title {
+  margin: 0 !important;
+}

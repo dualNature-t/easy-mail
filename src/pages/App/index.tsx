@@ -11,7 +11,11 @@ import Header from "./components/Header";
 import Aside from "./components/Aside";
 import Main from "./components/Main";
 import style from "./style.module.scss";
-import AppContext, { appDataType, tabType } from "@/context/appContext";
+import AppContext, {
+  appDataType,
+  dataTransferType,
+  tabType,
+} from "@/context/appContext";
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
@@ -29,9 +33,59 @@ const defaultTreeData: appDataType = {
       tagName: "mj-body",
       attributes: {
         "css-class": "mj-body",
-        "background-color": "#f40",
       },
       children: [
+        // {
+        //   tagName: "mj-section",
+        //   attributes: { "css-class": "mj-section" },
+        //   children: [
+        //     {
+        //       tagName: "mj-column",
+        //       attributes: { "css-class": "mj-column" },
+        //       children: [
+        //         {
+        //           tagName: "mj-text",
+        //           attributes: {
+        //             "css-class": "mj-text",
+        //           },
+        //           content: "column -left01",
+        //         },
+        //         {
+        //           tagName: "mj-image",
+        //           attributes: {
+        //             "css-class": "mj-image",
+        //             src: "https://cdn.getvero.com/dd-editor/templates/getting-started/hero.png",
+        //           },
+        //         },
+        //         {
+        //           tagName: "mj-button",
+        //           attributes: {
+        //             "css-class": "mj-button",
+        //           },
+        //           content: "column -left01",
+        //         },
+        //         {
+        //           tagName: "mj-divider",
+        //           attributes: {
+        //             "css-class": "mj-divider",
+        //           },
+        //         },
+        //         // {
+        //         //   tagName: "mj-spacer",
+        //         //   attributes: {
+        //         //     "css-class": "mj-spacer",
+        //         //   },
+        //         // },
+        //         // {
+        //         //   tagName: "mj-social",
+        //         //   attributes: {
+        //         //     "css-class": "mj-social",
+        //         //   },
+        //         // },
+        //       ],
+        //     },
+        //   ],
+        // },
         {
           tagName: "mj-section",
           attributes: { "css-class": "mj-section" },
@@ -39,98 +93,15 @@ const defaultTreeData: appDataType = {
             {
               tagName: "mj-column",
               attributes: { "css-class": "mj-column" },
-              children: [
-                {
-                  tagName: "mj-text",
-                  attributes: {
-                    "css-class": "mj-text",
-                  },
-                  content: "column -left01",
-                },
-                {
-                  tagName: "mj-image",
-                  attributes: {
-                    "css-class": "mj-image",
-                    src: "https://cdn.getvero.com/dd-editor/templates/getting-started/hero.png",
-                  },
-                },
-                {
-                  tagName: "mj-button",
-                  attributes: {
-                    "css-class": "mj-button",
-                  },
-                  content: "column -left01",
-                },
-                {
-                  tagName: "mj-divider",
-                  attributes: {
-                    "css-class": "mj-divider",
-                  },
-                },
-                {
-                  tagName: "mj-spacer",
-                  attributes: {
-                    "css-class": "mj-spacer",
-                  },
-                },
-                {
-                  tagName: "mj-social",
-                  attributes: {
-                    "css-class": "mj-social",
-                  },
-                },
-              ],
-            },
-          ],
-        },
-        {
-          tagName: "mj-section",
-          attributes: { "css-class": "mj-section" },
-          children: [
-            {
-              tagName: "mj-column",
-              attributes: { "css-class": "mj-column" },
-              children: [
-                {
-                  tagName: "mj-text",
-                  attributes: {
-                    "css-class": "mj-text",
-                  },
-                  content: "column -left01",
-                },
-                {
-                  tagName: "mj-image",
-                  attributes: {
-                    "css-class": "mj-image",
-                    src: "https://cdn.getvero.com/dd-editor/templates/getting-started/hero.png",
-                  },
-                },
-                {
-                  tagName: "mj-button",
-                  attributes: {
-                    "css-class": "mj-button",
-                  },
-                  content: "column -left01",
-                },
-                {
-                  tagName: "mj-divider",
-                  attributes: {
-                    "css-class": "mj-divider",
-                  },
-                },
-                {
-                  tagName: "mj-spacer",
-                  attributes: {
-                    "css-class": "mj-spacer",
-                  },
-                },
-                {
-                  tagName: "mj-social",
-                  attributes: {
-                    "css-class": "mj-social",
-                  },
-                },
-              ],
+              // children: [
+              //   {
+              //     tagName: "mj-text",
+              //     attributes: {
+              //       "css-class": "mj-text",
+              //     },
+              //     content: "column -left01",
+              //   },
+              // ],
             },
           ],
         },
@@ -149,6 +120,9 @@ const App: React.FC<AppProps> = ({
   const [tab, setTab] = useState<tabType>("add");
   const [hoverNode, setHoverNode] = useState<HTMLElement | null>(null);
   const [focusNode, setFocusNode] = useState<HTMLElement | null>(null);
+  const [dataTransfer, setDataTransfer] = useState<dataTransferType | null>(
+    null
+  );
 
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
@@ -171,6 +145,8 @@ const App: React.FC<AppProps> = ({
         setHoverNode,
         focusNode,
         setFocusNode,
+        dataTransfer,
+        setDataTransfer,
       }}
     >
       <div className={style.app_header}>

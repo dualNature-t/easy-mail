@@ -1,3 +1,4 @@
+import { dragBlockCategoryType } from "@/pages/App/components/Aside/Addition";
 import { createContext } from "react";
 
 export type tabType = "add" | "edit";
@@ -14,10 +15,13 @@ export type tagNameType =
   | "mj-spacer"
   | "mj-social";
 
-export type columnTagNameType = Extract<
-  tagNameType,
-  "mj-section" | "mj-column"
->;
+export type columnTagNameType =
+  | "mj-column"
+  | "mj-column-2"
+  | "mj-column-3"
+  | "mj-column-4"
+  | "mj-column-left"
+  | "mj-column-right";
 
 export type basicTagNameType = Exclude<
   tagNameType,
@@ -31,6 +35,14 @@ export interface appDataType {
   children?: appDataType[];
 }
 
+export interface dataTransferType {
+  type: "move" | "add";
+  data: {
+    type: dragBlockCategoryType;
+    value: basicTagNameType | columnTagNameType;
+  };
+}
+
 interface appContextType {
   appData: appDataType | null;
   setAppData: (data: appDataType) => void;
@@ -40,6 +52,8 @@ interface appContextType {
   setHoverNode: (node: HTMLElement | null) => void;
   focusNode: HTMLElement | null;
   setFocusNode: (node: HTMLElement | null) => void;
+  dataTransfer: dataTransferType | null;
+  setDataTransfer: (data: dataTransferType | null) => void;
 }
 
 const AppContext = createContext<appContextType>({
@@ -58,6 +72,10 @@ const AppContext = createContext<appContextType>({
   // 当前选中元素
   focusNode: null,
   setFocusNode: () => {},
+
+  // drag数据
+  dataTransfer: null,
+  setDataTransfer: () => {},
 });
 
 export default AppContext;

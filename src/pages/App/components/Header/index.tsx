@@ -10,8 +10,6 @@ import useFocusNode from "@/hooks/useFocusNode";
 import style from "./style.module.scss";
 import getBreadCrumbByNode from "@/utils/getBreadCrumbByNode";
 import { useMemo } from "react";
-import getMjmlByNode from "@/utils/getMjmlByNode";
-import useAppData from "@/hooks/useAppData";
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
@@ -21,7 +19,6 @@ const Header = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
   const { focusNode } = useFocusNode();
-  const { appData } = useAppData();
 
   // console.log(getMjmlByNode(appData, focusNode));
 
