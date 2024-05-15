@@ -93,28 +93,88 @@ const defaultTreeData: appDataType = {
             {
               tagName: "mj-column",
               attributes: { "css-class": "mj-column" },
-              // children: [
-              //   {
-              //     tagName: "mj-text",
-              //     attributes: {
-              //       "css-class": "mj-text",
-              //     },
-              //     content: "column -left01",
-              //   },
-              // ],
+            },
+          ],
+        },
+        {
+          tagName: "mj-section",
+          attributes: { "css-class": "mj-section" },
+          children: [
+            {
+              tagName: "mj-column",
+              attributes: { "css-class": "mj-column" },
             },
             {
               tagName: "mj-column",
               attributes: { "css-class": "mj-column" },
-              // children: [
-              //   {
-              //     tagName: "mj-text",
-              //     attributes: {
-              //       "css-class": "mj-text",
-              //     },
-              //     content: "column -left01",
-              //   },
-              // ],
+            },
+          ],
+        },
+        {
+          tagName: "mj-section",
+          attributes: { "css-class": "mj-section" },
+          children: [
+            {
+              tagName: "mj-column",
+              attributes: { "css-class": "mj-column", width: "60%" },
+            },
+            {
+              tagName: "mj-column",
+              attributes: { "css-class": "mj-column", width: "40%" },
+            },
+          ],
+        },
+        {
+          tagName: "mj-section",
+          attributes: { "css-class": "mj-section" },
+          children: [
+            {
+              tagName: "mj-column",
+              attributes: { "css-class": "mj-column", width: "40%" },
+            },
+            {
+              tagName: "mj-column",
+              attributes: { "css-class": "mj-column", width: "60%" },
+            },
+          ],
+        },
+        {
+          tagName: "mj-section",
+          attributes: { "css-class": "mj-section" },
+          children: [
+            {
+              tagName: "mj-column",
+              attributes: { "css-class": "mj-column" },
+            },
+            {
+              tagName: "mj-column",
+              attributes: { "css-class": "mj-column" },
+            },
+            {
+              tagName: "mj-column",
+              attributes: { "css-class": "mj-column" },
+            },
+          ],
+        },
+        {
+          tagName: "mj-section",
+          attributes: { "css-class": "mj-section" },
+          children: [
+            {
+              tagName: "mj-column",
+              attributes: { "css-class": "mj-column" },
+            },
+            {
+              tagName: "mj-column",
+              attributes: { "css-class": "mj-column" },
+            },
+            {
+              tagName: "mj-column",
+              attributes: { "css-class": "mj-column" },
+            },
+            {
+              tagName: "mj-column",
+              attributes: { "css-class": "mj-column" },
             },
           ],
         },

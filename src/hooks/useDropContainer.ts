@@ -36,17 +36,17 @@ const useDropContainer = () => {
   const { block } = useDropBlock();
   useFocusTool();
 
+  const resetEmptyNode = () => {
+    if (emptyNodeArr.current.length > 0) {
+      emptyNodeArr.current.forEach((node) => {
+        node.classList.add("mj-column-empty");
+      });
+      emptyNodeArr.current = [];
+    }
+  };
+
   useEffect(() => {
     if (!ref) return;
-
-    const clearEmptyNode = () => {
-      if (emptyNodeArr.current.length > 0) {
-        emptyNodeArr.current.forEach((node) => {
-          node.classList.add("mj-column-empty");
-        });
-        emptyNodeArr.current = [];
-      }
-    };
 
     const mouseover = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
@@ -106,7 +106,7 @@ const useDropContainer = () => {
       if ((e.target as HTMLElement).classList.contains("drop-block")) {
         emptyNodeArr.current = [];
       } else {
-        clearEmptyNode();
+        resetEmptyNode();
       }
     };
 
@@ -122,7 +122,7 @@ const useDropContainer = () => {
         dataTransfer?.data.type == "base" &&
         target?.classList.contains("mj-column-empty")
       ) {
-        clearEmptyNode();
+        resetEmptyNode();
         emptyNodeArr.current.push(target);
         target.classList.remove("mj-column-empty");
         target.children[0].children[0].appendChild(block as Node);
@@ -198,7 +198,7 @@ const useDropContainer = () => {
         insertParentEle?.insertBefore(block, insertEle);
       }
 
-      clearEmptyNode();
+      resetEmptyNode();
     }, 400);
 
     ref.addEventListener("mouseover", mouseover);
@@ -219,6 +219,7 @@ const useDropContainer = () => {
   useEffect(() => {
     const onDragEnd = () => {
       block && block.remove();
+      resetEmptyNode();
       setDataTransfer(null);
     };
     window.addEventListener("dragend", onDragEnd);

@@ -82,7 +82,7 @@ const useFocusTool = () => {
       setDataTransfer({
         type: "move",
         data: {
-          type: "base",
+          type: focusNode.classList.contains("mj-section") ? "column" : "base",
           value: focusNode.classList[0] as basicTagNameType | columnTagNameType,
         },
       });

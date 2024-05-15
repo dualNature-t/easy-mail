@@ -3,7 +3,12 @@ import useDataTransfer from "./useDataTransfer";
 import useFocusNode from "./useFocusNode";
 import { basicElementTextMap } from "@/constant";
 import { basicTagNameType } from "@/context/appContext";
-import { mergeSectionByNode, mergeSectionByType } from "@/utils/mergeNode";
+import {
+  hasChildByColumn,
+  mergeSectionByNode,
+  mergeSectionByType,
+} from "@/utils/mergeNode";
+import getNodeByTarget from "@/utils/getNodeByTarget";
 
 const normalStyle =
   "border: 1px dashed #ccc; padding: 20px; text-align: center; font-size: 14px;";
@@ -62,7 +67,13 @@ const useDropBlock = () => {
         }
       }
 
+      const sectionTarget = getNodeByTarget(target as HTMLElement, "mj-column");
+
       block.replaceWith(target);
+
+      if (sectionTarget && !hasChildByColumn(sectionTarget)) {
+        sectionTarget.classList.add("mj-column-empty");
+      }
     };
 
     const onDragOver = (e: DragEvent) => {

@@ -43,6 +43,7 @@ const Main = (): JSX.Element => {
   const setStyleInIframe = (htmlEle: HTMLElement) => {
     const body = htmlEle.querySelector("body");
     const head = htmlEle.querySelector("head");
+    const styleEles = htmlEle.querySelectorAll("style");
 
     const htmlEleStyle = getComputedStyle(document.documentElement);
     const color_primary_border = htmlEleStyle.getPropertyValue(
@@ -60,6 +61,7 @@ const Main = (): JSX.Element => {
       top: 0px;
       display: flex;
       flex-direction: column;
+      z-index: 9;
     }
     .focus-tool-drag, .focus-tool-copy, .focus-tool-delete {
       width: 25px;
@@ -100,7 +102,7 @@ const Main = (): JSX.Element => {
       vertical-align: middle;
     }
     .mj-column-empty > table:before {
-      content: "Empty Column - Drop content here";
+      content: "Empty Column";
     }
     .mj-column-empty.mj-column-per-100 > table:before {
       content: "Empty Section - Drop content here";
@@ -389,6 +391,25 @@ const Main = (): JSX.Element => {
       transform: translate(-2px, -108%);
     }
     `;
+
+    styleEles[1].innerHTML = `
+      @media only screen and (min-width:480px) {
+        .mj-column-per-100 { width:100% !important; max-width: 100%; }
+        .mj-column-per-50 { width:50% !important; max-width: 50%; }
+        .mj-column-per-60 { width:60% !important; max-width: 60%; }
+        .mj-column-per-40 { width:40% !important; max-width: 40%; }
+        .mj-column-per-33-333333333333336 { width:33.333333333333336% !important; max-width: 33.333333333333336%; }
+        .mj-column-per-25 { width:25% !important; max-width: 25%; }
+      }
+    `;
+    styleEles[2].innerHTML = `
+      .moz-text-html .mj-column-per-100 { width:100% !important; max-width: 100%; }
+      .moz-text-html .mj-column-per-50 { width:50% !important; max-width: 50%; }
+      .moz-text-html .mj-column-per-60 { width:60% !important; max-width: 60%; }
+      .moz-text-html .mj-column-per-40 { width:40% !important; max-width: 40%; }
+      .moz-text-html .mj-column-per-33-333333333333336 { width:33.333333333333336% !important; max-width: 33.333333333333336%; }
+      .moz-text-html .mj-column-per-25 { width:25% !important; max-width: 25%; }
+      `;
     head?.appendChild(style);
   };
 
