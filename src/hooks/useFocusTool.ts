@@ -23,7 +23,12 @@ const useFocusTool = () => {
   }, []);
 
   useEffect(() => {
-    if (!focusTool || !focusNode) {
+    if (
+      !focusTool ||
+      !focusNode ||
+      focusNode.nodeName === "BODY" ||
+      focusNode.classList.contains("mj-body")
+    ) {
       focusTool?.remove();
       return;
     }

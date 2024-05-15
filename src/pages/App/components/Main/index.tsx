@@ -58,7 +58,7 @@ const Main = (): JSX.Element => {
     .focus-tool {
       position: absolute;
       right: -30px;
-      top: 0px;
+      top: -20px;
       display: flex;
       flex-direction: column;
       z-index: 9;
@@ -150,11 +150,12 @@ const Main = (): JSX.Element => {
       outline-color: ${color_primary_border};
     }
     .edit-body .mj-section.hover:before, .edit-body .mj-section.focus:before {
+      width: 100%;
       content: "section";
       display: block;
       position: absolute;
       transform: translate(-27px, -150%);
-      padding: 2px 6px;
+      padding: 1px 2px;
       font-size: 15px;
       color: ${color_white};
       background-color: ${color_primary_border};
@@ -181,11 +182,12 @@ const Main = (): JSX.Element => {
       outline-color: ${color_primary_border};
     }
     .edit-body .mj-column.hover:before, .edit-body .mj-column.focus:before {
+      width: 100%;
       content: "column";
       display: block;
       position: absolute;
       transform: translate(-27px, -150%);
-      padding: 2px 6px;
+      padding: 1px 2px;
       font-size: 15px;
       color: ${color_white};
       background-color: ${color_primary_border};
@@ -212,11 +214,12 @@ const Main = (): JSX.Element => {
       outline-color: ${color_primary_border};
     }
     .edit-body .mj-text.hover:before, .edit-body .mj-text.focus:before {
+      width: 100%;
       content: "text";
       display: block;
       position: absolute;
       transform: translate(-27px, -150%);
-      padding: 2px 6px;
+      padding: 1px 2px;
       font-size: 15px;
       color: ${color_white};
       background-color: ${color_primary_border};
@@ -243,12 +246,14 @@ const Main = (): JSX.Element => {
       outline-color: ${color_primary_border};
     }
     .edit-body .mj-image.hover:before, .edit-body .mj-image.focus:before {
+      width: 100%;
       content: "image";
       display: block;
       position: absolute;
       transform: translate(-27px, -150%);
-      padding: 2px 6px;
+      padding: 1px 2px;
       font-size: 15px;
+      text-align: left;
       color: ${color_white};
       background-color: ${color_primary_border};
     }
@@ -274,12 +279,14 @@ const Main = (): JSX.Element => {
       outline-color: ${color_primary_border};
     }
     .edit-body .mj-button.hover:before, .edit-body .mj-button.focus:before {
+      width: 100%;
       content: "button";
       display: block;
       position: absolute;
       transform: translate(-27px, -150%);
-      padding: 2px 6px;
+      padding: 1px 2px;
       font-size: 15px;
+      text-align: left;
       color: ${color_white};
       background-color: ${color_primary_border};
     }
@@ -305,12 +312,14 @@ const Main = (): JSX.Element => {
       outline-color: ${color_primary_border};
     }
     .edit-body .mj-divider.hover:before, .edit-body .mj-divider.focus:before {
+      width: 100%;
       content: "divider";
       display: block;
       position: absolute;
       transform: translate(-27px, -150%);
-      padding: 2px 6px;
+      padding: 1px 2px;
       font-size: 15px;
+      text-align: left;
       color: ${color_white};
       background-color: ${color_primary_border};
     }
@@ -336,11 +345,12 @@ const Main = (): JSX.Element => {
       outline-color: ${color_primary_border};
     }
     .edit-body .mj-spacer.hover:before, .edit-body .mj-spacer.focus:before {
+      width: 100%;
       content: "spacer";
       display: block;
       position: absolute;
       transform: translate(-27px, -150%);
-      padding: 2px 6px;
+      padding: 1px 2px;
       font-size: 15px;
       color: ${color_white};
       background-color: ${color_primary_border};
@@ -367,11 +377,12 @@ const Main = (): JSX.Element => {
       outline-color: ${color_primary_border};
     }
     .edit-body .mj-social.hover:before, .edit-body .mj-social.focus:before {
+      width: 100%;
       content: "social";
       display: block;
       position: absolute;
       transform: translate(-27px, -150%);
-      padding: 2px 6px;
+      padding: 1px 2px;
       font-size: 15px;
       color: ${color_white};
       background-color: ${color_primary_border};

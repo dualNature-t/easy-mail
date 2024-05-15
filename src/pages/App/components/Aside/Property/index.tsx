@@ -22,10 +22,8 @@ import {
 } from "antd";
 import { appDataType, tagNameType } from "@/context/appContext";
 import { onTreePropertyChange } from "@/utils/treeTool";
-import {
-  getStyleCategoryByNode,
-  setStyleByNode,
-} from "@/utils/makeStyleByNode";
+import useProperty from "@/hooks/useProperty";
+import { setStyleByNode } from "@/utils/mergeProperty";
 const { Title } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
@@ -106,8 +104,7 @@ const propertyByTagNamesMap: Record<
 const Property = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
-  const { appData, setAppData } = useAppData();
-  const { focusNode } = useFocusNode();
+  const { property } = useProperty();
 
   // const { mjml, idx } = getMjmlByNode(appData, focusNode);
 
@@ -115,7 +112,7 @@ const Property = (): JSX.Element => {
   // const tagAttrs =
   //   propertyByTagNamesMap[tagName as keyof typeof propertyByTagNamesMap];
 
-  const renderAttrs = getStyleCategoryByNode(focusNode);
+  // const renderAttrs = getStyleCategoryByNode(focusNode);
 
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */

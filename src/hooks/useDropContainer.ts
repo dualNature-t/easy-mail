@@ -86,12 +86,16 @@ const useDropContainer = () => {
 
       const node = getNodeByTarget(target);
 
-      if (
-        !node ||
-        node.nodeName === "BODY" ||
-        node.classList.contains("mj-body")
-      ) {
+      if (!node) {
         setFocusNode(null);
+        return;
+      }
+      if (node.nodeName === "BODY") {
+        setFocusNode(node.children[0] as HTMLElement);
+        return;
+      }
+      if (node.classList.contains("mj-body")) {
+        setFocusNode(node);
         return;
       }
       if (node.classList.contains("focus")) return;

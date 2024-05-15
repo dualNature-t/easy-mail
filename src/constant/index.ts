@@ -1,3 +1,4 @@
+import { validFocusNodeTagNameType } from "@/hooks/useProperty";
 import { columnTagNameType, basicTagNameType } from "../context/appContext";
 
 export const columnElementTextMap: Record<columnTagNameType, string> = {
@@ -217,3 +218,26 @@ export const tagNameMap = [
   "mj-section",
   ...Object.keys(basicElementTextMap),
 ];
+
+export const defaultNodePropertyMap: Record<validFocusNodeTagNameType, object> =
+  {
+    "mj-body": {
+      "background-color": "none",
+      width: "600px",
+    },
+    "mj-section": {
+      "full-width": false,
+      "border-radius": "0px",
+      border: false,
+      "background-color": "none",
+      "background-image": "none",
+      "background-style": "repeat",
+      padding: "20px 0px",
+    },
+    "mj-button": {},
+    "mj-divider": {},
+    "mj-image": {},
+    "mj-social": {},
+    "mj-spacer": {},
+    "mj-text": {},
+  };
