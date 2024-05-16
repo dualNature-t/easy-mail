@@ -13,6 +13,24 @@ import style from "./style.module.scss";
 import { useMemo } from "react";
 import { mergeNodeEmpty } from "@/utils/mergeNode";
 
+const columnPer1 = `
+@media only screen and (min-width:480px) {
+  .mj-column-per-100 { width:100% !important; max-width: 100%; }
+  .mj-column-per-50 { width:50% !important; max-width: 50%; }
+  .mj-column-per-60 { width:60% !important; max-width: 60%; }
+  .mj-column-per-40 { width:40% !important; max-width: 40%; }
+  .mj-column-per-33-333333333333336 { width:33.333333333333336% !important; max-width: 33.333333333333336%; }
+  .mj-column-per-25 { width:25% !important; max-width: 25%; }
+}
+`;
+const columnPer2 = `
+.moz-text-html .mj-column-per-100 { width:100% !important; max-width: 100%; }
+.moz-text-html .mj-column-per-50 { width:50% !important; max-width: 50%; }
+.moz-text-html .mj-column-per-60 { width:60% !important; max-width: 60%; }
+.moz-text-html .mj-column-per-40 { width:40% !important; max-width: 40%; }
+.moz-text-html .mj-column-per-33-333333333333336 { width:33.333333333333336% !important; max-width: 33.333333333333336%; }
+.moz-text-html .mj-column-per-25 { width:25% !important; max-width: 25%; }
+`;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
@@ -403,24 +421,18 @@ const Main = (): JSX.Element => {
     }
     `;
 
-    styleEles[1].innerHTML = `
-      @media only screen and (min-width:480px) {
-        .mj-column-per-100 { width:100% !important; max-width: 100%; }
-        .mj-column-per-50 { width:50% !important; max-width: 50%; }
-        .mj-column-per-60 { width:60% !important; max-width: 60%; }
-        .mj-column-per-40 { width:40% !important; max-width: 40%; }
-        .mj-column-per-33-333333333333336 { width:33.333333333333336% !important; max-width: 33.333333333333336%; }
-        .mj-column-per-25 { width:25% !important; max-width: 25%; }
-      }
-    `;
-    styleEles[2].innerHTML = `
-      .moz-text-html .mj-column-per-100 { width:100% !important; max-width: 100%; }
-      .moz-text-html .mj-column-per-50 { width:50% !important; max-width: 50%; }
-      .moz-text-html .mj-column-per-60 { width:60% !important; max-width: 60%; }
-      .moz-text-html .mj-column-per-40 { width:40% !important; max-width: 40%; }
-      .moz-text-html .mj-column-per-33-333333333333336 { width:33.333333333333336% !important; max-width: 33.333333333333336%; }
-      .moz-text-html .mj-column-per-25 { width:25% !important; max-width: 25%; }
-      `;
+    if (styleEles.length > 1) {
+      styleEles[1].innerHTML = columnPer1;
+      styleEles[2].innerHTML = columnPer2;
+    } else {
+      const style01 = document.createElement("style");
+      const style02 = document.createElement("style");
+      style01.innerHTML = columnPer1;
+      style02.innerHTML = columnPer2;
+      head?.appendChild(style01);
+      head?.appendChild(style02);
+    }
+
     head?.appendChild(style);
   };
 

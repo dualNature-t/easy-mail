@@ -6,11 +6,8 @@
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import React from "react";
+import React, { useEffect } from "react";
 import style from "./style.module.scss";
-import useAppData from "@/hooks/useAppData";
-import useFocusNode from "@/hooks/useFocusNode";
-import getMjmlByNode from "@/utils/getMjmlByNode";
 import {
   ColorPicker,
   Form,
@@ -20,33 +17,22 @@ import {
   Switch,
   Typography,
 } from "antd";
-import { appDataType, tagNameType } from "@/context/appContext";
-import { onTreePropertyChange } from "@/utils/treeTool";
 import useProperty from "@/hooks/useProperty";
-import { setStyleByNode } from "@/utils/mergeProperty";
 const { Title } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
-const PxInputNumber = (
-  <InputNumber
-    step={10}
-    formatter={(value) => `${value}px`}
-    parser={(value) => value?.replace("px", "") as unknown as number}
-  />
-);
-
-const propertyComponentMap: Record<
+export const propertyComponentMap: Record<
   string,
   { type: string; component: React.ReactNode }
 > = {
   "background-color": {
-    type: "colorPicker",
+    type: "color",
     component: <ColorPicker showText format="hex" />,
   },
   width: {
     type: "number",
-    component: PxInputNumber,
+    component: <InputNumber />,
   },
   "full-width": {
     type: "boolean",
@@ -58,19 +44,19 @@ const propertyComponentMap: Record<
   },
   padding: {
     type: "number",
-    component: PxInputNumber,
+    component: <InputNumber />,
   },
   "font-size": {
     type: "number",
-    component: PxInputNumber,
+    component: <InputNumber />,
   },
   color: {
-    type: "colorPicker",
+    type: "color",
     component: <ColorPicker showText format="hex" />,
   },
   "line-height": {
     type: "number",
-    component: PxInputNumber,
+    component: <InputNumber />,
   },
   align: {
     type: "string",
@@ -85,34 +71,13 @@ const propertyComponentMap: Record<
     component: <Input />,
   },
 };
-
-const propertyByTagNamesMap: Record<
-  Exclude<tagNameType, "mjml" | "mj-column">,
-  string[]
-> = {
-  "mj-body": ["background-color", "width"],
-  "mj-section": ["full-width", "background-color", "background-url", "padding"],
-  "mj-text": ["font-size", "color", "line-height", "align", "padding"],
-  "mj-button": ["font-size", "color", "line-height", "align", "padding"],
-  "mj-image": ["align", "border", "padding", "src", "width"],
-  "mj-divider": ["align", "padding", "width"],
-  "mj-spacer": ["padding"],
-  "mj-social": ["align", "padding"],
-};
 /* <------------------------------------ **** INTERFACE END **** ------------------------------------ */
 /* <------------------------------------ **** FUNCTION COMPONENT START **** ------------------------------------ */
 const Property = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
-  const { property } = useProperty();
-
-  // const { mjml, idx } = getMjmlByNode(appData, focusNode);
-
-  // const tagName = mjml?.tagName ?? "mj-body";
-  // const tagAttrs =
-  //   propertyByTagNamesMap[tagName as keyof typeof propertyByTagNamesMap];
-
-  // const renderAttrs = getStyleCategoryByNode(focusNode);
+  const [form] = Form.useForm();
+  const { nodeName, property, setProperty } = useProperty();
 
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
@@ -120,94 +85,78 @@ const Property = (): JSX.Element => {
   /* <------------------------------------ **** PARAMETER END **** ------------------------------------ */
   /* <------------------------------------ **** FUNCTION START **** ------------------------------------ */
   /************* This section will include this component general function *************/
-  const formatChangeValue = (value: Record<string, unknown>) => {
-    const result: Record<string, unknown> = {};
-    const key = Object.keys(value)[0];
-    const type = propertyComponentMap[key].type;
-    if (type == "colorPicker") {
-      result[key] = (value[key] as { toHexString: () => string }).toHexString();
-    } else if (type == "number") {
-      result[key] = `${value[key]}px`;
-    } else {
-      result[key] = value[key];
-    }
-    return result;
+  const handleValuesChange = (value: Record<string, unknown>) => {
+    const result = formatFormValueToProperty(property, value);
+    setProperty(result);
   };
 
-  const handleValuesChange = (changeValue: Record<string, unknown>) => {
-    // console.log(focusNode, changeValue, focusNode?.getAttribute("style"));
-    // focusNode?.setAttribute("style", JSON.stringify(changeValue));
-    setStyleByNode(focusNode, changeValue);
-
-    // const result = onTreePropertyChange(
-    //   appData,
-    //   idx,
-    //   formatChangeValue(changeValue)
-    // );
-    // setAppData(result as appDataType);
-  };
-
-  const getInitValue = () => {
-    const flatAttrs = Object.values(renderAttrs).reduce((cur, pre) => {
-      return { ...cur, ...pre };
-    }, {});
-
-    const result = {};
-    Object.keys(flatAttrs).forEach((item) => {
-      const type = propertyComponentMap[item].type;
-      result[item] =
-        type == "number" ? parseInt(flatAttrs[item]) : flatAttrs[item];
+  const formatPropertyToFormValue = (property: Record<string, unknown>) => {
+    const result: Record<string, string | number> = {};
+    Object.keys(property).forEach((item) => {
+      const propertyType = propertyComponentMap[item].type;
+      const propertyValue = property[item];
+      if (propertyType === "number") {
+        result[item] = parseInt(propertyValue as string);
+      } else {
+        result[item] = propertyValue as string;
+      }
     });
+
     return result;
+  };
+
+  const formatFormValueToProperty = (
+    property: Record<string, unknown>,
+    value: Record<string, unknown>
+  ) => {
+    const key = Object.keys(value)[0];
+    const valueType = propertyComponentMap[key].type;
+
+    let result = { [key]: value[key] };
+    if (valueType == "number") {
+      result = { [key]: `${value[key]}px` };
+    } else if (valueType == "color") {
+      result = {
+        [key]: (value[key] as { toHexString: () => string }).toHexString(),
+      };
+    }
+
+    return { ...property, ...result } as Record<string, string>;
   };
   /* <------------------------------------ **** FUNCTION END **** ------------------------------------ */
   /* <------------------------------------ **** EFFECT START **** ------------------------------------ */
   /************* This section will include this component general function *************/
+  useEffect(() => {
+    form.setFieldsValue(formatPropertyToFormValue(property));
+  }, [property]);
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
     <div className={style.property_container}>
-      {/* <Title className={style.property_title} level={5}>
-        {tagName.split("-")[1]}
+      <Title className={style.property_title} level={5}>
+        {nodeName?.split("-")[1]}
       </Title>
-      <Form initialValues={getInitValue()} onValuesChange={handleValuesChange}>
-        {Object.keys(renderAttrs).map((item, index) => {
+      <Form form={form} onValuesChange={handleValuesChange}>
+        {Object.keys(property).map((citem, cindex) => {
           return (
-            <React.Fragment key={index}>
-              <Title
-                className={style.property_title__secondary}
-                type="secondary"
-                level={5}
-              >
-                {item}
-              </Title>
-              {Object.keys(renderAttrs[item]).map((citem, cindex) => {
-                return (
-                  <Form.Item
-                    key={cindex}
-                    className={style.property_formItem}
-                    colon={false}
-                    name={citem}
-                    label={
-                      <Title
-                        className={style.property_formItem_title}
-                        level={5}
-                      >
-                        {citem}
-                      </Title>
-                    }
-                  >
-                    {
-                      propertyComponentMap[
-                        citem as keyof typeof propertyComponentMap
-                      ].component
-                    }
-                  </Form.Item>
-                );
-              })}
-            </React.Fragment>
+            <Form.Item
+              key={cindex}
+              className={style.property_formItem}
+              colon={false}
+              name={citem}
+              label={
+                <Title className={style.property_formItem_title} level={5}>
+                  {citem}
+                </Title>
+              }
+            >
+              {
+                propertyComponentMap[citem as keyof typeof propertyComponentMap]
+                  .component
+              }
+            </Form.Item>
           );
         })}
-      </Form> */}
+      </Form>
     </div>
   );
 };

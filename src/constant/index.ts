@@ -222,15 +222,15 @@ export const tagNameMap = [
 export const defaultNodePropertyMap: Record<validFocusNodeTagNameType, object> =
   {
     "mj-body": {
-      "background-color": "none",
+      "background-color": "",
       width: "600px",
     },
     "mj-section": {
       "full-width": false,
       "border-radius": "0px",
       border: false,
-      "background-color": "none",
-      "background-image": "none",
+      "background-color": "",
+      "background-image": "",
       "background-style": "repeat",
       padding: "20px 0px",
     },
