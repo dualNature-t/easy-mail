@@ -40,6 +40,7 @@ const useDropBlock = () => {
       // e.stopPropagation();
 
       let target: Node | string = "";
+      let targetOrigin = focusNode;
 
       if (block.parentElement?.classList.contains("mj-body")) {
         // 插入到body
@@ -50,6 +51,7 @@ const useDropBlock = () => {
             target = focusNode;
           } else {
             // 需要包裹section
+            targetOrigin = focusNode?.parentElement as HTMLElement;
             target = mergeSectionByNode(focusNode);
           }
         }
@@ -67,7 +69,10 @@ const useDropBlock = () => {
         }
       }
 
-      const sectionTarget = getNodeByTarget(target as HTMLElement, "mj-column");
+      const sectionTarget = getNodeByTarget(
+        targetOrigin as HTMLElement,
+        "mj-column"
+      );
 
       block.replaceWith(target);
 

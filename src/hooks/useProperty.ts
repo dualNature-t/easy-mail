@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import useFocusNode from "./useFocusNode";
 import { tagNameType } from "@/context/appContext";
-import { getPropertyByNode, objToStyleStr } from "@/utils/mergeProperty";
+import { getPropertyByNode, setPropertyByNode } from "@/utils/mergeProperty";
 
 export type validFocusNodeTagNameType = Exclude<
   tagNameType,
@@ -13,9 +13,9 @@ const useProperty = () => {
   const { focusNode } = useFocusNode();
 
   const setPropertyToNode = useCallback(
-    (styleStr: Record<string, string>) => {
-      focusNode?.setAttribute("style", objToStyleStr(styleStr));
-      setProperty(styleStr);
+    (styleObj: Record<string, string>) => {
+      setPropertyByNode(focusNode, styleObj);
+      setProperty(styleObj);
     },
     [focusNode]
   );

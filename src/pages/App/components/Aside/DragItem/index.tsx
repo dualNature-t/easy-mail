@@ -9,11 +9,12 @@
 import useDataTransfer from "@/hooks/useDataTransfer";
 import React from "react";
 import { additionDataType } from "../Addition";
+import { basicTagNameType, columnTagNameType } from "@/context/appContext";
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
 interface DragItemProps {
-  value: additionDataType<string>;
+  value: additionDataType<basicTagNameType | columnTagNameType>;
 }
 
 /* <------------------------------------ **** INTERFACE END **** ------------------------------------ */

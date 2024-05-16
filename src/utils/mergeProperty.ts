@@ -23,16 +23,25 @@ export const objToStyleStr = (styleObj: Record<string, string>) => {
 export const getPropertyByNode = (node: HTMLElement | null) => {
   if (!node) return {};
   const nodeName = node.classList[0] as validFocusNodeTagNameType;
-  const styleStr = node.getAttribute("style");
+  const selfStyleStr = node.getAttribute("style");
+
   let result: Record<string, string> = {};
   switch (nodeName) {
     case "mj-body":
+      const sectionWidth = styleStrToObj(
+        node.querySelector(".mj-section")?.getAttribute("style")
+      )["max-width"];
+      const extraSytleStr = sectionWidth ? { width: sectionWidth } : {};
+
       result = Object.assign(
         defaultNodePropertyMap[nodeName],
-        styleStrToObj(styleStr)
+        styleStrToObj(selfStyleStr),
+        extraSytleStr
       );
+
       break;
     case "mj-section":
+      // result = Object.assign(defaultNodePropertyMap[nodeName]);
       break;
     case "mj-button":
       break;
@@ -50,12 +59,53 @@ export const getPropertyByNode = (node: HTMLElement | null) => {
   return result;
 };
 
-export const setStyleByNode = (
+export const setPropertyByNode = (
   node: HTMLElement | null,
   styleObj: Record<string, unknown>
 ) => {
   if (!node) return;
-  // const originStyle = styleStrToObj(node.getAttribute("style"));
-  // const newStyle = { ...originStyle, ...styleObj };
-  // console.log(newStyle);
+  const nodeName = node.classList[0] as validFocusNodeTagNameType;
+  switch (nodeName) {
+    case "mj-body":
+      const nodyStyle = objToStyleStr({
+        "background-color": styleObj["background-color"] as string,
+      });
+      const sections = node.querySelectorAll(".mj-section");
+      sections.forEach((section) => {
+        const sectionStyle = Object.assign(
+          styleStrToObj(section.getAttribute("style")),
+          {
+            "max-width": styleObj.width as string,
+          }
+        );
+        section.setAttribute("style", objToStyleStr(sectionStyle));
+      });
+      node.setAttribute("style", nodyStyle);
+      node.parentElement?.setAttribute(
+        "style",
+        objToStyleStr(
+          Object.assign(
+            styleStrToObj(node.parentElement.getAttribute("style")),
+            {
+              "background-color": styleObj["background-color"] as string,
+            }
+          )
+        )
+      );
+      break;
+    case "mj-section":
+      break;
+    case "mj-button":
+      break;
+    case "mj-divider":
+      break;
+    case "mj-image":
+      break;
+    case "mj-social":
+      break;
+    case "mj-spacer":
+      break;
+    case "mj-text":
+      break;
+  }
 };

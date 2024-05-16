@@ -226,9 +226,9 @@ export const defaultNodePropertyMap: Record<validFocusNodeTagNameType, object> =
       width: "600px",
     },
     "mj-section": {
-      "full-width": false,
-      "border-radius": "0px",
-      border: false,
+      // "full-width": false,
+      "border-radius": "",
+      border: "none",
       "background-color": "",
       "background-image": "",
       "background-style": "repeat",
