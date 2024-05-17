@@ -1,46 +1,21 @@
 /**
  * @file
- * @date 2024-04-24
+ * @date 2024-05-17
  * @author haodong.wang
- * @lastModify  2024-04-24
+ * @lastModify  2024-05-17
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import React, { useEffect } from "react";
-import style from "./style.module.scss";
-import { Col, Form, Row, Typography, theme } from "antd";
-import useProperty, { validFocusNodeTagNameType } from "@/hooks/useProperty";
-import BodyBlock from "@/components/Body";
-import SectionBlock from "@/components/Section";
-import TextBlock from "@/components/Text";
-import ImageBlock from "@/components/Image";
-import ButtonBlock from "@/components/Button";
-import DividerBlock from "@/components/Divider";
-import SpacerBlock from "@/components/Spacer";
-import SocialBlock from "@/components/Social";
-const { Title } = Typography;
+import { Divider, Typography } from "antd";
+const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
-const propertyContentMap: Record<validFocusNodeTagNameType, React.ReactNode> = {
-  "mj-body": <BodyBlock />,
-  "mj-section": <SectionBlock />,
-  "mj-text": <TextBlock />,
-  "mj-image": <ImageBlock />,
-  "mj-button": <ButtonBlock />,
-  "mj-divider": <DividerBlock />,
-  "mj-spacer": <SpacerBlock />,
-  "mj-social": <SocialBlock />,
-};
 /* <------------------------------------ **** INTERFACE END **** ------------------------------------ */
 /* <------------------------------------ **** FUNCTION COMPONENT START **** ------------------------------------ */
-const Property = (): JSX.Element => {
+const TextBlock = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
-  const [form] = Form.useForm();
-  const { token } = theme.useToken();
-  const { nodeName, property, setProperty } = useProperty();
-
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
@@ -50,24 +25,22 @@ const Property = (): JSX.Element => {
   /* <------------------------------------ **** FUNCTION END **** ------------------------------------ */
   /* <------------------------------------ **** EFFECT START **** ------------------------------------ */
   /************* This section will include this component general function *************/
-
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
-    <div className={style.property_container}>
-      <Row>
-        <Col
-          style={{ background: token.colorPrimary, width: 4, marginRight: 4 }}
-        ></Col>
-        <Col>
-          <Title className={style.property_title} level={4}>
-            {nodeName?.split("-")[1].toUpperCase()}
-          </Title>
-        </Col>
-      </Row>
+    <>
+      <>
+        <Divider orientation="left" orientationMargin="0">
+          <Text type="secondary">TEXT STYLES</Text>
+        </Divider>
+      </>
 
-      {propertyContentMap[nodeName]}
-    </div>
+      <>
+        <Divider orientation="left" orientationMargin="0">
+          <Text type="secondary">POSITION</Text>
+        </Divider>
+      </>
+    </>
   );
 };
-export default Property;
+export default TextBlock;
 /* <------------------------------------ **** FUNCTION COMPONENT END **** ------------------------------------ */

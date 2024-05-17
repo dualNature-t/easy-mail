@@ -14,11 +14,15 @@ const useProperty = () => {
 
   const setPropertyToNode = useCallback(
     (styleObj: Record<string, string>) => {
-      setPropertyByNode(focusNode, styleObj);
-      setProperty(styleObj);
+      const pt = { ...property, ...styleObj };
+      setPropertyByNode(focusNode, pt);
+      setProperty(pt);
     },
-    [focusNode]
+    [focusNode, property]
   );
+
+  const nodeName = (focusNode?.classList[0] ??
+    "mj-body") as validFocusNodeTagNameType;
 
   useEffect(() => {
     if (!focusNode) return;
@@ -28,7 +32,7 @@ const useProperty = () => {
   }, [focusNode]);
 
   return {
-    nodeName: focusNode?.classList[0],
+    nodeName,
     property,
     setProperty: setPropertyToNode,
   };
