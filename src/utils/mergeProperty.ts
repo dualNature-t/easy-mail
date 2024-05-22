@@ -6,8 +6,10 @@ export const styleStrToObj = (styleStr?: string | null) => {
   const result: Record<string, string> = {};
   const styleArr = styleStr.split(";").filter((i) => !!i);
   styleArr.forEach((item) => {
-    const key = item.split(":")[0];
-    const value = item.split(":")[1];
+    const itemArr = item.split(":");
+
+    const key = itemArr[0];
+    const value = itemArr.slice(1).join(":");
     result[key] = value;
   });
   return result;
@@ -28,20 +30,24 @@ export const getPropertyByNode = (node: HTMLElement | null) => {
   let result: Record<string, string> = {};
   switch (nodeName) {
     case "mj-body":
-      const sectionWidth = styleStrToObj(
-        node.querySelector(".mj-section")?.getAttribute("style")
-      )["max-width"];
-      const extraSytleStr = sectionWidth ? { width: sectionWidth } : {};
+      const sectionStyle = node
+        .querySelector(".mj-section")
+        ?.getAttribute("style");
 
       result = Object.assign(
         defaultNodePropertyMap[nodeName],
         styleStrToObj(selfStyleStr),
-        extraSytleStr
+        styleStrToObj(sectionStyle)
       );
 
       break;
     case "mj-section":
-      // result = Object.assign(defaultNodePropertyMap[nodeName]);
+      const tdStyle = node.querySelector("td")?.getAttribute("style");
+      result = Object.assign(
+        defaultNodePropertyMap[nodeName],
+        styleStrToObj(selfStyleStr),
+        styleStrToObj(tdStyle)
+      );
       break;
     case "mj-button":
       break;
@@ -75,7 +81,7 @@ export const setPropertyByNode = (
         const sectionStyle = Object.assign(
           styleStrToObj(section.getAttribute("style")),
           {
-            "max-width": styleObj.width as string,
+            "max-width": styleObj["max-width"] as string,
           }
         );
         section.setAttribute("style", objToStyleStr(sectionStyle));
@@ -94,6 +100,49 @@ export const setPropertyByNode = (
       );
       break;
     case "mj-section":
+      const {
+        background,
+        "background-repeat": backgroundRepeat,
+        "background-size": backgroundSize,
+        border,
+        "border-radius": borderRadius,
+        padding,
+      } = styleObj;
+      const tdEle = node.querySelector("td");
+      const tableEle = node.querySelector("table");
+      tdEle?.setAttribute(
+        "style",
+        objToStyleStr(
+          Object.assign(styleStrToObj(tdEle.getAttribute("style")), {
+            padding: padding,
+          })
+        )
+      );
+      node.setAttribute(
+        "style",
+        objToStyleStr(
+          Object.assign(styleStrToObj(node.getAttribute("style")), {
+            background,
+            "background-repeat": backgroundRepeat,
+            "background-size": backgroundSize,
+            border,
+            "border-radius": borderRadius,
+          })
+        )
+      );
+      tableEle?.setAttribute(
+        "style",
+        objToStyleStr(
+          Object.assign(styleStrToObj(tableEle.getAttribute("style")), {
+            background,
+            "background-repeat": backgroundRepeat,
+            "background-size": backgroundSize,
+            border,
+            "border-radius": borderRadius,
+          })
+        )
+      );
+      console.log(styleObj);
       break;
     case "mj-button":
       break;

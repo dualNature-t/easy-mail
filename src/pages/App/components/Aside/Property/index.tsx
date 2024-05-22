@@ -10,14 +10,16 @@ import React, { useEffect } from "react";
 import style from "./style.module.scss";
 import { Col, Form, Row, Typography, theme } from "antd";
 import useProperty, { validFocusNodeTagNameType } from "@/hooks/useProperty";
-import BodyBlock from "@/components/Body";
-import SectionBlock from "@/components/Section";
-import TextBlock from "@/components/Text";
-import ImageBlock from "@/components/Image";
-import ButtonBlock from "@/components/Button";
-import DividerBlock from "@/components/Divider";
-import SpacerBlock from "@/components/Spacer";
-import SocialBlock from "@/components/Social";
+import {
+  BodyBlock,
+  ButtonBlock,
+  DividerBlock,
+  ImageBlock,
+  SectionBlock,
+  SocialBlock,
+  SpacerBlock,
+  TextBlock,
+} from "@/components";
 const { Title } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */

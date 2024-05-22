@@ -223,16 +223,14 @@ export const defaultNodePropertyMap: Record<validFocusNodeTagNameType, object> =
   {
     "mj-body": {
       "background-color": "",
-      width: "600px",
+      "max-width": "600px",
     },
     "mj-section": {
       // "full-width": false,
       "border-radius": "",
-      border: "none",
-      "background-color": "",
-      "background-image": "",
-      "background-style": "repeat",
-      padding: "20px 0px",
+      border: "",
+      background: "",
+      padding: "20px",
     },
     "mj-button": {},
     "mj-divider": {},

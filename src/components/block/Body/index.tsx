@@ -28,8 +28,6 @@ const BodyBlock = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
   const { property, setProperty } = useProperty();
-
-  console.log(property);
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
@@ -76,10 +74,10 @@ const BodyBlock = (): JSX.Element => {
           </Col>
           <Col>
             <InputNumber
-              value={parseInt(property["width"])}
+              value={parseInt(property["max-width"])}
               step={10}
               onChange={(value) => {
-                onChange({ width: `${value}px` });
+                onChange({ "max-width": `${value}px` });
               }}
             />
           </Col>

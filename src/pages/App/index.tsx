@@ -38,8 +38,50 @@ const defaultTreeData: appDataType = {
       children: [
         {
           tagName: "mj-section",
-          attributes: { "css-class": "mj-section" },
+          attributes: {
+            "css-class": "mj-section",
+            "border-radius": "4px",
+            // border: "1px solid #ddd",
+            "background-color": "#f40",
+            "background-url":
+              "https://ss2.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2107631312,3178897554&fm=253&gp=0.jpg",
+            // "background-repeat": "cover",
+            padding: "20px",
+          },
           children: [
+            {
+              tagName: "mj-column",
+              attributes: { "css-class": "mj-column" },
+              children: [
+                {
+                  tagName: "mj-text",
+                  attributes: {
+                    "css-class": "mj-text",
+                  },
+                  content: "Hello World",
+                },
+                // {
+                //   tagName: "mj-image",
+                //   attributes: {
+                //     "css-class": "mj-image",
+                //     src: "https://ts1.cn.mm.bing.net/th/id/R-C.748160bf925a7acb3ba1c9514bbc60db?rik=AYY%2bJ9WcXYIMgw&riu=http%3a%2f%2fseopic.699pic.com%2fphoto%2f50017%2f0822.jpg_wh1200.jpg&ehk=CMVcdZMU6xxsjVjafO70cFcmJvD62suFC1ytk8UuAUk%3d&risl=&pid=ImgRaw&r=0",
+                //   },
+                // },
+                // {
+                //   tagName: "mj-button",
+                //   attributes: {
+                //     "css-class": "mj-button",
+                //   },
+                //   content: "Button",
+                // },
+                // {
+                //   tagName: "mj-divider",
+                //   attributes: {
+                //     "css-class": "mj-divider",
+                //   },
+                // },
+              ],
+            },
             {
               tagName: "mj-column",
               attributes: { "css-class": "mj-column" },
