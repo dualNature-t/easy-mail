@@ -6,7 +6,17 @@
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import { Divider, Typography } from "antd";
+import Padding from "@/components/Padding";
+import {
+  Divider,
+  Form,
+  InputNumber,
+  Radio,
+  Typography,
+  ColorPicker,
+  Select,
+} from "antd";
+import { Color } from "antd/es/color-picker";
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
@@ -32,12 +42,50 @@ const TextBlock = (): JSX.Element => {
         <Divider orientation="left" orientationMargin="0">
           <Text type="secondary">TEXT STYLES</Text>
         </Divider>
+
+        <Form.Item name="font-family" label={<Text strong>Font Family</Text>}>
+          <Select
+            style={{ width: 120 }}
+            options={[
+              { value: "repeat", label: "Repeat" },
+              { value: "no-repeat", label: "No-Repeat" },
+            ]}
+          ></Select>
+        </Form.Item>
+
+        <Form.Item name="font-size" label={<Text strong>Font Size</Text>}>
+          <InputNumber />
+        </Form.Item>
+
+        <Form.Item name="line-height" label={<Text strong>Line Height</Text>}>
+          <InputNumber />
+        </Form.Item>
+
+        <Form.Item
+          name="color"
+          label={<Text strong>Font Color</Text>}
+          normalize={(value: Color) => {
+            return value.toHexString();
+          }}
+        >
+          <ColorPicker format="hex" showText />
+        </Form.Item>
       </>
 
       <>
         <Divider orientation="left" orientationMargin="0">
           <Text type="secondary">POSITION</Text>
         </Divider>
+
+        <Form.Item name="align" label={<Text strong>Align</Text>}>
+          <Radio.Group>
+            <Radio.Button value="left">Left</Radio.Button>
+            <Radio.Button value="center">Center</Radio.Button>
+            <Radio.Button value="right">Right</Radio.Button>
+          </Radio.Group>
+        </Form.Item>
+
+        <Padding />
       </>
     </>
   );

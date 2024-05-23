@@ -6,7 +6,16 @@
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import { Divider, Typography } from "antd";
+import Padding from "@/components/Padding";
+import {
+  Checkbox,
+  Divider,
+  Form,
+  Input,
+  InputNumber,
+  Radio,
+  Typography,
+} from "antd";
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
@@ -32,18 +41,61 @@ const ImageBlock = (): JSX.Element => {
         <Divider orientation="left" orientationMargin="0">
           <Text type="secondary">IMAGE STYLES</Text>
         </Divider>
+
+        <Form.Item name="src" label={<Text strong>Image Source</Text>}>
+          <Input />
+        </Form.Item>
+
+        <Form.Item name="href" label={<Text strong>Image Link</Text>}>
+          <Input placeholder="Enter a link url" />
+        </Form.Item>
+
+        <Form.Item
+          name="target"
+          valuePropName="checked"
+          normalize={(value: boolean) => {
+            return value ? "_blank" : undefined;
+          }}
+        >
+          <Checkbox>Open link in new tab</Checkbox>
+        </Form.Item>
+
+        <Form.Item name="alt" label={<Text strong>Alt Text</Text>}>
+          <Input placeholder="Enter an image description" />
+        </Form.Item>
       </>
 
       <>
         <Divider orientation="left" orientationMargin="0">
           <Text type="secondary">SIZE</Text>
         </Divider>
+
+        <Form.Item name="width" label={<Text strong>Width</Text>}>
+          <InputNumber step={10} />
+        </Form.Item>
+
+        <Form.Item
+          name="border-radius"
+          label={<Text strong>Border Radius</Text>}
+        >
+          <InputNumber />
+        </Form.Item>
       </>
 
       <>
         <Divider orientation="left" orientationMargin="0">
           <Text type="secondary">POSITION</Text>
         </Divider>
+
+        <Form.Item name="align" label={<Text strong>Align</Text>}>
+          <Radio.Group>
+            <Radio.Button value="left">Left</Radio.Button>
+            <Radio.Button value="center">Center</Radio.Button>
+            <Radio.Button value="right">Right</Radio.Button>
+          </Radio.Group>
+        </Form.Item>
+
+        <Padding />
       </>
     </>
   );
