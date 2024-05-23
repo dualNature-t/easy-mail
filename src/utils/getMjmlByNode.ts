@@ -59,4 +59,26 @@ const getMjmlByNode = (
   return { mjml, idx } as { mjml: appDataType; idx: string };
 };
 
+export const getNodeByIdx = (doc: Document, idx: string) => {
+  const idxArr = idx.split("-");
+  let index = 0;
+  let result = doc.querySelector("body") as Element;
+
+  while (idxArr.length > 0) {
+    const currentId = idxArr.shift();
+    if (index === 0 || index === 1) {
+      result = result?.children?.[Number(currentId)];
+    } else if (index === 2) {
+      result = result.querySelectorAll(".mj-column")[Number(currentId)];
+    } else if (index === 3) {
+      result = result.querySelectorAll(".mj-column > table > tbody > tr")[
+        Number(currentId)
+      ];
+    }
+
+    index++;
+  }
+  return result;
+};
+
 export default getMjmlByNode;

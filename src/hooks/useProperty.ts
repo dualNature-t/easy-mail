@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
 import useFocusNode from "./useFocusNode";
-import { tagNameType } from "@/context/appContext";
-import { getPropertyByNode, setPropertyByNode } from "@/utils/mergeProperty";
+import { appDataType, tagNameType } from "@/context/appContext";
+import getMjmlByNode from "@/utils/getMjmlByNode";
+import useAppData from "./useAppData";
+import { onTreePropertyChange } from "@/utils/treeTool";
 
 export type validFocusNodeTagNameType = Exclude<
   tagNameType,
@@ -9,32 +11,32 @@ export type validFocusNodeTagNameType = Exclude<
 >;
 
 const useProperty = () => {
-  const [property, setProperty] = useState<Record<string, string>>({});
+  const [property, setProperty] = useState<object | undefined>({});
+  const { appData, setAppData } = useAppData();
   const { focusNode } = useFocusNode();
-
-  const setPropertyToNode = useCallback(
-    (styleObj: Record<string, string>) => {
-      const pt = { ...property, ...styleObj };
-      setPropertyByNode(focusNode, pt);
-      setProperty(pt);
-    },
-    [focusNode, property]
-  );
 
   const nodeName = (focusNode?.classList[0] ??
     "mj-body") as validFocusNodeTagNameType;
 
-  useEffect(() => {
-    if (!focusNode) return;
-    const propertyMap = getPropertyByNode(focusNode);
+  const onPropertyChange = (
+    value: Record<string, string>,
+    allValue: Record<string, string>
+  ) => {
+    const json = getMjmlByNode(appData, focusNode);
+    setAppData(
+      onTreePropertyChange(appData, json.idx, allValue) as appDataType
+    );
+  };
 
-    setProperty(propertyMap);
-  }, [focusNode]);
+  useEffect(() => {
+    const json = getMjmlByNode(appData, focusNode);
+    setProperty(json.mjml?.attributes);
+  }, [appData, focusNode]);
 
   return {
     nodeName,
     property,
-    setProperty: setPropertyToNode,
+    setProperty: onPropertyChange,
   };
 };
 

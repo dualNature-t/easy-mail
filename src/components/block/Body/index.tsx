@@ -17,6 +17,7 @@ import {
   Row,
   Typography,
 } from "antd";
+import { Color } from "antd/es/color-picker";
 
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
@@ -27,16 +28,12 @@ const { Text } = Typography;
 const BodyBlock = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
-  const { property, setProperty } = useProperty();
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
   /* <------------------------------------ **** PARAMETER END **** ------------------------------------ */
   /* <------------------------------------ **** FUNCTION START **** ------------------------------------ */
   /************* This section will include this component general function *************/
-  const onChange = (styleObj: Record<string, string>) => {
-    setProperty(styleObj);
-  };
   /* <------------------------------------ **** FUNCTION END **** ------------------------------------ */
   /* <------------------------------------ **** EFFECT START **** ------------------------------------ */
   /************* This section will include this component general function *************/
@@ -48,40 +45,19 @@ const BodyBlock = (): JSX.Element => {
           <Text type="secondary">BODY STYLES</Text>
         </Divider>
 
-        <Row
-          align="middle"
-          justify="space-between"
-          style={{ marginBottom: 12 }}
+        <Form.Item
+          name="background-color"
+          label={<Text strong>Background Color</Text>}
+          normalize={(value: Color) => {
+            return value.toHexString();
+          }}
         >
-          <Col>
-            <Text strong>Background Color</Text>
-          </Col>
-          <Col>
-            <ColorPicker
-              showText
-              value={property["background-color"]}
-              format="hex"
-              onChange={(_, hex: string) => {
-                onChange({ "background-color": hex });
-              }}
-            />
-          </Col>
-        </Row>
+          <ColorPicker showText format="hex" />
+        </Form.Item>
 
-        <Row align="middle" justify="space-between">
-          <Col>
-            <Text strong>Width</Text>
-          </Col>
-          <Col>
-            <InputNumber
-              value={parseInt(property["max-width"])}
-              step={10}
-              onChange={(value) => {
-                onChange({ "max-width": `${value}px` });
-              }}
-            />
-          </Col>
-        </Row>
+        <Form.Item name="width" label={<Text strong>Width</Text>}>
+          <InputNumber step={10} />
+        </Form.Item>
       </>
 
       <>

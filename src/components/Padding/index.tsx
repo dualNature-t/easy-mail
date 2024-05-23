@@ -6,19 +6,15 @@
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import React, { useState } from "react";
-import { Button, Col, InputNumber, Row, Typography } from "antd";
+import { useState } from "react";
+import { Button, Col, Form, InputNumber, Row, Typography } from "antd";
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
-interface PaddingProps {
-  value: string;
-  onChange: (styleObj: Record<string, string>) => void;
-}
 /* <------------------------------------ **** INTERFACE END **** ------------------------------------ */
 /* <------------------------------------ **** FUNCTION COMPONENT START **** ------------------------------------ */
-const Padding: React.FC<PaddingProps> = ({ value, onChange }): JSX.Element => {
+const Padding = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
   const [open, setOpen] = useState(false);
@@ -51,13 +47,9 @@ const Padding: React.FC<PaddingProps> = ({ value, onChange }): JSX.Element => {
                 </Button>
               </Col>
               <Col>
-                <InputNumber
-                  value={parseInt(value)}
-                  step={10}
-                  onChange={(value) => {
-                    onChange({ padding: `${value}px` });
-                  }}
-                />
+                <Form.Item noStyle name="padding">
+                  <InputNumber step={10} />
+                </Form.Item>
               </Col>
             </Row>
           )}
@@ -72,13 +64,9 @@ const Padding: React.FC<PaddingProps> = ({ value, onChange }): JSX.Element => {
                 <Text>Top</Text>
               </Col>
               <Col>
-                <InputNumber
-                  value={value}
-                  step={10}
-                  onChange={(value) => {
-                    onChange({ "padding-top": `${value}px` });
-                  }}
-                />
+                <Form.Item noStyle name="padding-top">
+                  <InputNumber step={10} />
+                </Form.Item>
               </Col>
             </Row>
           </Col>
@@ -88,13 +76,9 @@ const Padding: React.FC<PaddingProps> = ({ value, onChange }): JSX.Element => {
                 <Text>Right</Text>
               </Col>
               <Col>
-                <InputNumber
-                  value={value}
-                  step={10}
-                  onChange={(value) => {
-                    onChange({ "padding-right": `${value}px` });
-                  }}
-                />
+                <Form.Item noStyle name="padding-right">
+                  <InputNumber step={10} />
+                </Form.Item>
               </Col>
             </Row>
           </Col>
@@ -104,13 +88,9 @@ const Padding: React.FC<PaddingProps> = ({ value, onChange }): JSX.Element => {
                 <Text>Bottom</Text>
               </Col>
               <Col>
-                <InputNumber
-                  value={value}
-                  step={10}
-                  onChange={(value) => {
-                    onChange({ "padding-bottom": `${value}px` });
-                  }}
-                />
+                <Form.Item noStyle name="padding-bottom">
+                  <InputNumber step={10} />
+                </Form.Item>
               </Col>
             </Row>
           </Col>
@@ -120,13 +100,9 @@ const Padding: React.FC<PaddingProps> = ({ value, onChange }): JSX.Element => {
                 <Text>Left</Text>
               </Col>
               <Col>
-                <InputNumber
-                  value={value}
-                  step={10}
-                  onChange={(value) => {
-                    onChange({ "padding-left": `${value}px` });
-                  }}
-                />
+                <Form.Item noStyle name="padding-left">
+                  <InputNumber step={10} />
+                </Form.Item>
               </Col>
             </Row>
           </Col>

@@ -6,7 +6,9 @@
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import { Divider, Typography } from "antd";
+import Padding from "@/components/Padding";
+import { ColorPicker, Divider, Form, InputNumber, Typography } from "antd";
+import { Color } from "antd/es/color-picker";
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
@@ -32,11 +34,31 @@ const DividerBlock = (): JSX.Element => {
         <Divider orientation="left" orientationMargin="0">
           <Text type="secondary">DIVIDER STYLES</Text>
         </Divider>
+
+        <Form.Item name="width" label={<Text strong>Width</Text>}>
+          <InputNumber step={10} />
+        </Form.Item>
+
+        <Form.Item name="border-width" label={<Text strong>Border Width</Text>}>
+          <InputNumber />
+        </Form.Item>
+
+        <Form.Item
+          name="border-color"
+          label={<Text strong>Border Color</Text>}
+          normalize={(value: Color) => {
+            return value.toHexString();
+          }}
+        >
+          <ColorPicker format="hex" showText />
+        </Form.Item>
       </>
       <>
         <Divider orientation="left" orientationMargin="0">
           <Text type="secondary">POSITION</Text>
         </Divider>
+
+        <Padding />
       </>
     </>
   );

@@ -10,7 +10,7 @@ import mjml2html from "mjml-browser";
 import useAppData from "@/hooks/useAppData";
 import useDropContainer from "@/hooks/useDropContainer";
 import style from "./style.module.scss";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { mergeNodeEmpty } from "@/utils/mergeNode";
 
 const columnPer1 = `
@@ -447,6 +447,7 @@ const Main = (): JSX.Element => {
   /* <------------------------------------ **** FUNCTION END **** ------------------------------------ */
   /* <------------------------------------ **** EFFECT START **** ------------------------------------ */
   /************* This section will include this component general function *************/
+
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
     <iframe

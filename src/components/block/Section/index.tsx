@@ -15,6 +15,7 @@ import {
   Col,
   ColorPicker,
   Divider,
+  Form,
   Input,
   InputNumber,
   Row,
@@ -23,6 +24,7 @@ import {
   Typography,
   Upload,
 } from "antd";
+import { Color } from "antd/es/color-picker";
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
@@ -32,23 +34,21 @@ const { Text } = Typography;
 const SectionBlock = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
-  const { property, setProperty } = useProperty();
+  const { property } = useProperty();
 
-  const { color, url } = parseBackground(property.background);
-  const bgStyleValue =
-    property["background-size"] == "cover"
-      ? "cover"
-      : property["background-repeat"];
+  const {
+    "background-size": backgroundSize,
+    "background-repeat": backgroundRepeat,
+  } = property as { "background-size": string; "background-repeat": string };
 
+  const backgroundName =
+    backgroundSize == "cover" ? "background-size" : "background-repeat";
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
   /* <------------------------------------ **** PARAMETER END **** ------------------------------------ */
   /* <------------------------------------ **** FUNCTION START **** ------------------------------------ */
   /************* This section will include this component general function *************/
-  const onChange = (styleObj: Record<string, string>) => {
-    setProperty(styleObj);
-  };
   /* <------------------------------------ **** FUNCTION END **** ------------------------------------ */
   /* <------------------------------------ **** EFFECT START **** ------------------------------------ */
   /************* This section will include this component general function *************/
@@ -66,115 +66,69 @@ const SectionBlock = (): JSX.Element => {
           <Text type="secondary">SECTION STYLES</Text>
         </Divider>
 
-        <Row
-          align="middle"
-          justify="space-between"
-          style={{ marginBottom: 12 }}
+        <Form.Item
+          name="border-radius"
+          label={<Text strong>Border Radius</Text>}
         >
-          <Col>
-            <Text strong>Border Radius</Text>
-          </Col>
-          <Col>
-            <InputNumber
-              value={parseInt(property["border-radius"])}
-              onChange={(value) => {
-                onChange({ "border-radius": `${value}px` });
-              }}
-            />
-          </Col>
-        </Row>
+          <InputNumber />
+        </Form.Item>
 
-        <Row
-          align="middle"
-          justify="space-between"
-          style={{ marginBottom: 12 }}
+        <Form.Item
+          name="border"
+          valuePropName="checked"
+          label={<Text strong>Border</Text>}
+          normalize={(value: boolean) => {
+            return value ? "1px solid #eee" : "";
+          }}
         >
-          <Col>
-            <Text strong>Border</Text>
-          </Col>
-          <Col>
-            <Switch
-              value={!!property["border"]}
-              onChange={(value) => {
-                onChange({ border: value ? `1px solid #eee` : "" });
-              }}
-            />
-          </Col>
-        </Row>
+          <Switch />
+        </Form.Item>
 
-        <Row
-          align="middle"
-          justify="space-between"
-          style={{ marginBottom: 12 }}
+        <Form.Item
+          name="background-color"
+          label={<Text strong>Background Color</Text>}
+          normalize={(value: Color) => {
+            return value.toHexString();
+          }}
         >
-          <Col>
-            <Text strong>Background Color</Text>
-          </Col>
-          <Col>
-            <ColorPicker
-              showText
-              value={color}
-              format="hex"
-              onChange={(_, hex: string) => {
-                // onChange({ "background-color": hex });
-              }}
-            />
-          </Col>
-        </Row>
+          <ColorPicker showText format="hex" />
+        </Form.Item>
 
-        <Row
-          align="middle"
-          justify="space-between"
-          style={{ marginBottom: 12 }}
-          gutter={[0, 6]}
+        <Form.Item
+          name="background-url"
+          label={<Text strong>Background Image</Text>}
+          normalize={(value: string) => {
+            return value === "" ? undefined : value;
+          }}
         >
-          <Col span={24}>
-            <Row justify="space-between" align="middle">
-              <Col>
-                <Text strong>Background Image</Text>
-              </Col>
-              <Col>
-                <Upload>
-                  <Button type="link" icon={<UploadOutlined />}>
-                    Upload Image File
-                  </Button>
-                </Upload>
-              </Col>
-            </Row>
-          </Col>
-          <Col span={24}>
-            <Input value={url} placeholder="Enter a url" />
-          </Col>
-        </Row>
+          <Input placeholder="Enter a url" />
+        </Form.Item>
 
-        <Row
-          align="middle"
-          justify="space-between"
-          style={{ marginBottom: 12 }}
+        <Form.Item
+          name="background-repeat"
+          label={<Text strong>Background Repeat</Text>}
         >
-          <Col>
-            <Text strong>Background Style</Text>
-          </Col>
-          <Col>
-            <Select
-              value={bgStyleValue}
-              style={{ width: 120 }}
-              options={[
-                { value: "repeat", label: "Repeat" },
-                { value: "no-repeat", label: "No-Repeat" },
-                { value: "cover", label: "Cover" },
-              ]}
-              onChange={(value) => {
-                console.log(value);
-                onChange(
-                  value == "cover"
-                    ? { "background-size": value }
-                    : { "background-repeat": value }
-                );
-              }}
-            ></Select>
-          </Col>
-        </Row>
+          <Select
+            style={{ width: 120 }}
+            options={[
+              { value: "repeat", label: "Repeat" },
+              { value: "no-repeat", label: "No-Repeat" },
+            ]}
+          ></Select>
+        </Form.Item>
+
+        <Form.Item
+          name="background-size"
+          label={<Text strong>Background Size</Text>}
+        >
+          <Select
+            style={{ width: 120 }}
+            options={[
+              { value: "cover", label: "Cover" },
+              { value: "contain", label: "Contain" },
+            ]}
+          ></Select>
+        </Form.Item>
       </>
 
       <>
@@ -182,12 +136,7 @@ const SectionBlock = (): JSX.Element => {
           <Text type="secondary">POSITION</Text>
         </Divider>
 
-        <Padding
-          value={property["padding"]}
-          onChange={(styleObj) => {
-            onChange(styleObj);
-          }}
-        />
+        <Padding />
       </>
     </>
   );

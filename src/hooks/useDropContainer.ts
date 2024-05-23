@@ -7,6 +7,9 @@ import throttle from "@/utils/throttle";
 import useDataTransfer from "./useDataTransfer";
 import useDropBlock from "./useDropBlock";
 import useFocusTool from "./useFocusTool";
+import getMjmlByNode, { getNodeByIdx } from "@/utils/getMjmlByNode";
+import useAppData from "./useAppData";
+import mjml2html from "mjml-browser";
 
 type classNameType = "hover" | "focus";
 
@@ -31,6 +34,7 @@ const useDropContainer = () => {
   const { setHoverNode } = useHoverNode();
   const { focusNode, setFocusNode } = useFocusNode();
   const { setTab } = useTab();
+  const { appData } = useAppData();
   const { dataTransfer, setDataTransfer } = useDataTransfer();
 
   const { block } = useDropBlock();
@@ -234,6 +238,30 @@ const useDropContainer = () => {
       ref?.removeEventListener("dragend", onDragEnd);
     };
   }, [ref, block]);
+
+  useEffect(() => {
+    if (!appData || !focusNode) return;
+    const json = getMjmlByNode(appData, focusNode);
+    let parser = new DOMParser();
+    let doc = parser.parseFromString(mjml2html(appData).html, "text/html");
+
+    let targetNode = getNodeByIdx(doc, json.idx) as HTMLElement;
+    if (targetNode.classList.contains("mj-body")) {
+      focusNode.parentElement!.style.backgroundColor =
+        targetNode.style.backgroundColor;
+    } else {
+      if (targetNode.nodeName === "TR") {
+        targetNode = targetNode.children[0] as HTMLElement;
+      }
+      targetNode.classList.add("focus");
+      focusNodeArr.current.push(targetNode);
+    }
+
+    console.log(appData);
+
+    focusNode?.replaceWith(targetNode);
+    setFocusNode(targetNode as HTMLElement);
+  }, [appData]);
 
   return { setRef };
 };

@@ -6,7 +6,7 @@
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import { Divider, Typography } from "antd";
+import { Divider, Form, InputNumber, Typography } from "antd";
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
@@ -26,7 +26,17 @@ const SpacerBlock = (): JSX.Element => {
   /* <------------------------------------ **** EFFECT START **** ------------------------------------ */
   /************* This section will include this component general function *************/
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
-  return <></>;
+  return (
+    <>
+      <Divider orientation="left" orientationMargin="0">
+        <Text type="secondary">SPACER STYLES</Text>
+      </Divider>
+
+      <Form.Item name="height" label={<Text strong>Height</Text>}>
+        <InputNumber step={10} />
+      </Form.Item>
+    </>
+  );
 };
 export default SpacerBlock;
 /* <------------------------------------ **** FUNCTION COMPONENT END **** ------------------------------------ */
