@@ -56,6 +56,7 @@ const Property = (): JSX.Element => {
   const { token } = theme.useToken();
   const { nodeName, property, setProperty } = useProperty();
 
+  // console.log(nodeName);
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
@@ -103,7 +104,7 @@ const Property = (): JSX.Element => {
         ></Col>
         <Col>
           <Title className={style.property_title} level={4}>
-            {nodeName?.split("-")[1].toUpperCase()}
+            {/* {nodeName?.split("-")[1].toUpperCase()} */}
           </Title>
         </Col>
       </Row>

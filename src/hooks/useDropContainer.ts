@@ -240,12 +240,13 @@ const useDropContainer = () => {
   }, [ref, block]);
 
   useEffect(() => {
-    if (!appData || !focusNode) return;
+    if (!appData || !focusNode || dataTransfer?.type) return;
     const json = getMjmlByNode(appData, focusNode);
     let parser = new DOMParser();
     let doc = parser.parseFromString(mjml2html(appData).html, "text/html");
 
     let targetNode = getNodeByIdx(doc, json.idx) as HTMLElement;
+
     if (targetNode.classList.contains("mj-body")) {
       focusNode.parentElement!.style.backgroundColor =
         targetNode.style.backgroundColor;
@@ -256,8 +257,6 @@ const useDropContainer = () => {
       targetNode.classList.add("focus");
       focusNodeArr.current.push(targetNode);
     }
-
-    console.log(appData);
 
     focusNode?.replaceWith(targetNode);
     setFocusNode(targetNode as HTMLElement);

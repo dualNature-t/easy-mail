@@ -1,11 +1,19 @@
 import { useEffect, useState } from "react";
 import useFocusNode from "./useFocusNode";
 import useDataTransfer from "./useDataTransfer";
-import { basicTagNameType, columnTagNameType } from "@/context/appContext";
+import {
+  appDataType,
+  basicTagNameType,
+  columnTagNameType,
+} from "@/context/appContext";
 import getNodeByTarget from "@/utils/getNodeByTarget";
 import { hasChildByColumn } from "@/utils/mergeNode";
+import getMjmlByNode from "@/utils/getMjmlByNode";
+import useAppData from "./useAppData";
+import { addTreeItem, copyTreeItem, deleteTreeItem } from "@/utils/treeTool";
 
 const useFocusTool = () => {
+  const { appData, setAppData } = useAppData();
   const { focusNode, setFocusNode } = useFocusNode();
   const [focusTool, setFocusTool] = useState<HTMLDivElement | null>(null);
   const { setDataTransfer } = useDataTransfer();
@@ -39,6 +47,10 @@ const useFocusTool = () => {
     const onClick = (e: MouseEvent) => {
       const target = e.target as HTMLDivElement;
       if (target.classList.contains("focus-tool-copy")) {
+        const { idx } = getMjmlByNode(appData, focusNode);
+        const result = copyTreeItem(appData, idx);
+        setAppData(result as appDataType);
+
         let insertElement = focusNode.parentElement;
         let targetElement = focusNode;
 
@@ -61,10 +73,15 @@ const useFocusTool = () => {
               targetElement?.nextElementSibling
             )
           : insertElement?.appendChild(targetEle);
+        setFocusNode(null);
         return;
       }
 
       if (target.classList.contains("focus-tool-delete")) {
+        const { idx } = getMjmlByNode(appData, focusNode);
+        const result = deleteTreeItem(appData, idx);
+        setAppData(result as appDataType);
+
         if (focusNode.classList.contains("mj-section")) {
           if (focusNode.parentElement?.childElementCount === 1) {
             focusNode.parentElement.innerHTML = "";

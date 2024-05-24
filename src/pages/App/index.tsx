@@ -44,8 +44,8 @@ const defaultTreeData: appDataType = {
             "border-radius": "4px",
             border: "1px solid #ddd",
             "background-color": "#f40",
-            "background-url":
-              "https://ss2.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2107631312,3178897554&fm=253&gp=0.jpg",
+            // "background-url":
+            //   "https://ss2.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2107631312,3178897554&fm=253&gp=0.jpg",
             "background-repeat": "no-repeat",
             "background-size": "cover",
             padding: "20px 40px",
@@ -101,30 +101,30 @@ const defaultTreeData: appDataType = {
                   },
                   content: "Button",
                 },
-                {
-                  tagName: "mj-divider",
-                  attributes: {
-                    "css-class": "mj-divider",
-                    width: "100%",
-                    "border-width": "1px",
-                    "border-style": "solid",
-                    "border-color": "#000000",
-                    padding: "10px 25px",
-                  },
-                },
-                {
-                  tagName: "mj-spacer",
-                  attributes: {
-                    "css-class": "mj-spacer",
-                    height: "20px",
-                  },
-                },
-                {
-                  tagName: "mj-social",
-                  attributes: {
-                    "css-class": "mj-social",
-                  },
-                },
+                // {
+                //   tagName: "mj-divider",
+                //   attributes: {
+                //     "css-class": "mj-divider",
+                //     width: "100%",
+                //     "border-width": "1px",
+                //     "border-style": "solid",
+                //     "border-color": "#000000",
+                //     padding: "10px 25px",
+                //   },
+                // },
+                // {
+                //   tagName: "mj-spacer",
+                //   attributes: {
+                //     "css-class": "mj-spacer",
+                //     height: "20px",
+                //   },
+                // },
+                // {
+                //   tagName: "mj-social",
+                //   attributes: {
+                //     "css-class": "mj-social",
+                //   },
+                // },
               ],
             },
           ],

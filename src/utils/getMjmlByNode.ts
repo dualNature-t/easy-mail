@@ -1,9 +1,6 @@
 import { appDataType } from "@/context/appContext";
 
-const getMjmlByNode = (
-  appData: appDataType | null,
-  node: HTMLElement | null
-) => {
+const getMjmlByNode = (appData: appDataType | null, node: Element | null) => {
   let mjml = appData?.children?.[0];
   let idx = "0";
   if (!appData || !node || node.classList.contains("mj-body"))
@@ -19,36 +16,49 @@ const getMjmlByNode = (
     mjml = mjml?.children?.[id];
     idx = `${idx}-${id}`;
   } else {
+    // debugger;
     let id = 0;
     let currentNode = node.parentElement as HTMLElement;
     // 第一层block筛选
-    while (currentNode.previousElementSibling) {
-      id++;
+    while (currentNode?.previousElementSibling) {
       currentNode = currentNode.previousElementSibling as HTMLElement;
+      if (currentNode.classList.contains("drop-block")) {
+        continue;
+      }
+
+      id++;
     }
     const block4Id = id;
 
     // 第二层column筛选
-    currentNode = currentNode.parentElement as HTMLElement;
-    while (!currentNode?.classList?.contains("mj-column")) {
+    currentNode = currentNode?.parentElement as HTMLElement;
+    while (currentNode && !currentNode?.classList?.contains("mj-column")) {
       currentNode = currentNode.parentElement as HTMLElement;
     }
     id = 0;
-    while (currentNode.previousElementSibling) {
-      id++;
+    while (currentNode?.previousElementSibling) {
       currentNode = currentNode.previousElementSibling as HTMLElement;
+      if (currentNode.classList.contains("drop-block")) {
+        continue;
+      }
+
+      id++;
     }
     const block3Id = id;
 
     // 第三层section筛选
-    currentNode = currentNode.parentElement as HTMLElement;
-    while (!currentNode?.classList?.contains("mj-section")) {
+    currentNode = currentNode?.parentElement as HTMLElement;
+    while (currentNode && !currentNode?.classList?.contains("mj-section")) {
       currentNode = currentNode.parentElement as HTMLElement;
     }
     id = 0;
-    while (currentNode.previousElementSibling) {
-      id++;
+    while (currentNode?.previousElementSibling) {
       currentNode = currentNode.previousElementSibling as HTMLElement;
+      if (currentNode.classList.contains("drop-block")) {
+        continue;
+      }
+
+      id++;
     }
     const block2Id = id;
     idx = `${idx}-${block2Id}-${block3Id}-${block4Id}`;

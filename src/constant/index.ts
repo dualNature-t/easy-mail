@@ -1,5 +1,9 @@
 import { validFocusNodeTagNameType } from "@/hooks/useProperty";
-import { columnTagNameType, basicTagNameType } from "../context/appContext";
+import {
+  columnTagNameType,
+  basicTagNameType,
+  appDataType,
+} from "../context/appContext";
 
 export const columnElementTextMap: Record<columnTagNameType, string> = {
   "mj-column": `
@@ -219,23 +223,249 @@ export const tagNameMap = [
   ...Object.keys(basicElementTextMap),
 ];
 
-export const defaultNodePropertyMap: Record<validFocusNodeTagNameType, object> =
-  {
-    "mj-body": {
-      "background-color": "",
-      "max-width": "600px",
-    },
-    "mj-section": {
-      // "full-width": false,
-      "border-radius": "",
+export const defaultNodePropertyMap: Record<
+  basicTagNameType | columnTagNameType,
+  appDataType
+> = {
+  // "mj-section": {
+  //   tagName: "mj-section",
+  //   attributes: {
+  //     "css-class": "mj-section",
+  //     "border-radius": "0px",
+  //     border: "",
+  //     "background-color": "",
+  //     "background-url": "",
+  //     "background-repeat": "repeat",
+  //     "background-size": "auto",
+  //     padding: "20px",
+  //   },
+  // },
+  "mj-button": {
+    tagName: "mj-button",
+    attributes: {
+      "css-class": "mj-button",
+      href: "",
+      target: "_blank",
+      width: "100%",
+      "background-color": "#414141",
+      "border-radius": "0px",
       border: "",
-      background: "",
+      "font-family": "Ubuntu",
+      "font-size": "13px",
+      "line-height": "1",
+      color: "#FFFFFF",
+      align: "center",
+      padding: "10px 25px",
+    },
+    content: "Replace Content",
+  },
+  "mj-divider": {
+    tagName: "mj-divider",
+    attributes: {
+      "css-class": "mj-divider",
+      width: "100%",
+      "border-width": "1px",
+      "border-style": "solid",
+      "border-color": "#000000",
+      padding: "10px 25px",
+    },
+  },
+  "mj-image": {
+    tagName: "mj-image",
+    attributes: {
+      "css-class": "mj-image",
+      src: "",
+      href: "",
+      target: "_blank",
+      alt: "",
+      width: "100%",
+      "border-radius": "0px",
+      align: "center",
+      padding: "10px 25px",
+    },
+  },
+  "mj-social": {
+    tagName: "mj-social",
+    attributes: {},
+  },
+  "mj-spacer": {
+    tagName: "mj-spacer",
+    attributes: {
+      "css-class": "mj-spacer",
+      height: "20px",
+    },
+  },
+  "mj-text": {
+    tagName: "mj-text",
+    attributes: {
+      "css-class": "mj-text",
+      "font-family": "Ubuntu",
+      "font-size": "13px",
+      "line-height": "1",
+      color: "#000",
+      align: "left",
+      padding: "10px 25px",
+    },
+    content: "Replace Content",
+  },
+  "mj-column": {
+    tagName: "mj-section",
+    attributes: {
+      "css-class": "mj-section",
+      "border-radius": "0px",
+      border: "",
+      "background-color": "",
+      "background-url": "",
+      "background-repeat": "repeat",
+      "background-size": "auto",
       padding: "20px",
     },
-    "mj-button": {},
-    "mj-divider": {},
-    "mj-image": {},
-    "mj-social": {},
-    "mj-spacer": {},
-    "mj-text": {},
-  };
+    children: [
+      {
+        tagName: "mj-column",
+        attributes: { "css-class": "mj-column" },
+        children: [],
+      },
+    ],
+  },
+  "mj-column-2": {
+    tagName: "mj-section",
+    attributes: {
+      "css-class": "mj-section",
+      "border-radius": "0px",
+      border: "",
+      "background-color": "",
+      "background-url": "",
+      "background-repeat": "repeat",
+      "background-size": "auto",
+      padding: "20px",
+    },
+    children: [
+      {
+        tagName: "mj-column",
+        attributes: { "css-class": "mj-column" },
+        children: [],
+      },
+      {
+        tagName: "mj-column",
+        attributes: { "css-class": "mj-column" },
+        children: [],
+      },
+    ],
+  },
+  "mj-column-3": {
+    tagName: "mj-section",
+    attributes: {
+      "css-class": "mj-section",
+      "border-radius": "0px",
+      border: "",
+      "background-color": "",
+      "background-url": "",
+      "background-repeat": "repeat",
+      "background-size": "auto",
+      padding: "20px",
+    },
+    children: [
+      {
+        tagName: "mj-column",
+        attributes: { "css-class": "mj-column" },
+        children: [],
+      },
+      {
+        tagName: "mj-column",
+        attributes: { "css-class": "mj-column" },
+        children: [],
+      },
+      {
+        tagName: "mj-column",
+        attributes: { "css-class": "mj-column" },
+        children: [],
+      },
+    ],
+  },
+  "mj-column-4": {
+    tagName: "mj-section",
+    attributes: {
+      "css-class": "mj-section",
+      "border-radius": "0px",
+      border: "",
+      "background-color": "",
+      "background-url": "",
+      "background-repeat": "repeat",
+      "background-size": "auto",
+      padding: "20px",
+    },
+    children: [
+      {
+        tagName: "mj-column",
+        attributes: { "css-class": "mj-column" },
+        children: [],
+      },
+      {
+        tagName: "mj-column",
+        attributes: { "css-class": "mj-column" },
+        children: [],
+      },
+      {
+        tagName: "mj-column",
+        attributes: { "css-class": "mj-column" },
+        children: [],
+      },
+      {
+        tagName: "mj-column",
+        attributes: { "css-class": "mj-column" },
+        children: [],
+      },
+    ],
+  },
+  "mj-column-left": {
+    tagName: "mj-section",
+    attributes: {
+      "css-class": "mj-section",
+      "border-radius": "0px",
+      border: "",
+      "background-color": "",
+      "background-url": "",
+      "background-repeat": "repeat",
+      "background-size": "auto",
+      padding: "20px",
+    },
+    children: [
+      {
+        tagName: "mj-column",
+        attributes: { "css-class": "mj-column", width: "60%" },
+        children: [],
+      },
+      {
+        tagName: "mj-column",
+        attributes: { "css-class": "mj-column", width: "40%" },
+        children: [],
+      },
+    ],
+  },
+  "mj-column-right": {
+    tagName: "mj-section",
+    attributes: {
+      "css-class": "mj-section",
+      "border-radius": "0px",
+      border: "",
+      "background-color": "",
+      "background-url": "",
+      "background-repeat": "repeat",
+      "background-size": "auto",
+      padding: "20px",
+    },
+    children: [
+      {
+        tagName: "mj-column",
+        attributes: { "css-class": "mj-column", width: "40%" },
+        children: [],
+      },
+      {
+        tagName: "mj-column",
+        attributes: { "css-class": "mj-column", width: "60%" },
+        children: [],
+      },
+    ],
+  },
+};

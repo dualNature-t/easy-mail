@@ -2,13 +2,16 @@ import { useEffect, useState } from "react";
 import useDataTransfer from "./useDataTransfer";
 import useFocusNode from "./useFocusNode";
 import { basicElementTextMap } from "@/constant";
-import { basicTagNameType } from "@/context/appContext";
+import { appDataType, basicTagNameType } from "@/context/appContext";
 import {
   hasChildByColumn,
   mergeSectionByNode,
   mergeSectionByType,
 } from "@/utils/mergeNode";
 import getNodeByTarget from "@/utils/getNodeByTarget";
+import getMjmlByNode from "@/utils/getMjmlByNode";
+import useAppData from "./useAppData";
+import { addTreeItem, moveTreeItem } from "@/utils/treeTool";
 
 const normalStyle =
   "border: 1px dashed #ccc; padding: 20px; text-align: center; font-size: 14px;";
@@ -16,8 +19,9 @@ const hoverStyle = `${normalStyle} background-color: rgba(0,0,0,0.1)`;
 
 const useDropBlock = () => {
   const { dataTransfer } = useDataTransfer();
+  const { appData, setAppData } = useAppData();
   const [block, setBlock] = useState<HTMLDivElement | null>(null);
-  const { focusNode } = useFocusNode();
+  const { focusNode, setFocusNode } = useFocusNode();
 
   useEffect(() => {
     const div = document.createElement("div");
@@ -29,7 +33,7 @@ const useDropBlock = () => {
   }, []);
 
   useEffect(() => {
-    if (!block) return;
+    if (!block || !dataTransfer) return;
     const onDragEnter = (e: DragEvent) => {
       block.setAttribute("style", hoverStyle);
     };
@@ -38,8 +42,7 @@ const useDropBlock = () => {
     };
     const onDrop = (e: DragEvent) => {
       // e.stopPropagation();
-
-      let target: Node | string = "";
+      let target: Element | string = "";
       let targetOrigin = focusNode;
 
       if (block.parentElement?.classList.contains("mj-body")) {
@@ -65,7 +68,7 @@ const useDropBlock = () => {
           tr.innerHTML = blockText;
           target = tr;
         } else {
-          target = focusNode?.parentElement as Node;
+          target = focusNode?.parentElement as Element;
         }
       }
 
@@ -74,7 +77,28 @@ const useDropBlock = () => {
         "mj-column"
       );
 
+      const { idx: originIdx } = getMjmlByNode(appData, focusNode as Element);
+
       block.replaceWith(target);
+
+      console.log(target);
+
+      const { idx } = getMjmlByNode(
+        appData,
+        ((target as Element).nodeName == "TR"
+          ? (target as Element).children[0]
+          : target) as Element
+      );
+
+      console.log(idx);
+
+      if (dataTransfer?.type == "add") {
+        const result = addTreeItem(appData, idx, dataTransfer);
+        setAppData(result as appDataType);
+      } else {
+        const result = moveTreeItem(appData, idx, originIdx);
+        setAppData(result as appDataType);
+      }
 
       if (sectionTarget && !hasChildByColumn(sectionTarget)) {
         sectionTarget.classList.add("mj-column-empty");
@@ -97,7 +121,7 @@ const useDropBlock = () => {
       block.removeEventListener("drop", onDrop);
       block.removeEventListener("dragover", onDragOver);
     };
-  }, [block, dataTransfer]);
+  }, [block, dataTransfer, appData]);
 
   return { block };
 };
