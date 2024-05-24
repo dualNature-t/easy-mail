@@ -33,104 +33,313 @@ const defaultTreeData: appDataType = {
       tagName: "mj-body",
       attributes: {
         "css-class": "mj-body",
-        "background-color": "#eee",
+        "background-color": "#ffffff",
         width: "600px",
       },
-      children: [],
-      // children: [
-      //   {
-      //     tagName: "mj-section",
-      //     attributes: {
-      //       "css-class": "mj-section",
-      //       "border-radius": "4px",
-      //       border: "1px solid #ddd",
-      //       "background-color": "#f40",
-      //       "background-url":
-      //         "https://ss2.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2107631312,3178897554&fm=253&gp=0.jpg",
-      //       "background-repeat": "no-repeat",
-      //       "background-size": "cover",
-      //       padding: "20px 40px",
-      //     },
-      //     children: [
-      //       {
-      //         tagName: "mj-column",
-      //         attributes: { "css-class": "mj-column" },
-      //         children: [
-      //           {
-      //             tagName: "mj-text",
-      //             attributes: {
-      //               "css-class": "mj-text",
-      //               "font-family": "Ubuntu",
-      //               "font-size": "13px",
-      //               "line-height": "1",
-      //               color: "#000",
-      //               align: "left",
-      //               padding: "10px 25px",
-      //             },
-      //             content: "Hello World",
-      //           },
-      //           {
-      //             tagName: "mj-image",
-      //             attributes: {
-      //               "css-class": "mj-image",
-      //               src: "https://ts1.cn.mm.bing.net/th/id/R-C.748160bf925a7acb3ba1c9514bbc60db?rik=AYY%2bJ9WcXYIMgw&riu=http%3a%2f%2fseopic.699pic.com%2fphoto%2f50017%2f0822.jpg_wh1200.jpg&ehk=CMVcdZMU6xxsjVjafO70cFcmJvD62suFC1ytk8UuAUk%3d&risl=&pid=ImgRaw&r=0",
-      //               href: "",
-      //               target: "_blank",
-      //               alt: "11",
-      //               width: "100%",
-      //               "border-radius": "0px",
-      //               align: "center",
-      //               padding: "10px 25px",
-      //             },
-      //           },
-      //           {
-      //             tagName: "mj-button",
-      //             attributes: {
-      //               "css-class": "mj-button",
-      //               href: "",
-      //               target: "_blank",
-      //               width: "100%",
-      //               "background-color": "#414141",
-      //               "border-radius": "0px",
-      //               border: "",
-      //               "font-family": "Ubuntu",
-      //               "font-size": "13px",
-      //               "line-height": "1",
-      //               color: "#FFFFFF",
-      //               align: "center",
-      //               padding: "10px 25px",
-      //             },
-      //             content: "Button",
-      //           },
-      //           // {
-      //           //   tagName: "mj-divider",
-      //           //   attributes: {
-      //           //     "css-class": "mj-divider",
-      //           //     width: "100%",
-      //           //     "border-width": "1px",
-      //           //     "border-style": "solid",
-      //           //     "border-color": "#000000",
-      //           //     padding: "10px 25px",
-      //           //   },
-      //           // },
-      //           // {
-      //           //   tagName: "mj-spacer",
-      //           //   attributes: {
-      //           //     "css-class": "mj-spacer",
-      //           //     height: "20px",
-      //           //   },
-      //           // },
-      //           // {
-      //           //   tagName: "mj-social",
-      //           //   attributes: {
-      //           //     "css-class": "mj-social",
-      //           //   },
-      //           // },
-      //         ],
-      //       },
-      //     ],
-      //   },
-      // ],
+      children: [
+        {
+          tagName: "mj-section",
+          attributes: {
+            "css-class": "mj-section",
+            "border-radius": "0px",
+            border: "",
+            "background-color": "",
+            "background-url": "",
+            "background-repeat": "repeat",
+            "background-size": "auto",
+            padding: "20px",
+          },
+          children: [
+            {
+              tagName: "mj-column",
+              attributes: {
+                "css-class": "mj-column",
+              },
+              children: [
+                {
+                  tagName: "mj-image",
+                  attributes: {
+                    "css-class": "mj-image",
+                    src: "https://assets.maocanhua.cn/b999e7e4-9242-4435-a4f6-c8f1d6fdfd96-image.png",
+                    href: "",
+                    target: "_blank",
+                    alt: "",
+                    width: "170px",
+                    "border-radius": "0px",
+                    align: "center",
+                    padding: "10px",
+                  },
+                },
+                {
+                  tagName: "mj-text",
+                  attributes: {
+                    "css-class": "mj-text",
+                    "font-family": "Ubuntu",
+                    "font-size": "13px",
+                    "line-height": "1",
+                    color: "#000",
+                    align: "center",
+                    padding: "10px",
+                  },
+                  content: "Replace Content",
+                },
+                {
+                  tagName: "mj-image",
+                  attributes: {
+                    "css-class": "mj-image",
+                    src: "https://assets.maocanhua.cn/ed0590da-b6dc-4d14-bfc7-6f1931a390fd-image.png",
+                    href: "",
+                    target: "_blank",
+                    alt: "",
+                    width: "530px",
+                    "border-radius": "0px",
+                    align: "center",
+                    padding: "10px",
+                  },
+                },
+                {
+                  tagName: "mj-text",
+                  attributes: {
+                    "css-class": "mj-text",
+                    "font-family": "Ubuntu",
+                    "font-size": "20px",
+                    "line-height": "1",
+                    color: "#000",
+                    align: "center",
+                    padding: "10px",
+                  },
+                  content: "Replace Content",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          tagName: "mj-section",
+          attributes: {
+            "css-class": "mj-section",
+            "border-radius": "0px",
+            border: "",
+            "background-color": "",
+            "background-url": "",
+            "background-repeat": "repeat",
+            "background-size": "auto",
+            padding: "20px",
+          },
+          children: [
+            {
+              tagName: "mj-column",
+              attributes: {
+                "css-class": "mj-column",
+              },
+              children: [
+                {
+                  tagName: "mj-image",
+                  attributes: {
+                    "css-class": "mj-image",
+                    src: "https://assets.maocanhua.cn/be61d137-bb44-4358-a681-dea81d2a8ec1-image.png",
+                    href: "",
+                    target: "_blank",
+                    alt: "",
+                    width: "250px",
+                    "border-radius": "0px",
+                    align: "center",
+                    padding: "10px",
+                  },
+                },
+              ],
+            },
+            {
+              tagName: "mj-column",
+              attributes: {
+                "css-class": "mj-column",
+              },
+              children: [
+                {
+                  tagName: "mj-text",
+                  attributes: {
+                    "css-class": "mj-text",
+                    "font-family": "Ubuntu",
+                    "font-size": "13px",
+                    "line-height": "1",
+                    color: "#000",
+                    align: "left",
+                    padding: "10px 25px",
+                  },
+                  content: "Replace Content",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          tagName: "mj-section",
+          attributes: {
+            "css-class": "mj-section",
+            "border-radius": "0px",
+            border: "",
+            "background-color": "",
+            "background-url": "",
+            "background-repeat": "repeat",
+            "background-size": "auto",
+            padding: "20px",
+          },
+          children: [
+            {
+              tagName: "mj-column",
+              attributes: {
+                "css-class": "mj-column",
+              },
+              children: [
+                {
+                  tagName: "mj-text",
+                  attributes: {
+                    "css-class": "mj-text",
+                    "font-family": "Ubuntu",
+                    "font-size": "13px",
+                    "line-height": "1",
+                    color: "#000",
+                    align: "left",
+                    padding: "10px 25px",
+                  },
+                  content: "Replace Content",
+                },
+              ],
+            },
+            {
+              tagName: "mj-column",
+              attributes: {
+                "css-class": "mj-column",
+              },
+              children: [
+                {
+                  tagName: "mj-image",
+                  attributes: {
+                    "css-class": "mj-image",
+                    src: "https://assets.maocanhua.cn/b3e16b18-9385-421e-b6a7-b28a749d6abf-image.png",
+                    href: "",
+                    target: "_blank",
+                    alt: "",
+                    width: "250px",
+                    "border-radius": "0px",
+                    align: "center",
+                    padding: "10px",
+                  },
+                },
+              ],
+            },
+          ],
+        },
+        {
+          tagName: "mj-section",
+          attributes: {
+            "css-class": "mj-section",
+            "border-radius": "0px",
+            border: "",
+            "background-color": "",
+            "background-url": "",
+            "background-repeat": "repeat",
+            "background-size": "auto",
+            padding: "20px",
+          },
+          children: [
+            {
+              tagName: "mj-column",
+              attributes: {
+                "css-class": "mj-column",
+              },
+              children: [
+                {
+                  tagName: "mj-image",
+                  attributes: {
+                    "css-class": "mj-image",
+                    src: "https://assets.maocanhua.cn/6c23a5d0-ec6c-4634-8753-49e4a2da407e-image.png",
+                    href: "",
+                    target: "_blank",
+                    alt: "",
+                    width: "250px",
+                    "border-radius": "0px",
+                    align: "center",
+                    padding: "10px",
+                  },
+                },
+              ],
+            },
+            {
+              tagName: "mj-column",
+              attributes: {
+                "css-class": "mj-column",
+              },
+              children: [
+                {
+                  tagName: "mj-text",
+                  attributes: {
+                    "css-class": "mj-text",
+                    "font-family": "Ubuntu",
+                    "font-size": "13px",
+                    "line-height": "1",
+                    color: "#000",
+                    align: "left",
+                    padding: "10px 25px",
+                  },
+                  content: "Replace Content",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          tagName: "mj-section",
+          attributes: {
+            "css-class": "mj-section",
+            "border-radius": "0px",
+            border: "",
+            "background-color": "",
+            "background-url": "",
+            "background-repeat": "repeat",
+            "background-size": "auto",
+            padding: "20px",
+          },
+          children: [
+            {
+              tagName: "mj-column",
+              attributes: {
+                "css-class": "mj-column",
+              },
+              children: [
+                {
+                  tagName: "mj-image",
+                  attributes: {
+                    "css-class": "mj-image",
+                    src: "https://assets.maocanhua.cn/0a270377-104e-4ea8-bd94-3df6d7afaa01-image.png",
+                    href: "",
+                    target: "_blank",
+                    alt: "",
+                    width: "540px",
+                    "border-radius": "0px",
+                    align: "center",
+                    padding: "10px",
+                  },
+                },
+                {
+                  tagName: "mj-image",
+                  attributes: {
+                    "css-class": "mj-image",
+                    src: "https://assets.maocanhua.cn/b999e7e4-9242-4435-a4f6-c8f1d6fdfd96-image.png",
+                    href: "",
+                    target: "_blank",
+                    alt: "",
+                    width: "170px",
+                    "border-radius": "0px",
+                    align: "center",
+                    padding: "10px",
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
     },
   ],
 };
