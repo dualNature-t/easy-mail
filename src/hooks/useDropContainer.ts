@@ -10,6 +10,7 @@ import useFocusTool from "./useFocusTool";
 import getMjmlByNode, { getNodeByIdx } from "@/utils/getMjmlByNode";
 import useAppData from "./useAppData";
 import mjml2html from "mjml-browser";
+import { mergeNodeEmpty } from "@/utils/mergeNode";
 
 type classNameType = "hover" | "focus";
 

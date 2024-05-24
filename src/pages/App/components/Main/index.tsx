@@ -134,290 +134,225 @@ const Main = (): JSX.Element => {
       outline: 2px solid transparent;
     }
     .edit-body .mj-body.hover, .edit-body .mj-body.focus {
-      outline-color: ${color_primary_border};
+      outline-color: var(--color-primary-border);
     }
     .edit-body .mj-body.hover:before, .edit-body .mj-body.focus:before {
       content: "body";
       display: block;
       position: absolute;
-      transform: translate(-27px, -150%);
+      left: -2px;
+      top: -22px;
+      text-align: left;
       padding: 2px 6px;
       font-size: 15px;
-      color: ${color_white};
-      background-color: ${color_primary_border};
+      color: var(--color-white);
+      background-color: var(--color-primary-border);
     }
     .edit-body .mj-body.focus {
-      outline-color: ${color_primary};
+      outline-color: var(--color-primary);
     }
     .edit-body .mj-body.focus:before {
-      background-color: ${color_primary};
-    }
-    .edit-body .mj-body.hover:before,
-    .edit-body .mj-body.focus:before,
-    .edit-body .mj-section.hover:before,
-    .edit-body .mj-section.focus:before,
-    .edit-body .mj-spacer.hover:before,
-    .edit-body .mj-spacer.focus:before {
-      transform: translate(-2px, -108%);
+      background-color: var(--color-primary);
     }
     .edit-body .mj-section {
       position: relative;
       outline: 2px solid transparent;
     }
     .edit-body .mj-section.hover, .edit-body .mj-section.focus {
-      outline-color: ${color_primary_border};
+      outline-color: var(--color-primary-border);
     }
     .edit-body .mj-section.hover:before, .edit-body .mj-section.focus:before {
-      width: 100%;
       content: "section";
       display: block;
       position: absolute;
-      transform: translate(-27px, -150%);
-      padding: 1px 2px;
+      left: -2px;
+      top: -22px;
+      text-align: left;
+      padding: 2px 6px;
       font-size: 15px;
-      color: ${color_white};
-      background-color: ${color_primary_border};
+      color: var(--color-white);
+      background-color: var(--color-primary-border);
     }
     .edit-body .mj-section.focus {
-      outline-color: ${color_primary};
+      outline-color: var(--color-primary);
     }
     .edit-body .mj-section.focus:before {
-      background-color: ${color_primary};
-    }
-    .edit-body .mj-body.hover:before,
-    .edit-body .mj-body.focus:before,
-    .edit-body .mj-section.hover:before,
-    .edit-body .mj-section.focus:before,
-    .edit-body .mj-spacer.hover:before,
-    .edit-body .mj-spacer.focus:before {
-      transform: translate(-2px, -108%);
+      background-color: var(--color-primary);
     }
     .edit-body .mj-column {
       position: relative;
       outline: 2px solid transparent;
     }
     .edit-body .mj-column.hover, .edit-body .mj-column.focus {
-      outline-color: ${color_primary_border};
+      outline-color: var(--color-primary-border);
     }
     .edit-body .mj-column.hover:before, .edit-body .mj-column.focus:before {
-      width: 100%;
       content: "column";
       display: block;
       position: absolute;
-      transform: translate(-27px, -150%);
-      padding: 1px 2px;
+      left: -2px;
+      top: -22px;
+      text-align: left;
+      padding: 2px 6px;
       font-size: 15px;
-      color: ${color_white};
-      background-color: ${color_primary_border};
+      color: var(--color-white);
+      background-color: var(--color-primary-border);
     }
     .edit-body .mj-column.focus {
-      outline-color: ${color_primary};
+      outline-color: var(--color-primary);
     }
     .edit-body .mj-column.focus:before {
-      background-color: ${color_primary};
-    }
-    .edit-body .mj-body.hover:before,
-    .edit-body .mj-body.focus:before,
-    .edit-body .mj-section.hover:before,
-    .edit-body .mj-section.focus:before,
-    .edit-body .mj-spacer.hover:before,
-    .edit-body .mj-spacer.focus:before {
-      transform: translate(-2px, -108%);
+      background-color: var(--color-primary);
     }
     .edit-body .mj-text {
       position: relative;
       outline: 2px solid transparent;
     }
     .edit-body .mj-text.hover, .edit-body .mj-text.focus {
-      outline-color: ${color_primary_border};
+      outline-color: var(--color-primary-border);
     }
     .edit-body .mj-text.hover:before, .edit-body .mj-text.focus:before {
-      width: 100%;
       content: "text";
       display: block;
       position: absolute;
-      transform: translate(-27px, -150%);
-      padding: 1px 2px;
+      left: -2px;
+      top: -22px;
+      text-align: left;
+      padding: 2px 6px;
       font-size: 15px;
-      color: ${color_white};
-      background-color: ${color_primary_border};
+      color: var(--color-white);
+      background-color: var(--color-primary-border);
     }
     .edit-body .mj-text.focus {
-      outline-color: ${color_primary};
+      outline-color: var(--color-primary);
     }
     .edit-body .mj-text.focus:before {
-      background-color: ${color_primary};
-    }
-    .edit-body .mj-body.hover:before,
-    .edit-body .mj-body.focus:before,
-    .edit-body .mj-section.hover:before,
-    .edit-body .mj-section.focus:before,
-    .edit-body .mj-spacer.hover:before,
-    .edit-body .mj-spacer.focus:before {
-      transform: translate(-2px, -108%);
+      background-color: var(--color-primary);
     }
     .edit-body .mj-image {
       position: relative;
       outline: 2px solid transparent;
     }
     .edit-body .mj-image.hover, .edit-body .mj-image.focus {
-      outline-color: ${color_primary_border};
+      outline-color: var(--color-primary-border);
     }
     .edit-body .mj-image.hover:before, .edit-body .mj-image.focus:before {
-      width: 100%;
       content: "image";
       display: block;
       position: absolute;
-      transform: translate(-27px, -150%);
-      padding: 1px 2px;
-      font-size: 15px;
+      left: -2px;
+      top: -22px;
       text-align: left;
-      color: ${color_white};
-      background-color: ${color_primary_border};
+      padding: 2px 6px;
+      font-size: 15px;
+      color: var(--color-white);
+      background-color: var(--color-primary-border);
     }
     .edit-body .mj-image.focus {
-      outline-color: ${color_primary};
+      outline-color: var(--color-primary);
     }
     .edit-body .mj-image.focus:before {
-      background-color: ${color_primary};
-    }
-    .edit-body .mj-body.hover:before,
-    .edit-body .mj-body.focus:before,
-    .edit-body .mj-section.hover:before,
-    .edit-body .mj-section.focus:before,
-    .edit-body .mj-spacer.hover:before,
-    .edit-body .mj-spacer.focus:before {
-      transform: translate(-2px, -108%);
+      background-color: var(--color-primary);
     }
     .edit-body .mj-button {
       position: relative;
       outline: 2px solid transparent;
     }
     .edit-body .mj-button.hover, .edit-body .mj-button.focus {
-      outline-color: ${color_primary_border};
+      outline-color: var(--color-primary-border);
     }
     .edit-body .mj-button.hover:before, .edit-body .mj-button.focus:before {
-      width: 100%;
       content: "button";
       display: block;
       position: absolute;
-      transform: translate(-27px, -150%);
-      padding: 1px 2px;
-      font-size: 15px;
+      left: -2px;
+      top: -22px;
       text-align: left;
-      color: ${color_white};
-      background-color: ${color_primary_border};
+      padding: 2px 6px;
+      font-size: 15px;
+      color: var(--color-white);
+      background-color: var(--color-primary-border);
     }
     .edit-body .mj-button.focus {
-      outline-color: ${color_primary};
+      outline-color: var(--color-primary);
     }
     .edit-body .mj-button.focus:before {
-      background-color: ${color_primary};
-    }
-    .edit-body .mj-body.hover:before,
-    .edit-body .mj-body.focus:before,
-    .edit-body .mj-section.hover:before,
-    .edit-body .mj-section.focus:before,
-    .edit-body .mj-spacer.hover:before,
-    .edit-body .mj-spacer.focus:before {
-      transform: translate(-2px, -108%);
+      background-color: var(--color-primary);
     }
     .edit-body .mj-divider {
       position: relative;
       outline: 2px solid transparent;
     }
     .edit-body .mj-divider.hover, .edit-body .mj-divider.focus {
-      outline-color: ${color_primary_border};
+      outline-color: var(--color-primary-border);
     }
     .edit-body .mj-divider.hover:before, .edit-body .mj-divider.focus:before {
-      width: 100%;
       content: "divider";
       display: block;
       position: absolute;
-      transform: translate(-27px, -150%);
-      padding: 1px 2px;
-      font-size: 15px;
+      left: -2px;
+      top: -22px;
       text-align: left;
-      color: ${color_white};
-      background-color: ${color_primary_border};
+      padding: 2px 6px;
+      font-size: 15px;
+      color: var(--color-white);
+      background-color: var(--color-primary-border);
     }
     .edit-body .mj-divider.focus {
-      outline-color: ${color_primary};
+      outline-color: var(--color-primary);
     }
     .edit-body .mj-divider.focus:before {
-      background-color: ${color_primary};
-    }
-    .edit-body .mj-body.hover:before,
-    .edit-body .mj-body.focus:before,
-    .edit-body .mj-section.hover:before,
-    .edit-body .mj-section.focus:before,
-    .edit-body .mj-spacer.hover:before,
-    .edit-body .mj-spacer.focus:before {
-      transform: translate(-2px, -108%);
+      background-color: var(--color-primary);
     }
     .edit-body .mj-spacer {
       position: relative;
       outline: 2px solid transparent;
     }
     .edit-body .mj-spacer.hover, .edit-body .mj-spacer.focus {
-      outline-color: ${color_primary_border};
+      outline-color: var(--color-primary-border);
     }
     .edit-body .mj-spacer.hover:before, .edit-body .mj-spacer.focus:before {
-      width: 100%;
       content: "spacer";
       display: block;
       position: absolute;
-      transform: translate(-27px, -150%);
-      padding: 1px 2px;
+      left: -2px;
+      top: -22px;
+      text-align: left;
+      padding: 2px 6px;
       font-size: 15px;
-      color: ${color_white};
-      background-color: ${color_primary_border};
+      color: var(--color-white);
+      background-color: var(--color-primary-border);
     }
     .edit-body .mj-spacer.focus {
-      outline-color: ${color_primary};
+      outline-color: var(--color-primary);
     }
     .edit-body .mj-spacer.focus:before {
-      background-color: ${color_primary};
-    }
-    .edit-body .mj-body.hover:before,
-    .edit-body .mj-body.focus:before,
-    .edit-body .mj-section.hover:before,
-    .edit-body .mj-section.focus:before,
-    .edit-body .mj-spacer.hover:before,
-    .edit-body .mj-spacer.focus:before {
-      transform: translate(-2px, -108%);
+      background-color: var(--color-primary);
     }
     .edit-body .mj-social {
       position: relative;
       outline: 2px solid transparent;
     }
     .edit-body .mj-social.hover, .edit-body .mj-social.focus {
-      outline-color: ${color_primary_border};
+      outline-color: var(--color-primary-border);
     }
     .edit-body .mj-social.hover:before, .edit-body .mj-social.focus:before {
-      width: 100%;
       content: "social";
       display: block;
       position: absolute;
-      transform: translate(-27px, -150%);
-      padding: 1px 2px;
+      left: -2px;
+      top: -22px;
+      text-align: left;
+      padding: 2px 6px;
       font-size: 15px;
-      color: ${color_white};
-      background-color: ${color_primary_border};
+      color: var(--color-white);
+      background-color: var(--color-primary-border);
     }
     .edit-body .mj-social.focus {
-      outline-color: ${color_primary};
+      outline-color: var(--color-primary);
     }
     .edit-body .mj-social.focus:before {
-      background-color: ${color_primary};
-    }
-    .edit-body .mj-body.hover:before,
-    .edit-body .mj-body.focus:before,
-    .edit-body .mj-section.hover:before,
-    .edit-body .mj-section.focus:before,
-    .edit-body .mj-spacer.hover:before,
-    .edit-body .mj-spacer.focus:before {
-      transform: translate(-2px, -108%);
+      background-color: var(--color-primary);
     }
     `;
 

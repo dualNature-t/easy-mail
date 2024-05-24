@@ -110,8 +110,11 @@ const Property = (): JSX.Element => {
       </Row>
 
       <Form
+        name="property"
         form={form}
+        preserve={false}
         onValuesChange={(value, allVlaue) => {
+          console.log(allVlaue);
           setProperty(value, unTransformProperty(allVlaue));
         }}
       >

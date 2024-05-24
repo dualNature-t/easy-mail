@@ -9,6 +9,8 @@ $blockArr: "body", "section", "column", "text", "image", "button", "divider",
 }
 
 .edit-body {
+  min-height: calc(100vh - 44px);
+  border: 22px solid white;
   @each $item in $blockArr {
     .mj-#{$item} {
       position: relative;
@@ -22,7 +24,9 @@ $blockArr: "body", "section", "column", "text", "image", "button", "divider",
           content: "#{$item}";
           display: block;
           position: absolute;
-          transform: translate(-27px, -150%);
+          left: -2px;
+          top: -22px;
+          text-align: left;
           padding: 2px 6px;
           font-size: 15px;
           color: var(--color-white);
@@ -36,14 +40,6 @@ $blockArr: "body", "section", "column", "text", "image", "button", "divider",
           background-color: var(--color-primary);
         }
       }
-    }
-    .mj-body.hover:before,
-    .mj-body.focus:before,
-    .mj-section.hover:before,
-    .mj-section.focus:before,
-    .mj-spacer.hover:before,
-    .mj-spacer.focus:before {
-      transform: translate(-2px, -108%);
     }
   }
 }

@@ -38,6 +38,7 @@ export const addTreeItem = (
       dataTransfer.data.value as keyof typeof defaultNodePropertyMap
     ]
   );
+  console.log(result);
   return result;
 };
 

@@ -77,11 +77,12 @@ const useDropBlock = () => {
         "mj-column"
       );
 
-      const { idx: originIdx } = getMjmlByNode(appData, focusNode as Element);
+      const { idx: originIdx } = getMjmlByNode(
+        appData,
+        targetOrigin as Element
+      );
 
       block.replaceWith(target);
-
-      console.log(target);
 
       const { idx } = getMjmlByNode(
         appData,
@@ -89,8 +90,6 @@ const useDropBlock = () => {
           ? (target as Element).children[0]
           : target) as Element
       );
-
-      console.log(idx);
 
       if (dataTransfer?.type == "add") {
         const result = addTreeItem(appData, idx, dataTransfer);
