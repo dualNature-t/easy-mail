@@ -55,8 +55,6 @@ const Property = (): JSX.Element => {
   const [form] = Form.useForm();
   const { token } = theme.useToken();
   const { nodeName, property, setProperty } = useProperty();
-
-  // console.log(nodeName);
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
@@ -114,7 +112,6 @@ const Property = (): JSX.Element => {
         form={form}
         preserve={false}
         onValuesChange={(value, allVlaue) => {
-          console.log(allVlaue);
           setProperty(value, unTransformProperty(allVlaue));
         }}
       >

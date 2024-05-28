@@ -31,14 +31,25 @@ export const addTreeItem = (
   const treeResult = idArr.slice(0, -1).reduce((cur, pre) => {
     return cur.children?.[pre] as appDataType;
   }, result);
-  treeResult.children?.splice(
-    idArr[idArr.length - 1],
-    0,
-    defaultNodePropertyMap[
-      dataTransfer.data.value as keyof typeof defaultNodePropertyMap
-    ]
-  );
-  console.log(result);
+
+  if (dataTransfer.data.type === "base" && idArr.length === 2) {
+    const oneColumn = defaultNodePropertyMap["mj-column"];
+    oneColumn.children?.[0].children?.push(
+      defaultNodePropertyMap[
+        dataTransfer.data.value as keyof typeof defaultNodePropertyMap
+      ]
+    );
+    treeResult.children?.splice(idArr[idArr.length - 1], 0, oneColumn);
+  } else {
+    treeResult.children?.splice(
+      idArr[idArr.length - 1],
+      0,
+      defaultNodePropertyMap[
+        dataTransfer.data.value as keyof typeof defaultNodePropertyMap
+      ]
+    );
+  }
+
   return result;
 };
 
@@ -87,16 +98,19 @@ export const moveTreeItem = (
   const tmp = treeOriginResult.children?.splice(
     originIdArr[originIdArr.length - 1],
     1
-  )[0];
+  )[0] as appDataType;
 
   const treeResult = idArr.slice(0, -1).reduce((cur, pre) => {
     return cur.children?.[pre] as appDataType;
   }, result);
 
-  console.log(idArr, originIdArr, tmp);
-
-  treeResult.children?.splice(idArr[idArr.length - 1], 0, tmp as appDataType);
-  console.log(result);
+  if (idArr.length === 2 && tmp?.tagName !== "mj-section") {
+    const oneColumn = defaultNodePropertyMap["mj-column"];
+    oneColumn.children?.[0].children?.push(tmp);
+    treeResult.children?.splice(idArr[idArr.length - 1], 0, oneColumn);
+  } else {
+    treeResult.children?.splice(idArr[idArr.length - 1], 0, tmp);
+  }
 
   return result;
 };

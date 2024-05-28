@@ -61,9 +61,8 @@ export const hasChildByColumn = (item: Element) => {
   return item.querySelectorAll(childStr).length > 0;
 };
 
-export const mergeNodeEmpty = (node: Element | null) => {
-  if (!node) return null;
-  const nodeClone = node.cloneNode(true) as Element;
+export const mergeNodeEmpty = <T extends Element>(node: T): T => {
+  const nodeClone = node.cloneNode(true) as T;
   const body = nodeClone.querySelector("div.mj-body");
 
   if (body && body.childElementCount === 0) {

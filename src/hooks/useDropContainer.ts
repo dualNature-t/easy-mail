@@ -10,7 +10,7 @@ import useFocusTool from "./useFocusTool";
 import getMjmlByNode, { getNodeByIdx } from "@/utils/getMjmlByNode";
 import useAppData from "./useAppData";
 import mjml2html from "mjml-browser";
-import { mergeNodeEmpty } from "@/utils/mergeNode";
+import { hasChildByColumn, mergeNodeEmpty } from "@/utils/mergeNode";
 
 type classNameType = "hover" | "focus";
 
@@ -241,26 +241,58 @@ const useDropContainer = () => {
   }, [ref, block]);
 
   useEffect(() => {
-    if (!appData || !focusNode || dataTransfer?.type) return;
-    const json = getMjmlByNode(appData, focusNode);
+    if (!appData) return;
     let parser = new DOMParser();
     let doc = parser.parseFromString(mjml2html(appData).html, "text/html");
+    // console.log("block", block);
+    // console.log("focusNode", focusNode);
+    // console.log("datatransfer", dataTransfer);
+    // console.log("appData", appData);
 
-    let targetNode = getNodeByIdx(doc, json.idx) as HTMLElement;
-
-    if (targetNode.classList.contains("mj-body")) {
-      focusNode.parentElement!.style.backgroundColor =
-        targetNode.style.backgroundColor;
+    const mergeDoc = mergeNodeEmpty(doc.documentElement);
+    const { idx: blockIdx } = getMjmlByNode(appData, block);
+    const { idx: focusIdx } = getMjmlByNode(appData, focusNode);
+    const focusTargetNode = getNodeByIdx(mergeDoc, focusIdx);
+    const blockTargetNode = getNodeByIdx(mergeDoc, blockIdx);
+    let targetNode: HTMLElement | null = null;
+    // debugger;
+    if (!dataTransfer) {
+      // property
+      targetNode = focusTargetNode;
     } else {
-      if (targetNode.nodeName === "TR") {
-        targetNode = targetNode.children[0] as HTMLElement;
+      // add or copy or delete or move
+      if (dataTransfer.type === "add") {
+        if (focusNode) {
+          targetNode = focusTargetNode;
+        } else {
+          targetNode = blockTargetNode;
+        }
+      } else if (dataTransfer.type === "copy") {
+        targetNode = focusTargetNode;
+      } else if (dataTransfer.type === "move") {
+        targetNode = blockTargetNode;
+      } else {
+        focusNodeArr.current = [];
+        setFocusNode(null);
       }
-      targetNode.classList.add("focus");
-      focusNodeArr.current.push(targetNode);
     }
 
-    focusNode?.replaceWith(targetNode);
-    setFocusNode(targetNode as HTMLElement);
+    if (targetNode) {
+      if (targetNode.classList.contains("mj-section")) {
+        targetNode.classList.add("focus");
+        focusNodeArr.current.push(targetNode);
+        setFocusNode(targetNode);
+      } else {
+        targetNode.children[0].classList.add("focus");
+        focusNodeArr.current.push(targetNode.children[0] as HTMLElement);
+        setFocusNode(targetNode.children[0] as HTMLElement);
+      }
+    }
+
+    const docBody = mergeDoc.querySelector("body");
+    ref?.querySelector("body")?.replaceChildren(docBody as Node);
+
+    setDataTransfer(null);
   }, [appData]);
 
   return { setRef };

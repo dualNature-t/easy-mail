@@ -30,24 +30,8 @@ export const getPropertyByNode = (node: HTMLElement | null) => {
   let result: Record<string, string> = {};
   switch (nodeName) {
     case "mj-body":
-      const sectionStyle = node
-        .querySelector(".mj-section")
-        ?.getAttribute("style");
-
-      result = Object.assign(
-        defaultNodePropertyMap[nodeName],
-        styleStrToObj(selfStyleStr),
-        styleStrToObj(sectionStyle)
-      );
-
       break;
     case "mj-section":
-      const tdStyle = node.querySelector("td")?.getAttribute("style");
-      result = Object.assign(
-        defaultNodePropertyMap[nodeName],
-        styleStrToObj(selfStyleStr),
-        styleStrToObj(tdStyle)
-      );
       break;
     case "mj-button":
       break;
@@ -142,7 +126,6 @@ export const setPropertyByNode = (
           })
         )
       );
-      console.log(styleObj);
       break;
     case "mj-button":
       break;

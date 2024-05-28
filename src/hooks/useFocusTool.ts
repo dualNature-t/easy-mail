@@ -45,35 +45,37 @@ const useFocusTool = () => {
     focusNode.appendChild(focusTool);
 
     const onClick = (e: MouseEvent) => {
+      e.stopPropagation();
       const target = e.target as HTMLDivElement;
       if (target.classList.contains("focus-tool-copy")) {
         const { idx } = getMjmlByNode(appData, focusNode);
         const result = copyTreeItem(appData, idx);
         setAppData(result as appDataType);
+        setDataTransfer({ type: "copy", data: {} });
 
-        let insertElement = focusNode.parentElement;
-        let targetElement = focusNode;
+        // let insertElement = focusNode.parentElement;
+        // let targetElement = focusNode;
 
-        const clone = focusNode.cloneNode(true) as HTMLElement;
-        clone.getElementsByClassName("focus-tool")[0].remove();
-        clone.classList.remove("focus", "hover");
+        // const clone = focusNode.cloneNode(true) as HTMLElement;
+        // clone.getElementsByClassName("focus-tool")[0].remove();
+        // clone.classList.remove("focus", "hover");
 
-        let targetEle = clone;
-        if (!focusNode.classList.contains("mj-section")) {
-          insertElement = insertElement?.parentElement as HTMLElement;
-          targetElement = targetElement?.parentElement as HTMLElement;
-          const tr = document.createElement("tr");
-          tr.appendChild(clone);
-          targetEle = tr;
-        }
+        // let targetEle = clone;
+        // if (!focusNode.classList.contains("mj-section")) {
+        //   insertElement = insertElement?.parentElement as HTMLElement;
+        //   targetElement = targetElement?.parentElement as HTMLElement;
+        //   const tr = document.createElement("tr");
+        //   tr.appendChild(clone);
+        //   targetEle = tr;
+        // }
 
-        targetElement?.nextElementSibling
-          ? insertElement?.insertBefore(
-              targetEle,
-              targetElement?.nextElementSibling
-            )
-          : insertElement?.appendChild(targetEle);
-        setFocusNode(null);
+        // targetElement?.nextElementSibling
+        //   ? insertElement?.insertBefore(
+        //       targetEle,
+        //       targetElement?.nextElementSibling
+        //     )
+        //   : insertElement?.appendChild(targetEle);
+        // setFocusNode(null);
         return;
       }
 
@@ -81,21 +83,22 @@ const useFocusTool = () => {
         const { idx } = getMjmlByNode(appData, focusNode);
         const result = deleteTreeItem(appData, idx);
         setAppData(result as appDataType);
+        setDataTransfer({ type: "del", data: {} });
 
-        if (focusNode.classList.contains("mj-section")) {
-          if (focusNode.parentElement?.childElementCount === 1) {
-            focusNode.parentElement.innerHTML = "";
-          }
-          focusNode?.remove();
-        } else {
-          const target = getNodeByTarget(focusNode, "mj-column") as HTMLElement;
-          focusNode?.parentElement?.remove();
-          if (!hasChildByColumn(target)) {
-            target.classList.add("mj-column-empty");
-          }
-        }
+        // if (focusNode.classList.contains("mj-section")) {
+        //   if (focusNode.parentElement?.childElementCount === 1) {
+        //     focusNode.parentElement.innerHTML = "";
+        //   }
+        //   focusNode?.remove();
+        // } else {
+        //   const target = getNodeByTarget(focusNode, "mj-column") as HTMLElement;
+        //   focusNode?.parentElement?.remove();
+        //   if (!hasChildByColumn(target)) {
+        //     target.classList.add("mj-column-empty");
+        //   }
+        // }
 
-        setFocusNode(null);
+        // setFocusNode(null);
         return;
       }
     };

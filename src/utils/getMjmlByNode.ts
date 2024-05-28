@@ -4,9 +4,13 @@ const getMjmlByNode = (appData: appDataType | null, node: Element | null) => {
   let mjml = appData?.children?.[0];
   let idx = "0";
   if (!appData || !node || node.classList.contains("mj-body"))
-    return { mjml, idx };
+    return { mjml, idx: null };
 
-  if (node.classList.contains("mj-section")) {
+  if (
+    node.classList.contains("mj-section") ||
+    node.previousElementSibling?.classList.contains("mj-section") ||
+    node.nextElementSibling?.classList.contains("mj-section")
+  ) {
     let id = 0;
     let siblingNode = node;
     while (siblingNode.previousElementSibling) {
@@ -18,7 +22,9 @@ const getMjmlByNode = (appData: appDataType | null, node: Element | null) => {
   } else {
     // debugger;
     let id = 0;
-    let currentNode = node.parentElement as HTMLElement;
+    let currentNode = node.classList.contains("drop-block")
+      ? node
+      : (node.parentElement as HTMLElement);
     // 第一层block筛选
     while (currentNode?.previousElementSibling) {
       currentNode = currentNode.previousElementSibling as HTMLElement;
@@ -69,7 +75,11 @@ const getMjmlByNode = (appData: appDataType | null, node: Element | null) => {
   return { mjml, idx } as { mjml: appDataType; idx: string };
 };
 
-export const getNodeByIdx = (doc: Document, idx: string) => {
+export const getNodeByIdx = <T extends Element>(
+  doc: T,
+  idx: string | null
+): T | null => {
+  if (!idx) return null;
   const idxArr = idx.split("-");
   let index = 0;
   let result = doc.querySelector("body") as Element;
@@ -88,7 +98,7 @@ export const getNodeByIdx = (doc: Document, idx: string) => {
 
     index++;
   }
-  return result;
+  return result as T;
 };
 
 export default getMjmlByNode;

@@ -36,10 +36,10 @@ export interface appDataType {
 }
 
 export interface dataTransferType {
-  type: "move" | "add";
+  type: "move" | "add" | "copy" | "del";
   data: {
-    type: dragBlockCategoryType;
-    value: basicTagNameType | columnTagNameType;
+    type?: dragBlockCategoryType;
+    value?: basicTagNameType | columnTagNameType;
   };
 }
 
