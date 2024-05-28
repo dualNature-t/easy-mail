@@ -11,6 +11,7 @@ import getMjmlByNode, { getNodeByIdx } from "@/utils/getMjmlByNode";
 import useAppData from "./useAppData";
 import mjml2html from "mjml-browser";
 import { mergeNodeEmpty } from "@/utils/mergeNode";
+import { aborted } from "util";
 
 type classNameType = "hover" | "focus";
 
@@ -28,15 +29,18 @@ const removeClassNameByNodes = (
 };
 
 const useDropContainer = () => {
-  const [ref, setRef] = useState<HTMLElement | null>(null);
+  const [ref, setRef] = useState<Window | null>(null);
   const hoverNodeArr = useRef<Array<HTMLElement>>([]);
   const focusNodeArr = useRef<Array<HTMLElement>>([]);
   const emptyNodeArr = useRef<Array<HTMLElement>>([]);
+  const editTextNodeArr = useRef<Array<HTMLElement>>([]);
   const { setHoverNode } = useHoverNode();
   const { focusNode, setFocusNode } = useFocusNode();
   const { setTab } = useTab();
   const { appData } = useAppData();
   const { dataTransfer, setDataTransfer } = useDataTransfer();
+
+  const documentElement = ref?.document.documentElement;
 
   const { block } = useDropBlock();
   useFocusTool();
@@ -51,7 +55,7 @@ const useDropContainer = () => {
   };
 
   useEffect(() => {
-    if (!ref) return;
+    if (!documentElement) return;
 
     const mouseover = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
@@ -211,18 +215,18 @@ const useDropContainer = () => {
       resetEmptyNode();
     }, 400);
 
-    ref.addEventListener("mouseover", mouseover);
-    ref.addEventListener("mouseout", mouseout);
-    ref.addEventListener("click", click);
-    ref.addEventListener("drop", drop);
-    ref.addEventListener("dragover", dragover);
+    documentElement.addEventListener("mouseover", mouseover);
+    documentElement.addEventListener("mouseout", mouseout);
+    documentElement.addEventListener("click", click);
+    documentElement.addEventListener("drop", drop);
+    documentElement.addEventListener("dragover", dragover);
 
     return () => {
-      ref.removeEventListener("mouseover", mouseover);
-      ref.removeEventListener("click", click);
-      ref.removeEventListener("drop", drop);
-      ref.removeEventListener("dragover", dragover);
-      ref.removeEventListener("mouseout", mouseout);
+      documentElement.removeEventListener("mouseover", mouseover);
+      documentElement.removeEventListener("click", click);
+      documentElement.removeEventListener("drop", drop);
+      documentElement.removeEventListener("dragover", dragover);
+      documentElement.removeEventListener("mouseout", mouseout);
     };
   }, [ref, block, focusNode, dataTransfer]);
 
@@ -233,13 +237,46 @@ const useDropContainer = () => {
       setDataTransfer(null);
     };
     window.addEventListener("dragend", onDragEnd);
-    ref?.addEventListener("dragend", onDragEnd);
+    documentElement?.addEventListener("dragend", onDragEnd);
 
     return () => {
       window.removeEventListener("dragend", onDragEnd);
-      ref?.removeEventListener("dragend", onDragEnd);
+      documentElement?.removeEventListener("dragend", onDragEnd);
     };
   }, [ref, block]);
+
+  useEffect(() => {
+    if (!focusNode) return;
+    console.log(ref.tinymce);
+    editTextNodeArr.current.forEach((node) => {
+      node.removeAttribute("id");
+    });
+    editTextNodeArr.current = [];
+
+    if (focusNode?.classList.contains("mj-text")) {
+      const targetNode = focusNode.children[0];
+      editTextNodeArr.current.push(targetNode as HTMLElement);
+
+      targetNode.setAttribute("id", "editor");
+      ref?.tinymce.init({
+        selector: "#editor",
+        inline: true,
+        menubar: false,
+        toolbar: [
+          "fontsize forecolor undo redo",
+          "bold italic underline strikethrough link",
+        ],
+        // toolbar: "formatting | alignleft aligncenter alignright",
+        // toolbar_groups: {
+        //   formatting: {
+        //     icon: "bold",
+        //     tooltip: "Formatting",
+        //     items: "bold italic underline | superscript subscript",
+        //   },
+        // },
+      });
+    }
+  }, [focusNode, ref]);
 
   useEffect(() => {
     if (!appData) return;
@@ -290,8 +327,8 @@ const useDropContainer = () => {
       }
     }
 
-    const docBody = mergeDoc.querySelector("body");
-    ref?.querySelector("body")?.replaceChildren(docBody as Node);
+    const docBody = mergeDoc.querySelector(".mj-body");
+    documentElement?.querySelector(".mj-body")?.replaceWith(docBody as Node);
 
     setDataTransfer(null);
   }, [appData]);

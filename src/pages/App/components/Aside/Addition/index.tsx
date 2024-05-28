@@ -9,6 +9,7 @@
 import style from "./style.module.scss";
 import DragItem from "../DragItem";
 import { basicTagNameType, columnTagNameType } from "@/context/appContext";
+import { useEffect, useRef } from "react";
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */

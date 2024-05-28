@@ -10,7 +10,7 @@ import mjml2html from "mjml-browser";
 import useAppData from "@/hooks/useAppData";
 import useDropContainer from "@/hooks/useDropContainer";
 import style from "./style.module.scss";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { mergeNodeEmpty } from "@/utils/mergeNode";
 
 const columnPer1 = `
@@ -208,6 +208,9 @@ const Main = (): JSX.Element => {
       position: relative;
       outline: 2px solid transparent;
     }
+    .edit-body .mj-text > div {
+      outline: none;
+    }
     .edit-body .mj-text.hover, .edit-body .mj-text.focus {
       outline-color: var(--color-primary-border);
     }
@@ -356,6 +359,9 @@ const Main = (): JSX.Element => {
     }
     `;
 
+    const script = document.createElement("script");
+    script.setAttribute("src", "./public/tinymce/js/tinymce/tinymce.min.js");
+
     if (styleEles.length > 1) {
       styleEles[1].innerHTML = columnPer1;
       styleEles[2].innerHTML = columnPer2;
@@ -369,20 +375,26 @@ const Main = (): JSX.Element => {
     }
 
     head?.appendChild(style);
+    head?.appendChild(script);
   };
 
   const onLoad = (e: React.BaseSyntheticEvent) => {
     const target: EventTarget | null = e.target;
     if (target && target instanceof HTMLIFrameElement && target.contentWindow) {
-      const iframeHtml = target.contentWindow.document.documentElement;
-      setRef(iframeHtml);
-      setStyleInIframe(iframeHtml);
+      const iframeWindow = target.contentWindow;
+      setRef(iframeWindow);
+      setStyleInIframe(iframeWindow.document.documentElement);
     }
   };
   /* <------------------------------------ **** FUNCTION END **** ------------------------------------ */
   /* <------------------------------------ **** EFFECT START **** ------------------------------------ */
   /************* This section will include this component general function *************/
-
+  // useEffect(() => {
+  //   tinymce.init({
+  //     selector: ".text-editor",
+  //     inline: true,
+  //   });
+  // }, []);
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
     <iframe

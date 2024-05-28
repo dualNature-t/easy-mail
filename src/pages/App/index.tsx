@@ -60,7 +60,7 @@ const defaultTreeData: appDataType = {
                   tagName: "mj-image",
                   attributes: {
                     "css-class": "mj-image",
-                    src: "https://assets.maocanhua.cn/b999e7e4-9242-4435-a4f6-c8f1d6fdfd96-image.png",
+                    src: "https://t7.baidu.com/it/u=1956604245,3662848045&fm=193&f=GIF",
                     href: "",
                     target: "_blank",
                     alt: "",
@@ -87,7 +87,7 @@ const defaultTreeData: appDataType = {
                   tagName: "mj-image",
                   attributes: {
                     "css-class": "mj-image",
-                    src: "https://assets.maocanhua.cn/ed0590da-b6dc-4d14-bfc7-6f1931a390fd-image.png",
+                    src: "https://t7.baidu.com/it/u=1956604245,3662848045&fm=193&f=GIF",
                     href: "",
                     target: "_blank",
                     alt: "",
@@ -137,7 +137,7 @@ const defaultTreeData: appDataType = {
                   tagName: "mj-image",
                   attributes: {
                     "css-class": "mj-image",
-                    src: "https://assets.maocanhua.cn/be61d137-bb44-4358-a681-dea81d2a8ec1-image.png",
+                    src: "https://t7.baidu.com/it/u=1956604245,3662848045&fm=193&f=GIF",
                     href: "",
                     target: "_blank",
                     alt: "",
@@ -216,7 +216,7 @@ const defaultTreeData: appDataType = {
                   tagName: "mj-image",
                   attributes: {
                     "css-class": "mj-image",
-                    src: "https://assets.maocanhua.cn/b3e16b18-9385-421e-b6a7-b28a749d6abf-image.png",
+                    src: "https://t7.baidu.com/it/u=1956604245,3662848045&fm=193&f=GIF",
                     href: "",
                     target: "_blank",
                     alt: "",
@@ -253,7 +253,7 @@ const defaultTreeData: appDataType = {
                   tagName: "mj-image",
                   attributes: {
                     "css-class": "mj-image",
-                    src: "https://assets.maocanhua.cn/6c23a5d0-ec6c-4634-8753-49e4a2da407e-image.png",
+                    src: "https://t7.baidu.com/it/u=1956604245,3662848045&fm=193&f=GIF",
                     href: "",
                     target: "_blank",
                     alt: "",
@@ -311,7 +311,7 @@ const defaultTreeData: appDataType = {
                   tagName: "mj-image",
                   attributes: {
                     "css-class": "mj-image",
-                    src: "https://assets.maocanhua.cn/0a270377-104e-4ea8-bd94-3df6d7afaa01-image.png",
+                    src: "https://t7.baidu.com/it/u=1956604245,3662848045&fm=193&f=GIF",
                     href: "",
                     target: "_blank",
                     alt: "",
@@ -325,7 +325,7 @@ const defaultTreeData: appDataType = {
                   tagName: "mj-image",
                   attributes: {
                     "css-class": "mj-image",
-                    src: "https://assets.maocanhua.cn/b999e7e4-9242-4435-a4f6-c8f1d6fdfd96-image.png",
+                    src: "https://t7.baidu.com/it/u=1956604245,3662848045&fm=193&f=GIF",
                     href: "",
                     target: "_blank",
                     alt: "",
