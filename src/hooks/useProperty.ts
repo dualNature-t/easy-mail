@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useFocusNode from "./useFocusNode";
 import { appDataType, tagNameType } from "@/context/appContext";
 import getMjmlByNode from "@/utils/getMjmlByNode";
@@ -22,9 +22,9 @@ const useProperty = () => {
     value: Record<string, string>,
     allValue: Record<string, string>
   ) => {
-    const json = getMjmlByNode(appData, focusNode);
+    const { idx } = getMjmlByNode(appData, focusNode);
     setAppData(
-      onTreePropertyChange(appData, json.idx, allValue) as appDataType
+      onTreePropertyChange(appData, idx as string, allValue) as appDataType
     );
   };
 

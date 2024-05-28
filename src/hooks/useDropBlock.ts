@@ -1,27 +1,20 @@
 import { useEffect, useState } from "react";
 import useDataTransfer from "./useDataTransfer";
 import useFocusNode from "./useFocusNode";
-import { basicElementTextMap } from "@/constant";
-import { appDataType, basicTagNameType } from "@/context/appContext";
-import {
-  hasChildByColumn,
-  mergeSectionByNode,
-  mergeSectionByType,
-} from "@/utils/mergeNode";
-import getNodeByTarget from "@/utils/getNodeByTarget";
+import { appDataType } from "@/context/appContext";
 import getMjmlByNode from "@/utils/getMjmlByNode";
 import useAppData from "./useAppData";
 import { addTreeItem, moveTreeItem } from "@/utils/treeTool";
 
 const normalStyle =
-  "border: 1px dashed #ccc; padding: 20px; text-align: center; font-size: 14px;";
+  "border: 1px dashed #ccc; padding: 26px 20px; text-align: center; font-size: 14px;";
 const hoverStyle = `${normalStyle} background-color: rgba(0,0,0,0.1)`;
 
 const useDropBlock = () => {
-  const { dataTransfer, setDataTransfer } = useDataTransfer();
+  const { dataTransfer } = useDataTransfer();
   const { appData, setAppData } = useAppData();
   const [block, setBlock] = useState<HTMLDivElement | null>(null);
-  const { focusNode, setFocusNode } = useFocusNode();
+  const { focusNode } = useFocusNode();
 
   useEffect(() => {
     const div = document.createElement("div");
@@ -41,58 +34,21 @@ const useDropBlock = () => {
       block.setAttribute("style", normalStyle);
     };
     const onDrop = (e: DragEvent) => {
-      // e.stopPropagation();
-      let target: Element | string = "";
-      // let targetOrigin = focusNode;
-
-      // if (block.parentElement?.classList.contains("mj-body")) {
-      //   // 插入到body
-      //   if (dataTransfer?.type == "add") {
-      //     target = mergeSectionByType(dataTransfer.data.value);
-      //   } else {
-      //     if (focusNode?.classList.contains("mj-section")) {
-      //       target = focusNode;
-      //     } else {
-      //       // 需要包裹section
-      //       targetOrigin = focusNode?.parentElement as HTMLElement;
-      //       target = mergeSectionByNode(focusNode);
-      //     }
-      //   }
-      // } else {
-      //   // 插入到section
-      //   if (dataTransfer?.type == "add") {
-      //     const blockText =
-      //       basicElementTextMap[dataTransfer.data.value as basicTagNameType];
-
-      //     const tr = document.createElement("tr");
-      //     tr.innerHTML = blockText;
-      //     target = tr;
-      //   } else {
-      //     target = focusNode?.parentElement as Element;
-      //   }
-      // }
-
-      // const sectionTarget = getNodeByTarget(
-      //   targetOrigin as HTMLElement,
-      //   "mj-column"
-      // );
-
       const { idx: originIdx } = getMjmlByNode(appData, focusNode as Element);
 
-      // block.replaceWith(target);
       const { idx } = getMjmlByNode(appData, block);
 
       if (dataTransfer?.type == "add") {
-        const result = addTreeItem(appData, idx, dataTransfer);
+        const result = addTreeItem(appData, idx as string, dataTransfer);
         setAppData(result as appDataType);
       } else {
-        const result = moveTreeItem(appData, idx, originIdx);
+        const result = moveTreeItem(
+          appData,
+          idx as string,
+          originIdx as string
+        );
         setAppData(result as appDataType);
       }
-
-      // if (sectionTarget && !hasChildByColumn(sectionTarget)) {
-      //   sectionTarget.classList.add("mj-column-empty");
-      // }
     };
 
     const onDragOver = (e: DragEvent) => {
