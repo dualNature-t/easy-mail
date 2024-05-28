@@ -55,7 +55,7 @@ const useDropContainer = () => {
 
     const mouseover = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (!target) return;
+      if (!target || dataTransfer) return;
 
       removeClassNameByNodes(hoverNodeArr.current, "hover");
       hoverNodeArr.current = [];
@@ -121,6 +121,7 @@ const useDropContainer = () => {
 
     const dragover = (e: DragEvent) => {
       e.preventDefault();
+      e.stopPropagation();
       throttleDragOver(e);
     };
 
@@ -166,8 +167,8 @@ const useDropContainer = () => {
       }
 
       const { height, top } = target.getBoundingClientRect();
-      const { pageY } = e;
-      const direction = pageY - top > height / 2 ? "down" : "up";
+      const { clientY } = e;
+      const direction = clientY - top > height / 2 ? "down" : "up";
 
       let insertParentEle = target.parentElement as HTMLElement;
       let insertEle = target;
