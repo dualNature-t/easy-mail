@@ -11,8 +11,9 @@ import getMjmlByNode, { getNodeByIdx } from "@/utils/getMjmlByNode";
 import useAppData from "./useAppData";
 import mjml2html from "mjml-browser";
 import { mergeNodeEmpty } from "@/utils/mergeNode";
-import { aborted } from "util";
 import useEditorTool from "./useEditorTool";
+import { onTextContentChange } from "@/utils/treeTool";
+import { appDataType } from "@/context/appContext";
 
 type classNameType = "hover" | "focus";
 
@@ -38,7 +39,7 @@ const useDropContainer = () => {
   const { setHoverNode } = useHoverNode();
   const { focusNode, setFocusNode } = useFocusNode();
   const { setTab } = useTab();
-  const { appData } = useAppData();
+  const { appData, setAppData } = useAppData();
   const { dataTransfer, setDataTransfer } = useDataTransfer();
 
   const documentElement = ref?.document.documentElement;
@@ -274,6 +275,14 @@ const useDropContainer = () => {
         forced_root_block: " ",
         init_instance_callback: () => {
           (targetNode as HTMLTextAreaElement).focus();
+        },
+        setup: (editor: any) => {
+          editor.on("change", (e: any) => {
+            const value = e.level.content;
+            const { idx } = getMjmlByNode(appData, focusNode);
+            const result = onTextContentChange(appData, idx as string, value);
+            setAppData(result as appDataType);
+          });
         },
         // toolbar: "formatting | alignleft aligncenter alignright",
         // toolbar_groups: {

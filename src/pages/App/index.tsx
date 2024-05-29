@@ -81,7 +81,7 @@ const defaultTreeData: appDataType = {
                     align: "center",
                     padding: "10px",
                   },
-                  content: "Replace Content",
+                  content: "<strong>Replace Content</strong>123123",
                 },
                 {
                   tagName: "mj-image",

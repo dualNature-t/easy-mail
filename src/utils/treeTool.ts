@@ -19,6 +19,23 @@ export const onTreePropertyChange = (
   return result;
 };
 
+export const onTextContentChange = (
+  tree: appDataType | null,
+  idx: string,
+  content: string
+) => {
+  if (!tree) return;
+  const idArr = idx.split("-").map((i) => Number(i));
+
+  const result = deepClone(tree);
+  const treeResult = idArr.reduce((cur, pre) => {
+    return cur.children?.[pre] as appDataType;
+  }, result);
+  treeResult.content = content;
+
+  return result;
+};
+
 export const addTreeItem = (
   tree: appDataType | null,
   idx: string,

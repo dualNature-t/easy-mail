@@ -17,13 +17,11 @@ const useEditorTool = () => {
     editorTool.replaceChildren();
 
     if (focusNode.classList.contains("mj-text")) {
-      const rootNode = focusNode.getRootNode() as Document;
-      rootNode.documentElement.querySelector("body")?.appendChild(editorTool);
+      const documentEle = (focusNode.getRootNode() as Document).documentElement;
+      documentEle.querySelector("body")?.appendChild(editorTool);
       const { left, top, width } = focusNode.getBoundingClientRect();
       editorTool.style.left = `${left + width / 2 - 279 / 2}px`;
-      editorTool.style.top = `${
-        top + rootNode.documentElement?.scrollTop - 78 - 10
-      }px`;
+      editorTool.style.top = `${top + documentEle?.scrollTop - 78 - 10}px`;
     } else {
       editorTool?.remove();
     }
