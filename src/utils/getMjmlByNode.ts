@@ -14,8 +14,11 @@ const getMjmlByNode = (appData: appDataType | null, node: Element | null) => {
     let id = 0;
     let siblingNode = node;
     while (siblingNode.previousElementSibling) {
-      id++;
       siblingNode = siblingNode.previousElementSibling as HTMLElement;
+      if (siblingNode.classList.contains("drop-block")) {
+        continue;
+      }
+      id++;
     }
     mjml = mjml?.children?.[id];
     idx = `${idx}-${id}`;

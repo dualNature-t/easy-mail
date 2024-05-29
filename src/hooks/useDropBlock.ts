@@ -34,14 +34,21 @@ const useDropBlock = () => {
       block.setAttribute("style", normalStyle);
     };
     const onDrop = (e: DragEvent) => {
-      const { idx: originIdx } = getMjmlByNode(appData, focusNode as Element);
-
-      const { idx } = getMjmlByNode(appData, block);
-
       if (dataTransfer?.type == "add") {
+        const { idx } = getMjmlByNode(appData, block);
         const result = addTreeItem(appData, idx as string, dataTransfer);
         setAppData(result as appDataType);
       } else {
+        const { idx: originIdx } = getMjmlByNode(appData, focusNode as Element);
+        if (focusNode?.classList.contains("mj-section")) {
+          focusNode?.remove();
+        } else {
+          focusNode?.parentElement?.remove();
+        }
+        const { idx } = getMjmlByNode(appData, block);
+
+        debugger;
+
         const result = moveTreeItem(
           appData,
           idx as string,

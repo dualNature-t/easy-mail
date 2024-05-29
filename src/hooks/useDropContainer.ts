@@ -312,6 +312,7 @@ const useDropContainer = () => {
     const { idx: focusIdx } = getMjmlByNode(appData, focusNode);
     const focusTargetNode = getNodeByIdx(mergeDoc, focusIdx);
     const blockTargetNode = getNodeByIdx(mergeDoc, blockIdx);
+    // debugger;
     let targetNode: HTMLElement | null = null;
     // debugger;
     if (!dataTransfer) {
