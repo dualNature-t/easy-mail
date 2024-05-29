@@ -45,10 +45,48 @@ const TextBlock = (): JSX.Element => {
 
         <Form.Item name="font-family" label={<Text strong>Font Family</Text>}>
           <Select
-            style={{ width: 120 }}
+            style={{ width: 120, textAlign: "left" }}
             options={[
-              { value: "repeat", label: "Repeat" },
-              { value: "no-repeat", label: "No-Repeat" },
+              {
+                value: "arial",
+                label: <span style={{ fontFamily: "arial" }}>Arial</span>,
+              },
+              {
+                value: "serif ",
+                label: <span style={{ fontFamily: "serif" }}>Serif</span>,
+              },
+              {
+                value: "sans-serif",
+                label: (
+                  <span style={{ fontFamily: "sans-serif" }}>Sansserif</span>
+                ),
+              },
+              {
+                value: "monospace",
+                label: (
+                  <span style={{ fontFamily: "monospace" }}>Monospace</span>
+                ),
+              },
+              {
+                value: "cursive",
+                label: <span style={{ fontFamily: "cursive" }}>Cursive</span>,
+              },
+              {
+                value: "fantasy",
+                label: <span style={{ fontFamily: "fantasy" }}>Fantasy</span>,
+              },
+              {
+                value: "emoji",
+                label: <span style={{ fontFamily: "emoji" }}>Emoji</span>,
+              },
+              {
+                value: "math",
+                label: <span style={{ fontFamily: "math" }}>Math</span>,
+              },
+              {
+                value: "fangsong",
+                label: <span style={{ fontFamily: "fangsong" }}>仿宋</span>,
+              },
             ]}
           ></Select>
         </Form.Item>
@@ -58,7 +96,7 @@ const TextBlock = (): JSX.Element => {
         </Form.Item>
 
         <Form.Item name="line-height" label={<Text strong>Line Height</Text>}>
-          <InputNumber />
+          <InputNumber step={0.1} />
         </Form.Item>
 
         <Form.Item

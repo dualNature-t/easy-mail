@@ -6,8 +6,9 @@
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Button, Col, Form, InputNumber, Row, Typography } from "antd";
+import useProperty from "@/hooks/useProperty";
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
@@ -18,6 +19,8 @@ const Padding = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
   const [open, setOpen] = useState(false);
+  const { property } = useProperty();
+  // console.log(property);
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/

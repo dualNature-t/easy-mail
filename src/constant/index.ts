@@ -250,7 +250,7 @@ export const defaultNodePropertyMap: Record<
       "background-color": "#414141",
       "border-radius": "0px",
       border: "",
-      "font-family": "Ubuntu",
+      "font-family": "arial",
       "font-size": "13px",
       "line-height": "1",
       color: "#FFFFFF",
@@ -299,7 +299,7 @@ export const defaultNodePropertyMap: Record<
     tagName: "mj-text",
     attributes: {
       "css-class": "mj-text",
-      "font-family": "Ubuntu",
+      "font-family": "arial",
       "font-size": "13px",
       "line-height": "1",
       color: "#000",

@@ -36,6 +36,7 @@ const useDropContainer = () => {
   const focusNodeArr = useRef<Array<HTMLElement>>([]);
   const emptyNodeArr = useRef<Array<HTMLElement>>([]);
   const editTextNodeArr = useRef<Array<HTMLElement>>([]);
+
   const { setHoverNode } = useHoverNode();
   const { focusNode, setFocusNode } = useFocusNode();
   const { setTab } = useTab();
@@ -88,6 +89,7 @@ const useDropContainer = () => {
     };
 
     const click = (e: MouseEvent) => {
+      e.preventDefault();
       const target = e.target as HTMLElement;
       if (!target) return;
 
@@ -248,53 +250,53 @@ const useDropContainer = () => {
     };
   }, [ref, block]);
 
-  useEffect(() => {
-    if (!focusNode) return;
-    editTextNodeArr.current.forEach((node) => {
-      ref?.tinymce.remove();
-      node.removeAttribute("id");
-      node.removeAttribute("class");
-      node.removeAttribute("contenteditable");
-    });
-    editTextNodeArr.current = [];
+  // useEffect(() => {
+  //   if (!focusNode) return;
+  //   editTextNodeArr.current.forEach((node) => {
+  //     ref?.tinymce.remove();
+  //     node.removeAttribute("id");
+  //     node.removeAttribute("class");
+  //     node.removeAttribute("contenteditable");
+  //   });
+  //   editTextNodeArr.current = [];
 
-    if (focusNode?.classList.contains("mj-text")) {
-      const targetNode = focusNode.children[0];
-      editTextNodeArr.current.push(targetNode as HTMLElement);
+  //   if (focusNode?.classList.contains("mj-text")) {
+  //     const targetNode = focusNode.children[0];
+  //     editTextNodeArr.current.push(targetNode as HTMLElement);
 
-      targetNode.setAttribute("id", "editor");
-      ref?.tinymce.init({
-        selector: "#editor",
-        inline: true,
-        menubar: false,
-        toolbar: [
-          "fontsize forecolor undo redo",
-          "bold italic underline strikethrough link",
-        ],
-        fixed_toolbar_container: "#editor-tool-box",
-        forced_root_block: " ",
-        init_instance_callback: () => {
-          (targetNode as HTMLTextAreaElement).focus();
-        },
-        setup: (editor: any) => {
-          editor.on("change", (e: any) => {
-            const value = e.level.content;
-            const { idx } = getMjmlByNode(appData, focusNode);
-            const result = onTextContentChange(appData, idx as string, value);
-            setAppData(result as appDataType);
-          });
-        },
-        // toolbar: "formatting | alignleft aligncenter alignright",
-        // toolbar_groups: {
-        //   formatting: {
-        //     icon: "bold",
-        //     tooltip: "Formatting",
-        //     items: "bold italic underline | superscript subscript",
-        //   },
-        // },
-      });
-    }
-  }, [focusNode, ref]);
+  //     targetNode.setAttribute("id", "editor");
+  //     ref?.tinymce.init({
+  //       selector: "#editor",
+  //       inline: true,
+  //       menubar: false,
+  //       toolbar: [
+  //         "fontsize forecolor undo redo",
+  //         "bold italic underline strikethrough link",
+  //       ],
+  //       fixed_toolbar_container: "#editor-tool-box",
+  //       forced_root_block: " ",
+  //       init_instance_callback: () => {
+  //         (targetNode as HTMLTextAreaElement).focus();
+  //       },
+  //       setup: (editor: any) => {
+  //         editor.on("change", (e: any) => {
+  //           const value = e.level.content;
+  //           const { idx } = getMjmlByNode(appData, focusNode);
+  //           const result = onTextContentChange(appData, idx as string, value);
+  //           setAppData(result as appDataType);
+  //         });
+  //       },
+  //       // toolbar: "formatting | alignleft aligncenter alignright",
+  //       // toolbar_groups: {
+  //       //   formatting: {
+  //       //     icon: "bold",
+  //       //     tooltip: "Formatting",
+  //       //     items: "bold italic underline | superscript subscript",
+  //       //   },
+  //       // },
+  //     });
+  //   }
+  // }, [focusNode, ref]);
 
   useEffect(() => {
     if (!appData) return;

@@ -6,9 +6,9 @@
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import React, { useEffect } from "react";
+import React, { createContext, useEffect } from "react";
 import style from "./style.module.scss";
-import { Col, Form, Row, Typography, theme } from "antd";
+import { Col, Form, FormInstance, Row, Typography, theme } from "antd";
 import useProperty, { validFocusNodeTagNameType } from "@/hooks/useProperty";
 import {
   BodyBlock,
@@ -47,6 +47,7 @@ const NumberPropertyMap = [
   "border-width",
   "height",
 ];
+
 /* <------------------------------------ **** INTERFACE END **** ------------------------------------ */
 /* <------------------------------------ **** FUNCTION COMPONENT START **** ------------------------------------ */
 const Property = (): JSX.Element => {
@@ -65,7 +66,10 @@ const Property = (): JSX.Element => {
     if (!property) return;
     const propertyMap: Record<string, string | number> = {};
     for (const key in property) {
-      if (NumberPropertyMap.includes(key)) {
+      if (
+        NumberPropertyMap.includes(key) &&
+        !(property[key as keyof typeof property] as string).includes("%")
+      ) {
         propertyMap[key] = parseInt(property[key as keyof typeof property]);
       } else {
         propertyMap[key] = property[key as keyof typeof property];
@@ -112,8 +116,10 @@ const Property = (): JSX.Element => {
         form={form}
         preserve={false}
         onValuesChange={(value, allVlaue) => {
+          console.log(allVlaue);
           setProperty(value, unTransformProperty(allVlaue));
         }}
+        className={style.property_form}
       >
         {propertyContentMap[nodeName]}
       </Form>

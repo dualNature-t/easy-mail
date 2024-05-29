@@ -57,24 +57,10 @@ const defaultTreeData: appDataType = {
               },
               children: [
                 {
-                  tagName: "mj-image",
-                  attributes: {
-                    "css-class": "mj-image",
-                    src: "https://t7.baidu.com/it/u=1956604245,3662848045&fm=193&f=GIF",
-                    href: "",
-                    target: "_blank",
-                    alt: "",
-                    width: "170px",
-                    "border-radius": "0px",
-                    align: "center",
-                    padding: "10px",
-                  },
-                },
-                {
                   tagName: "mj-text",
                   attributes: {
                     "css-class": "mj-text",
-                    "font-family": "Ubuntu",
+                    "font-family": "arial",
                     "font-size": "13px",
                     "line-height": "1",
                     color: "#000",
@@ -91,248 +77,47 @@ const defaultTreeData: appDataType = {
                     href: "",
                     target: "_blank",
                     alt: "",
-                    width: "530px",
-                    "border-radius": "0px",
-                    align: "center",
-                    padding: "10px",
-                  },
-                },
-                {
-                  tagName: "mj-text",
-                  attributes: {
-                    "css-class": "mj-text",
-                    "font-family": "Ubuntu",
-                    "font-size": "20px",
-                    "line-height": "1",
-                    color: "#000",
-                    align: "center",
-                    padding: "10px",
-                  },
-                  content: "Replace Content",
-                },
-              ],
-            },
-          ],
-        },
-        {
-          tagName: "mj-section",
-          attributes: {
-            "css-class": "mj-section",
-            "border-radius": "0px",
-            border: "",
-            "background-color": "",
-            "background-url": "",
-            "background-repeat": "repeat",
-            "background-size": "auto",
-            padding: "20px",
-          },
-          children: [
-            {
-              tagName: "mj-column",
-              attributes: {
-                "css-class": "mj-column",
-              },
-              children: [
-                {
-                  tagName: "mj-image",
-                  attributes: {
-                    "css-class": "mj-image",
-                    src: "https://t7.baidu.com/it/u=1956604245,3662848045&fm=193&f=GIF",
-                    href: "",
-                    target: "_blank",
-                    alt: "",
-                    width: "250px",
-                    "border-radius": "0px",
-                    align: "center",
-                    padding: "10px",
-                  },
-                },
-              ],
-            },
-            {
-              tagName: "mj-column",
-              attributes: {
-                "css-class": "mj-column",
-              },
-              children: [
-                {
-                  tagName: "mj-text",
-                  attributes: {
-                    "css-class": "mj-text",
-                    "font-family": "Ubuntu",
-                    "font-size": "13px",
-                    "line-height": "1",
-                    color: "#000",
-                    align: "left",
-                    padding: "10px 25px",
-                  },
-                  content: "Replace Content",
-                },
-              ],
-            },
-          ],
-        },
-        {
-          tagName: "mj-section",
-          attributes: {
-            "css-class": "mj-section",
-            "border-radius": "0px",
-            border: "",
-            "background-color": "",
-            "background-url": "",
-            "background-repeat": "repeat",
-            "background-size": "auto",
-            padding: "20px",
-          },
-          children: [
-            {
-              tagName: "mj-column",
-              attributes: {
-                "css-class": "mj-column",
-              },
-              children: [
-                {
-                  tagName: "mj-text",
-                  attributes: {
-                    "css-class": "mj-text",
-                    "font-family": "Ubuntu",
-                    "font-size": "13px",
-                    "line-height": "1",
-                    color: "#000",
-                    align: "left",
-                    padding: "10px 25px",
-                  },
-                  content: "Replace Content",
-                },
-              ],
-            },
-            {
-              tagName: "mj-column",
-              attributes: {
-                "css-class": "mj-column",
-              },
-              children: [
-                {
-                  tagName: "mj-image",
-                  attributes: {
-                    "css-class": "mj-image",
-                    src: "https://t7.baidu.com/it/u=1956604245,3662848045&fm=193&f=GIF",
-                    href: "",
-                    target: "_blank",
-                    alt: "",
-                    width: "250px",
-                    "border-radius": "0px",
-                    align: "center",
-                    padding: "10px",
-                  },
-                },
-              ],
-            },
-          ],
-        },
-        {
-          tagName: "mj-section",
-          attributes: {
-            "css-class": "mj-section",
-            "border-radius": "0px",
-            border: "",
-            "background-color": "",
-            "background-url": "",
-            "background-repeat": "repeat",
-            "background-size": "auto",
-            padding: "20px",
-          },
-          children: [
-            {
-              tagName: "mj-column",
-              attributes: {
-                "css-class": "mj-column",
-              },
-              children: [
-                {
-                  tagName: "mj-image",
-                  attributes: {
-                    "css-class": "mj-image",
-                    src: "https://t7.baidu.com/it/u=1956604245,3662848045&fm=193&f=GIF",
-                    href: "",
-                    target: "_blank",
-                    alt: "",
-                    width: "250px",
-                    "border-radius": "0px",
-                    align: "center",
-                    padding: "10px",
-                  },
-                },
-              ],
-            },
-            {
-              tagName: "mj-column",
-              attributes: {
-                "css-class": "mj-column",
-              },
-              children: [
-                {
-                  tagName: "mj-text",
-                  attributes: {
-                    "css-class": "mj-text",
-                    "font-family": "Ubuntu",
-                    "font-size": "13px",
-                    "line-height": "1",
-                    color: "#000",
-                    align: "left",
-                    padding: "10px 25px",
-                  },
-                  content: "Replace Content",
-                },
-              ],
-            },
-          ],
-        },
-        {
-          tagName: "mj-section",
-          attributes: {
-            "css-class": "mj-section",
-            "border-radius": "0px",
-            border: "",
-            "background-color": "",
-            "background-url": "",
-            "background-repeat": "repeat",
-            "background-size": "auto",
-            padding: "20px",
-          },
-          children: [
-            {
-              tagName: "mj-column",
-              attributes: {
-                "css-class": "mj-column",
-              },
-              children: [
-                {
-                  tagName: "mj-image",
-                  attributes: {
-                    "css-class": "mj-image",
-                    src: "https://t7.baidu.com/it/u=1956604245,3662848045&fm=193&f=GIF",
-                    href: "",
-                    target: "_blank",
-                    alt: "",
-                    width: "540px",
-                    "border-radius": "0px",
-                    align: "center",
-                    padding: "10px",
-                  },
-                },
-                {
-                  tagName: "mj-image",
-                  attributes: {
-                    "css-class": "mj-image",
-                    src: "https://t7.baidu.com/it/u=1956604245,3662848045&fm=193&f=GIF",
-                    href: "",
-                    target: "_blank",
-                    alt: "",
                     width: "170px",
                     "border-radius": "0px",
                     align: "center",
                     padding: "10px",
+                  },
+                },
+                {
+                  tagName: "mj-button",
+                  attributes: {
+                    "css-class": "mj-button",
+                    href: "",
+                    target: "_blank",
+                    width: "100%",
+                    "background-color": "#414141",
+                    "border-radius": "0px",
+                    border: "",
+                    "font-family": "arial",
+                    "font-size": "13px",
+                    "line-height": "1",
+                    color: "#FFFFFF",
+                    align: "center",
+                    padding: "10px 25px",
+                  },
+                  content: "Replace Content",
+                },
+                {
+                  tagName: "mj-divider",
+                  attributes: {
+                    "css-class": "mj-divider",
+                    width: "100%",
+                    "border-width": "1px",
+                    "border-style": "solid",
+                    "border-color": "#000000",
+                    padding: "10px 25px",
+                  },
+                },
+                {
+                  tagName: "mj-spacer",
+                  attributes: {
+                    "css-class": "mj-spacer",
+                    height: "20px",
                   },
                 },
               ],
