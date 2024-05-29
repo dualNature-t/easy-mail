@@ -360,7 +360,7 @@ const Main = (): JSX.Element => {
     `;
 
     const script = document.createElement("script");
-    script.setAttribute("src", "./public/tinymce/js/tinymce/tinymce.min.js");
+    script.setAttribute("src", "/tinymce/js/tinymce/tinymce.min.js");
 
     if (styleEles.length > 1) {
       styleEles[1].innerHTML = columnPer1;
@@ -389,12 +389,6 @@ const Main = (): JSX.Element => {
   /* <------------------------------------ **** FUNCTION END **** ------------------------------------ */
   /* <------------------------------------ **** EFFECT START **** ------------------------------------ */
   /************* This section will include this component general function *************/
-  // useEffect(() => {
-  //   tinymce.init({
-  //     selector: ".text-editor",
-  //     inline: true,
-  //   });
-  // }, []);
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
     <iframe

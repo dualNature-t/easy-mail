@@ -12,6 +12,7 @@ import useAppData from "./useAppData";
 import mjml2html from "mjml-browser";
 import { mergeNodeEmpty } from "@/utils/mergeNode";
 import { aborted } from "util";
+import useEditorTool from "./useEditorTool";
 
 type classNameType = "hover" | "focus";
 
@@ -44,6 +45,7 @@ const useDropContainer = () => {
 
   const { block } = useDropBlock();
   useFocusTool();
+  useEditorTool();
 
   const resetEmptyNode = () => {
     if (emptyNodeArr.current.length > 0) {
@@ -247,9 +249,11 @@ const useDropContainer = () => {
 
   useEffect(() => {
     if (!focusNode) return;
-    console.log(ref.tinymce);
     editTextNodeArr.current.forEach((node) => {
+      ref?.tinymce.remove();
       node.removeAttribute("id");
+      node.removeAttribute("class");
+      node.removeAttribute("contenteditable");
     });
     editTextNodeArr.current = [];
 
@@ -266,6 +270,11 @@ const useDropContainer = () => {
           "fontsize forecolor undo redo",
           "bold italic underline strikethrough link",
         ],
+        fixed_toolbar_container: "#editor-tool-box",
+        forced_root_block: " ",
+        init_instance_callback: () => {
+          (targetNode as HTMLTextAreaElement).focus();
+        },
         // toolbar: "formatting | alignleft aligncenter alignright",
         // toolbar_groups: {
         //   formatting: {
