@@ -65,7 +65,7 @@ const defaultTreeData: appDataType = {
                     "line-height": "1",
                     color: "#000",
                     align: "center",
-                    padding: "10px",
+                    padding: "10px 25px",
                   },
                   content: "<strong>Replace Content</strong>123123",
                 },
@@ -80,7 +80,7 @@ const defaultTreeData: appDataType = {
                     width: "170px",
                     "border-radius": "0px",
                     align: "center",
-                    padding: "10px",
+                    padding: "10px 25px",
                   },
                 },
                 {

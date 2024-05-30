@@ -6,44 +6,121 @@
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { Button, Col, Form, InputNumber, Row, Typography } from "antd";
 import useProperty from "@/hooks/useProperty";
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
-const mergePadding = (padding: string) => {
-  const paddingSplit = padding.split(" ");
-  const len = paddingSplit.length;
-  if (len == 2) {
-  } else if (len == 3) {
-  }
-};
+
 /* <------------------------------------ **** INTERFACE END **** ------------------------------------ */
 /* <------------------------------------ **** FUNCTION COMPONENT START **** ------------------------------------ */
 const Padding = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
   const [open, setOpen] = useState(false);
+  const { property, setProperty } = useProperty();
+
+  const {
+    "padding-left": paddingLeft,
+    "padding-right": paddingRight,
+    "padding-top": paddingTop,
+    "padding-bottom": paddingBottom,
+  } = useMemo(() => {
+    const result = {
+      "padding-top": 0,
+      "padding-right": 0,
+      "padding-bottom": 0,
+      "padding-left": 0,
+    };
+    if (!property || Object.keys(property).length == 0) {
+      return result;
+    }
+
+    const padding = (property as { padding: string }).padding;
+    const paddingArr = padding.split(" ");
+    const len = paddingArr.length;
+
+    if (len == 1) {
+      Object.keys(result).forEach((item) => {
+        result[item as keyof typeof result] = parseInt(paddingArr[0]);
+      });
+    } else if (len == 2) {
+      const number01 = parseInt(paddingArr[0]);
+      const number02 = parseInt(paddingArr[1]);
+      result["padding-left"] = number02;
+      result["padding-right"] = number02;
+      result["padding-top"] = number01;
+      result["padding-bottom"] = number01;
+    } else if (len == 3) {
+      const number01 = parseInt(paddingArr[0]);
+      const number02 = parseInt(paddingArr[1]);
+      const number03 = parseInt(paddingArr[2]);
+      result["padding-left"] = number02;
+      result["padding-right"] = number02;
+      result["padding-top"] = number01;
+      result["padding-bottom"] = number03;
+    } else {
+      Object.keys(result).forEach((item, index) => {
+        result[item as keyof typeof result] = parseInt(paddingArr[index]);
+      });
+    }
+
+    return result;
+  }, [property]);
+
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
   /* <------------------------------------ **** PARAMETER END **** ------------------------------------ */
   /* <------------------------------------ **** FUNCTION START **** ------------------------------------ */
   /************* This section will include this component general function *************/
+  const onChange = (
+    value: number | null,
+    key:
+      | "padding"
+      | "padding-left"
+      | "padding-right"
+      | "padding-top"
+      | "padding-bottom"
+  ) => {
+    let result = null;
+    if (key === "padding") {
+      result = {
+        ...property,
+        padding: `${value}px ${value}px ${value}px ${value}px`,
+      };
+    } else {
+      const merge = Object.assign(
+        {
+          "padding-left": paddingLeft,
+          "padding-right": paddingRight,
+          "padding-top": paddingTop,
+          "padding-bottom": paddingBottom,
+        },
+        { [key]: value }
+      );
+      result = {
+        ...property,
+        padding: `${merge["padding-top"]}px ${merge["padding-right"]}px ${merge["padding-bottom"]}px ${merge["padding-left"]}px`,
+      };
+    }
+
+    setProperty({ padding: result.padding }, result);
+  };
   /* <------------------------------------ **** FUNCTION END **** ------------------------------------ */
   /* <------------------------------------ **** EFFECT START **** ------------------------------------ */
   /************* This section will include this component general function *************/
-  // useEffect(() => {
-  //   if (!property || Object.keys(property).length == 0) return;
-  //   const { padding } = property;
-  //   const paddingSplit = padding.split(" ");
-  //   if (paddingSplit.length > 1) {
-  //     setOpen(true);
-  //   }
-  //   console.log(padding);
-  // }, [property]);
+  useEffect(() => {
+    if (
+      paddingLeft === paddingRight &&
+      paddingRight === paddingTop &&
+      paddingTop === paddingBottom
+    )
+      return;
+    !open && setOpen(true);
+  }, [paddingLeft, paddingRight, paddingTop, paddingBottom]);
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
     <>
@@ -53,7 +130,24 @@ const Padding = (): JSX.Element => {
         </Col>
         <Col>
           {open ? (
-            <Button onClick={() => setOpen(false)} type="link">
+            <Button
+              onClick={() => {
+                const minPadding = Math.min(
+                  paddingLeft,
+                  paddingRight,
+                  paddingTop,
+                  paddingBottom
+                );
+                const paddingValue = `${minPadding}px ${minPadding}px ${minPadding}px ${minPadding}px`;
+
+                setOpen(false);
+                setProperty(
+                  { padding: paddingValue },
+                  { ...property, padding: paddingValue }
+                );
+              }}
+              type="link"
+            >
               Less Options
             </Button>
           ) : (
@@ -64,9 +158,19 @@ const Padding = (): JSX.Element => {
                 </Button>
               </Col>
               <Col>
-                <Form.Item noStyle name="padding">
-                  <InputNumber step={10} min={0} />
-                </Form.Item>
+                <InputNumber
+                  value={Math.min(
+                    paddingLeft,
+                    paddingRight,
+                    paddingTop,
+                    paddingBottom
+                  )}
+                  step={10}
+                  min={0}
+                  onChange={(value: number | null) =>
+                    onChange(value, "padding")
+                  }
+                />
               </Col>
             </Row>
           )}
@@ -81,9 +185,14 @@ const Padding = (): JSX.Element => {
                 <Text>Top</Text>
               </Col>
               <Col>
-                <Form.Item noStyle name="padding-top">
-                  <InputNumber step={10} min={0} />
-                </Form.Item>
+                <InputNumber
+                  value={paddingTop}
+                  step={10}
+                  min={0}
+                  onChange={(value: number | null) =>
+                    onChange(value, "padding-top")
+                  }
+                />
               </Col>
             </Row>
           </Col>
@@ -93,9 +202,14 @@ const Padding = (): JSX.Element => {
                 <Text>Right</Text>
               </Col>
               <Col>
-                <Form.Item noStyle name="padding-right">
-                  <InputNumber step={10} min={0} />
-                </Form.Item>
+                <InputNumber
+                  value={paddingRight}
+                  step={10}
+                  min={0}
+                  onChange={(value: number | null) =>
+                    onChange(value, "padding-right")
+                  }
+                />
               </Col>
             </Row>
           </Col>
@@ -105,9 +219,14 @@ const Padding = (): JSX.Element => {
                 <Text>Bottom</Text>
               </Col>
               <Col>
-                <Form.Item noStyle name="padding-bottom">
-                  <InputNumber step={10} min={0} />
-                </Form.Item>
+                <InputNumber
+                  value={paddingBottom}
+                  step={10}
+                  min={0}
+                  onChange={(value: number | null) =>
+                    onChange(value, "padding-bottom")
+                  }
+                />
               </Col>
             </Row>
           </Col>
@@ -117,9 +236,14 @@ const Padding = (): JSX.Element => {
                 <Text>Left</Text>
               </Col>
               <Col>
-                <Form.Item noStyle name="padding-left">
-                  <InputNumber step={10} min={0} />
-                </Form.Item>
+                <InputNumber
+                  value={paddingLeft}
+                  step={10}
+                  min={0}
+                  onChange={(value: number | null) =>
+                    onChange(value, "padding-left")
+                  }
+                />
               </Col>
             </Row>
           </Col>
