@@ -13,14 +13,19 @@ const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
+const mergePadding = (padding: string) => {
+  const paddingSplit = padding.split(" ");
+  const len = paddingSplit.length;
+  if (len == 2) {
+  } else if (len == 3) {
+  }
+};
 /* <------------------------------------ **** INTERFACE END **** ------------------------------------ */
 /* <------------------------------------ **** FUNCTION COMPONENT START **** ------------------------------------ */
 const Padding = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
   const [open, setOpen] = useState(false);
-  const { property } = useProperty();
-  // console.log(property);
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
@@ -30,6 +35,15 @@ const Padding = (): JSX.Element => {
   /* <------------------------------------ **** FUNCTION END **** ------------------------------------ */
   /* <------------------------------------ **** EFFECT START **** ------------------------------------ */
   /************* This section will include this component general function *************/
+  // useEffect(() => {
+  //   if (!property || Object.keys(property).length == 0) return;
+  //   const { padding } = property;
+  //   const paddingSplit = padding.split(" ");
+  //   if (paddingSplit.length > 1) {
+  //     setOpen(true);
+  //   }
+  //   console.log(padding);
+  // }, [property]);
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
     <>
@@ -51,7 +65,7 @@ const Padding = (): JSX.Element => {
               </Col>
               <Col>
                 <Form.Item noStyle name="padding">
-                  <InputNumber step={10} />
+                  <InputNumber step={10} min={0} />
                 </Form.Item>
               </Col>
             </Row>
@@ -68,7 +82,7 @@ const Padding = (): JSX.Element => {
               </Col>
               <Col>
                 <Form.Item noStyle name="padding-top">
-                  <InputNumber step={10} />
+                  <InputNumber step={10} min={0} />
                 </Form.Item>
               </Col>
             </Row>
@@ -80,7 +94,7 @@ const Padding = (): JSX.Element => {
               </Col>
               <Col>
                 <Form.Item noStyle name="padding-right">
-                  <InputNumber step={10} />
+                  <InputNumber step={10} min={0} />
                 </Form.Item>
               </Col>
             </Row>
@@ -92,7 +106,7 @@ const Padding = (): JSX.Element => {
               </Col>
               <Col>
                 <Form.Item noStyle name="padding-bottom">
-                  <InputNumber step={10} />
+                  <InputNumber step={10} min={0} />
                 </Form.Item>
               </Col>
             </Row>
@@ -104,7 +118,7 @@ const Padding = (): JSX.Element => {
               </Col>
               <Col>
                 <Form.Item noStyle name="padding-left">
-                  <InputNumber step={10} />
+                  <InputNumber step={10} min={0} />
                 </Form.Item>
               </Col>
             </Row>

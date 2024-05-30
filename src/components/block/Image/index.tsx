@@ -46,7 +46,11 @@ const ImageBlock = (): JSX.Element => {
           <Input />
         </Form.Item>
 
-        <Form.Item name="href" label={<Text strong>Image Link</Text>}>
+        <Form.Item
+          name="href"
+          label={<Text strong>Image Link</Text>}
+          style={{ marginBottom: 6 }}
+        >
           <Input placeholder="Enter a link url" />
         </Form.Item>
 
@@ -56,6 +60,7 @@ const ImageBlock = (): JSX.Element => {
           normalize={(value: boolean) => {
             return value ? "_blank" : undefined;
           }}
+          style={{ textAlign: "left" }}
         >
           <Checkbox>Open link in new tab</Checkbox>
         </Form.Item>
@@ -71,14 +76,14 @@ const ImageBlock = (): JSX.Element => {
         </Divider>
 
         <Form.Item name="width" label={<Text strong>Width</Text>}>
-          <InputNumber step={10} />
+          <InputNumber step={10} min={0} />
         </Form.Item>
 
         <Form.Item
           name="border-radius"
           label={<Text strong>Border Radius</Text>}
         >
-          <InputNumber />
+          <InputNumber min={0} />
         </Form.Item>
       </>
 

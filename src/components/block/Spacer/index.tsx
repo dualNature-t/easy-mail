@@ -33,7 +33,7 @@ const SpacerBlock = (): JSX.Element => {
       </Divider>
 
       <Form.Item name="height" label={<Text strong>Height</Text>}>
-        <InputNumber step={10} />
+        <InputNumber step={10} min={10} />
       </Form.Item>
     </>
   );

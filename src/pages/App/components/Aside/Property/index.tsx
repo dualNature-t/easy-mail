@@ -106,17 +106,18 @@ const Property = (): JSX.Element => {
         ></Col>
         <Col>
           <Title className={style.property_title} level={4}>
-            {/* {nodeName?.split("-")[1].toUpperCase()} */}
+            {nodeName?.split("-")[1].toUpperCase()}
           </Title>
         </Col>
       </Row>
 
       <Form
+        colon={false}
         name="property"
         form={form}
         preserve={false}
         onValuesChange={(value, allVlaue) => {
-          console.log(allVlaue);
+          console.log("change");
           setProperty(value, unTransformProperty(allVlaue));
         }}
         className={style.property_form}

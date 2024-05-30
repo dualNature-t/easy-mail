@@ -278,6 +278,7 @@ const useDropContainer = () => {
   //       init_instance_callback: () => {
   //         (targetNode as HTMLTextAreaElement).focus();
   //       },
+  //       font_size_formats: '12px 14px 16px 18px 24px 36px 48px 56px 72px',
   //       setup: (editor: any) => {
   //         editor.on("change", (e: any) => {
   //           const value = e.level.content;

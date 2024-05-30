@@ -36,11 +36,11 @@ const DividerBlock = (): JSX.Element => {
         </Divider>
 
         <Form.Item name="width" label={<Text strong>Width</Text>}>
-          <InputNumber step={10} />
+          <InputNumber step={10} min={0} />
         </Form.Item>
 
         <Form.Item name="border-width" label={<Text strong>Border Width</Text>}>
-          <InputNumber />
+          <InputNumber min={1} />
         </Form.Item>
 
         <Form.Item

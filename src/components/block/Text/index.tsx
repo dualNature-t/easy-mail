@@ -92,11 +92,11 @@ const TextBlock = (): JSX.Element => {
         </Form.Item>
 
         <Form.Item name="font-size" label={<Text strong>Font Size</Text>}>
-          <InputNumber />
+          <InputNumber min={0} />
         </Form.Item>
 
         <Form.Item name="line-height" label={<Text strong>Line Height</Text>}>
-          <InputNumber step={0.1} />
+          <InputNumber step={0.1} min={1} />
         </Form.Item>
 
         <Form.Item

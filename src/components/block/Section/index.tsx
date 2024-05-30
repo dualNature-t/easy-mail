@@ -109,7 +109,7 @@ const SectionBlock = (): JSX.Element => {
           label={<Text strong>Background Repeat</Text>}
         >
           <Select
-            style={{ width: 120 }}
+            style={{ width: 120, textAlign: "left" }}
             options={[
               { value: "repeat", label: "Repeat" },
               { value: "no-repeat", label: "No-Repeat" },
@@ -122,7 +122,7 @@ const SectionBlock = (): JSX.Element => {
           label={<Text strong>Background Size</Text>}
         >
           <Select
-            style={{ width: 120 }}
+            style={{ width: 120, textAlign: "left" }}
             options={[
               { value: "cover", label: "Cover" },
               { value: "contain", label: "Contain" },

@@ -47,7 +47,11 @@ const ButtonBlock = (): JSX.Element => {
           <Text type="secondary">BUTTON STYLES</Text>
         </Divider>
 
-        <Form.Item name="href" label={<Text strong>Button Link</Text>}>
+        <Form.Item
+          name="href"
+          label={<Text strong>Button Link</Text>}
+          style={{ marginBottom: 6 }}
+        >
           <Input placeholder="https://www.example.com" />
         </Form.Item>
 
@@ -57,6 +61,7 @@ const ButtonBlock = (): JSX.Element => {
           normalize={(value: boolean) => {
             return value ? "_blank" : undefined;
           }}
+          style={{ textAlign: "left" }}
         >
           <Checkbox>Open link in new tab</Checkbox>
         </Form.Item>
@@ -92,7 +97,7 @@ const ButtonBlock = (): JSX.Element => {
           name="border-radius"
           label={<Text strong>Border Radius</Text>}
         >
-          <InputNumber />
+          <InputNumber min={0} />
         </Form.Item>
 
         <Form.Item
@@ -113,11 +118,11 @@ const ButtonBlock = (): JSX.Element => {
         </Divider>
 
         <Form.Item name="font-size" label={<Text strong>Font Size</Text>}>
-          <InputNumber />
+          <InputNumber min={0} />
         </Form.Item>
 
         <Form.Item name="line-height" label={<Text strong>Line Height</Text>}>
-          <InputNumber />
+          <InputNumber step={0.1} min={1} />
         </Form.Item>
 
         <Form.Item
