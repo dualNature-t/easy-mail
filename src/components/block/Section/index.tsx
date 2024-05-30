@@ -6,6 +6,7 @@
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
+import Border from "@/components/Border";
 import Padding from "@/components/Padding";
 import {
   Button,
@@ -62,16 +63,7 @@ const SectionBlock = (): JSX.Element => {
           <InputNumber min={0} />
         </Form.Item>
 
-        <Form.Item
-          name="border"
-          valuePropName="checked"
-          label={<Text strong>Border</Text>}
-          normalize={(value: boolean) => {
-            return value ? "1px solid #eee" : "";
-          }}
-        >
-          <Switch />
-        </Form.Item>
+        <Border />
 
         <Form.Item
           name="background-color"

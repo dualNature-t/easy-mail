@@ -42,7 +42,7 @@ const defaultTreeData: appDataType = {
           attributes: {
             "css-class": "mj-section",
             "border-radius": "0px",
-            border: "",
+            border: "8px solid #f40",
             "background-color": "",
             "background-url": "",
             "background-repeat": "repeat",

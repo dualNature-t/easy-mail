@@ -22,6 +22,7 @@ const useProperty = () => {
     value: Record<string, string>,
     allValue: Record<string, string>
   ) => {
+    console.log(allValue);
     const { idx } = getMjmlByNode(appData, focusNode);
     setAppData(
       onTreePropertyChange(appData, idx as string, allValue) as appDataType
