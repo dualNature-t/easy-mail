@@ -116,7 +116,7 @@ const Property = (): JSX.Element => {
         name="property"
         form={form}
         preserve={false}
-        onValuesChange={(value, allVlaue) => {
+        onValuesChange={async (value, allVlaue) => {
           console.log("change");
           setProperty(value, unTransformProperty(allVlaue));
         }}

@@ -7,9 +7,6 @@
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
 import Padding from "@/components/Padding";
-import useProperty from "@/hooks/useProperty";
-import parseBackground from "@/utils/parseBackground";
-import { UploadOutlined } from "@ant-design/icons";
 import {
   Button,
   Col,
@@ -34,15 +31,7 @@ const { Text } = Typography;
 const SectionBlock = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
-  const { property } = useProperty();
 
-  const {
-    "background-size": backgroundSize,
-    "background-repeat": backgroundRepeat,
-  } = property as { "background-size": string; "background-repeat": string };
-
-  const backgroundName =
-    backgroundSize == "cover" ? "background-size" : "background-repeat";
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
@@ -70,7 +59,7 @@ const SectionBlock = (): JSX.Element => {
           name="border-radius"
           label={<Text strong>Border Radius</Text>}
         >
-          <InputNumber />
+          <InputNumber min={0} />
         </Form.Item>
 
         <Form.Item
@@ -124,6 +113,7 @@ const SectionBlock = (): JSX.Element => {
           <Select
             style={{ width: 120, textAlign: "left" }}
             options={[
+              { value: "auto", label: "Auto" },
               { value: "cover", label: "Cover" },
               { value: "contain", label: "Contain" },
             ]}
