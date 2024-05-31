@@ -35,18 +35,7 @@ const propertyContentMap: Record<validFocusNodeTagNameType, React.ReactNode> = {
   "mj-social": <SocialBlock />,
 };
 
-const NumberPropertyMap = [
-  "width",
-  "border-radius",
-  "padding",
-  "padding-left",
-  "padding-right",
-  "padding-top",
-  "padding-bottom",
-  "font-size",
-  "border-width",
-  "height",
-];
+const NumberPropertyMap = ["width", "font-size", "border-width", "height"];
 
 /* <------------------------------------ **** INTERFACE END **** ------------------------------------ */
 /* <------------------------------------ **** FUNCTION COMPONENT START **** ------------------------------------ */
