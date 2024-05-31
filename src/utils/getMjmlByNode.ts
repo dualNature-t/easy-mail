@@ -9,7 +9,8 @@ const getMjmlByNode = (appData: appDataType | null, node: Element | null) => {
   if (
     node.classList.contains("mj-section") ||
     node.previousElementSibling?.classList.contains("mj-section") ||
-    node.nextElementSibling?.classList.contains("mj-section")
+    node.nextElementSibling?.classList.contains("mj-section") ||
+    appData.children?.[0].children?.length == 0
   ) {
     let id = 0;
     let siblingNode = node;
@@ -92,16 +93,16 @@ export const getNodeByIdx = <T extends Element>(
     if (index === 0 || index === 1) {
       result = result?.children?.[Number(currentId)];
     } else if (index === 2) {
-      result = result.querySelectorAll(".mj-column")[Number(currentId)];
+      result = result?.querySelectorAll(".mj-column")?.[Number(currentId)];
     } else if (index === 3) {
-      result = result.querySelectorAll(".mj-column > table > tbody > tr")[
+      result = result?.querySelectorAll(".mj-column > table > tbody > tr")?.[
         Number(currentId)
       ];
     }
 
     index++;
   }
-  return result as T;
+  return (result ?? null) as T;
 };
 
 export default getMjmlByNode;

@@ -10,7 +10,7 @@ import mjml2html from "mjml-browser";
 import useAppData from "@/hooks/useAppData";
 import useDropContainer from "@/hooks/useDropContainer";
 import style from "./style.module.scss";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { mergeNodeEmpty } from "@/utils/mergeNode";
 
 const columnPer1 = `

@@ -8,13 +8,18 @@ export const onTreePropertyChange = (
   property: Record<string, unknown>
 ) => {
   if (!tree) return;
-  const idArr = idx.split("-").map((i) => Number(i));
-
   const result = deepClone(tree);
-  const treeResult = idArr.reduce((cur, pre) => {
-    return cur.children?.[pre] as appDataType;
-  }, result);
-  treeResult.attributes = { ...treeResult.attributes, ...property };
+  if (idx) {
+    const idArr = idx.split("-").map((i) => Number(i));
+
+    const treeResult = idArr.reduce((cur, pre) => {
+      return cur.children?.[pre] as appDataType;
+    }, result);
+    treeResult.attributes = { ...treeResult.attributes, ...property };
+  } else {
+    const treeResult = result.children?.[0] as appDataType;
+    treeResult.attributes = { ...treeResult.attributes, ...property };
+  }
 
   return result;
 };

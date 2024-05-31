@@ -45,9 +45,8 @@ const useDropBlock = () => {
         } else {
           focusNode?.parentElement?.remove();
         }
-        const { idx } = getMjmlByNode(appData, block);
 
-        debugger;
+        const { idx } = getMjmlByNode(appData, block);
 
         const result = moveTreeItem(
           appData,
