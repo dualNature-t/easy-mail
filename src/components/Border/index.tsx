@@ -133,8 +133,9 @@ const Border = (): JSX.Element => {
             style={{ width: "100%", marginTop: 6 }}
             styles={{ body: { padding: 16 } }}
           >
-            <Row>
+            <Row style={{ marginBottom: 12 }}>
               <Checkbox.Group
+                className={style.border_checkbox}
                 value={borderDirValue}
                 options={[
                   { label: "Top", value: "border-top" },
