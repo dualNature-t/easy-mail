@@ -41,7 +41,7 @@ const defaultTreeData: appDataType = {
           tagName: "mj-section",
           attributes: {
             "css-class": "mj-section",
-            "border-radius": "0px",
+            "border-radius": "0px 10px 20px 30px",
             border: "8px solid #f40",
             "background-color": "",
             "background-url": "",

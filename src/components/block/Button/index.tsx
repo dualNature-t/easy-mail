@@ -6,6 +6,8 @@
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
+import Border from "@/components/Border";
+import BorderRadius from "@/components/BorderRadius";
 import Padding from "@/components/Padding";
 import {
   Checkbox,
@@ -93,23 +95,9 @@ const ButtonBlock = (): JSX.Element => {
           <ColorPicker format="hex" showText />
         </Form.Item>
 
-        <Form.Item
-          name="border-radius"
-          label={<Text strong>Border Radius</Text>}
-        >
-          <InputNumber min={0} />
-        </Form.Item>
+        <BorderRadius />
 
-        <Form.Item
-          name="border"
-          valuePropName="checked"
-          normalize={(value: boolean) => {
-            return value ? "1px solid #eee" : "";
-          }}
-          label={<Text strong>Border</Text>}
-        >
-          <Switch />
-        </Form.Item>
+        <Border />
       </>
 
       <>

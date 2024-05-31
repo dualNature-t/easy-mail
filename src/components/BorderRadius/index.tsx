@@ -1,69 +1,69 @@
 /**
  * @file
- * @date 2024-05-21
+ * @date 2024-05-31
  * @author haodong.wang
- * @lastModify  2024-05-21
+ * @lastModify  2024-05-31
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import { useContext, useEffect, useMemo, useState } from "react";
-import { Button, Col, Form, InputNumber, Row, Typography } from "antd";
+import React, { useEffect, useMemo, useState } from "react";
+import style from "./style.module.scss";
+import { Button, Col, InputNumber, Row, Typography } from "antd";
 import useProperty from "@/hooks/useProperty";
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
-
 /* <------------------------------------ **** INTERFACE END **** ------------------------------------ */
 /* <------------------------------------ **** FUNCTION COMPONENT START **** ------------------------------------ */
-const Padding = (): JSX.Element => {
+const BorderRadius = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
   const [open, setOpen] = useState(false);
   const { property, setProperty } = useProperty();
 
   const {
-    "padding-left": paddingLeft,
-    "padding-right": paddingRight,
-    "padding-top": paddingTop,
-    "padding-bottom": paddingBottom,
+    "radius-left": radiusLeft,
+    "radius-right": radiusRight,
+    "radius-top": radiusTop,
+    "radius-bottom": radiusBottom,
   } = useMemo(() => {
     const result = {
-      "padding-top": 0,
-      "padding-right": 0,
-      "padding-bottom": 0,
-      "padding-left": 0,
+      "radius-top": 0,
+      "radius-right": 0,
+      "radius-bottom": 0,
+      "radius-left": 0,
     };
     if (!property || Object.keys(property).length == 0) {
       return result;
     }
 
-    const padding = (property as { padding: string }).padding;
-    const paddingArr = padding.split(" ");
-    const len = paddingArr.length;
+    const radius = (property as { "border-radius": string })["border-radius"];
+    const radiusArr = radius.split(" ");
+    const len = radiusArr.length;
 
     if (len == 1) {
       Object.keys(result).forEach((item) => {
-        result[item as keyof typeof result] = parseInt(paddingArr[0]);
+        result[item as keyof typeof result] = parseInt(radiusArr[0]);
       });
     } else if (len == 2) {
-      const number01 = parseInt(paddingArr[0]);
-      const number02 = parseInt(paddingArr[1]);
-      result["padding-left"] = number02;
-      result["padding-right"] = number02;
-      result["padding-top"] = number01;
-      result["padding-bottom"] = number01;
+      const number01 = parseInt(radiusArr[0]);
+      const number02 = parseInt(radiusArr[1]);
+      result["radius-left"] = number02;
+      result["radius-right"] = number02;
+      result["radius-top"] = number01;
+      result["radius-bottom"] = number01;
     } else if (len == 3) {
-      const number01 = parseInt(paddingArr[0]);
-      const number02 = parseInt(paddingArr[1]);
-      const number03 = parseInt(paddingArr[2]);
-      result["padding-left"] = number02;
-      result["padding-right"] = number02;
-      result["padding-top"] = number01;
-      result["padding-bottom"] = number03;
+      const number01 = parseInt(radiusArr[0]);
+      const number02 = parseInt(radiusArr[1]);
+      const number03 = parseInt(radiusArr[2]);
+      result["radius-left"] = number02;
+      result["radius-right"] = number02;
+      result["radius-top"] = number01;
+      result["radius-bottom"] = number03;
     } else {
       Object.keys(result).forEach((item, index) => {
-        result[item as keyof typeof result] = parseInt(paddingArr[index]);
+        result[item as keyof typeof result] = parseInt(radiusArr[index]);
       });
     }
 
@@ -79,72 +79,72 @@ const Padding = (): JSX.Element => {
   const onChange = (
     value: number | null,
     key:
-      | "padding"
-      | "padding-left"
-      | "padding-right"
-      | "padding-top"
-      | "padding-bottom"
+      | "radius"
+      | "radius-left"
+      | "radius-right"
+      | "radius-top"
+      | "radius-bottom"
   ) => {
     let result = null;
-    if (key === "padding") {
+    if (key === "radius") {
       result = {
         ...property,
-        padding: `${value}px ${value}px ${value}px ${value}px`,
+        "border-radius": `${value}px ${value}px ${value}px ${value}px`,
       };
     } else {
       const merge = Object.assign(
         {
-          "padding-left": paddingLeft,
-          "padding-right": paddingRight,
-          "padding-top": paddingTop,
-          "padding-bottom": paddingBottom,
+          "radius-left": radiusLeft,
+          "radius-right": radiusRight,
+          "radius-top": radiusTop,
+          "radius-bottom": radiusBottom,
         },
         { [key]: value }
       );
       result = {
         ...property,
-        padding: `${merge["padding-top"]}px ${merge["padding-right"]}px ${merge["padding-bottom"]}px ${merge["padding-left"]}px`,
+        "border-radius": `${merge["radius-top"]}px ${merge["radius-right"]}px ${merge["radius-bottom"]}px ${merge["radius-left"]}px`,
       };
     }
 
-    setProperty({ padding: result.padding }, result);
+    setProperty({ "border-radius": result["border-radius"] }, result);
   };
   /* <------------------------------------ **** FUNCTION END **** ------------------------------------ */
   /* <------------------------------------ **** EFFECT START **** ------------------------------------ */
   /************* This section will include this component general function *************/
   useEffect(() => {
     if (
-      paddingLeft === paddingRight &&
-      paddingRight === paddingTop &&
-      paddingTop === paddingBottom
+      radiusBottom === radiusLeft &&
+      radiusLeft === radiusRight &&
+      radiusRight === radiusTop
     )
       return;
     !open && setOpen(true);
-  }, [paddingLeft, paddingRight, paddingTop, paddingBottom]);
+  }, [radiusBottom, radiusLeft, radiusRight, radiusTop]);
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
-    <>
+    <div style={{ marginBottom: 24 }}>
       <Row align="middle" justify="space-between" style={{ marginBottom: 12 }}>
         <Col>
-          <Text strong>Padding</Text>
+          <Text strong>Border Radius</Text>
         </Col>
         <Col>
           {open ? (
             <Button
               style={{ paddingRight: 0 }}
               onClick={() => {
-                const minPadding = Math.min(
-                  paddingLeft,
-                  paddingRight,
-                  paddingTop,
-                  paddingBottom
+                const minRadius = Math.min(
+                  radiusBottom,
+                  radiusLeft,
+                  radiusRight,
+                  radiusTop
                 );
-                const paddingValue = `${minPadding}px ${minPadding}px ${minPadding}px ${minPadding}px`;
+                const radiusValue = `${minRadius}px ${minRadius}px ${minRadius}px ${minRadius}px`;
 
                 setOpen(false);
                 setProperty(
-                  { padding: paddingValue },
-                  { ...property, padding: paddingValue }
+                  { "border-radius": radiusValue },
+                  { ...property, "border-radius": radiusValue }
                 );
               }}
               type="link"
@@ -164,17 +164,16 @@ const Padding = (): JSX.Element => {
               </Col>
               <Col>
                 <InputNumber
+                  style={{ width: 74 }}
                   value={Math.min(
-                    paddingLeft,
-                    paddingRight,
-                    paddingTop,
-                    paddingBottom
+                    radiusBottom,
+                    radiusLeft,
+                    radiusRight,
+                    radiusTop
                   )}
                   step={10}
                   min={0}
-                  onChange={(value: number | null) =>
-                    onChange(value, "padding")
-                  }
+                  onChange={(value: number | null) => onChange(value, "radius")}
                 />
               </Col>
             </Row>
@@ -185,72 +184,116 @@ const Padding = (): JSX.Element => {
       {open && (
         <Row wrap={true} gutter={[12, 12]}>
           <Col span={12}>
-            <Row align="middle" justify="space-between">
+            <Row align="middle" gutter={20}>
               <Col>
-                <Text>Top</Text>
+                <InputNumber
+                  style={{ width: 80 }}
+                  value={radiusTop}
+                  step={10}
+                  min={0}
+                  onChange={(value: number | null) =>
+                    onChange(value, "radius-top")
+                  }
+                />
+              </Col>
+              <Col>
+                <svg
+                  width="19"
+                  height="19"
+                  viewBox="0 0 19 19"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M14 4h.5a1.5 1.5 0 0 1 0 3H14a7 7 0 0 0-6.996 6.76L7 14v.5a1.5 1.5 0 0 1-3 0V14C4 8.477 8.477 4 14 4z"
+                    fill="#979797"
+                    fill-rule="nonzero"
+                  ></path>
+                </svg>
+              </Col>
+            </Row>
+          </Col>
+          <Col span={12}>
+            <Row align="middle" justify="end" gutter={20}>
+              <Col>
+                <svg
+                  width="19"
+                  height="19"
+                  viewBox="0 0 19 19"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M5 4h-.5a1.5 1.5 0 0 0 0 3H5a7 7 0 0 1 6.996 6.76L12 14v.5a1.5 1.5 0 0 0 3 0V14C15 8.477 10.523 4 5 4z"
+                    fill="#979797"
+                    fill-rule="nonzero"
+                  ></path>
+                </svg>
               </Col>
               <Col>
                 <InputNumber
                   style={{ width: 80 }}
-                  value={paddingTop}
+                  value={radiusRight}
                   step={10}
                   min={0}
                   onChange={(value: number | null) =>
-                    onChange(value, "padding-top")
+                    onChange(value, "radius-right")
                   }
                 />
               </Col>
             </Row>
           </Col>
           <Col span={12}>
-            <Row align="middle" justify="space-between">
-              <Col>
-                <Text>Right</Text>
-              </Col>
+            <Row align="middle" gutter={20}>
               <Col>
                 <InputNumber
                   style={{ width: 80 }}
-                  value={paddingRight}
+                  value={radiusLeft}
                   step={10}
                   min={0}
                   onChange={(value: number | null) =>
-                    onChange(value, "padding-right")
+                    onChange(value, "radius-left")
                   }
                 />
+              </Col>
+              <Col>
+                <svg
+                  width="19"
+                  height="19"
+                  viewBox="0 0 19 19"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M14 15h.5a1.5 1.5 0 0 0 0-3H14a7 7 0 0 1-6.996-6.76L7 5v-.5a1.5 1.5 0 0 0-3 0V5c0 5.523 4.477 10 10 10z"
+                    fill="#979797"
+                    fill-rule="nonzero"
+                  ></path>
+                </svg>
               </Col>
             </Row>
           </Col>
           <Col span={12}>
-            <Row align="middle" justify="space-between" wrap={false}>
+            <Row align="middle" justify="end" gutter={20}>
               <Col>
-                <Text>Bottom</Text>
+                <svg
+                  width="19"
+                  height="19"
+                  viewBox="0 0 19 19"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M5 15h-.5a1.5 1.5 0 0 1 0-3H5a7 7 0 0 0 6.996-6.76L12 5v-.5a1.5 1.5 0 0 1 3 0V5c0 5.523-4.477 10-10 10z"
+                    fill="#979797"
+                    fill-rule="nonzero"
+                  ></path>
+                </svg>
               </Col>
               <Col>
                 <InputNumber
                   style={{ width: 80 }}
-                  value={paddingBottom}
+                  value={radiusBottom}
                   step={10}
                   min={0}
                   onChange={(value: number | null) =>
-                    onChange(value, "padding-bottom")
-                  }
-                />
-              </Col>
-            </Row>
-          </Col>
-          <Col span={12}>
-            <Row align="middle" justify="space-between">
-              <Col>
-                <Text>Left</Text>
-              </Col>
-              <Col>
-                <InputNumber
-                  style={{ width: 80 }}
-                  value={paddingLeft}
-                  step={10}
-                  min={0}
-                  onChange={(value: number | null) =>
-                    onChange(value, "padding-left")
+                    onChange(value, "radius-bottom")
                   }
                 />
               </Col>
@@ -258,8 +301,8 @@ const Padding = (): JSX.Element => {
           </Col>
         </Row>
       )}
-    </>
+    </div>
   );
 };
-export default Padding;
+export default BorderRadius;
 /* <------------------------------------ **** FUNCTION COMPONENT END **** ------------------------------------ */

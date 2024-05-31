@@ -7,6 +7,7 @@
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
 import Border from "@/components/Border";
+import BorderRadius from "@/components/BorderRadius";
 import Padding from "@/components/Padding";
 import {
   Button,
@@ -56,13 +57,7 @@ const SectionBlock = (): JSX.Element => {
           <Text type="secondary">SECTION STYLES</Text>
         </Divider>
 
-        <Form.Item
-          name="border-radius"
-          label={<Text strong>Border Radius</Text>}
-        >
-          <InputNumber min={0} />
-        </Form.Item>
-
+        <BorderRadius />
         <Border />
 
         <Form.Item
