@@ -1,24 +1,35 @@
 /**
  * @file
- * @date 2024-05-17
+ * @date 2024-05-31
  * @author haodong.wang
- * @lastModify  2024-05-17
+ * @lastModify  2024-05-31
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import Padding from "@/components/Padding";
-import Width from "@/components/Width";
-import { ColorPicker, Divider, Form, InputNumber, Typography } from "antd";
-import { Color } from "antd/es/color-picker";
+import React, { useMemo, useState } from "react";
+import style from "./style.module.scss";
+import useProperty from "@/hooks/useProperty";
+import { Col, InputNumber, Row, Switch, Typography } from "antd";
+
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
 /* <------------------------------------ **** INTERFACE END **** ------------------------------------ */
 /* <------------------------------------ **** FUNCTION COMPONENT START **** ------------------------------------ */
-const DividerBlock = (): JSX.Element => {
+const Width = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
+  const { property, setProperty } = useProperty();
+
+  const [open, setOpen] = useState(false);
+
+  const { width } = useMemo(() => {
+    if (!property || Object.keys(property).length == 0) {
+      return { width: "" };
+    }
+    return { width: (property as { width: string }).width || "" };
+  }, [property]);
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
@@ -30,37 +41,47 @@ const DividerBlock = (): JSX.Element => {
   /************* This section will include this component general function *************/
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
-    <>
-      <>
-        <Divider orientation="left" orientationMargin="0">
-          <Text type="secondary">DIVIDER STYLES</Text>
-        </Divider>
+    <div style={{ marginBottom: 24 }}>
+      <Row align="middle" justify="space-between" style={{ marginBottom: 24 }}>
+        <Col>
+          <Text strong>Full Width</Text>
+        </Col>
+        <Col>
+          <Switch
+            value={width === ""}
+            onChange={(value: boolean) => {
+              if (value) {
+                setProperty({}, { ...property, width: "" });
+              } else {
+                setProperty({}, { ...property, width: "200px" });
+              }
+              setOpen(!value);
+            }}
+          />
+        </Col>
+      </Row>
 
-        <Width />
-
-        <Form.Item name="border-width" label={<Text strong>Border Width</Text>}>
-          <InputNumber min={1} />
-        </Form.Item>
-
-        <Form.Item
-          name="border-color"
-          label={<Text strong>Border Color</Text>}
-          normalize={(value: Color) => {
-            return value.toHexString();
-          }}
-        >
-          <ColorPicker format="hex" showText />
-        </Form.Item>
-      </>
-      <>
-        <Divider orientation="left" orientationMargin="0">
-          <Text type="secondary">POSITION</Text>
-        </Divider>
-
-        <Padding />
-      </>
-    </>
+      {open && (
+        <Row align="middle" justify="space-between">
+          <Col>
+            <Text strong>Width</Text>
+          </Col>
+          <Col>
+            <InputNumber
+              step={10}
+              min={0}
+              value={parseInt(width)}
+              onChange={(value: number | null) => {
+                if (value) {
+                  setProperty({}, { ...property, width: `${value}px` });
+                }
+              }}
+            />
+          </Col>
+        </Row>
+      )}
+    </div>
   );
 };
-export default DividerBlock;
+export default Width;
 /* <------------------------------------ **** FUNCTION COMPONENT END **** ------------------------------------ */

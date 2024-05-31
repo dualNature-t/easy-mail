@@ -8,6 +8,7 @@
 /** This section will include all the necessary dependence for this tsx file */
 import BorderRadius from "@/components/BorderRadius";
 import Padding from "@/components/Padding";
+import Width from "@/components/Width";
 import {
   Checkbox,
   Divider,
@@ -85,10 +86,7 @@ const ImageBlock = (): JSX.Element => {
           <Text type="secondary">SIZE</Text>
         </Divider>
 
-        <Form.Item name="width" label={<Text strong>Width</Text>}>
-          <InputNumber step={10} min={0} />
-        </Form.Item>
-
+        <Width />
         <BorderRadius />
       </>
 

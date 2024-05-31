@@ -16,7 +16,10 @@ const useEditorTool = () => {
     if (!focusNode || !editorTool) return;
     editorTool.replaceChildren();
 
-    if (focusNode.classList.contains("mj-text")) {
+    if (
+      focusNode.classList.contains("mj-text") ||
+      focusNode.classList.contains("mj-button")
+    ) {
       const documentEle = (focusNode.getRootNode() as Document).documentElement;
       documentEle.querySelector("body")?.appendChild(editorTool);
       const { left, top, width } = focusNode.getBoundingClientRect();

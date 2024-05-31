@@ -206,7 +206,7 @@ const BorderRadius = (): JSX.Element => {
                   <path
                     d="M14 4h.5a1.5 1.5 0 0 1 0 3H14a7 7 0 0 0-6.996 6.76L7 14v.5a1.5 1.5 0 0 1-3 0V14C4 8.477 8.477 4 14 4z"
                     fill="#979797"
-                    fill-rule="nonzero"
+                    fillRule="nonzero"
                   ></path>
                 </svg>
               </Col>
@@ -224,7 +224,7 @@ const BorderRadius = (): JSX.Element => {
                   <path
                     d="M5 4h-.5a1.5 1.5 0 0 0 0 3H5a7 7 0 0 1 6.996 6.76L12 14v.5a1.5 1.5 0 0 0 3 0V14C15 8.477 10.523 4 5 4z"
                     fill="#979797"
-                    fill-rule="nonzero"
+                    fillRule="nonzero"
                   ></path>
                 </svg>
               </Col>
@@ -264,7 +264,7 @@ const BorderRadius = (): JSX.Element => {
                   <path
                     d="M14 15h.5a1.5 1.5 0 0 0 0-3H14a7 7 0 0 1-6.996-6.76L7 5v-.5a1.5 1.5 0 0 0-3 0V5c0 5.523 4.477 10 10 10z"
                     fill="#979797"
-                    fill-rule="nonzero"
+                    fillRule="nonzero"
                   ></path>
                 </svg>
               </Col>
@@ -282,7 +282,7 @@ const BorderRadius = (): JSX.Element => {
                   <path
                     d="M5 15h-.5a1.5 1.5 0 0 1 0-3H5a7 7 0 0 0 6.996-6.76L12 5v-.5a1.5 1.5 0 0 1 3 0V5c0 5.523-4.477 10-10 10z"
                     fill="#979797"
-                    fill-rule="nonzero"
+                    fillRule="nonzero"
                   ></path>
                 </svg>
               </Col>

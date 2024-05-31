@@ -260,11 +260,17 @@ const useDropContainer = () => {
     });
     editTextNodeArr.current = [];
 
-    if (focusNode?.classList.contains("mj-text")) {
-      const targetNode = focusNode.children[0];
+    if (
+      focusNode?.classList.contains("mj-text") ||
+      focusNode?.classList.contains("mj-button")
+    ) {
+      const targetNode = focusNode?.classList.contains("mj-text")
+        ? focusNode.children[0]
+        : focusNode.querySelector("p");
+      (targetNode as HTMLElement).style.outline = "none";
       editTextNodeArr.current.push(targetNode as HTMLElement);
 
-      targetNode.setAttribute("id", "editor");
+      targetNode?.setAttribute("id", "editor");
       ref?.tinymce.init({
         selector: "#editor",
         inline: true,
@@ -313,8 +319,13 @@ const useDropContainer = () => {
     const { idx: focusIdx } = getMjmlByNode(appData, focusNode);
     const focusTargetNode = getNodeByIdx(mergeDoc, focusIdx);
     const blockTargetNode = getNodeByIdx(mergeDoc, blockIdx);
+
+    const newEle = getNodeByIdx(mergeDoc, focusIdx);
+    console.log("old", focusNode);
+    console.log("new", newEle);
+    return;
+    debugger;
     let targetNode: HTMLElement | null = null;
-    // debugger;
     if (!dataTransfer) {
       // property
       targetNode = focusTargetNode;

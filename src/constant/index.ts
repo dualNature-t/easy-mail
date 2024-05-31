@@ -263,7 +263,7 @@ export const defaultNodePropertyMap: Record<
     tagName: "mj-divider",
     attributes: {
       "css-class": "mj-divider",
-      width: "100%",
+      width: "",
       "border-width": "1px",
       "border-style": "solid",
       "border-color": "#000000",
@@ -278,7 +278,7 @@ export const defaultNodePropertyMap: Record<
       href: "",
       target: "_blank",
       alt: "",
-      width: "200px",
+      width: "",
       "border-radius": "0px",
       align: "center",
       padding: "10px",
