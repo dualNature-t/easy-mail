@@ -43,11 +43,16 @@ const ImageBlock = (): JSX.Element => {
           <Text type="secondary">IMAGE STYLES</Text>
         </Divider>
 
-        <Form.Item name="src" label={<Text strong>Image Source</Text>}>
+        <Form.Item
+          labelCol={{ span: 24 }}
+          name="src"
+          label={<Text strong>Image Source</Text>}
+        >
           <Input />
         </Form.Item>
 
         <Form.Item
+          labelCol={{ span: 24 }}
           name="href"
           label={<Text strong>Image Link</Text>}
           style={{ marginBottom: 6 }}
@@ -66,7 +71,11 @@ const ImageBlock = (): JSX.Element => {
           <Checkbox>Open link in new tab</Checkbox>
         </Form.Item>
 
-        <Form.Item name="alt" label={<Text strong>Alt Text</Text>}>
+        <Form.Item
+          labelCol={{ span: 24 }}
+          name="alt"
+          label={<Text strong>Alt Text</Text>}
+        >
           <Input placeholder="Enter an image description" />
         </Form.Item>
       </>

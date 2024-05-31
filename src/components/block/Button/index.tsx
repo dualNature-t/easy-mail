@@ -50,6 +50,7 @@ const ButtonBlock = (): JSX.Element => {
         </Divider>
 
         <Form.Item
+          labelCol={{ span: 24 }}
           name="href"
           label={<Text strong>Button Link</Text>}
           style={{ marginBottom: 6 }}
