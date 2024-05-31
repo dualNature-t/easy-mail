@@ -323,8 +323,6 @@ const useDropContainer = () => {
     const newEle = getNodeByIdx(mergeDoc, focusIdx);
     console.log("old", focusNode);
     console.log("new", newEle);
-    return;
-    debugger;
     let targetNode: HTMLElement | null = null;
     if (!dataTransfer) {
       // property
