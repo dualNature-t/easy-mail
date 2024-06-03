@@ -266,7 +266,8 @@ const useDropContainer = () => {
     ) {
       const targetNode = focusNode?.classList.contains("mj-text")
         ? focusNode.children[0]
-        : focusNode.querySelector("p");
+        : focusNode.querySelector("p") || focusNode.querySelector("a");
+      console.log(focusNode);
       (targetNode as HTMLElement).style.outline = "none";
       editTextNodeArr.current.push(targetNode as HTMLElement);
 
