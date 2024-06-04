@@ -9,6 +9,9 @@ const useEditorTool = () => {
     const div = document.createElement("div");
     div.setAttribute("id", "editor-tool-box");
     div.setAttribute("style", "position: absolute; left: 0; top: 0");
+    div.onclick = (e) => {
+      e.stopPropagation();
+    };
     setEditorTool(div);
   }, []);
 

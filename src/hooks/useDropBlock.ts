@@ -11,7 +11,7 @@ const normalStyle =
 const hoverStyle = `${normalStyle} background-color: rgba(0,0,0,0.1)`;
 
 const useDropBlock = () => {
-  const { dataTransfer } = useDataTransfer();
+  const { dataTransfer, setDataTransfer } = useDataTransfer();
   const { appData, setAppData } = useAppData();
   const [block, setBlock] = useState<HTMLDivElement | null>(null);
   const { focusNode } = useFocusNode();
@@ -38,14 +38,8 @@ const useDropBlock = () => {
         const { idx } = getMjmlByNode(appData, block);
         const result = addTreeItem(appData, idx as string, dataTransfer);
         setAppData(result as appDataType);
-      } else {
+      } else if (dataTransfer.type === "move") {
         const { idx: originIdx } = getMjmlByNode(appData, focusNode as Element);
-        if (focusNode?.classList.contains("mj-section")) {
-          focusNode?.remove();
-        } else {
-          focusNode?.parentElement?.remove();
-        }
-
         const { idx } = getMjmlByNode(appData, block);
 
         const result = moveTreeItem(

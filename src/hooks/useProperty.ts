@@ -22,7 +22,6 @@ const useProperty = () => {
     value: Record<string, string>,
     allValue: Record<string, string>
   ) => {
-    // console.log(allValue);
     const { idx } = getMjmlByNode(appData, focusNode);
     setAppData(
       onTreePropertyChange(appData, idx as string, allValue) as appDataType
@@ -32,7 +31,7 @@ const useProperty = () => {
   useEffect(() => {
     const json = getMjmlByNode(appData, focusNode);
     setProperty(json.mjml?.attributes);
-  }, [appData, focusNode]);
+  }, [focusNode, appData]);
 
   return {
     nodeName,

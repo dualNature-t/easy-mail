@@ -36,7 +36,7 @@ export interface appDataType {
 }
 
 export interface dataTransferType {
-  type: "move" | "add" | "copy" | "del";
+  type: "move" | "add";
   data: {
     type?: dragBlockCategoryType;
     value?: basicTagNameType | columnTagNameType;
@@ -45,7 +45,9 @@ export interface dataTransferType {
 
 interface appContextType {
   appData: appDataType | null;
-  setAppData: (data: appDataType) => void;
+  setAppData: (
+    data: appDataType | ((preData: appDataType) => appDataType)
+  ) => void;
   tab: tabType;
   setTab: (tab: tabType) => void;
   hoverNode: HTMLElement | null;

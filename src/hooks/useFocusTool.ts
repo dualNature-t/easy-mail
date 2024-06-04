@@ -9,10 +9,12 @@ import {
 import getMjmlByNode from "@/utils/getMjmlByNode";
 import useAppData from "./useAppData";
 import { copyTreeItem, deleteTreeItem } from "@/utils/treeTool";
+import getNodeByTarget from "@/utils/getNodeByTarget";
+import { hasChildByColumn } from "@/utils/mergeNode";
 
 const useFocusTool = () => {
   const { appData, setAppData } = useAppData();
-  const { focusNode } = useFocusNode();
+  const { focusNode, setFocusNode } = useFocusNode();
   const [focusTool, setFocusTool] = useState<HTMLDivElement | null>(null);
   const { setDataTransfer } = useDataTransfer();
 
@@ -45,20 +47,50 @@ const useFocusTool = () => {
     const onClick = (e: MouseEvent) => {
       e.stopPropagation();
       const target = e.target as HTMLDivElement;
+      const { idx } = getMjmlByNode(appData, focusNode);
       if (target.classList.contains("focus-tool-copy")) {
-        const { idx } = getMjmlByNode(appData, focusNode);
         const result = copyTreeItem(appData, idx as string);
         setAppData(result as appDataType);
-        setDataTransfer({ type: "copy", data: {} });
-        return;
+
+        const cloneFocusNode = focusNode.cloneNode(true) as HTMLElement;
+        cloneFocusNode.classList.remove("focus", "hover");
+        cloneFocusNode.querySelector(".focus-tool")?.remove();
+
+        if (focusNode?.classList.contains("mj-section")) {
+          focusNode.nextElementSibling
+            ? focusNode.parentElement?.insertBefore(
+                cloneFocusNode,
+                focusNode.nextElementSibling
+              )
+            : focusNode.parentElement?.appendChild(cloneFocusNode as Node);
+        } else {
+          const tr = document.createElement("tr");
+          tr.appendChild(cloneFocusNode);
+          focusNode?.parentElement?.nextElementSibling
+            ? focusNode.parentElement.parentElement?.insertBefore(
+                tr,
+                focusNode.parentElement.nextElementSibling
+              )
+            : focusNode?.parentElement?.parentElement?.appendChild(tr);
+        }
       }
 
       if (target.classList.contains("focus-tool-delete")) {
-        const { idx } = getMjmlByNode(appData, focusNode);
         const result = deleteTreeItem(appData, idx as string);
         setAppData(result as appDataType);
-        setDataTransfer({ type: "del", data: {} });
-        return;
+
+        if (focusNode?.classList.contains("mj-section")) {
+          focusNode?.remove();
+        } else {
+          const column = getNodeByTarget(focusNode, "mj-column");
+          focusNode?.parentElement?.remove();
+
+          if (!hasChildByColumn(column as Element)) {
+            column?.classList.add("mj-column-empty");
+          }
+        }
+
+        setFocusNode(null);
       }
     };
 

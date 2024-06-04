@@ -39,7 +39,8 @@ const Padding = (): JSX.Element => {
     }
 
     const padding = (property as { padding: string }).padding;
-    const paddingArr = padding.split(" ");
+    if (!padding) return result;
+    const paddingArr = padding?.split(" ");
     const len = paddingArr.length;
 
     if (len == 1) {

@@ -10,7 +10,7 @@ import useFocusTool from "./useFocusTool";
 import getMjmlByNode, { getNodeByIdx } from "@/utils/getMjmlByNode";
 import useAppData from "./useAppData";
 import mjml2html from "mjml-browser";
-import { mergeNodeEmpty } from "@/utils/mergeNode";
+import { mergeNodeEmpty, mergeNodesAttr } from "@/utils/mergeNode";
 import useEditorTool from "./useEditorTool";
 import { onTextContentChange } from "@/utils/treeTool";
 import { appDataType } from "@/context/appContext";
@@ -267,7 +267,6 @@ const useDropContainer = () => {
       const targetNode = focusNode?.classList.contains("mj-text")
         ? focusNode.children[0]
         : focusNode.querySelector("p") || focusNode.querySelector("a");
-      console.log(focusNode);
       (targetNode as HTMLElement).style.outline = "none";
       editTextNodeArr.current.push(targetNode as HTMLElement);
 
@@ -290,8 +289,13 @@ const useDropContainer = () => {
           editor.on("change", (e: any) => {
             const value = e.level.content;
             const { idx } = getMjmlByNode(appData, focusNode);
-            const result = onTextContentChange(appData, idx as string, value);
-            setAppData(result as appDataType);
+            setAppData((preData: appDataType) => {
+              return onTextContentChange(
+                preData,
+                idx as string,
+                value
+              ) as appDataType;
+            });
           });
         },
         // toolbar: "formatting | alignleft aligncenter alignright",
@@ -307,7 +311,8 @@ const useDropContainer = () => {
   }, [focusNode, ref]);
 
   useEffect(() => {
-    if (!appData) return;
+    if (!appData || !ref) return;
+
     let parser = new DOMParser();
     let doc = parser.parseFromString(mjml2html(appData).html, "text/html");
     // console.log("block", block);
@@ -321,45 +326,59 @@ const useDropContainer = () => {
     const focusTargetNode = getNodeByIdx(mergeDoc, focusIdx);
     const blockTargetNode = getNodeByIdx(mergeDoc, blockIdx);
 
-    const newEle = getNodeByIdx(mergeDoc, focusIdx);
-    console.log("old", focusNode);
-    console.log("new", newEle);
     let targetNode: HTMLElement | null = null;
-    if (!dataTransfer) {
-      // property
-      targetNode = focusTargetNode;
-    } else {
-      // add or copy or delete or move
+
+    if (dataTransfer) {
       if (dataTransfer.type === "add") {
-        if (focusNode) {
-          targetNode = focusTargetNode;
-        } else {
-          targetNode = blockTargetNode;
-        }
-      } else if (dataTransfer.type === "copy") {
-        targetNode = focusTargetNode;
-      } else if (dataTransfer.type === "move") {
         targetNode = blockTargetNode;
+
+        block?.replaceWith(targetNode as Node);
       } else {
-        focusNodeArr.current = [];
-        setFocusNode(null);
+        if (focusNode?.classList.contains("mj-section")) {
+          focusNode.remove();
+        } else {
+          focusNode?.parentElement?.remove();
+        }
+
+        targetNode = blockTargetNode;
+        if (targetNode) {
+          if (targetNode.classList.contains("mj-section")) {
+            targetNode.classList.add("focus");
+            focusNodeArr.current.push(targetNode);
+            setFocusNode(targetNode);
+          } else {
+            targetNode.children[0].classList.add("focus");
+            focusNodeArr.current.push(targetNode.children[0] as HTMLElement);
+            setFocusNode(targetNode.children[0] as HTMLElement);
+          }
+        }
+
+        block?.replaceWith(targetNode as Node);
+      }
+    } else {
+      if (
+        !focusNode ||
+        focusNode.classList.contains("mj-body") ||
+        focusNode.tagName === "BODY"
+      ) {
+        const rootAttr = appData?.children?.[0].attributes as {
+          "background-color": string;
+          width: string;
+        };
+        const body = ref?.document.documentElement.querySelector("body");
+        const sectionArr = body?.querySelectorAll(".mj-section");
+        body!.style.backgroundColor = rootAttr?.["background-color"];
+        (body!.children[0] as HTMLElement)!.style.backgroundColor =
+          rootAttr?.["background-color"];
+        sectionArr?.forEach((s) => {
+          (s as HTMLElement).style["max-width"] = rootAttr?.width;
+        });
+      }
+
+      if (focusNode && focusTargetNode) {
+        mergeNodesAttr(focusNode, focusTargetNode);
       }
     }
-
-    if (targetNode) {
-      if (targetNode.classList.contains("mj-section")) {
-        targetNode.classList.add("focus");
-        focusNodeArr.current.push(targetNode);
-        setFocusNode(targetNode);
-      } else {
-        targetNode.children[0].classList.add("focus");
-        focusNodeArr.current.push(targetNode.children[0] as HTMLElement);
-        setFocusNode(targetNode.children[0] as HTMLElement);
-      }
-    }
-
-    const docBody = mergeDoc.querySelector(".mj-body");
-    documentElement?.querySelector("body")?.replaceChildren(docBody as Node);
 
     setDataTransfer(null);
   }, [appData]);

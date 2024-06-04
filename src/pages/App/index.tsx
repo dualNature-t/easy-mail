@@ -35,6 +35,7 @@ const defaultTreeData: appDataType = {
         "css-class": "mj-body",
         "background-color": "#ffffff",
         width: "600px",
+        "font-family": "arial",
       },
       children: [
         {
@@ -60,7 +61,7 @@ const defaultTreeData: appDataType = {
                   tagName: "mj-text",
                   attributes: {
                     "css-class": "mj-text",
-                    "font-family": "arial",
+                    // "font-family": "arial",
                     "font-size": "13px",
                     "line-height": "1",
                     color: "#000",

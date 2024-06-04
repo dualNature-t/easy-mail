@@ -76,3 +76,58 @@ export const mergeNodeEmpty = <T extends Element>(node: T): T => {
 
   return nodeClone;
 };
+
+const filterAttrs = ["id", "class", "contenteditable", "spellcheck"];
+
+export const mergeNodesAttr = <T extends Element>(node: T, newNode: T) => {
+  if (node?.classList.contains("mj-section")) {
+    let loopEle = node;
+    let newLoopEle = newNode;
+    while (loopEle) {
+      if (loopEle.tagName !== newLoopEle?.tagName) {
+        loopEle.replaceWith(newLoopEle);
+        break;
+      }
+      const attrs = loopEle
+        .getAttributeNames()
+        .filter((i) => !filterAttrs.includes(i));
+      if (loopEle.classList.contains("mj-column")) {
+        break;
+      }
+      if (attrs.length == 0) {
+        loopEle = loopEle.children[0] as T;
+        newLoopEle = newLoopEle?.children[0] as T;
+        continue;
+      }
+      attrs.forEach((attr) => {
+        loopEle.setAttribute(attr, newLoopEle?.getAttribute(attr) as string);
+      });
+
+      loopEle = loopEle.children[0] as T;
+      newLoopEle = newLoopEle?.children[0] as T;
+    }
+  } else {
+    let loopEle = node;
+    let newLoopEle = newNode?.children[0];
+    while (loopEle) {
+      if (loopEle.tagName !== newLoopEle?.tagName) {
+        loopEle.replaceWith(newLoopEle);
+        break;
+      }
+      const attrs = loopEle
+        .getAttributeNames()
+        .filter((i) => !filterAttrs.includes(i));
+      if (attrs.length == 0) {
+        loopEle = loopEle.children[0] as T;
+        newLoopEle = newLoopEle?.children[0];
+        continue;
+      }
+      attrs.forEach((attr) => {
+        loopEle.setAttribute(attr, newLoopEle?.getAttribute(attr) as string);
+      });
+
+      loopEle = loopEle.children[0] as T;
+      newLoopEle = newLoopEle?.children[0];
+    }
+  }
+};

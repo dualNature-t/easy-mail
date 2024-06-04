@@ -24,7 +24,6 @@ const getMjmlByNode = (appData: appDataType | null, node: Element | null) => {
     mjml = mjml?.children?.[id];
     idx = `${idx}-${id}`;
   } else {
-    // debugger;
     let id = 0;
     let currentNode = node.classList.contains("drop-block")
       ? node
@@ -32,7 +31,10 @@ const getMjmlByNode = (appData: appDataType | null, node: Element | null) => {
     // 第一层block筛选
     while (currentNode?.previousElementSibling) {
       currentNode = currentNode.previousElementSibling as HTMLElement;
-      if (currentNode.classList.contains("drop-block")) {
+      if (
+        currentNode.classList.contains("drop-block") ||
+        currentNode.children[0].classList.contains("focus")
+      ) {
         continue;
       }
 

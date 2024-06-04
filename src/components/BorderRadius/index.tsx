@@ -39,6 +39,8 @@ const BorderRadius = (): JSX.Element => {
     }
 
     const radius = (property as { "border-radius": string })["border-radius"];
+    if (!radius) return result;
+
     const radiusArr = radius.split(" ");
     const len = radiusArr.length;
 
