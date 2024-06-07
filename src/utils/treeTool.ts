@@ -55,20 +55,24 @@ export const addTreeItem = (
   }, result);
 
   if (dataTransfer.data.type === "base" && idArr.length === 2) {
-    const oneColumn = defaultNodePropertyMap["mj-column"];
+    const oneColumn = deepClone(defaultNodePropertyMap["mj-column"]);
     oneColumn.children?.[0].children?.push(
-      defaultNodePropertyMap[
-        dataTransfer.data.value as keyof typeof defaultNodePropertyMap
-      ]
+      deepClone(
+        defaultNodePropertyMap[
+          dataTransfer.data.value as keyof typeof defaultNodePropertyMap
+        ]
+      )
     );
     treeResult.children?.splice(idArr[idArr.length - 1], 0, oneColumn);
   } else {
     treeResult.children?.splice(
       idArr[idArr.length - 1],
       0,
-      defaultNodePropertyMap[
-        dataTransfer.data.value as keyof typeof defaultNodePropertyMap
-      ]
+      deepClone(
+        defaultNodePropertyMap[
+          dataTransfer.data.value as keyof typeof defaultNodePropertyMap
+        ]
+      )
     );
   }
 
@@ -127,7 +131,7 @@ export const moveTreeItem = (
   }, result);
 
   if (idArr.length === 2 && tmp?.tagName !== "mj-section") {
-    const oneColumn = defaultNodePropertyMap["mj-column"];
+    const oneColumn = deepClone(defaultNodePropertyMap["mj-column"]);
     oneColumn.children?.[0].children?.push(tmp);
     treeResult.children?.splice(idArr[idArr.length - 1], 0, oneColumn);
   } else {

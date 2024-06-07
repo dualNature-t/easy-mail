@@ -253,10 +253,12 @@ const useDropContainer = () => {
   useEffect(() => {
     if (!focusNode) return;
     editTextNodeArr.current.forEach((node) => {
+      console.log(node);
       ref?.tinymce.remove();
       node.removeAttribute("id");
       node.removeAttribute("class");
       node.removeAttribute("contenteditable");
+      // node.setAttribute("style", "");
     });
     editTextNodeArr.current = [];
 
@@ -297,6 +299,13 @@ const useDropContainer = () => {
               ) as appDataType;
             });
           });
+          // editor.on("blur", () => {
+          //   const targetNode = focusNode?.classList.contains("mj-text")
+          //     ? focusNode.children[0]
+          //     : focusNode.querySelector("p") || focusNode.querySelector("a");
+          //   console.log(targetNode);
+          //   editTextNodeArr.current = [targetNode];
+          // });
         },
         // toolbar: "formatting | alignleft aligncenter alignright",
         // toolbar_groups: {
@@ -371,6 +380,7 @@ const useDropContainer = () => {
         (body!.children[0] as HTMLElement)!.style.backgroundColor =
           rootAttr?.["background-color"];
         sectionArr?.forEach((s) => {
+          // CSSStyleDeclaration
           (s as HTMLElement).style["max-width"] = rootAttr?.width;
         });
       }

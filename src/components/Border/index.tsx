@@ -50,6 +50,15 @@ const Border = (): JSX.Element => {
   }, [property]);
 
   const borderDirValue = useMemo(() => {
+    const result = [
+      "border-top",
+      "border-right",
+      "border-bottom",
+      "border-left",
+    ];
+    if (!property || Object.keys(property).length == 0) {
+      return result;
+    }
     const {
       "border-top": borderTop,
       "border-right": borderRight,
@@ -73,6 +82,8 @@ const Border = (): JSX.Element => {
       (item) => dir[item as keyof typeof dir] === undefined
     );
   }, [property]);
+
+  console.log(borderDirValue);
   /* <------------------------------------ **** PARAMETER END **** ------------------------------------ */
   /* <------------------------------------ **** FUNCTION START **** ------------------------------------ */
   /************* This section will include this component general function *************/
