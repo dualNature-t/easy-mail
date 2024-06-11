@@ -125,6 +125,22 @@ const defaultTreeData: appDataType = {
             },
           ],
         },
+        {
+          tagName: "mj-section",
+          attributes: {
+            "css-class": "mj-section",
+            padding: "20px",
+          },
+          children: [
+            {
+              tagName: "mj-column",
+              attributes: {
+                "css-class": "mj-column",
+              },
+              children: [],
+            },
+          ],
+        },
       ],
     },
   ],

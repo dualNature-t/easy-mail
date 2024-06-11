@@ -115,13 +115,11 @@ const BorderRadius = (): JSX.Element => {
   /* <------------------------------------ **** EFFECT START **** ------------------------------------ */
   /************* This section will include this component general function *************/
   useEffect(() => {
-    if (
+    const unOpen =
       radiusBottom === radiusLeft &&
       radiusLeft === radiusRight &&
-      radiusRight === radiusTop
-    )
-      return;
-    !open && setOpen(true);
+      radiusRight === radiusTop;
+    setOpen(!unOpen);
   }, [radiusBottom, radiusLeft, radiusRight, radiusTop]);
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (

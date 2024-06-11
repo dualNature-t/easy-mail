@@ -16,7 +16,10 @@ const getMjmlByNode = (appData: appDataType | null, node: Element | null) => {
     let siblingNode = node;
     while (siblingNode.previousElementSibling) {
       siblingNode = siblingNode.previousElementSibling as HTMLElement;
-      if (siblingNode.classList.contains("drop-block")) {
+      if (
+        siblingNode.classList.contains("drop-block") ||
+        siblingNode.classList.contains("focus")
+      ) {
         continue;
       }
       id++;
