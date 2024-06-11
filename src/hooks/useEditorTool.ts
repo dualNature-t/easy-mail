@@ -8,7 +8,10 @@ const useEditorTool = () => {
   useEffect(() => {
     const div = document.createElement("div");
     div.setAttribute("id", "editor-tool-box");
-    div.setAttribute("style", "position: absolute; left: 0; top: 0");
+    div.setAttribute(
+      "style",
+      "position: absolute; left: 0; top: 0; width: 279px"
+    );
     div.onclick = (e) => {
       e.stopPropagation();
     };
@@ -28,8 +31,6 @@ const useEditorTool = () => {
       const { left, top, width } = focusNode.getBoundingClientRect();
       editorTool.style.left = `${left + width / 2 - 279 / 2}px`;
       editorTool.style.top = `${top + documentEle?.scrollTop - 78 - 10}px`;
-    } else {
-      editorTool?.remove();
     }
   }, [focusNode, editorTool]);
 

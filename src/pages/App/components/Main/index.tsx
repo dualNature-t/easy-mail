@@ -126,8 +126,12 @@ const Main = (): JSX.Element => {
       content: "Empty Section - Drop content here";
     }
     .edit-body {
+      user-select: none;
       min-height: calc(100vh - 44px);
       border: 22px solid white;
+    }
+    *:focus-visible {
+      outline: none;
     }
     .edit-body .mj-body {
       position: relative;
