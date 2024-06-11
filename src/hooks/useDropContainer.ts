@@ -112,8 +112,10 @@ const useDropContainer = () => {
         setFocusNode(node);
         return;
       }
-      if (node.classList.contains("focus")) return;
 
+      console.log("click");
+
+      if (node.classList.contains("focus")) return;
       !focusNodeArr.current.includes(node) && focusNodeArr.current.push(node);
       addClassNameByNode(node, "focus");
       setFocusNode(node);
@@ -253,12 +255,10 @@ const useDropContainer = () => {
   useEffect(() => {
     if (!focusNode) return;
     editTextNodeArr.current.forEach((node) => {
-      console.log(node);
       ref?.tinymce.remove();
       node.removeAttribute("id");
       node.removeAttribute("class");
       node.removeAttribute("contenteditable");
-      // node.setAttribute("style", "");
     });
     editTextNodeArr.current = [];
 
@@ -299,13 +299,25 @@ const useDropContainer = () => {
               ) as appDataType;
             });
           });
-          // editor.on("blur", () => {
-          //   const targetNode = focusNode?.classList.contains("mj-text")
-          //     ? focusNode.children[0]
-          //     : focusNode.querySelector("p") || focusNode.querySelector("a");
-          //   console.log(targetNode);
-          //   editTextNodeArr.current = [targetNode];
-          // });
+          editor.on("blur", () => {
+            editor.editorManager.remove();
+            // editTextNodeArr.current.forEach((node) => {
+            //   ref?.tinymce.remove();
+            //   node.removeAttribute("id");
+            //   node.removeAttribute("class");
+            //   node.removeAttribute("contenteditable");
+            // });
+            // editTextNodeArr.current = [];
+          });
+          editor.on("focus", () => {
+            // editTextNodeArr.current.forEach((node) => {
+            //   ref?.tinymce.remove();
+            //   node.removeAttribute("id");
+            //   node.removeAttribute("class");
+            //   node.removeAttribute("contenteditable");
+            // });
+            // editTextNodeArr.current = [];
+          });
         },
         // toolbar: "formatting | alignleft aligncenter alignright",
         // toolbar_groups: {

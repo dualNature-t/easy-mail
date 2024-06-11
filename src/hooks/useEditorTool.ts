@@ -33,6 +33,20 @@ const useEditorTool = () => {
     }
   }, [focusNode, editorTool]);
 
+  useEffect(() => {
+    if (!editorTool) return;
+    const fn = (e: MouseEvent) => {
+      e.stopPropagation();
+    };
+    editorTool.addEventListener("click", fn, false);
+    editorTool.addEventListener("mouseover", fn, false);
+
+    return () => {
+      editorTool.removeEventListener("click", fn, false);
+      editorTool.removeEventListener("mouseover", fn, false);
+    };
+  }, [editorTool]);
+
   return { editorTool };
 };
 

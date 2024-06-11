@@ -6,7 +6,7 @@
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import style from "./style.module.scss";
 import useProperty from "@/hooks/useProperty";
 import { Col, InputNumber, Row, Switch, Typography } from "antd";
@@ -30,6 +30,7 @@ const Width = (): JSX.Element => {
     }
     return { width: (property as { width: string }).width || "" };
   }, [property]);
+
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
@@ -39,6 +40,9 @@ const Width = (): JSX.Element => {
   /* <------------------------------------ **** FUNCTION END **** ------------------------------------ */
   /* <------------------------------------ **** EFFECT START **** ------------------------------------ */
   /************* This section will include this component general function *************/
+  useEffect(() => {
+    setOpen(width !== "");
+  }, [width]);
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
     <div style={{ marginBottom: 24 }}>
@@ -55,7 +59,6 @@ const Width = (): JSX.Element => {
               } else {
                 setProperty({}, { ...property, width: "200px" });
               }
-              setOpen(!value);
             }}
           />
         </Col>

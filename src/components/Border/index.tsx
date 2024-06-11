@@ -83,7 +83,6 @@ const Border = (): JSX.Element => {
     );
   }, [property]);
 
-  console.log(borderDirValue);
   /* <------------------------------------ **** PARAMETER END **** ------------------------------------ */
   /* <------------------------------------ **** FUNCTION START **** ------------------------------------ */
   /************* This section will include this component general function *************/
