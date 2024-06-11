@@ -28,9 +28,12 @@ const useEditorTool = () => {
     ) {
       const documentEle = (focusNode.getRootNode() as Document).documentElement;
       documentEle.querySelector("body")?.appendChild(editorTool);
-      const { left, top, width } = focusNode.getBoundingClientRect();
+      const { left, top, width, height } = focusNode.getBoundingClientRect();
       editorTool.style.left = `${left + width / 2 - 279 / 2}px`;
-      editorTool.style.top = `${top + documentEle?.scrollTop - 78 - 10}px`;
+      editorTool.style.top =
+        top > 88
+          ? `${top + documentEle?.scrollTop - 78 - 10}px`
+          : `${top + documentEle?.scrollTop + height + 10}px`;
     }
   }, [focusNode, editorTool]);
 
