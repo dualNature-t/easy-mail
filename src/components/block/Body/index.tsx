@@ -56,7 +56,7 @@ const BodyBlock = (): JSX.Element => {
         </Form.Item>
 
         <Form.Item name="width" label={<Text strong>Width</Text>}>
-          <InputNumber step={10} />
+          <InputNumber step={10} min={0} />
         </Form.Item>
       </>
 

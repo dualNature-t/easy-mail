@@ -72,9 +72,10 @@ const Property = (): JSX.Element => {
     for (const key in property) {
       const value = property[key as keyof typeof property];
       if (NumberPropertyMap.includes(key)) {
-        propertyMap[key] = typeof value == "number" ? `${value}px` : value;
+        propertyMap[key] =
+          typeof value == "number" ? `${value}px` : value ?? "0px";
       } else {
-        propertyMap[key] = property[key as keyof typeof property];
+        propertyMap[key] = property[key as keyof typeof property] ?? "0px";
       }
     }
     return propertyMap;
@@ -105,8 +106,9 @@ const Property = (): JSX.Element => {
         name="property"
         form={form}
         preserve={false}
-        onValuesChange={async (value, allVlaue) => {
-          setProperty(value, unTransformProperty(allVlaue));
+        onValuesChange={async (value, allValue) => {
+          console.log(unTransformProperty(allValue));
+          setProperty(value, unTransformProperty(allValue));
         }}
         className={style.property_form}
       >

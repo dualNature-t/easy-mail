@@ -6,8 +6,8 @@
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import { useContext, useEffect, useMemo, useState } from "react";
-import { Button, Col, Form, InputNumber, Row, Typography } from "antd";
+import { useEffect, useMemo, useState } from "react";
+import { Button, Col, InputNumber, Row, Typography } from "antd";
 import useProperty from "@/hooks/useProperty";
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
@@ -78,7 +78,7 @@ const Padding = (): JSX.Element => {
   /* <------------------------------------ **** FUNCTION START **** ------------------------------------ */
   /************* This section will include this component general function *************/
   const onChange = (
-    value: number | null,
+    value: number,
     key:
       | "padding"
       | "padding-left"
@@ -174,7 +174,7 @@ const Padding = (): JSX.Element => {
                   step={10}
                   min={0}
                   onChange={(value: number | null) =>
-                    onChange(value, "padding")
+                    onChange(value ?? 0, "padding")
                   }
                 />
               </Col>
@@ -197,7 +197,7 @@ const Padding = (): JSX.Element => {
                   step={10}
                   min={0}
                   onChange={(value: number | null) =>
-                    onChange(value, "padding-top")
+                    onChange(value ?? 0, "padding-top")
                   }
                 />
               </Col>
@@ -215,7 +215,7 @@ const Padding = (): JSX.Element => {
                   step={10}
                   min={0}
                   onChange={(value: number | null) =>
-                    onChange(value, "padding-right")
+                    onChange(value ?? 0, "padding-right")
                   }
                 />
               </Col>
@@ -233,7 +233,7 @@ const Padding = (): JSX.Element => {
                   step={10}
                   min={0}
                   onChange={(value: number | null) =>
-                    onChange(value, "padding-bottom")
+                    onChange(value ?? 0, "padding-bottom")
                   }
                 />
               </Col>
@@ -251,7 +251,7 @@ const Padding = (): JSX.Element => {
                   step={10}
                   min={0}
                   onChange={(value: number | null) =>
-                    onChange(value, "padding-left")
+                    onChange(value ?? 0, "padding-left")
                   }
                 />
               </Col>

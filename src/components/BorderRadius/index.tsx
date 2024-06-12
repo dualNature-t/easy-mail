@@ -79,7 +79,7 @@ const BorderRadius = (): JSX.Element => {
   /* <------------------------------------ **** FUNCTION START **** ------------------------------------ */
   /************* This section will include this component general function *************/
   const onChange = (
-    value: number | null,
+    value: number,
     key:
       | "radius"
       | "radius-left"
@@ -119,7 +119,7 @@ const BorderRadius = (): JSX.Element => {
       radiusBottom === radiusLeft &&
       radiusLeft === radiusRight &&
       radiusRight === radiusTop;
-    setOpen(!unOpen);
+    !open && setOpen(!unOpen);
   }, [radiusBottom, radiusLeft, radiusRight, radiusTop]);
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
@@ -173,7 +173,9 @@ const BorderRadius = (): JSX.Element => {
                   )}
                   step={10}
                   min={0}
-                  onChange={(value: number | null) => onChange(value, "radius")}
+                  onChange={(value: number | null) =>
+                    onChange(value ?? 0, "radius")
+                  }
                 />
               </Col>
             </Row>
@@ -192,7 +194,7 @@ const BorderRadius = (): JSX.Element => {
                   step={10}
                   min={0}
                   onChange={(value: number | null) =>
-                    onChange(value, "radius-top")
+                    onChange(value ?? 0, "radius-top")
                   }
                 />
               </Col>
@@ -235,7 +237,7 @@ const BorderRadius = (): JSX.Element => {
                   step={10}
                   min={0}
                   onChange={(value: number | null) =>
-                    onChange(value, "radius-right")
+                    onChange(value ?? 0, "radius-right")
                   }
                 />
               </Col>
@@ -250,7 +252,7 @@ const BorderRadius = (): JSX.Element => {
                   step={10}
                   min={0}
                   onChange={(value: number | null) =>
-                    onChange(value, "radius-left")
+                    onChange(value ?? 0, "radius-left")
                   }
                 />
               </Col>
@@ -293,7 +295,7 @@ const BorderRadius = (): JSX.Element => {
                   step={10}
                   min={0}
                   onChange={(value: number | null) =>
-                    onChange(value, "radius-bottom")
+                    onChange(value ?? 0, "radius-bottom")
                   }
                 />
               </Col>
