@@ -9,6 +9,11 @@
 import Border from "@/components/Border";
 import BorderRadius from "@/components/BorderRadius";
 import Padding from "@/components/Padding";
+import { appDataType } from "@/context/appContext";
+import useAppData from "@/hooks/useAppData";
+import useFocusNode from "@/hooks/useFocusNode";
+import getMjmlByNode from "@/utils/getMjmlByNode";
+import { updateSectionLayout } from "@/utils/treeTool";
 import {
   Button,
   Col,
@@ -33,7 +38,8 @@ const { Text } = Typography;
 const SectionBlock = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
-
+  const { appData, setAppData } = useAppData();
+  const { focusNode } = useFocusNode();
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
@@ -43,7 +49,9 @@ const SectionBlock = (): JSX.Element => {
   const handleLayoutChange = (
     type: "1" | "2" | "3" | "4" | "left" | "right"
   ) => {
-    console.log(type);
+    const { idx } = getMjmlByNode(appData, focusNode);
+    const result = updateSectionLayout(appData, idx as string, type);
+    setAppData(result as appDataType);
   };
   /* <------------------------------------ **** FUNCTION END **** ------------------------------------ */
   /* <------------------------------------ **** EFFECT START **** ------------------------------------ */

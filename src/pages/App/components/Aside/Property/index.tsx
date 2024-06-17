@@ -75,7 +75,7 @@ const Property = (): JSX.Element => {
         propertyMap[key] =
           typeof value == "number" ? `${value}px` : value ?? "0px";
       } else {
-        propertyMap[key] = property[key as keyof typeof property] ?? "0px";
+        propertyMap[key] = property[key as keyof typeof property];
       }
     }
     return propertyMap;

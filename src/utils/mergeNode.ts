@@ -91,14 +91,44 @@ export const mergeNodesAttr = <T extends Element>(node: T, newNode: T) => {
       const attrs = loopEle
         .getAttributeNames()
         .filter((i) => !filterAttrs.includes(i));
+
       if (loopEle.classList.contains("mj-column")) {
+        const originColumns = [].slice.call(
+          loopEle.parentElement?.children
+        ) as Element[];
+        const newColumns = [].slice.call(
+          newLoopEle.parentElement?.children
+        ) as Element[];
+
+        for (let i in newColumns) {
+          if (originColumns[i]) {
+            const newColumnAttrs = newColumns[i].getAttributeNames();
+            newColumnAttrs.forEach((attr) => {
+              originColumns[i].setAttribute(
+                attr,
+                newColumns[i]?.getAttribute(attr) as string
+              );
+            });
+          } else {
+            loopEle.parentElement?.appendChild(newColumns[i]);
+          }
+        }
+        if (originColumns.length > newColumns.length) {
+          const len = originColumns.length - newColumns.length;
+          for (let i = 0; i < len; i++) {
+            originColumns[originColumns.length - 1 - i].remove();
+          }
+        }
+
         break;
       }
+
       if (attrs.length == 0) {
         loopEle = loopEle.children[0] as T;
         newLoopEle = newLoopEle?.children[0] as T;
         continue;
       }
+
       attrs.forEach((attr) => {
         loopEle.setAttribute(attr, newLoopEle?.getAttribute(attr) as string);
       });

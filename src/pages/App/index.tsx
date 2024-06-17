@@ -139,6 +139,13 @@ const defaultTreeData: appDataType = {
               },
               children: [],
             },
+            {
+              tagName: "mj-column",
+              attributes: {
+                "css-class": "mj-column",
+              },
+              children: [],
+            },
           ],
         },
       ],
