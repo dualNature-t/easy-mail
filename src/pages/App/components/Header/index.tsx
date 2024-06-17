@@ -68,7 +68,7 @@ const Header = (): JSX.Element => {
         footer={null}
       >
         <iframe
-          style={{ width: "100%", border: "none" }}
+          style={{ width: "100%", border: "none", height: 800 }}
           srcDoc={docHtml}
         ></iframe>
       </Modal>

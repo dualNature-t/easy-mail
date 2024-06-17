@@ -323,6 +323,7 @@ const useDropContainer = () => {
 
   useEffect(() => {
     if (!appData || !ref) return;
+    // console.log(appData);
 
     let parser = new DOMParser();
     let doc = parser.parseFromString(mjml2html(appData).html, "text/html");
@@ -332,7 +333,11 @@ const useDropContainer = () => {
     // console.log("appData", appData);
 
     const mergeDoc = mergeNodeEmpty(doc.documentElement);
-    const { idx: blockIdx } = getMjmlByNode(appData, block);
+    const { idx: blockIdx } = getMjmlByNode(
+      appData,
+      block,
+      dataTransfer?.type === "move"
+    );
     const { idx: focusIdx } = getMjmlByNode(appData, focusNode);
     const focusTargetNode = getNodeByIdx(mergeDoc, focusIdx);
     const blockTargetNode = getNodeByIdx(mergeDoc, blockIdx);

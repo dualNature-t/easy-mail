@@ -55,24 +55,20 @@ export const addTreeItem = (
   }, result);
 
   if (dataTransfer.data.type === "base" && idArr.length === 2) {
-    const oneColumn = deepClone(defaultNodePropertyMap["mj-column"]);
+    const oneColumn = deepClone(defaultNodePropertyMap)["mj-column"];
     oneColumn.children?.[0].children?.push(
-      deepClone(
-        defaultNodePropertyMap[
-          dataTransfer.data.value as keyof typeof defaultNodePropertyMap
-        ]
-      )
+      deepClone(defaultNodePropertyMap)[
+        dataTransfer.data.value as keyof typeof defaultNodePropertyMap
+      ]
     );
     treeResult.children?.splice(idArr[idArr.length - 1], 0, oneColumn);
   } else {
     treeResult.children?.splice(
       idArr[idArr.length - 1],
       0,
-      deepClone(
-        defaultNodePropertyMap[
-          dataTransfer.data.value as keyof typeof defaultNodePropertyMap
-        ]
-      )
+      deepClone(defaultNodePropertyMap)[
+        dataTransfer.data.value as keyof typeof defaultNodePropertyMap
+      ]
     );
   }
 
@@ -131,7 +127,7 @@ export const moveTreeItem = (
   }, result);
 
   if (idArr.length === 2 && tmp?.tagName !== "mj-section") {
-    const oneColumn = deepClone(defaultNodePropertyMap["mj-column"]);
+    const oneColumn = deepClone(defaultNodePropertyMap)["mj-column"];
     oneColumn.children?.[0].children?.push(tmp);
     treeResult.children?.splice(idArr[idArr.length - 1], 0, oneColumn);
   } else {
@@ -157,13 +153,11 @@ export const updateSectionLayout = (
 
   const columnLen = ["left", "right"].includes(column) ? 2 : Number(column);
 
-  const defaultColumns = deepClone(
-    defaultNodePropertyMap[
-      column === "1"
-        ? "mj-column"
-        : (`mj-column-${column}` as keyof typeof defaultNodePropertyMap)
-    ]
-  );
+  const defaultColumns = deepClone(defaultNodePropertyMap)[
+    column === "1"
+      ? "mj-column"
+      : (`mj-column-${column}` as keyof typeof defaultNodePropertyMap)
+  ];
   defaultColumns.children?.forEach((item, index) => {
     let originColumn = treeColumns?.[index];
 

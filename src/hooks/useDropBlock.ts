@@ -7,7 +7,7 @@ import useAppData from "./useAppData";
 import { addTreeItem, moveTreeItem } from "@/utils/treeTool";
 
 const normalStyle =
-  "border: 1px dashed #ccc; padding: 26px 20px; text-align: center; font-size: 14px;";
+  "border: 1px dashed #ccc; padding: 20px 20px; text-align: center; font-size: 14px;";
 const hoverStyle = `${normalStyle} background-color: rgba(0,0,0,0.1)`;
 
 const useDropBlock = () => {
@@ -39,14 +39,19 @@ const useDropBlock = () => {
         const result = addTreeItem(appData, idx as string, dataTransfer);
         setAppData(result as appDataType);
       } else if (dataTransfer.type === "move") {
-        const { idx: originIdx } = getMjmlByNode(appData, focusNode as Element);
-        const { idx } = getMjmlByNode(appData, block);
+        const { idx: originIdx } = getMjmlByNode(
+          appData,
+          focusNode as Element,
+          true
+        );
+        const { idx } = getMjmlByNode(appData, block, true);
 
         const result = moveTreeItem(
           appData,
           idx as string,
           originIdx as string
         );
+
         setAppData(result as appDataType);
       }
     };

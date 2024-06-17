@@ -1,6 +1,10 @@
 import { appDataType } from "@/context/appContext";
 
-const getMjmlByNode = (appData: appDataType | null, node: Element | null) => {
+const getMjmlByNode = (
+  appData: appDataType | null,
+  node: Element | null,
+  isMove: boolean = false
+) => {
   let mjml = appData?.children?.[0];
   let idx = "0";
   if (!appData || !node || node.classList.contains("mj-body"))
@@ -10,7 +14,7 @@ const getMjmlByNode = (appData: appDataType | null, node: Element | null) => {
     node.classList.contains("mj-section") ||
     node.previousElementSibling?.classList.contains("mj-section") ||
     node.nextElementSibling?.classList.contains("mj-section") ||
-    appData.children?.[0].children?.length == 0
+    node.parentElement?.classList.contains("mj-body")
   ) {
     let id = 0;
     let siblingNode = node;
@@ -18,7 +22,7 @@ const getMjmlByNode = (appData: appDataType | null, node: Element | null) => {
       siblingNode = siblingNode.previousElementSibling as HTMLElement;
       if (
         siblingNode.classList.contains("drop-block") ||
-        siblingNode.classList.contains("focus")
+        (isMove && siblingNode.classList.contains("focus"))
       ) {
         continue;
       }
@@ -36,7 +40,7 @@ const getMjmlByNode = (appData: appDataType | null, node: Element | null) => {
       currentNode = currentNode.previousElementSibling as HTMLElement;
       if (
         currentNode.classList.contains("drop-block") ||
-        currentNode.children[0].classList.contains("focus")
+        (isMove && currentNode.children[0].classList.contains("focus"))
       ) {
         continue;
       }
