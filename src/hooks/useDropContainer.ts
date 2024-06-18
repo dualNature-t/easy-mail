@@ -255,6 +255,16 @@ const useDropContainer = () => {
 
   useEffect(() => {
     if (!ref || !editorTool) return;
+    let mceEditor: any = null;
+
+    const removeEditor = (node: Element | null) => {
+      ref?.tinymce.remove();
+      node?.removeAttribute("id");
+      node?.removeAttribute("class");
+      node?.removeAttribute("contenteditable");
+      mceEditor = null;
+    };
+
     const clickFn = (e: MouseEvent) => {
       const node = getNodeByTarget(e.target as HTMLElement);
 
@@ -267,15 +277,19 @@ const useDropContainer = () => {
           : node.querySelector("p") || node.querySelector("a");
 
         if (targetNode?.getAttribute("id") === "editor") return;
+        if (mceEditor && !mceEditor.removed) {
+          removeEditor(mceEditor.bodyElement);
+        }
         targetNode?.setAttribute("id", "editor");
 
         ref?.tinymce.init({
           selector: "#editor",
           inline: true,
           menubar: false,
+          plugins: "autolink link",
           toolbar: [
             "fontsize forecolor undo redo",
-            "bold italic underline strikethrough link",
+            "removeformat bold italic underline strikethrough link unlink",
           ],
           fixed_toolbar_container: "#editor-tool-box",
           forced_root_block: " ",
@@ -284,6 +298,7 @@ const useDropContainer = () => {
           },
           font_size_formats: "12px 14px 16px 18px 24px 36px 48px 56px 72px",
           setup: (editor: any) => {
+            mceEditor = editor;
             editor.on("change", (e: any) => {
               const value = e.level.content;
               const { idx } = getMjmlByNode(appData, node);
@@ -296,21 +311,17 @@ const useDropContainer = () => {
               });
             });
             editor.on("blur", () => {
-              editor.remove();
-              targetNode?.removeAttribute("id");
-              targetNode?.removeAttribute("class");
-              targetNode?.removeAttribute("contenteditable");
+              setTimeout(() => {
+                removeEditor(targetNode);
+              });
             });
           },
-          // toolbar: "formatting | alignleft aligncenter alignright",
-          // toolbar_groups: {
-          //   formatting: {
-          //     icon: "bold",
-          //     tooltip: "Formatting",
-          //     items: "bold italic underline | superscript subscript",
-          //   },
-          // },
         });
+        return;
+      }
+
+      if (mceEditor && !mceEditor.removed) {
+        removeEditor(mceEditor.bodyElement);
       }
     };
 
@@ -323,7 +334,7 @@ const useDropContainer = () => {
 
   useEffect(() => {
     if (!appData || !ref) return;
-    console.log(appData);
+    // console.log(appData);
 
     let parser = new DOMParser();
     let doc = parser.parseFromString(mjml2html(appData).html, "text/html");

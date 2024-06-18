@@ -7,11 +7,11 @@ import useAppData from "./useAppData";
 import { addTreeItem, moveTreeItem } from "@/utils/treeTool";
 
 const normalStyle =
-  "border: 1px dashed #ccc; padding: 20px 20px; text-align: center; font-size: 14px;";
+  "border: 1px dashed #ccc; padding: 20px 20px; text-align: center; font-size: 14px; line-height: 14px;";
 const hoverStyle = `${normalStyle} background-color: rgba(0,0,0,0.1)`;
 
 const useDropBlock = () => {
-  const { dataTransfer, setDataTransfer } = useDataTransfer();
+  const { dataTransfer } = useDataTransfer();
   const { appData, setAppData } = useAppData();
   const [block, setBlock] = useState<HTMLDivElement | null>(null);
   const { focusNode } = useFocusNode();
