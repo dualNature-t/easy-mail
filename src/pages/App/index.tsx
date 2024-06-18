@@ -163,7 +163,7 @@ const defaultTreeData: appDataType = {
                     "css-class": "mj-button",
                     href: "https://www.baidu.com",
                     target: "_blank",
-                    width: "NaNpx",
+                    width: "",
                     "background-color": "#9aaea6",
                     "border-radius": "0px",
                     border: "",

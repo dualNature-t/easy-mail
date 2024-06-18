@@ -114,13 +114,11 @@ const Padding = (): JSX.Element => {
   /* <------------------------------------ **** EFFECT START **** ------------------------------------ */
   /************* This section will include this component general function *************/
   useEffect(() => {
-    if (
+    const unOpen =
       paddingLeft === paddingRight &&
       paddingRight === paddingTop &&
-      paddingTop === paddingBottom
-    )
-      return;
-    !open && setOpen(true);
+      paddingTop === paddingBottom;
+    !open && setOpen(!unOpen);
   }, [paddingLeft, paddingRight, paddingTop, paddingBottom]);
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (

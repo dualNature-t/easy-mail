@@ -133,6 +133,9 @@ const Main = (): JSX.Element => {
     *:focus-visible {
       outline: none;
     }
+    * img {
+      -webkit-user-drag: none;
+    }
     .edit-body .mj-body {
       position: relative;
       outline: 2px solid transparent;

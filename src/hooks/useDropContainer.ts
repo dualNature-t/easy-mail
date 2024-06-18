@@ -323,7 +323,7 @@ const useDropContainer = () => {
 
   useEffect(() => {
     if (!appData || !ref) return;
-    // console.log(appData);
+    console.log(appData);
 
     let parser = new DOMParser();
     let doc = parser.parseFromString(mjml2html(appData).html, "text/html");
