@@ -119,7 +119,7 @@ const BorderRadius = (): JSX.Element => {
       radiusBottom === radiusLeft &&
       radiusLeft === radiusRight &&
       radiusRight === radiusTop;
-    !open && setOpen(!unOpen);
+    setOpen(!unOpen);
   }, [radiusBottom, radiusLeft, radiusRight, radiusTop]);
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (

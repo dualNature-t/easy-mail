@@ -118,7 +118,7 @@ const Padding = (): JSX.Element => {
       paddingLeft === paddingRight &&
       paddingRight === paddingTop &&
       paddingTop === paddingBottom;
-    !open && setOpen(!unOpen);
+    setOpen(!unOpen);
   }, [paddingLeft, paddingRight, paddingTop, paddingBottom]);
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
