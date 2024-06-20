@@ -44,8 +44,8 @@ const defaultTreeData: appDataType = {
             "css-class": "mj-section",
             "border-radius": "0px",
             border: "",
-            "background-color": "",
-            "background-url": "",
+            // "background-color": "",
+            // "background-url": "",
             "background-repeat": "repeat",
             "background-size": "auto",
             padding: "10px 10px 10px 10px",
@@ -115,6 +115,52 @@ const defaultTreeData: appDataType = {
                 "css-class": "mj-column",
               },
               children: [
+                {
+                  tagName: "mj-social",
+                  attributes: {
+                    "css-class": "mj-social",
+                    "icon-size": "30px",
+                    "icon-padding": "15px",
+                    "border-radius": "3px",
+                    "inner-padding": "4px",
+                    "font-family": "arial",
+                    "font-size": "13px",
+                    color: "#000000",
+                    mode: "horizontal",
+                    // mode: "vertical",
+                    align: "center",
+                    padding: "10px 25px",
+                  },
+                  children: [
+                    {
+                      tagName: "mj-social-element",
+                      attributes: {
+                        name: "facebook",
+                        "css-class": "mj-social-element",
+                        href: "https://www.facebook.com",
+                      },
+                      content: "",
+                    },
+                    {
+                      tagName: "mj-social-element",
+                      attributes: {
+                        name: "twitter",
+                        "css-class": "mj-social-element",
+                        href: "https://www.twitter.com",
+                      },
+                      content: "",
+                    },
+                    {
+                      tagName: "mj-social-element",
+                      attributes: {
+                        name: "google",
+                        "css-class": "mj-social-element",
+                        href: "https://www.google.com",
+                      },
+                      content: "",
+                    },
+                  ],
+                },
                 {
                   tagName: "mj-image",
                   attributes: {

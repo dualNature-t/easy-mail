@@ -13,7 +13,8 @@ export type tagNameType =
   | "mj-button"
   | "mj-divider"
   | "mj-spacer"
-  | "mj-social";
+  | "mj-social"
+  | "mj-social-element";
 
 export type columnTagNameType =
   | "mj-column"
@@ -25,7 +26,7 @@ export type columnTagNameType =
 
 export type basicTagNameType = Exclude<
   tagNameType,
-  "mjml" | "mj-body" | "mj-section" | "mj-column"
+  "mjml" | "mj-body" | "mj-section" | "mj-column" | "mj-social-element"
 >;
 
 export interface appDataType {

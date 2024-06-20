@@ -7,7 +7,7 @@ import { onTreePropertyChange } from "@/utils/treeTool";
 
 export type validFocusNodeTagNameType = Exclude<
   tagNameType,
-  "mjml" | "mj-column"
+  "mjml" | "mj-column" | "mj-social-element"
 >;
 
 const useProperty = () => {
