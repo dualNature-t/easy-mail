@@ -262,6 +262,7 @@ export const defaultNodePropertyMap: Record<
       href: "",
       target: "_blank",
       alt: "",
+      width: "200px",
       "border-radius": "0px",
       align: "center",
       padding: "0px",

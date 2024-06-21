@@ -5,16 +5,20 @@ import { defaultNodePropertyMap } from "@/constant";
 export const onTreePropertyChange = (
   tree: appDataType | null,
   idx: string,
-  property: Record<string, unknown>
+  property: Record<string, unknown>,
+  index?: number
 ) => {
   if (!tree) return;
   const result = deepClone(tree);
   if (idx) {
     const idArr = idx.split("-").map((i) => Number(i));
 
-    const treeResult = idArr.reduce((cur, pre) => {
+    let treeResult = idArr.reduce((cur, pre) => {
       return cur.children?.[pre] as appDataType;
     }, result);
+    if (index || index === 0) {
+      treeResult = treeResult.children?.[index] as appDataType;
+    }
     treeResult.attributes = { ...treeResult.attributes, ...property };
   } else {
     const treeResult = result.children?.[0] as appDataType;
@@ -27,15 +31,19 @@ export const onTreePropertyChange = (
 export const onTextContentChange = (
   tree: appDataType | null,
   idx: string,
-  content: string
+  content: string,
+  index?: number
 ) => {
   if (!tree) return;
   const idArr = idx.split("-").map((i) => Number(i));
 
   const result = deepClone(tree);
-  const treeResult = idArr.reduce((cur, pre) => {
+  let treeResult = idArr.reduce((cur, pre) => {
     return cur.children?.[pre] as appDataType;
   }, result);
+  if (index || index === 0) {
+    treeResult = treeResult.children?.[index] as appDataType;
+  }
   treeResult.content = content;
 
   return result;
@@ -178,5 +186,60 @@ export const updateSectionLayout = (
     }
   });
   columnLen < (treeColumns?.length ?? 0) && treeColumns?.splice(columnLen);
+  return result;
+};
+
+export const addSocialItem = (
+  tree: appDataType | null,
+  idx: string,
+  value: any
+) => {
+  if (!tree) return;
+  const idArr = idx.split("-").map((i) => Number(i));
+
+  const result = deepClone(tree);
+  const treeResult = idArr.reduce((cur, pre) => {
+    return cur.children?.[pre] as appDataType;
+  }, result);
+
+  treeResult.children?.splice(treeResult.children.length, 0, value);
+
+  return result;
+};
+
+export const deleteSocialItem = (
+  tree: appDataType | null,
+  idx: string,
+  index: number
+) => {
+  if (!tree) return;
+  const idArr = idx.split("-").map((i) => Number(i));
+
+  const result = deepClone(tree);
+  const treeResult = idArr.reduce((cur, pre) => {
+    return cur.children?.[pre] as appDataType;
+  }, result);
+
+  treeResult.children?.splice(index, 1);
+  return result;
+};
+
+export const moveSocialItem = (
+  tree: appDataType,
+  idx: string,
+  originIndex: number,
+  targetIndex: number
+) => {
+  if (!tree) return;
+  const idArr = idx.split("-").map((i) => Number(i));
+
+  const result = deepClone(tree);
+  const treeResult = idArr.reduce((cur, pre) => {
+    return cur.children?.[pre] as appDataType;
+  }, result);
+
+  const tmp = treeResult.children?.splice(originIndex, 1)[0] as appDataType;
+
+  treeResult.children?.splice(targetIndex, 0, tmp);
   return result;
 };

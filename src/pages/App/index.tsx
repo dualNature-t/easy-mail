@@ -43,9 +43,6 @@ const defaultTreeData: appDataType = {
           attributes: {
             "css-class": "mj-section",
             "border-radius": "0px",
-            border: "",
-            // "background-color": "",
-            // "background-url": "",
             "background-repeat": "repeat",
             "background-size": "auto",
             padding: "10px 10px 10px 10px",
@@ -101,9 +98,7 @@ const defaultTreeData: appDataType = {
           attributes: {
             "css-class": "mj-section",
             "border-radius": "0px",
-            border: "",
             "background-color": "#ffffff",
-            "background-url": "",
             "background-repeat": "repeat",
             "background-size": "auto",
             padding: "0px 0px 0px 0px",
@@ -231,9 +226,6 @@ const defaultTreeData: appDataType = {
           attributes: {
             "css-class": "mj-section",
             "border-radius": "0px",
-            border: "",
-            "background-color": "",
-            "background-url": "",
             "background-repeat": "repeat",
             "background-size": "auto",
             padding: "20px",
