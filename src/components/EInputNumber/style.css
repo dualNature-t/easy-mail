@@ -1,3 +1,7 @@
+.eInputNumber-select {
+  width: 100%;
+}
+
 .eInputNumber-select .ant-select-selector {
   padding: 0 !important;
 }

@@ -6,6 +6,12 @@
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
+import { BasicEnum } from "@/constant";
+import useCurrentNode from "@/hooks/useCurrentNode";
+import useFocusNode from "@/hooks/useFocusNode";
+import getNodeByTarget from "@/utils/getNodeByTarget";
+import { isSection } from "@/utils/isBlockType";
+import toFirstUpperCase from "@/utils/toFirstUpperCase";
 import { Breadcrumb, Flex, theme } from "antd";
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
@@ -17,12 +23,71 @@ const Header = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
   const { token } = theme.useToken();
+  const { focusNode, setFocusNode } = useFocusNode();
+  const { currentFocusNode, setFocusNodeCls } = useCurrentNode();
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
   /* <------------------------------------ **** PARAMETER END **** ------------------------------------ */
   /* <------------------------------------ **** FUNCTION START **** ------------------------------------ */
   /************* This section will include this component general function *************/
+  const getBreadcrumbItems = () => {
+    const body = {
+      title: (
+        <a
+          onClick={(e) => {
+            e.preventDefault();
+            setFocusNodeCls("remove");
+            setFocusNode(null);
+          }}
+        >
+          Body
+        </a>
+      ),
+    };
+    const section = {
+      title: (
+        <a
+          onClick={(e) => {
+            e.preventDefault();
+            const result = getNodeByTarget(
+              focusNode as Element,
+              BasicEnum.MJ_SECTION
+            );
+            setFocusNodeCls("remove");
+            currentFocusNode.current = result;
+            setFocusNodeCls("add");
+            setFocusNode(result as HTMLElement);
+          }}
+        >
+          Section
+        </a>
+      ),
+    };
+    if (focusNode) {
+      if (isSection(focusNode)) {
+        return [
+          body,
+          {
+            title: "Section",
+          },
+        ];
+      } else {
+        const block = {
+          title: toFirstUpperCase(
+            focusNode?.classList[0].split("-")[1] as string
+          ),
+        };
+        return [body, section, block];
+      }
+    } else {
+      return [
+        {
+          title: "Body",
+        },
+      ];
+    }
+  };
   /* <------------------------------------ **** FUNCTION END **** ------------------------------------ */
   /* <------------------------------------ **** EFFECT START **** ------------------------------------ */
   /************* This section will include this component general function *************/
@@ -36,23 +101,7 @@ const Header = (): JSX.Element => {
       }}
       align="center"
     >
-      <Breadcrumb
-        separator=">"
-        items={[
-          {
-            title: "Home",
-          },
-          {
-            title: "Application Center",
-          },
-          {
-            title: "Application List",
-          },
-          {
-            title: "An Application",
-          },
-        ]}
-      />
+      <Breadcrumb separator=">" items={getBreadcrumbItems()} />
     </Flex>
   );
 };

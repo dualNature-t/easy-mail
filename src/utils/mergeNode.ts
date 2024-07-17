@@ -1,5 +1,26 @@
 import { BasicEnum, MJ_COLUMN_EMPTY, basicBlockNameList } from "../constant";
-import { isSection } from "./isBlockType";
+import { isBody, isSection } from "./isBlockType";
+
+const styleStrToObj = (styleStr?: string | null) => {
+  if (!styleStr) return {};
+  const result: Record<string, string> = {};
+  const styleArr = styleStr.split(";").filter((i) => !!i);
+  styleArr.forEach((item) => {
+    const itemArr = item.split(":");
+
+    const key = itemArr[0];
+    const value = itemArr.slice(1).join(":");
+    result[key] = value;
+  });
+  return result;
+};
+
+const objToStyleStr = (styleObj: Record<string, string>) => {
+  const result = Object.entries(styleObj)
+    .map(([key, value]) => `${key}:${value}`)
+    .join(";");
+  return result;
+};
 
 export const hasChildByColumn = (column: Element) => {
   const childStr = basicBlockNameList.map((i) => `.${i}`).join(",");
@@ -25,8 +46,21 @@ export const mergeNodeEmpty = <T extends Node>(node: T): T => {
 export const mergeNode = (node: Element, newNode: Element) => {
   let originNode = node;
   let targetNode = newNode;
-  if (!isSection(node)) {
+
+  const isOriginBody = isBody(originNode);
+
+  if (!isSection(originNode) && !isOriginBody) {
     targetNode = targetNode.children[0];
+  }
+
+  if (isOriginBody) {
+    originNode.parentElement?.setAttribute(
+      "style",
+      objToStyleStr({
+        ...styleStrToObj(originNode.parentElement?.getAttribute("style")),
+        ...styleStrToObj(targetNode?.getAttribute("style")),
+      })
+    );
   }
   originNode
     .getAttributeNames()
@@ -34,10 +68,11 @@ export const mergeNode = (node: Element, newNode: Element) => {
       (i) => !["id", "class", "contenteditable", "spellcheck"].includes(i)
     )
     .forEach((attr) => {
-      node.setAttribute(attr, targetNode?.getAttribute(attr) as string);
+      originNode.setAttribute(attr, targetNode?.getAttribute(attr) as string);
     });
+
   originNode.replaceChildren(
     ...targetNode.childNodes,
-    originNode.lastElementChild as Node
+    isOriginBody ? "" : (originNode.lastElementChild as Node)
   );
 };

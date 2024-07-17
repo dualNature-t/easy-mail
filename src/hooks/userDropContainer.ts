@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import useHoverNode from "./useHoverNode";
 import useFocusNode from "./useFocusNode";
 import useAppData from "./useAppData";
@@ -11,11 +11,11 @@ import {
   BasicEnum,
   EDITOR_TOOL_BOX,
   FOCUS_CLS,
-  HOVER_CLS,
   MJ_COLUMN_EMPTY,
 } from "@/constant";
 import getNodeByTarget from "@/utils/getNodeByTarget";
 import {
+  isBody,
   isButton,
   isDropBlock,
   isEmptyColumn,
@@ -27,11 +27,12 @@ import {
 import throttle from "@/utils/throttle";
 import insertEle2Node from "@/utils/insertEle2Node";
 import getIdxByNode from "@/utils/getIdxByNode";
-import { IFRAME_ID } from "@/pages/Main";
 import { onTextContentChange } from "@/utils/treeTools";
 import getDocByData from "@/utils/getDocByData";
 import { getNodeByIdx } from "@/utils/getNodeByidx";
 import { hasChildByColumn, mergeNode } from "@/utils/mergeNode";
+import getEditorWindow from "@/utils/getEditorWindow";
+import useCurrentNode from "./useCurrentNode";
 
 const useDropContainer = () => {
   const { setHoverNode } = useHoverNode();
@@ -44,34 +45,14 @@ const useDropContainer = () => {
   useFocusTool();
 
   const [ref, setRef] = useState<Element | null>(null);
-  const currentHoverNode = useRef<HTMLElement | null>(null);
-  const currentFocusNode = useRef<HTMLElement | null>(null);
-  let currentEmptyNode = useRef<HTMLElement | null>(null);
-
-  const resetEmptyNode = () => {
-    if (currentEmptyNode.current) {
-      currentEmptyNode.current.classList.add(MJ_COLUMN_EMPTY);
-      currentEmptyNode.current = null;
-    }
-  };
-
-  const setHoverNodeCls = (type: "add" | "remove") => {
-    if (currentHoverNode.current) {
-      currentHoverNode.current.classList[type](HOVER_CLS);
-    }
-    if (type === "remove") {
-      currentHoverNode.current = null;
-    }
-  };
-
-  const setFocusNodeCls = (type: "add" | "remove") => {
-    if (currentFocusNode.current) {
-      currentFocusNode.current.classList[type](FOCUS_CLS);
-    }
-    if (type === "remove") {
-      currentFocusNode.current = null;
-    }
-  };
+  const {
+    currentHoverNode,
+    currentFocusNode,
+    currentEmptyNode,
+    resetEmptyNode,
+    setHoverNodeCls,
+    setFocusNodeCls,
+  } = useCurrentNode();
 
   useEffect(() => {
     if (!ref) return;
@@ -137,16 +118,22 @@ const useDropContainer = () => {
     };
 
     const throttleDragOver = throttle((e: Event) => {
-      let target = getNodeByTarget(
-        e.target as HTMLElement,
-        BasicEnum.MJ_COLUMN
-      ) as HTMLElement;
+      let target = getNodeByTarget(e.target as Element, BasicEnum.MJ_COLUMN);
+      const editorBody = getEditorWindow().document.body;
+
+      if (
+        isBody(e.target as Element) &&
+        editorBody.children[0].children.length === 0
+      ) {
+        editorBody.children[0].appendChild(block as Node);
+        return;
+      }
 
       if (dataTransfer?.data?.type == "basic" && isEmptyColumn(target)) {
         resetEmptyNode();
         currentEmptyNode.current = target;
-        target.classList.remove(MJ_COLUMN_EMPTY);
-        target.children[0].children[0].appendChild(block as Node);
+        target?.classList.remove(MJ_COLUMN_EMPTY);
+        target?.children[0].children[0].appendChild(block as Node);
         return;
       }
 
@@ -158,7 +145,7 @@ const useDropContainer = () => {
       target = getNodeByTarget(
         e.target as HTMLElement,
         isMergeSection ? BasicEnum.MJ_SECTION : undefined
-      ) as HTMLElement;
+      );
 
       if (!target || !block) return;
 
@@ -239,9 +226,7 @@ const useDropContainer = () => {
   useEffect(() => {
     if (!ref || !editorTool) return;
     let mceEditor: any = null;
-    const iframeWindow = (
-      document.getElementById(IFRAME_ID) as HTMLIFrameElement
-    ).contentWindow as any;
+    const iframeWindow = getEditorWindow();
 
     const removeEditor = (node: Element | null) => {
       iframeWindow?.tinymce.remove();
@@ -319,7 +304,7 @@ const useDropContainer = () => {
     let targetNode: HTMLElement | null = null;
 
     if (dataTransfer) {
-      if (dataTransfer.type === "copy") {
+      if (["copy", "delete"].includes(dataTransfer.type)) {
         setDataTransfer(null);
         return;
       }
@@ -337,8 +322,13 @@ const useDropContainer = () => {
           focusNode as HTMLElement,
           BasicEnum.MJ_COLUMN
         );
-        if (focusNode?.classList.contains(BasicEnum.MJ_SECTION)) {
-          focusNode.remove();
+
+        if (focusIdx.split("-")[1] !== blockIdx.split("-")[1]) {
+          setFocusNodeCls("remove");
+        }
+
+        if (isSection(focusNode)) {
+          focusNode?.remove();
         } else {
           focusNode?.parentElement?.remove();
         }
@@ -349,23 +339,27 @@ const useDropContainer = () => {
 
         targetNode = blockTargetNode;
         if (targetNode) {
-          if (targetNode.classList.contains(BasicEnum.MJ_SECTION)) {
-            targetNode.classList.add(FOCUS_CLS);
+          if (isSection(targetNode)) {
             currentFocusNode.current = targetNode;
-            setFocusNode(targetNode);
           } else {
-            targetNode.children[0].classList.add(FOCUS_CLS);
-            currentFocusNode.current = targetNode.children[0] as HTMLElement;
-            setFocusNode(targetNode.children[0] as HTMLElement);
+            currentFocusNode.current = targetNode.children[0];
           }
+          setFocusNode(currentFocusNode.current as HTMLElement);
         }
 
         block?.replaceWith(targetNode as Node);
+        setFocusNodeCls("add");
       }
     } else {
-      if (focusNode && focusTargetNode) {
+      let focusOriginNode = null;
+      if (focusNode) {
+        focusOriginNode = focusNode;
+      } else {
+        focusOriginNode = getEditorWindow().document.body.children[0];
+      }
+      if (focusTargetNode) {
         setTimeout(() => {
-          mergeNode(focusNode, focusTargetNode);
+          mergeNode(focusOriginNode, focusTargetNode);
         });
       }
     }

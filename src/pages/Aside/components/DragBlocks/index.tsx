@@ -1,14 +1,15 @@
 /**
  * @file
- * @date 2024-06-27
- * @author haodong.wang
- * @lastModify  2024-06-27
+ * @date
+ * @author
+ * @lastModify
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import { Card, Flex } from "antd";
+import { Card, Flex, Typography } from "antd";
 import { BasicBlockType, ColumnType, DataTransferMapType } from "@/constant";
 import useDataTransfer from "@/hooks/useDataTransfer";
+const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
@@ -52,6 +53,7 @@ const DragBlocks: React.FC<DragBlocksProps> = ({ value }): JSX.Element => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                flexDirection: "column",
               },
             }}
             hoverable
@@ -59,7 +61,8 @@ const DragBlocks: React.FC<DragBlocksProps> = ({ value }): JSX.Element => {
             draggable
             onDragStart={() => onDragStart(item)}
           >
-            {item.label}
+            {item.icon}
+            <Text strong> {item.label}</Text>
           </Card>
         );
       })}

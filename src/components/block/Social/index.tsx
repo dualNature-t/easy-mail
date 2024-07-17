@@ -372,9 +372,14 @@ const SocialBlock = (): JSX.Element => {
       <>
         <EDivider>SOCIAL STYLES</EDivider>
 
-        <EInputNumber name="icon-size" label={<Text strong>Icon Size</Text>} />
+        <EInputNumber
+          step={1}
+          name="icon-size"
+          label={<Text strong>Icon Size</Text>}
+        />
 
         <EInputNumber
+          step={1}
           name="icon-padding"
           label={<Text strong>Icon Padding</Text>}
         />
@@ -382,6 +387,7 @@ const SocialBlock = (): JSX.Element => {
         <BorderRadius />
 
         <EInputNumber
+          step={1}
           name="inner-padding"
           label={<Text strong>Inner Padding</Text>}
         />
@@ -392,7 +398,11 @@ const SocialBlock = (): JSX.Element => {
 
         <FontFamily />
 
-        <EInputNumber name="font-size" label={<Text strong>Font Size</Text>} />
+        <EInputNumber
+          step={1}
+          name="font-size"
+          label={<Text strong>Font Size</Text>}
+        />
 
         <Form.Item
           name="color"

@@ -23,12 +23,11 @@ const useProperty = () => {
   useEffect(() => {
     if (!appData || !idx) return;
     const json = getJsonByIdx({ appData, idx });
-    // console.log(appData, json, idx);
     setProperty(json?.attributes);
   }, [idx, appData]);
 
   return {
-    property: property,
+    property,
     setProperty: onChange,
   };
 };

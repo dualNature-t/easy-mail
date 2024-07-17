@@ -98,7 +98,7 @@ const Attributes = (): JSX.Element => {
         colon={false}
         preserve={false}
         style={{ textAlign: "right" }}
-        onValuesChange={(value, allValue) => {
+        onValuesChange={(_, allValue) => {
           const keys = Object.keys(allValue);
           const result: Record<string, string | number> = {};
           keys.forEach((key) => {
@@ -108,7 +108,13 @@ const Attributes = (): JSX.Element => {
             } else {
               const propertyKey = key.split("_")[0];
               if (!isEmpty(value)) {
-                result[propertyKey] = `${result[propertyKey]}${value}`;
+                const propertyValue =
+                  value === "%"
+                    ? Number(result[propertyKey]) > 100
+                      ? 100
+                      : result[propertyKey]
+                    : result[propertyKey];
+                result[propertyKey] = `${propertyValue}${value}`;
               }
             }
           });

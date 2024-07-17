@@ -26,12 +26,14 @@ import {
 import getIdxByNode from "@/utils/getIdxByNode";
 import insertEle2Node from "@/utils/insertEle2Node";
 import { copyBlock, deleteBlock } from "@/utils/treeTools";
+import useCurrentNode from "./useCurrentNode";
 
 const useFocusTool = () => {
   const { appData, setAppData } = useAppData();
   const { focusNode, setFocusNode } = useFocusNode();
   const [focusTool, setFocusTool] = useState<HTMLDivElement | null>(null);
   const { setDataTransfer } = useDataTransfer();
+  const { setFocusNodeCls } = useCurrentNode();
 
   useEffect(() => {
     const div = document.createElement("div");
@@ -79,6 +81,7 @@ const useFocusTool = () => {
 
       if (isFocusDelete(target)) {
         setAppData(deleteBlock({ appData: appData as AppDataType, idx }));
+        setFocusNodeCls("remove");
 
         if (isSectionNode) {
           focusNode?.remove();
@@ -95,6 +98,7 @@ const useFocusTool = () => {
         }
 
         setFocusNode(null);
+        setDataTransfer({ type: "delete" });
       }
     };
 

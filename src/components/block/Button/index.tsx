@@ -102,10 +102,15 @@ const ButtonBlock = (): JSX.Element => {
       <>
         <EDivider>TEXT STYLES</EDivider>
 
-        <EInputNumber name="font-size" label={<Text strong>Font Size</Text>} />
+        <EInputNumber
+          step={1}
+          name="font-size"
+          label={<Text strong>Font Size</Text>}
+        />
 
         <EInputNumber
           name="line-height"
+          options={["px", "%", "-"]}
           label={<Text strong>Line Height</Text>}
           step={0.1}
         />

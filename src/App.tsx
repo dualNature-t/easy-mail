@@ -6,9 +6,9 @@
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { AppDataType, DataTransferType, TabType } from "./constant";
-import { AppContext } from "./context";
+import { AppContext, NodeContext } from "./context";
 import Header from "./pages/Header";
 import "./App.css";
 import { Flex, Form } from "antd";
@@ -329,6 +329,10 @@ const App: React.FC<AppProps> = ({
   const [dataTransfer, setDataTransfer] = useState<DataTransferType | null>(
     null
   );
+
+  const currentHoverNode = useRef<Element | null>(null);
+  const currentFocusNode = useRef<Element | null>(null);
+  const currentEmptyNode = useRef<Element | null>(null);
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
@@ -356,11 +360,15 @@ const App: React.FC<AppProps> = ({
           form,
         }}
       >
-        <Header />
-        <Flex style={{ height: "calc(100% - 40px)" }}>
-          <Aside />
-          <Main />
-        </Flex>
+        <NodeContext.Provider
+          value={{ currentHoverNode, currentFocusNode, currentEmptyNode }}
+        >
+          <Header />
+          <Flex style={{ height: "calc(100% - 40px)" }}>
+            <Aside />
+            <Main />
+          </Flex>
+        </NodeContext.Provider>
       </AppContext.Provider>
     </div>
   );

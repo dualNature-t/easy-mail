@@ -14,6 +14,7 @@ import EInputNumber from "./EInputNumber";
 import FontFamily from "./FontFamily";
 import Padding from "./Padding";
 import Width from "./Width";
+import ECheckbox from "./ECheckbox";
 
 export {
   BodyBlock,
@@ -29,6 +30,7 @@ export {
   BorderRadius,
   EDivider,
   EInputNumber,
+  ECheckbox,
   FontFamily,
   Padding,
   Width,

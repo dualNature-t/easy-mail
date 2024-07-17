@@ -53,6 +53,7 @@ export const defaultBlockPropertyJson: Record<
   [BasicEnum.MJ_DIVEDER]: {
     tagName: "mj-divider",
     attributes: {
+      width: "100%",
       "css-class": "mj-divider",
       "border-width": "1px",
       "border-style": "solid",
@@ -304,6 +305,7 @@ export type ColumnUnitType = "1" | "2" | "3" | "4" | "left" | "right";
 export const MJ_COLUMN_EMPTY = "mj-column-empty";
 export const DROP_BLOCK = "drop-block";
 export const FOCUS_CLS = "focus";
+export const FOCUS_CHILD_CLS = "focus-child";
 export const HOVER_CLS = "hover";
 export const FOCUS_TOOL_CLS = "focus-tool";
 export const FOCUS_TOOL_DRAG = "focus-tool-drag";

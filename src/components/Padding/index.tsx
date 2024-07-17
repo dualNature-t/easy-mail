@@ -7,14 +7,29 @@
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
 import { useEffect, useMemo, useState } from "react";
-import { Button, Col, InputNumber, Row, Typography } from "antd";
+import { Button, Flex, Typography } from "antd";
 import useProperty from "@/hooks/useProperty";
+import EInputNumber from "../EInputNumber";
+import toFirstUpperCase from "@/utils/toFirstUpperCase";
 
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
+enum PaddingEnum {
+  LEFT = "padding-left",
+  RIGHT = "padding-right",
+  TOP = "padding-top",
+  BOTTOM = "padding-bottom",
+}
+type PaddingType = `${PaddingEnum}`;
 
+const initPaddingValue: Record<PaddingType, number> = {
+  [PaddingEnum.TOP]: 0,
+  [PaddingEnum.RIGHT]: 0,
+  [PaddingEnum.BOTTOM]: 0,
+  [PaddingEnum.LEFT]: 0,
+};
 /* <------------------------------------ **** INTERFACE END **** ------------------------------------ */
 /* <------------------------------------ **** FUNCTION COMPONENT START **** ------------------------------------ */
 const Padding = (): JSX.Element => {
@@ -23,27 +38,17 @@ const Padding = (): JSX.Element => {
   const [open, setOpen] = useState(false);
   const { property, setProperty } = useProperty();
 
-  const {
-    "padding-left": paddingLeft,
-    "padding-right": paddingRight,
-    "padding-top": paddingTop,
-    "padding-bottom": paddingBottom,
-  } = useMemo(() => {
-    const result = {
-      "padding-top": 0,
-      "padding-right": 0,
-      "padding-bottom": 0,
-      "padding-left": 0,
-    };
+  const paddingProperty = useMemo(() => {
+    const result = { ...initPaddingValue };
     if (!property || Object.keys(property).length == 0) {
       return result;
     }
 
     const padding = (property as { padding: string }).padding;
     if (!padding) return result;
+
     const paddingArr = padding?.split(" ");
     const len = paddingArr.length;
-
     if (len == 1) {
       Object.keys(result).forEach((item) => {
         result[item as keyof typeof result] = parseInt(paddingArr[0]);
@@ -51,18 +56,18 @@ const Padding = (): JSX.Element => {
     } else if (len == 2) {
       const number01 = parseInt(paddingArr[0]);
       const number02 = parseInt(paddingArr[1]);
-      result["padding-left"] = number02;
-      result["padding-right"] = number02;
-      result["padding-top"] = number01;
-      result["padding-bottom"] = number01;
+      result[PaddingEnum.LEFT] = number02;
+      result[PaddingEnum.RIGHT] = number02;
+      result[PaddingEnum.TOP] = number01;
+      result[PaddingEnum.BOTTOM] = number01;
     } else if (len == 3) {
       const number01 = parseInt(paddingArr[0]);
       const number02 = parseInt(paddingArr[1]);
       const number03 = parseInt(paddingArr[2]);
-      result["padding-left"] = number02;
-      result["padding-right"] = number02;
-      result["padding-top"] = number01;
-      result["padding-bottom"] = number03;
+      result[PaddingEnum.LEFT] = number02;
+      result[PaddingEnum.RIGHT] = number02;
+      result[PaddingEnum.TOP] = number01;
+      result[PaddingEnum.BOTTOM] = number03;
     } else {
       Object.keys(result).forEach((item, index) => {
         result[item as keyof typeof result] = parseInt(paddingArr[index]);
@@ -72,21 +77,20 @@ const Padding = (): JSX.Element => {
     return result;
   }, [property]);
 
+  const {
+    [PaddingEnum.RIGHT]: paddingRight,
+    [PaddingEnum.LEFT]: paddingLeft,
+    [PaddingEnum.TOP]: paddingTop,
+    [PaddingEnum.BOTTOM]: paddingBottom,
+  } = paddingProperty;
+  const sortPadding = [paddingTop, paddingRight, paddingBottom, paddingLeft];
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
   /* <------------------------------------ **** PARAMETER END **** ------------------------------------ */
   /* <------------------------------------ **** FUNCTION START **** ------------------------------------ */
   /************* This section will include this component general function *************/
-  const onChange = (
-    value: number,
-    key:
-      | "padding"
-      | "padding-left"
-      | "padding-right"
-      | "padding-top"
-      | "padding-bottom"
-  ) => {
+  const onChange = (value: number, key: "padding" | PaddingType) => {
     let result = null;
     if (key === "padding") {
       result = {
@@ -94,18 +98,12 @@ const Padding = (): JSX.Element => {
         padding: `${value}px ${value}px ${value}px ${value}px`,
       };
     } else {
-      const merge = Object.assign(
-        {
-          "padding-left": paddingLeft,
-          "padding-right": paddingRight,
-          "padding-top": paddingTop,
-          "padding-bottom": paddingBottom,
-        },
-        { [key]: value }
-      );
+      const merge = Object.assign(paddingProperty, { [key]: value });
       result = {
         ...property,
-        padding: `${merge["padding-top"]}px ${merge["padding-right"]}px ${merge["padding-bottom"]}px ${merge["padding-left"]}px`,
+        padding: `${merge[PaddingEnum.TOP]}px ${merge[PaddingEnum.RIGHT]}px ${
+          merge[PaddingEnum.BOTTOM]
+        }px ${merge[PaddingEnum.LEFT]}px`,
       };
     }
 
@@ -119,141 +117,69 @@ const Padding = (): JSX.Element => {
       paddingLeft === paddingRight &&
       paddingRight === paddingTop &&
       paddingTop === paddingBottom;
-    setOpen(!unOpen);
-  }, [paddingLeft, paddingRight, paddingTop, paddingBottom]);
+    !open && setOpen(!unOpen);
+  }, [paddingProperty]);
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
     <>
-      <Row align="middle" justify="space-between" style={{ marginBottom: 12 }}>
-        <Col>
-          <Text strong>Padding</Text>
-        </Col>
-        <Col>
-          {open ? (
-            <Button
-              style={{ paddingRight: 0 }}
-              onClick={() => {
-                const minPadding = Math.min(
-                  paddingLeft,
-                  paddingRight,
-                  paddingTop,
-                  paddingBottom
-                );
-                const paddingValue = `${minPadding}px ${minPadding}px ${minPadding}px ${minPadding}px`;
+      <Flex align="center" justify="space-between">
+        <Text strong>Padding</Text>
+        {open ? (
+          <Button
+            style={{ paddingRight: 0 }}
+            onClick={() => {
+              const minPadding = Math.min(...sortPadding);
+              const paddingValue = `${minPadding}px ${minPadding}px ${minPadding}px ${minPadding}px`;
 
-                setOpen(false);
-                setProperty({ ...property, padding: paddingValue });
-              }}
+              setOpen(false);
+              setProperty({ ...property, padding: paddingValue });
+            }}
+            type="link"
+          >
+            Less Options
+          </Button>
+        ) : (
+          <Flex align="center">
+            <Button
+              style={{ paddingRight: 5 }}
+              onClick={() => setOpen(true)}
               type="link"
             >
-              Less Options
+              More Options
             </Button>
-          ) : (
-            <Row align="middle">
-              <Col>
-                <Button
-                  style={{ paddingRight: 5 }}
-                  onClick={() => setOpen(true)}
-                  type="link"
-                >
-                  More Options
-                </Button>
-              </Col>
-              <Col>
-                <InputNumber
-                  value={Math.min(
-                    paddingLeft,
-                    paddingRight,
-                    paddingTop,
-                    paddingBottom
-                  )}
-                  step={10}
-                  min={0}
-                  onChange={(value: number | null) =>
-                    onChange(value ?? 0, "padding")
-                  }
-                />
-              </Col>
-            </Row>
-          )}
-        </Col>
-      </Row>
+            <EInputNumber
+              hasForm={false}
+              value={Math.min(...sortPadding)}
+              onChange={(value: number | null) =>
+                onChange(value ?? 0, "padding")
+              }
+            />
+          </Flex>
+        )}
+      </Flex>
 
       {open && (
-        <Row wrap={true} gutter={[12, 12]}>
-          <Col span={12}>
-            <Row align="middle" justify="space-between">
-              <Col>
-                <Text>Top</Text>
-              </Col>
-              <Col>
-                <InputNumber
-                  style={{ width: 80 }}
-                  value={paddingTop}
-                  step={10}
-                  min={0}
-                  onChange={(value: number | null) =>
-                    onChange(value ?? 0, "padding-top")
-                  }
-                />
-              </Col>
-            </Row>
-          </Col>
-          <Col span={12}>
-            <Row align="middle" justify="space-between">
-              <Col>
-                <Text>Right</Text>
-              </Col>
-              <Col>
-                <InputNumber
-                  style={{ width: 80 }}
-                  value={paddingRight}
-                  step={10}
-                  min={0}
-                  onChange={(value: number | null) =>
-                    onChange(value ?? 0, "padding-right")
-                  }
-                />
-              </Col>
-            </Row>
-          </Col>
-          <Col span={12}>
-            <Row align="middle" justify="space-between" wrap={false}>
-              <Col>
-                <Text>Bottom</Text>
-              </Col>
-              <Col>
-                <InputNumber
-                  style={{ width: 80 }}
-                  value={paddingBottom}
-                  step={10}
-                  min={0}
-                  onChange={(value: number | null) =>
-                    onChange(value ?? 0, "padding-bottom")
-                  }
-                />
-              </Col>
-            </Row>
-          </Col>
-          <Col span={12}>
-            <Row align="middle" justify="space-between">
-              <Col>
-                <Text>Left</Text>
-              </Col>
-              <Col>
-                <InputNumber
-                  style={{ width: 80 }}
-                  value={paddingLeft}
-                  step={10}
-                  min={0}
-                  onChange={(value: number | null) =>
-                    onChange(value ?? 0, "padding-left")
-                  }
-                />
-              </Col>
-            </Row>
-          </Col>
-        </Row>
+        <Flex wrap justify="space-between">
+          {(Object.keys(initPaddingValue) as PaddingType[]).map(
+            (item, index) => {
+              return (
+                <Flex align="center" style={{ marginTop: 12 }} key={item}>
+                  <Text style={{ width: 50, textAlign: "left" }}>
+                    {toFirstUpperCase(item.split("-")[1])}
+                  </Text>
+                  <EInputNumber
+                    hasForm={false}
+                    style={{ width: 80 }}
+                    value={sortPadding[index]}
+                    onChange={(value: number | null) =>
+                      onChange(value ?? 0, item)
+                    }
+                  />
+                </Flex>
+              );
+            }
+          )}
+        </Flex>
       )}
     </>
   );

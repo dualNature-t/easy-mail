@@ -36,9 +36,14 @@ const DividerBlock = (): JSX.Element => {
       <>
         <EDivider>DIVIDER STYLES</EDivider>
 
-        <Width />
+        <EInputNumber
+          name="width"
+          options={["px", "%"]}
+          label={<Text strong>Width</Text>}
+        />
 
         <EInputNumber
+          step={1}
           name="border-width"
           label={<Text strong>Border Width</Text>}
         />

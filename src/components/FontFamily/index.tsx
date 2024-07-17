@@ -1,19 +1,17 @@
 /**
  * @file
- * @date 2024-07-11
- * @author haodong.wang
- * @lastModify  2024-07-11
+ * @date
+ * @author
+ * @lastModify
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
 import { Form, Select, Typography } from "antd";
 const { Text } = Typography;
-
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
 /* <------------------------------------ **** INTERFACE END **** ------------------------------------ */
-
 /* <------------------------------------ **** FUNCTION COMPONENT START **** ------------------------------------ */
 const FontFamily = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */

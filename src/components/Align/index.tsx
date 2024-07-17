@@ -1,12 +1,11 @@
 /**
  * @file
- * @date 2024-07-11
- * @author haodong.wang
- * @lastModify  2024-07-11
+ * @date
+ * @author
+ * @lastModify
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-
 import { Form, Radio, Typography } from "antd";
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */

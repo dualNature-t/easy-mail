@@ -63,9 +63,8 @@ const Width = (): JSX.Element => {
       {open && (
         <Flex justify="space-between" style={{ marginBottom: 24 }}>
           <Text strong>Width</Text>
-          <InputNumber
-            step={10}
-            min={0}
+          <EInputNumber
+            hasForm={false}
             value={parseInt(width)}
             onChange={(value: number | null) => {
               if (value) {

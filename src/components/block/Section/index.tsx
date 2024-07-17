@@ -1,8 +1,8 @@
 /**
  * @file
- * @date 2024-05-17
- * @author haodong.wang
- * @lastModify  2024-05-17
+ * @date
+ * @author
+ * @lastModify
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
@@ -23,7 +23,15 @@ import useAppData from "@/hooks/useAppData";
 import useFocusNode from "@/hooks/useFocusNode";
 import getIdxByNode from "@/utils/getIdxByNode";
 import { onLayoutChange } from "@/utils/treeTools";
-import { ColorPicker, Flex, Form, Input, Select, Typography } from "antd";
+import {
+  Button,
+  ColorPicker,
+  Flex,
+  Form,
+  Input,
+  Select,
+  Typography,
+} from "antd";
 import { Color } from "antd/es/color-picker";
 import React from "react";
 const { Text } = Typography;
@@ -69,9 +77,14 @@ const SectionBlock = (): JSX.Element => {
         <Flex justify="space-around">
           {renderData.map((item) => {
             return (
-              <div onClick={() => handleLayoutChange(item.key)} key={item.key}>
+              <Button
+                type="text"
+                onClick={() => handleLayoutChange(item.key)}
+                key={item.key}
+                style={{ padding: "0px 6px" }}
+              >
                 {item.icon}
-              </div>
+              </Button>
             );
           })}
         </Flex>

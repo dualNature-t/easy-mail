@@ -6,6 +6,9 @@ export const getStyle = (token: AliasToken) => {
   const colorWhite = token.colorWhite;
   const colorText = token.colorPrimaryTextHover;
   return `
+    html {
+      height: 100%;
+    }
     *:focus-visible {
       outline: none;
     }
@@ -15,7 +18,7 @@ export const getStyle = (token: AliasToken) => {
     .focus-tool {
       position: absolute;
       right: -30px;
-      top: -20px;
+      top: -10px;
       display: flex;
       flex-direction: column;
       z-index: 9;
@@ -67,15 +70,17 @@ export const getStyle = (token: AliasToken) => {
     .editor-body {
       user-select: none;
       border: 22px solid white;
+      min-height: calc(100% - 44px);
     }
     .editor-body .mj-section {
       position: relative;
       outline: 2px solid transparent;
     }
-    .editor-body .mj-section.hover, .editor-body .mj-section.focus {
+    .editor-body .mj-section.hover, .editor-body .mj-section.focus, .editor-body .mj-section.focus-child {
       outline-color: ${primaryHover};
+      z-index: 1;
     }
-    .editor-body .mj-section.hover:before, .editor-body .mj-section.focus:before {
+    .editor-body .mj-section.hover:before, .editor-body .mj-section.focus:before, .editor-body .mj-section.focus-child:before {
       content: "section";
       display: block;
       position: absolute;
@@ -86,12 +91,17 @@ export const getStyle = (token: AliasToken) => {
       font-size: 15px;
       color: ${colorWhite};
       background-color: ${primaryHover};
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
     }
     .editor-body .mj-section.focus {
       outline-color: ${primary};
     }
     .editor-body .mj-section.focus:before {
       background-color: ${primary};
+    }
+    .editor-body .mj-section.hover .mj-column {
+      outline: 1px dashed ${primary};
     }
     .editor-body .mj-text {
       position: relative;
@@ -102,18 +112,21 @@ export const getStyle = (token: AliasToken) => {
     }
     .editor-body .mj-text.hover, .editor-body .mj-text.focus {
       outline-color: ${primaryHover};
+      z-index: 1;
     }
     .editor-body .mj-text.hover:before, .editor-body .mj-text.focus:before {
-      content: "text";
+      content: "";
       display: block;
+      width: 20px;
+      height: 30px;
       position: absolute;
-      left: -2px;
-      top: -22px;
-      text-align: left;
-      padding: 1px 6px;
-      font-size: 15px;
+      left: -20px;
+      top: -2px;
       color: ${colorWhite};
-      background-color: ${primaryHover};
+      background: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyBjbGFzcz0ibXgtYXV0byBzdmctdGV4dCIgd2lkdGg9IjFlbSIgaGVpZ2h0PSIxZW0iIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbD0iI2ZmZiIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xNyA2LjczM2gtLjkzYzAtMS44NjYtMS44Ny0yLjMzMy00LjIwMy0yLjMzM3Y5LjQ3YzAgLjc2My40NjQgMS40NSAxLjE3MyAxLjczM2wxLjE2LjQ2NFYxN0g1Ljh2LS45MzNsMS4xNi0uNDY0YTEuODY3IDEuODY3IDAgMCAwIDEuMTczLTEuNzMzVjQuNGMtMi4zMzMgMC00LjIuNDY3LTQuMiAyLjMzM0gzVjNoMTR2My43MzN6Ij48L3BhdGg+PC9zdmc+) ${primaryHover} no-repeat;
+      background-position-y: 5px;
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
     }
     .editor-body .mj-text.focus {
       outline-color: ${primary};
@@ -127,18 +140,21 @@ export const getStyle = (token: AliasToken) => {
     }
     .editor-body .mj-image.hover, .editor-body .mj-image.focus {
       outline-color: ${primaryHover};
+      z-index: 1;
     }
     .editor-body .mj-image.hover:before, .editor-body .mj-image.focus:before {
-      content: "image";
+      content: "";
       display: block;
+      width: 20px;
+      height: 30px;
       position: absolute;
-      left: -2px;
-      top: -22px;
-      text-align: left;
-      padding: 1px 6px;
-      font-size: 15px;
+      left: -20px;
+      top: -2px;
       color: ${colorWhite};
-      background-color: ${primaryHover};
+      background: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyBjbGFzcz0ibXgtYXV0byBzdmctdGV4dCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiB2aWV3Qm94PSIwIDAgMjAgMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbD0iI2ZmZiIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xOCA0LjVBMi41IDIuNSAwIDAgMCAxNS41IDJoLTExQTIuNSAyLjUgMCAwIDAgMiA0LjV2MTFBMi41IDIuNSAwIDAgMCA0LjUgMThoMTFhMi41IDIuNSAwIDAgMCAyLjUtMi41di0xMXptLTEzLjUtMWExIDEgMCAwIDAtMSAxdjkuNzMybDIuNjYtMi44NWExIDEgMCAwIDEgMS4zLS4xNGwxLjgxIDEuMjUyYTEgMSAwIDAgMCAxLjMxOC0uMTZsMi40ODUtMi44MTdhMSAxIDAgMCAxIDEuNDI4LS4wNzNsMS45OTkgMS44NDVWNC41YTEgMSAwIDAgMC0xLTFoLTExem0xIDMuNWExLjUgMS41IDAgMSAxIDMgMCAxLjUgMS41IDAgMCAxLTMgMHoiPjwvcGF0aD48L3N2Zz4=) ${primaryHover} no-repeat;
+      background-position-y: 5px;
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
     }
     .editor-body .mj-image.focus {
       outline-color: ${primary};
@@ -152,18 +168,21 @@ export const getStyle = (token: AliasToken) => {
     }
     .editor-body .mj-button.hover, .editor-body .mj-button.focus {
       outline-color: ${primaryHover};
+      z-index: 1;
     }
     .editor-body .mj-button.hover:before, .editor-body .mj-button.focus:before {
-      content: "button";
+      content: "";
       display: block;
+      width: 20px;
+      height: 30px;
       position: absolute;
-      left: -2px;
-      top: -22px;
-      text-align: left;
-      padding: 1px 6px;
-      font-size: 15px;
+      left: -20px;
+      top: -2px;
       color: ${colorWhite};
-      background-color: ${primaryHover};
+      background: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyBjbGFzcz0ibXgtYXV0byBzdmctdGV4dCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiB2aWV3Qm94PSIwIDAgMjAgMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTE4IDVhMi41IDIuNSAwIDAgMC0yLjUtMi41aC0xMUEyLjUgMi41IDAgMCAwIDIgNXY1YTIuNSAyLjUgMCAwIDAgMi41IDIuNWgzLjY1NEw4LjAzOCAxMUg0LjVhMSAxIDAgMCAxLTEtMVY1YTEgMSAwIDAgMSAxLTFoMTFhMSAxIDAgMCAxIDEgMXY1YzAgLjI2MS0uMS40OTktLjI2NC42NzdsMS4yMDMuOTAyYy4zNS0uNDMuNTYxLS45OC41NjEtMS41NzlWNXoiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBkPSJNOS43MDYgOC4xMTZsLjkyOSA4LjQ4Yy4wMTIuMTA5LjE0OC4xNS4yMi4wNjhMMTIuNjIgMTQuNmwxLjY2NyAyLjg4N2EuODMzLjgzMyAwIDEgMCAxLjQ0My0uODMzbC0xLjY2Ny0yLjg4NyAyLjY3LS40OThhLjEyNS4xMjUgMCAwIDAgLjA1MS0uMjIzTDkuOTA0IDhhLjEyNS4xMjUgMCAwIDAtLjE5OC4xMTV6Ij48L3BhdGg+PC9zdmc+) ${primaryHover} no-repeat;
+      background-position-y: 5px;
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
     }
     .editor-body .mj-button.focus {
       outline-color: ${primary};
@@ -177,18 +196,21 @@ export const getStyle = (token: AliasToken) => {
     }
     .editor-body .mj-divider.hover, .editor-body .mj-divider.focus {
       outline-color: ${primaryHover};
+      z-index: 1;
     }
     .editor-body .mj-divider.hover:before, .editor-body .mj-divider.focus:before {
-      content: "divider";
+      content: "";
       display: block;
+      width: 20px;
+      height: 30px;
       position: absolute;
-      left: -2px;
-      top: -22px;
-      text-align: left;
-      padding: 1px 6px;
-      font-size: 15px;
+      left: -20px;
+      top: -2px;
       color: ${colorWhite};
-      background-color: ${primaryHover};
+      background: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyBjbGFzcz0ibXgtYXV0byBzdmctdGV4dCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiB2aWV3Qm94PSIwIDAgMjAgMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTkuODM2IDQuNTYxYS4yNS4yNSAwIDAgMSAuMzI4IDBsMS45MjcgMS42N2EuMjUuMjUgMCAwIDEtLjE2My40MzhIOC4wNzJhLjI1LjI1IDAgMCAxLS4xNjMtLjQzOWwxLjkyNy0xLjY2OXpNMiA4LjQyaDE2djNIMnYtM3pNOS44MzYgMTUuMjc3YS4yNS4yNSAwIDAgMCAuMzI4IDBsMS45MjctMS42NjlhLjI1LjI1IDAgMCAwLS4xNjMtLjQzOUg4LjA3MmEuMjUuMjUgMCAwIDAtLjE2My40NGwxLjkyNyAxLjY2OHoiPjwvcGF0aD48L3N2Zz4=) ${primaryHover} no-repeat;
+      background-position-y: 5px;
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
     }
     .editor-body .mj-divider.focus {
       outline-color: ${primary};
@@ -202,18 +224,21 @@ export const getStyle = (token: AliasToken) => {
     }
     .editor-body .mj-spacer.hover, .editor-body .mj-spacer.focus {
       outline-color: ${primaryHover};
+      z-index: 1;
     }
     .editor-body .mj-spacer.hover:before, .editor-body .mj-spacer.focus:before {
-      content: "spacer";
+      content: "";
       display: block;
+      width: 20px;
+      height: 30px;
       position: absolute;
-      left: -2px;
-      top: -22px;
-      text-align: left;
-      padding: 1px 6px;
-      font-size: 15px;
+      left: -20px;
+      top: -2px;
       color: ${colorWhite};
-      background-color: ${primaryHover};
+      background: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyBjbGFzcz0ibXgtYXV0byBzdmctdGV4dCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiB2aWV3Qm94PSIwIDAgMjAgMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTkuODM2IDIuMTYxYS4yNS4yNSAwIDAgMSAuMzI4IDBsMS45MjcgMS42N2EuMjUuMjUgMCAwIDEtLjE2My40MzhIOC4wNzJhLjI1LjI1IDAgMCAxLS4xNjMtLjQzOWwxLjkyNy0xLjY2OXoiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTE4IDguMDJhMi41IDIuNSAwIDAgMC0yLjUtMi41aC0xMUEyLjUgMi41IDAgMCAwIDIgOC4wMnY0YTIuNSAyLjUgMCAwIDAgMi41IDIuNWgxMWEyLjUgMi41IDAgMCAwIDIuNS0yLjV2LTR6bS0xMy41LTFhMSAxIDAgMCAwLTEgMXY0YTEgMSAwIDAgMCAxIDFoMTFhMSAxIDAgMCAwIDEtMXYtNGExIDEgMCAwIDAtMS0xaC0xMXoiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBkPSJNOS44MzYgMTcuODc4YS4yNS4yNSAwIDAgMCAuMzI4IDBsMS45MjctMS42N2EuMjUuMjUgMCAwIDAtLjE2My0uNDM5SDguMDcyYS4yNS4yNSAwIDAgMC0uMTYzLjQ0bDEuOTI3IDEuNjY5eiI+PC9wYXRoPjwvc3ZnPg==) ${primaryHover} no-repeat;
+      background-position-y: 5px;
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
     }
     .editor-body .mj-spacer.focus {
       outline-color: ${primary};
@@ -227,18 +252,21 @@ export const getStyle = (token: AliasToken) => {
     }
     .editor-body .mj-social.hover, .editor-body .mj-social.focus {
       outline-color: ${primaryHover};
+      z-index: 1;
     }
     .editor-body .mj-social.hover:before, .editor-body .mj-social.focus:before {
-      content: "social";
+      content: "";
       display: block;
+      width: 20px;
+      height: 30px;
       position: absolute;
-      left: -2px;
-      top: -22px;
-      text-align: left;
-      padding: 1px 6px;
-      font-size: 15px;
+      left: -20px;
+      top: -2px;
       color: ${colorWhite};
-      background-color: ${primaryHover};
+      background: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyBjbGFzcz0ibXgtYXV0byBzdmctdGV4dCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiB2aWV3Qm94PSIwIDAgMjAgMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTE1LjUgNy41YTIuNSAyLjUgMCAxIDAgMC01IDIuNSAyLjUgMCAwIDAgMCA1ek0xMi4yMiA2LjIyNGMuMTc5LjQ4LjQ2LjkwOS44MTYgMS4yNjJMOS45MTYgOS4yM2EzLjQ4NSAzLjQ4NSAwIDAgMC0uNjQtMS4zNjFsMi45NDQtMS42NDV6TTkgMTBhMy41IDMuNSAwIDEgMS03IDAgMy41IDMuNSAwIDAgMSA3IDB6TTE4IDE1YTIuNSAyLjUgMCAxIDEtNSAwIDIuNSAyLjUgMCAwIDEgNSAwek05Ljg1NCAxMS4wMDVjLS4xNDcuNDkxLS40LjkzNy0uNzMgMS4zMWwzLjAyMiAxLjY4Yy4xNDctLjQ5MS40LS45MzcuNzMtMS4zMWwtMy4wMjItMS42OHoiPjwvcGF0aD48L3N2Zz4=) ${primaryHover} no-repeat;
+      background-position-y: 5px;
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
     }
     .editor-body .mj-social.focus {
       outline-color: ${primary};

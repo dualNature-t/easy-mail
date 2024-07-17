@@ -45,7 +45,7 @@ const useDropBlock = () => {
     const onDrop = () => {
       const idx = getIdxByNode({
         node: block,
-        transferAction: dataTransfer?.type,
+        transferAction: dataTransfer.type,
       });
       if (dataTransfer.type == "add") {
         setAppData(
@@ -54,7 +54,7 @@ const useDropBlock = () => {
       } else if (dataTransfer.type === "move") {
         const originIdx = getIdxByNode({
           node: focusNode as Element,
-          transferAction: dataTransfer?.type,
+          transferAction: dataTransfer.type,
         });
         setAppData(
           moveBlock({ appData: appData as AppDataType, idx, originIdx })
