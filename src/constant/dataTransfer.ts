@@ -1,6 +1,6 @@
 import { BasicBlockType, ColumnType } from "./block";
 
-export type TransferActionType = "move" | "add" | "copy" | "delete";
+export type TransferActionType = "move" | "add" | "copy" | "delete" | "tinymce";
 export type TransferCategoryType = "column" | "basic";
 
 export type DataTransferType = {

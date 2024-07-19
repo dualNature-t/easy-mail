@@ -27,7 +27,7 @@ export const isColumn = (element: Element | HTMLElement | null) => {
 };
 
 export const isButton = (element: Element | HTMLElement | null) => {
-  return element?.classList.contains(BasicEnum.MJ_BOTTON);
+  return element?.classList.contains(BasicEnum.MJ_BUTTON);
 };
 
 export const isDivider = (element: Element | HTMLElement | null) => {

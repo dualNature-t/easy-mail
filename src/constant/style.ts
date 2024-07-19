@@ -12,7 +12,7 @@ export const getStyle = (token: AliasToken) => {
     *:focus-visible {
       outline: none;
     }
-    * img {
+    * img, * a {
       -webkit-user-drag: none;
     }
     .focus-tool {
@@ -130,13 +130,28 @@ export const getStyle = (token: AliasToken) => {
     }
     .editor-body .mj-text.focus {
       outline-color: ${primary};
+      z-index: 2;
     }
     .editor-body .mj-text.focus:before {
       background-color: ${primary};
     }
+    .editor-body .mj-text > div:empty:before {
+      content: "Please enter text";
+      display: block;
+      width: 100%;
+      height: 14px;
+      font-size: 14px;
+      color: ${token.colorTextPlaceholder};
+    }
+    .editor-body .mj-text > div.mce-edit-focus:empty:before {
+      content: "";
+    }
     .editor-body .mj-image {
       position: relative;
       outline: 2px solid transparent;
+    }
+    .editor-body .mj-image img {
+      min-height: 10px;
     }
     .editor-body .mj-image.hover, .editor-body .mj-image.focus {
       outline-color: ${primaryHover};
@@ -158,6 +173,7 @@ export const getStyle = (token: AliasToken) => {
     }
     .editor-body .mj-image.focus {
       outline-color: ${primary};
+      z-index: 2;
     }
     .editor-body .mj-image.focus:before {
       background-color: ${primary};
@@ -186,9 +202,21 @@ export const getStyle = (token: AliasToken) => {
     }
     .editor-body .mj-button.focus {
       outline-color: ${primary};
+      z-index: 2;
     }
     .editor-body .mj-button.focus:before {
       background-color: ${primary};
+    }
+    .editor-body .mj-button a:empty:before, .editor-body .mj-button p:empty:before, .editor-body .mj-button a > div:empty:before, .editor-body .mj-button p > div:empty:before {
+      content: "Please enter text";
+      display: block;
+      width: 100%;
+      height: 14px;
+      font-size: 14px;
+      color: ${colorWhite};
+    }
+    .editor-body .mj-button a.mce-edit-focus:empty:before, .editor-body .mj-button p.mce-edit-focus:empty:before, .editor-body .mj-button a > div.mce-edit-focus:empty:before, .editor-body .mj-button p > div.mce-edit-focus:empty:before {
+      content: "";
     }
     .editor-body .mj-divider {
       position: relative;
@@ -214,6 +242,7 @@ export const getStyle = (token: AliasToken) => {
     }
     .editor-body .mj-divider.focus {
       outline-color: ${primary};
+      z-index: 2;
     }
     .editor-body .mj-divider.focus:before {
       background-color: ${primary};
@@ -242,6 +271,7 @@ export const getStyle = (token: AliasToken) => {
     }
     .editor-body .mj-spacer.focus {
       outline-color: ${primary};
+      z-index: 2;
     }
     .editor-body .mj-spacer.focus:before {
       background-color: ${primary};
@@ -270,6 +300,7 @@ export const getStyle = (token: AliasToken) => {
     }
     .editor-body .mj-social.focus {
       outline-color: ${primary};
+      z-index: 2;
     }
     .editor-body .mj-social.focus:before {
       background-color: ${primary};

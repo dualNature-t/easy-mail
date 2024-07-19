@@ -17,7 +17,7 @@ export enum BasicEnum {
   MJ_COLUMN = "mj-column",
   MJ_TEXT = "mj-text",
   MJ_IMAGE = "mj-image",
-  MJ_BOTTON = "mj-button",
+  MJ_BUTTON = "mj-button",
   MJ_DIVEDER = "mj-divider",
   MJ_SPACER = "mj-spacer",
   MJ_SOCIAL = "mj-social",
@@ -33,7 +33,7 @@ export const defaultBlockPropertyJson: Record<
   BasicBlockType | ColumnType,
   AppDataType
 > = {
-  [BasicEnum.MJ_BOTTON]: {
+  [BasicEnum.MJ_BUTTON]: {
     tagName: "mj-button",
     attributes: {
       "css-class": "mj-button",
@@ -48,7 +48,7 @@ export const defaultBlockPropertyJson: Record<
       align: "center",
       padding: "0px",
     },
-    content: "Replace Content",
+    content: "",
   },
   [BasicEnum.MJ_DIVEDER]: {
     tagName: "mj-divider",
@@ -138,7 +138,7 @@ export const defaultBlockPropertyJson: Record<
       align: "left",
       padding: "10px",
     },
-    content: "Replace Content",
+    content: "",
   },
 
   [ColumnEnum.MJ_COLUMN_1]: {

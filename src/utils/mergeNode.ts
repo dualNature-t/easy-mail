@@ -1,5 +1,5 @@
 import { BasicEnum, MJ_COLUMN_EMPTY, basicBlockNameList } from "../constant";
-import { isBody, isSection } from "./isBlockType";
+import { isBody, isButton, isSection, isText } from "./isBlockType";
 
 const styleStrToObj = (styleStr?: string | null) => {
   if (!styleStr) return {};
@@ -43,6 +43,43 @@ export const mergeNodeEmpty = <T extends Node>(node: T): T => {
   return nodeClone as unknown as T;
 };
 
+export const mergeTinymceEmptyNode = (node: Element | null) => {
+  if (!node) return;
+  const isSec = isSection(node);
+  const textList = node.querySelectorAll(`.${BasicEnum.MJ_TEXT}`);
+  const buttonList = node.querySelectorAll(`.${BasicEnum.MJ_BUTTON}`);
+
+  if (
+    isSec &&
+    [...textList, ...buttonList].length === 0 &&
+    node.tagName !== "TR"
+  )
+    return;
+
+  let result: Element[] | Element = [node];
+  if (isSec) {
+    result = [...textList, ...buttonList];
+  }
+  if (node.tagName === "TR") {
+    result = [node.children[0]];
+  }
+
+  result.forEach((item) => {
+    let targetEle = null;
+    if (isText(item)) {
+      targetEle = item.children[0];
+    }
+
+    if (isButton(item)) {
+      targetEle = item?.querySelector("p") || item?.querySelector("a");
+    }
+
+    if (targetEle?.textContent?.trim() === "") {
+      targetEle.replaceChildren();
+    }
+  });
+};
+
 export const mergeNode = (node: Element, newNode: Element) => {
   let originNode = node;
   let targetNode = newNode;
@@ -62,6 +99,7 @@ export const mergeNode = (node: Element, newNode: Element) => {
       })
     );
   }
+
   originNode
     .getAttributeNames()
     .filter(

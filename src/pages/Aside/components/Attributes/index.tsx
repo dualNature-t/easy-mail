@@ -31,7 +31,7 @@ const BlockNodeMap = {
   [BasicEnum.MJ_SECTION]: <SectionBlock />,
   [BasicEnum.MJ_TEXT]: <TextBlock />,
   [BasicEnum.MJ_IMAGE]: <ImageBlock />,
-  [BasicEnum.MJ_BOTTON]: <ButtonBlock />,
+  [BasicEnum.MJ_BUTTON]: <ButtonBlock />,
   [BasicEnum.MJ_DIVEDER]: <DividerBlock />,
   [BasicEnum.MJ_SPACER]: <SpacerBlock />,
   [BasicEnum.MJ_SOCIAL]: <SocialBlock />,

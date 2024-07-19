@@ -6,85 +6,83 @@
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import Align from "@/components/Align";
-import BorderRadius from "@/components/BorderRadius";
-import EDivider from "@/components/EDivider";
-import Padding from "@/components/Padding";
-import Src from "@/components/Src";
-import Width from "@/components/Width";
-import { Checkbox, Form, Input, Typography } from "antd";
+import useProperty from "@/hooks/useProperty";
+import { UploadOutlined } from "@ant-design/icons";
+import { Button, Flex, Form, Input, Typography } from "antd";
 const { Text } = Typography;
+import "./style.css";
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
+interface SrcProps {
+  label: string;
+  name: string;
+}
 /* <------------------------------------ **** INTERFACE END **** ------------------------------------ */
+
 /* <------------------------------------ **** FUNCTION COMPONENT START **** ------------------------------------ */
-const ImageBlock = (): JSX.Element => {
+const Src: React.FC<SrcProps> = ({ label, name }): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
+  const { setProperty } = useProperty() as {
+    property: { src: string } | undefined;
+    setProperty: (property: { src: string }) => void;
+  };
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
   /* <------------------------------------ **** PARAMETER END **** ------------------------------------ */
   /* <------------------------------------ **** FUNCTION START **** ------------------------------------ */
   /************* This section will include this component general function *************/
+  const upload = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(file.name);
+      }, 2000);
+    });
+  };
+
+  const handleUpload = () => {
+    const input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", ".png,.jpg,.jpeg,.webp");
+    input.click();
+    input.onchange = async () => {
+      var file = input.files?.[0] as File;
+      const result = await upload(file);
+      setProperty({ src: result });
+    };
+  };
+
   /* <------------------------------------ **** FUNCTION END **** ------------------------------------ */
   /* <------------------------------------ **** EFFECT START **** ------------------------------------ */
   /************* This section will include this component general function *************/
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
-    <>
-      <>
-        <EDivider>IMAGE STYLES</EDivider>
-
-        <Src name="src" label="Image Source" />
-
-        <Form.Item
-          labelCol={{ span: 24 }}
-          name="href"
-          label={<Text strong>Image Link</Text>}
-          style={{ marginBottom: 6 }}
-        >
-          <Input placeholder="Enter a link url" />
-        </Form.Item>
-
-        <Form.Item
-          name="target"
-          valuePropName="checked"
-          normalize={(value: boolean) => {
-            return value ? "_blank" : undefined;
-          }}
-          style={{ textAlign: "left" }}
-        >
-          <Checkbox>Open link in new tab</Checkbox>
-        </Form.Item>
-
-        <Form.Item
-          labelCol={{ span: 24 }}
-          name="alt"
-          label={<Text strong>Alt Text</Text>}
-        >
-          <Input placeholder="Enter an image description" />
-        </Form.Item>
-      </>
-
-      <>
-        <EDivider>SIZE</EDivider>
-
-        <Width />
-
-        <BorderRadius />
-      </>
-
-      <>
-        <EDivider>POSITION</EDivider>
-
-        <Align />
-
-        <Padding />
-      </>
-    </>
+    <Form.Item
+      className="src-container"
+      labelCol={{ span: 24 }}
+      name={name}
+      label={
+        <Flex align="center" justify="space-between" style={{ width: "100%" }}>
+          <Text strong>{label}</Text>
+          <Button
+            type="link"
+            icon={<UploadOutlined />}
+            style={{ padding: 0 }}
+            onClick={handleUpload}
+          >
+            Upload Image
+          </Button>
+        </Flex>
+      }
+      normalize={(value: string) => {
+        return value === "" ? undefined : value;
+      }}
+    >
+      <Input placeholder="Enter a url" />
+    </Form.Item>
   );
 };
-export default ImageBlock;
+export default Src;
 /* <------------------------------------ **** FUNCTION COMPONENT END **** ------------------------------------ */

@@ -227,7 +227,7 @@ const defaultTreeData: AppDataType = {
                   tagName: "mj-button",
                   attributes: {
                     "css-class": "mj-button",
-                    href: "https://www.baidu.com",
+                    href: "http://www.baidu.com",
                     target: "_blank",
                     width: "",
                     "background-color": "#9aaea6",
@@ -240,7 +240,7 @@ const defaultTreeData: AppDataType = {
                     align: "center",
                     padding: "10px 10px 40px 10px",
                   },
-                  content: "Get&nbsp; the offer",
+                  content: "Get the offer",
                 },
               ],
             },

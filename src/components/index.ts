@@ -15,6 +15,7 @@ import FontFamily from "./FontFamily";
 import Padding from "./Padding";
 import Width from "./Width";
 import ECheckbox from "./ECheckbox";
+import Src from "./Src";
 
 export {
   BodyBlock,
@@ -34,4 +35,5 @@ export {
   FontFamily,
   Padding,
   Width,
+  Src,
 };

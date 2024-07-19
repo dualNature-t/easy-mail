@@ -7,12 +7,7 @@ import useDataTransfer from "./useDataTransfer";
 import useDropBlock from "./userDropBlock";
 import useFocusTool from "./useFocusTool";
 import useEditorTool from "./useEditorTool";
-import {
-  BasicEnum,
-  EDITOR_TOOL_BOX,
-  FOCUS_CLS,
-  MJ_COLUMN_EMPTY,
-} from "@/constant";
+import { BasicEnum, EDITOR_TOOL_BOX, MJ_COLUMN_EMPTY } from "@/constant";
 import getNodeByTarget from "@/utils/getNodeByTarget";
 import {
   isBody,
@@ -30,7 +25,11 @@ import getIdxByNode from "@/utils/getIdxByNode";
 import { onTextContentChange } from "@/utils/treeTools";
 import getDocByData from "@/utils/getDocByData";
 import { getNodeByIdx } from "@/utils/getNodeByidx";
-import { hasChildByColumn, mergeNode } from "@/utils/mergeNode";
+import {
+  hasChildByColumn,
+  mergeNode,
+  mergeTinymceEmptyNode,
+} from "@/utils/mergeNode";
 import getEditorWindow from "@/utils/getEditorWindow";
 import useCurrentNode from "./useCurrentNode";
 
@@ -240,9 +239,20 @@ const useDropContainer = () => {
       const node = getNodeByTarget(e.target as HTMLElement);
 
       if (isText(node) || isButton(node)) {
-        const targetNode = isText(node)
+        let targetNode = isText(node)
           ? node?.children[0]
           : node?.querySelector("p") || node?.querySelector("a");
+
+        if (isButton(node)) {
+          if (targetNode?.children[0]) {
+            targetNode = targetNode.children[0];
+          } else {
+            const div = document.createElement("div");
+            div.innerText = targetNode?.textContent?.trim() ?? "";
+            targetNode?.replaceChildren(div);
+            targetNode = div;
+          }
+        }
 
         if (targetNode?.getAttribute("id") === "editor") return;
         if (mceEditor && !mceEditor.removed) {
@@ -270,6 +280,7 @@ const useDropContainer = () => {
             editor.on("change", (e: any) => {
               const content = e.level.content;
               const idx = getIdxByNode({ node: node as Element });
+              setDataTransfer({ type: "tinymce" });
               setAppData((preData) => {
                 return onTextContentChange({ appData: preData, idx, content });
               });
@@ -304,7 +315,7 @@ const useDropContainer = () => {
     let targetNode: HTMLElement | null = null;
 
     if (dataTransfer) {
-      if (["copy", "delete"].includes(dataTransfer.type)) {
+      if (["copy", "delete", "tinymce"].includes(dataTransfer.type)) {
         setDataTransfer(null);
         return;
       }
@@ -315,6 +326,7 @@ const useDropContainer = () => {
       const blockTargetNode = getNodeByIdx({ doc, idx: blockIdx });
       if (dataTransfer.type === "add") {
         targetNode = blockTargetNode;
+        mergeTinymceEmptyNode(targetNode);
 
         block?.replaceWith(targetNode as Node);
       } else {
@@ -323,7 +335,10 @@ const useDropContainer = () => {
           BasicEnum.MJ_COLUMN
         );
 
-        if (focusIdx.split("-")[1] !== blockIdx.split("-")[1]) {
+        if (
+          focusIdx.split("-")[1] !== blockIdx.split("-")[1] ||
+          focusIdx.length !== blockIdx.length
+        ) {
           setFocusNodeCls("remove");
         }
 
@@ -346,7 +361,7 @@ const useDropContainer = () => {
           }
           setFocusNode(currentFocusNode.current as HTMLElement);
         }
-
+        mergeTinymceEmptyNode(targetNode);
         block?.replaceWith(targetNode as Node);
         setFocusNodeCls("add");
       }
@@ -360,6 +375,8 @@ const useDropContainer = () => {
       if (focusTargetNode) {
         setTimeout(() => {
           mergeNode(focusOriginNode, focusTargetNode);
+
+          mergeTinymceEmptyNode(focusOriginNode);
         });
       }
     }

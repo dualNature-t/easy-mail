@@ -6,6 +6,7 @@
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
+import { Src } from "@/components";
 import Border from "@/components/Border";
 import BorderRadius from "@/components/BorderRadius";
 import EDivider from "@/components/EDivider";
@@ -106,7 +107,9 @@ const SectionBlock = (): JSX.Element => {
           <ColorPicker showText format="hex" />
         </Form.Item>
 
-        <Form.Item
+        <Src name="background-url" label="Background Image" />
+
+        {/* <Form.Item
           labelCol={{ span: 24 }}
           name="background-url"
           label={<Text strong>Background Image</Text>}
@@ -115,7 +118,7 @@ const SectionBlock = (): JSX.Element => {
           }}
         >
           <Input placeholder="Enter a url" />
-        </Form.Item>
+        </Form.Item> */}
 
         <Form.Item
           name="background-repeat"
