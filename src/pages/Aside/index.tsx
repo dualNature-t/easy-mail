@@ -6,9 +6,9 @@
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
+import { TabType } from "@/constant";
+import { useTab } from "@/hooks";
 import { Flex, Tabs, TabsProps, theme } from "antd";
-import { TabType } from "../../constant";
-import useTab from "../../hooks/useTab";
 import Blocks from "./components/Blocks";
 import Attributes from "./components/Attributes";
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */

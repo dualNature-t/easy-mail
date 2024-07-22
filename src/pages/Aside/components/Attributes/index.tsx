@@ -18,11 +18,9 @@ import {
   TextBlock,
 } from "@/components";
 import { BasicEnum } from "@/constant";
-import useFocusNode from "@/hooks/useFocusNode";
-import useProperty from "@/hooks/useProperty";
 import { useEffect } from "react";
-import useForm from "@/hooks/useForm";
-import isEmpty from "@/utils/isEmpty";
+import { useFocusNode, useProperty } from "@/hooks";
+import { isEmpty } from "@/utils";
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
@@ -43,7 +41,7 @@ const Attributes = (): JSX.Element => {
   /************* This section will include this component HOOK function *************/
 
   const { token } = theme.useToken();
-  const { form } = useForm();
+  const [form] = Form.useForm();
   const { focusNode } = useFocusNode();
   const { property, setProperty } = useProperty();
 
@@ -78,7 +76,7 @@ const Attributes = (): JSX.Element => {
       }
     });
 
-    form?.setFieldsValue(result);
+    form.setFieldsValue(result);
   }, [property]);
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (

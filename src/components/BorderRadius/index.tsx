@@ -7,15 +7,15 @@
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
 import { useEffect, useMemo, useState } from "react";
-import { Button, Col, Flex, InputNumber, Row, Typography } from "antd";
-import useProperty from "@/hooks/useProperty";
-import EInputNumber from "../EInputNumber";
+import { Button, Flex, Typography } from "antd";
 import {
   BorderRadiusLBOutlined,
   BorderRadiusLTOutlined,
   BorderRadiusRBOutlined,
   BorderRadiusRTOutlined,
 } from "../Icon";
+import { useProperty } from "@/hooks";
+import { EInputNumber } from "..";
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */

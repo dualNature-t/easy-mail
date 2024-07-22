@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
-import useHoverNode from "./useHoverNode";
-import useFocusNode from "./useFocusNode";
-import useAppData from "./useAppData";
-import useTab from "./useTab";
-import useDataTransfer from "./useDataTransfer";
-import useDropBlock from "./userDropBlock";
-import useFocusTool from "./useFocusTool";
-import useEditorTool from "./useEditorTool";
 import { BasicEnum, EDITOR_TOOL_BOX, MJ_COLUMN_EMPTY } from "@/constant";
-import getNodeByTarget from "@/utils/getNodeByTarget";
 import {
+  getDocByData,
+  getEditorWindow,
+  getIdxByNode,
+  getNodeByIdx,
+  getNodeByTarget,
+  hasChildByColumn,
+  insertEle2Node,
   isBody,
   isButton,
   isDropBlock,
@@ -18,22 +16,24 @@ import {
   isHoverBlock,
   isSection,
   isText,
-} from "@/utils/isBlockType";
-import throttle from "@/utils/throttle";
-import insertEle2Node from "@/utils/insertEle2Node";
-import getIdxByNode from "@/utils/getIdxByNode";
-import { onTextContentChange } from "@/utils/treeTools";
-import getDocByData from "@/utils/getDocByData";
-import { getNodeByIdx } from "@/utils/getNodeByidx";
-import {
-  hasChildByColumn,
   mergeNode,
   mergeTinymceEmptyNode,
-} from "@/utils/mergeNode";
-import getEditorWindow from "@/utils/getEditorWindow";
-import useCurrentNode from "./useCurrentNode";
+  onTextContentChange,
+  throttle,
+} from "@/utils";
+import {
+  useAppData,
+  useCurrentNode,
+  useDataTransfer,
+  useDropBlock,
+  useEditorTool,
+  useFocusNode,
+  useFocusTool,
+  useHoverNode,
+  useTab,
+} from ".";
 
-const useDropContainer = () => {
+export const useDropContainer = () => {
   const { setHoverNode } = useHoverNode();
   const { focusNode, setFocusNode } = useFocusNode();
   const { setTab } = useTab();
@@ -386,5 +386,3 @@ const useDropContainer = () => {
 
   return { setRef };
 };
-
-export default useDropContainer;

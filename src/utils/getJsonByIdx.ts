@@ -1,6 +1,6 @@
 import { AppDataType } from "../constant";
 
-const getJsonByIdx = ({
+export const getJsonByIdx = ({
   appData,
   idx,
 }: {
@@ -14,5 +14,3 @@ const getJsonByIdx = ({
 
   return result;
 };
-
-export default getJsonByIdx;

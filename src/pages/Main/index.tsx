@@ -7,9 +7,8 @@
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
 import { EDITOR_BODY, getStyle } from "@/constant";
-import useAppData from "@/hooks/useAppData";
-import useDropContainer from "@/hooks/userDropContainer";
-import getDocByData from "@/utils/getDocByData";
+import { useAppData, useDropContainer } from "@/hooks";
+import { getDocByData } from "@/utils";
 import { theme } from "antd";
 import { useCallback, useMemo } from "react";
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
@@ -110,7 +109,7 @@ const Main = (): JSX.Element => {
   /************* This section will include this component general function *************/
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
-    <div style={{ width: "calc(100vw - 406px)" }}>
+    <div style={{ width: "calc(100% - 406px)" }}>
       <iframe
         srcDoc={html}
         onLoad={onLoad}

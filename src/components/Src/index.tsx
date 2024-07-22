@@ -6,11 +6,12 @@
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import useProperty from "@/hooks/useProperty";
 import { UploadOutlined } from "@ant-design/icons";
 import { Button, Flex, Form, Input, Typography } from "antd";
+import { useProperty } from "@/hooks";
 const { Text } = Typography;
 import "./style.css";
+
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */

@@ -1,29 +1,31 @@
 /**
  * @file
- * @date 2024-05-17
- * @author haodong.wang
- * @lastModify  2024-05-17
+ * @date
+ * @author
+ * @lastModify
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import Align from "@/components/Align";
-import BorderRadius from "@/components/BorderRadius";
-import EDivider from "@/components/EDivider";
-import EInputNumber from "@/components/EInputNumber";
-import FontFamily from "@/components/FontFamily";
-import Padding from "@/components/Padding";
+
+import {
+  Align,
+  BorderRadius,
+  EDivider,
+  EInputNumber,
+  FontFamily,
+  Padding,
+} from "@/components";
 import { AppDataType } from "@/constant";
-import useAppData from "@/hooks/useAppData";
-import useFocusNode from "@/hooks/useFocusNode";
-import getIdxByNode from "@/utils/getIdxByNode";
-import getJsonByIdx from "@/utils/getJsonByIdx";
+import { useAppData, useFocusNode } from "@/hooks";
 import {
   addSocialBlock,
   deleteSocialBlock,
+  getIdxByNode,
+  getJsonByIdx,
   moveSocialBlock,
   onPropertyChange,
   onTextContentChange,
-} from "@/utils/treeTools";
+} from "@/utils";
 import {
   DeleteOutlined,
   DownOutlined,

@@ -8,7 +8,7 @@
 /** This section will include all the necessary dependence for this tsx file */
 import { Card, Flex, Typography } from "antd";
 import { BasicBlockType, ColumnType, DataTransferMapType } from "@/constant";
-import useDataTransfer from "@/hooks/useDataTransfer";
+import { useDataTransfer } from "@/hooks";
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
@@ -41,11 +41,11 @@ const DragBlocks: React.FC<DragBlocksProps> = ({ value }): JSX.Element => {
   /************* This section will include this component general function *************/
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
-    <Flex wrap gap={10} style={{ margin: "10px 0" }}>
+    <Flex wrap style={{ margin: "10px 0" }} justify="space-between">
       {value.map((item, index) => {
         return (
           <Card
-            style={{ width: 96, height: 96 }}
+            style={{ width: 96, height: 96, marginBottom: 10 }}
             styles={{
               body: {
                 padding: 0,

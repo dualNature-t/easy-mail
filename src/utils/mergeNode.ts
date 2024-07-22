@@ -1,5 +1,5 @@
 import { BasicEnum, MJ_COLUMN_EMPTY, basicBlockNameList } from "../constant";
-import { isBody, isButton, isSection, isText } from "./isBlockType";
+import { isBody, isButton, isSection, isText } from ".";
 
 const styleStrToObj = (styleStr?: string | null) => {
   if (!styleStr) return {};

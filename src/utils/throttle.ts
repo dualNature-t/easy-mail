@@ -1,4 +1,4 @@
-function throttle<T extends (...args: any[]) => any>(
+export function throttle<T extends (...args: any[]) => any>(
   func: T,
   limit: number
 ): T {
@@ -22,5 +22,3 @@ function throttle<T extends (...args: any[]) => any>(
     }
   } as T;
 }
-
-export default throttle;

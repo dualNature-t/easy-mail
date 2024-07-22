@@ -6,8 +6,7 @@
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import EDivider from "@/components/EDivider";
-import EInputNumber from "@/components/EInputNumber";
+import { EDivider, EInputNumber } from "@/components";
 import { ColorPicker, Form, Typography } from "antd";
 import { Color } from "antd/es/color-picker";
 const { Text } = Typography;

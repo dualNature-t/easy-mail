@@ -1,11 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
-import useFocusNode from "./useFocusNode";
-import useAppData from "./useAppData";
-import getIdxByNode from "@/utils/getIdxByNode";
-import getJsonByIdx from "@/utils/getJsonByIdx";
-import { onPropertyChange } from "@/utils/treeTools";
+import { getIdxByNode, getJsonByIdx, onPropertyChange } from "@/utils";
+import { useAppData, useFocusNode } from ".";
 
-const useProperty = () => {
+export const useProperty = () => {
   const [property, setProperty] = useState<object | undefined>(undefined);
   const { appData, setAppData } = useAppData();
   const { focusNode } = useFocusNode();
@@ -31,5 +28,3 @@ const useProperty = () => {
     setProperty: onChange,
   };
 };
-
-export default useProperty;

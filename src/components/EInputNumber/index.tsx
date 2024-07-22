@@ -6,11 +6,10 @@
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import React, { useEffect, useState } from "react";
-import "./style.css";
 import { Form, InputNumber, Select } from "antd";
 import { DefaultOptionType } from "antd/es/select";
-import useProperty from "@/hooks/useProperty";
+import { useProperty } from "@/hooks";
+import "./style.css";
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */

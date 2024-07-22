@@ -1,14 +1,13 @@
 /**
  * @file
- * @date 2024-05-17
- * @author haodong.wang
- * @lastModify  2024-05-17
+ * @date
+ * @author
+ * @lastModify
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import EDivider from "@/components/EDivider";
-import EInputNumber from "@/components/EInputNumber";
-import { Divider, Form, InputNumber, Typography } from "antd";
+import { EDivider, EInputNumber } from "@/components";
+import { Typography } from "antd";
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */

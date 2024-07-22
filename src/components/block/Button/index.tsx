@@ -1,28 +1,20 @@
 /**
  * @file
- * @date 2024-05-17
- * @author haodong.wang
- * @lastModify  2024-05-17
+ * @date
+ * @author
+ * @lastModify
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import Align from "@/components/Align";
-import Border from "@/components/Border";
-import BorderRadius from "@/components/BorderRadius";
-import EDivider from "@/components/EDivider";
-import EInputNumber from "@/components/EInputNumber";
-import Padding from "@/components/Padding";
 import {
-  Checkbox,
-  ColorPicker,
-  Divider,
-  Form,
-  Input,
-  InputNumber,
-  Radio,
-  Switch,
-  Typography,
-} from "antd";
+  Align,
+  Border,
+  BorderRadius,
+  EDivider,
+  EInputNumber,
+  Padding,
+} from "@/components";
+import { Checkbox, ColorPicker, Form, Input, Switch, Typography } from "antd";
 import { Color } from "antd/es/color-picker";
 
 const { Text } = Typography;

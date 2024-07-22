@@ -8,9 +8,9 @@
 /** This section will include all the necessary dependence for this tsx file */
 import { useEffect, useMemo, useState } from "react";
 import { Button, Flex, Typography } from "antd";
-import useProperty from "@/hooks/useProperty";
-import EInputNumber from "../EInputNumber";
-import toFirstUpperCase from "@/utils/toFirstUpperCase";
+import { useProperty } from "@/hooks";
+import { EInputNumber } from "..";
+import { toFirstUpperCase } from "@/utils";
 
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */

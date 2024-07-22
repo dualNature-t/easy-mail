@@ -10,11 +10,11 @@ import Align from "./Align";
 import Border from "./Border";
 import BorderRadius from "./BorderRadius";
 import EDivider from "./EDivider";
+import ECheckbox from "./ECheckbox";
 import EInputNumber from "./EInputNumber";
 import FontFamily from "./FontFamily";
 import Padding from "./Padding";
 import Width from "./Width";
-import ECheckbox from "./ECheckbox";
 import Src from "./Src";
 
 export {

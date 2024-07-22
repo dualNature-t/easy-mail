@@ -1,16 +1,13 @@
 /**
  * @file
- * @date 2024-05-17
- * @author haodong.wang
- * @lastModify  2024-05-17
+ * @date
+ * @author
+ * @lastModify
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import EDivider from "@/components/EDivider";
-import EInputNumber from "@/components/EInputNumber";
-import Padding from "@/components/Padding";
-import Width from "@/components/Width";
-import { ColorPicker, Divider, Form, InputNumber, Typography } from "antd";
+import { EDivider, EInputNumber, Padding } from "@/components";
+import { ColorPicker, Form, Typography } from "antd";
 import { Color } from "antd/es/color-picker";
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */

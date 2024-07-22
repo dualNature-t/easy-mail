@@ -1,15 +1,15 @@
 /**
  * @file
- * @date 2024-05-31
- * @author haodong.wang
- * @lastModify  2024-05-31
+ * @date
+ * @author
+ * @lastModify
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
 import { useEffect, useMemo, useState } from "react";
-import useProperty from "@/hooks/useProperty";
-import { Flex, InputNumber, Switch, Typography } from "antd";
-import EInputNumber from "../EInputNumber";
+import { Flex, Switch, Typography } from "antd";
+import { useProperty } from "@/hooks";
+import { EInputNumber } from "..";
 
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */

@@ -1,5 +1,3 @@
-const deepClone = <T>(value: T): T => {
+export const deepClone = <T>(value: T): T => {
   return JSON.parse(JSON.stringify(value));
 };
-
-export default deepClone;

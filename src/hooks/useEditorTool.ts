@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import useFocusNode from "./useFocusNode";
 import { EDITOR_TOOL_BOX } from "@/constant";
-import { isButton, isText } from "@/utils/isBlockType";
+import { isButton, isText } from "@/utils";
+import { useFocusNode } from ".";
 
-const useEditorTool = () => {
+export const useEditorTool = () => {
   const [editorTool, setEditorTool] = useState<HTMLElement | null>(null);
   const { focusNode } = useFocusNode();
 
@@ -54,5 +54,3 @@ const useEditorTool = () => {
 
   return { editorTool };
 };
-
-export default useEditorTool;

@@ -1,5 +1,3 @@
-const isEmpty = <T>(value: T): boolean => {
+export const isEmpty = <T>(value: T): boolean => {
   return value === undefined || value === null || value === "";
 };
-
-export default isEmpty;

@@ -1,7 +1,7 @@
 import { BasicEnum, BasicType, tagNameList } from "../constant";
-import { isBody } from "./isBlockType";
+import { isBody } from ".";
 
-const getNodeByTarget = (
+export const getNodeByTarget = (
   node: Element | HTMLElement,
   target?: BasicType | BasicType[]
 ) => {
@@ -24,5 +24,3 @@ const getNodeByTarget = (
 
   return result;
 };
-
-export default getNodeByTarget;

@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react";
-import useFocusNode from "./useFocusNode";
-import useDataTransfer from "./useDataTransfer";
-import useAppData from "./useAppData";
-import getNodeByTarget from "@/utils/getNodeByTarget";
-import { hasChildByColumn } from "@/utils/mergeNode";
+import {
+  copyBlock,
+  deleteBlock,
+  getIdxByNode,
+  getNodeByTarget,
+  hasChildByColumn,
+  insertEle2Node,
+  isBody,
+  isFocusCopy,
+  isFocusDelete,
+  isSection,
+} from "@/utils";
 import {
   AppDataType,
   BasicBlockType,
@@ -17,23 +24,15 @@ import {
   HOVER_CLS,
   MJ_COLUMN_EMPTY,
 } from "@/constant";
-import {
-  isBody,
-  isFocusCopy,
-  isFocusDelete,
-  isSection,
-} from "@/utils/isBlockType";
-import getIdxByNode from "@/utils/getIdxByNode";
-import insertEle2Node from "@/utils/insertEle2Node";
-import { copyBlock, deleteBlock } from "@/utils/treeTools";
-import useCurrentNode from "./useCurrentNode";
+import { useAppData, useCurrentNode, useDataTransfer, useFocusNode } from ".";
 
-const useFocusTool = () => {
+export const useFocusTool = () => {
   const { appData, setAppData } = useAppData();
   const { focusNode, setFocusNode } = useFocusNode();
-  const [focusTool, setFocusTool] = useState<HTMLDivElement | null>(null);
   const { setDataTransfer } = useDataTransfer();
   const { setFocusNodeCls } = useCurrentNode();
+
+  const [focusTool, setFocusTool] = useState<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const div = document.createElement("div");
@@ -122,5 +121,3 @@ const useFocusTool = () => {
 
   return { focusTool };
 };
-
-export default useFocusTool;

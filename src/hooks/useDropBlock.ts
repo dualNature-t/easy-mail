@@ -1,13 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
-import useDataTransfer from "./useDataTransfer";
-import useFocusNode from "./useFocusNode";
-import useAppData from "./useAppData";
 import { AppDataType, DROP_BLOCK } from "@/constant";
-import getIdxByNode from "@/utils/getIdxByNode";
 import { theme } from "antd";
-import { addBlock, moveBlock } from "@/utils/treeTools";
+import { useAppData, useDataTransfer, useFocusNode } from ".";
+import { addBlock, getIdxByNode, moveBlock } from "@/utils";
 
-const useDropBlock = () => {
+export const useDropBlock = () => {
   const { token } = theme.useToken();
   const { dataTransfer } = useDataTransfer();
   const { appData, setAppData } = useAppData();
@@ -82,5 +79,3 @@ const useDropBlock = () => {
 
   return { block };
 };
-
-export default useDropBlock;

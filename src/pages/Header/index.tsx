@@ -7,11 +7,8 @@
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
 import { BasicEnum } from "@/constant";
-import useCurrentNode from "@/hooks/useCurrentNode";
-import useFocusNode from "@/hooks/useFocusNode";
-import getNodeByTarget from "@/utils/getNodeByTarget";
-import { isSection } from "@/utils/isBlockType";
-import toFirstUpperCase from "@/utils/toFirstUpperCase";
+import { useCurrentNode, useFocusNode } from "@/hooks";
+import { getNodeByTarget, isSection, toFirstUpperCase } from "@/utils";
 import { Breadcrumb, Flex, theme } from "antd";
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */

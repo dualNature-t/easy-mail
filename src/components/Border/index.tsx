@@ -8,11 +8,9 @@
 /** This section will include all the necessary dependence for this tsx file */
 import { useEffect, useMemo, useState } from "react";
 import { Card, ColorPicker, Flex, Select, Switch, Typography } from "antd";
-import useProperty from "@/hooks/useProperty";
-import EInputNumber from "../EInputNumber";
-import { ECheckbox } from "..";
+import { ECheckbox, EInputNumber } from "..";
+import { useProperty } from "@/hooks";
 import "./style.css";
-
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */

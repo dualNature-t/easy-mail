@@ -1,10 +1,8 @@
 import { useContext } from "react";
-import { AppContext } from "../context";
+import { AppContext } from "@/context";
 
-const useHoverNode = () => {
+export const useHoverNode = () => {
   const { hoverNode, setHoverNode } = useContext(AppContext);
 
   return { hoverNode, setHoverNode };
 };
-
-export default useHoverNode;

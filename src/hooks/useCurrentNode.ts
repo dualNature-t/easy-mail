@@ -6,11 +6,10 @@ import {
   MJ_COLUMN_EMPTY,
 } from "@/constant";
 import { NodeContext, NodeContextType } from "@/context";
-import getNodeByTarget from "@/utils/getNodeByTarget";
-import { isSection } from "@/utils/isBlockType";
+import { getNodeByTarget, isSection } from "@/utils";
 import { useContext } from "react";
 
-const useCurrentNode = () => {
+export const useCurrentNode = () => {
   const { currentEmptyNode, currentFocusNode, currentHoverNode } = useContext(
     NodeContext
   ) as NodeContextType;
@@ -65,5 +64,3 @@ const useCurrentNode = () => {
     setFocusNodeCls,
   };
 };
-
-export default useCurrentNode;

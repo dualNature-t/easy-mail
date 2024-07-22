@@ -1,6 +1,5 @@
 import { createContext } from "react";
 import { AppDataType, DataTransferType, TabType } from "../constant";
-import { FormInstance } from "antd";
 
 export interface appContextType {
   appData: AppDataType | null;
@@ -15,7 +14,6 @@ export interface appContextType {
   setFocusNode: (node: HTMLElement | null) => void;
   dataTransfer: DataTransferType | null;
   setDataTransfer: (data: DataTransferType | null) => void;
-  form: FormInstance | undefined;
 }
 
 export const AppContext = createContext<appContextType>({
@@ -38,6 +36,4 @@ export const AppContext = createContext<appContextType>({
   // DRAG DATA
   dataTransfer: null,
   setDataTransfer: () => {},
-
-  form: undefined,
 });

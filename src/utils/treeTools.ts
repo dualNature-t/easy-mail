@@ -1,13 +1,13 @@
 import {
   AppDataType,
+  BasicBlockType,
   BasicEnum,
   ColumnEnum,
   ColumnUnitType,
   DataTransferType,
   defaultBlockPropertyJson,
 } from "@/constant";
-import deepClone from "./deepClone";
-import isEmpty from "./isEmpty";
+import { deepClone, isEmpty } from ".";
 
 interface PyloadType {
   appData: AppDataType;
@@ -66,9 +66,9 @@ export const addBlock = ({
   let { result, tree } = getTargetTree(appData, idx, -1);
 
   const propertyResult = deepClone(defaultBlockPropertyJson)[
-    dataTransfer.data.value
+    dataTransfer.data?.value as BasicBlockType
   ];
-  if (dataTransfer.data.type === "basic" && idArr.length === 2) {
+  if (dataTransfer.data?.type === "basic" && idArr.length === 2) {
     const oneColumn = deepClone(defaultBlockPropertyJson)[
       ColumnEnum.MJ_COLUMN_1
     ];

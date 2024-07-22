@@ -6,10 +6,7 @@
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import { Src } from "@/components";
-import Border from "@/components/Border";
-import BorderRadius from "@/components/BorderRadius";
-import EDivider from "@/components/EDivider";
+import { Border, BorderRadius, EDivider, Src } from "@/components";
 import {
   Column1Outlined,
   Column2Outlined,
@@ -20,19 +17,9 @@ import {
 } from "@/components/Icon";
 import Padding from "@/components/Padding";
 import { AppDataType, ColumnUnitType } from "@/constant";
-import useAppData from "@/hooks/useAppData";
-import useFocusNode from "@/hooks/useFocusNode";
-import getIdxByNode from "@/utils/getIdxByNode";
-import { onLayoutChange } from "@/utils/treeTools";
-import {
-  Button,
-  ColorPicker,
-  Flex,
-  Form,
-  Input,
-  Select,
-  Typography,
-} from "antd";
+import { useAppData, useFocusNode } from "@/hooks";
+import { getIdxByNode, onLayoutChange } from "@/utils";
+import { Button, ColorPicker, Flex, Form, Select, Typography } from "antd";
 import { Color } from "antd/es/color-picker";
 import React from "react";
 const { Text } = Typography;
@@ -108,17 +95,6 @@ const SectionBlock = (): JSX.Element => {
         </Form.Item>
 
         <Src name="background-url" label="Background Image" />
-
-        {/* <Form.Item
-          labelCol={{ span: 24 }}
-          name="background-url"
-          label={<Text strong>Background Image</Text>}
-          normalize={(value: string) => {
-            return value === "" ? undefined : value;
-          }}
-        >
-          <Input placeholder="Enter a url" />
-        </Form.Item> */}
 
         <Form.Item
           name="background-repeat"

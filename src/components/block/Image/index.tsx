@@ -6,12 +6,14 @@
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import Align from "@/components/Align";
-import BorderRadius from "@/components/BorderRadius";
-import EDivider from "@/components/EDivider";
-import Padding from "@/components/Padding";
-import Src from "@/components/Src";
-import Width from "@/components/Width";
+import {
+  Align,
+  BorderRadius,
+  EDivider,
+  Padding,
+  Src,
+  Width,
+} from "@/components";
 import { Checkbox, Form, Input, Typography } from "antd";
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */

@@ -1,13 +1,7 @@
 import { TransferActionType } from "../constant";
-import {
-  isBody,
-  isColumn,
-  isDropBlock,
-  isFocusBlock,
-  isSection,
-} from "./isBlockType";
+import { isBody, isColumn, isDropBlock, isFocusBlock, isSection } from ".";
 
-const getIdxByNode = ({
+export const getIdxByNode = ({
   node,
   transferAction,
 }: {
@@ -80,5 +74,3 @@ const getIdxByNode = ({
   }
   return idx;
 };
-
-export default getIdxByNode;
