@@ -7,3 +7,7 @@ body {
 * {
   box-sizing: border-box;
 }
+
+.easy-mail-container.dark {
+  scrollbar-color: rgba(255, 255, 255, 0.25) rgba(253, 253, 253, 0.12);
+}

@@ -23,6 +23,7 @@ import {
 } from "@/utils";
 import {
   useAppData,
+  useConfig,
   useCurrentNode,
   useDataTransfer,
   useDropBlock,
@@ -41,6 +42,7 @@ export const useDropContainer = () => {
   const { dataTransfer, setDataTransfer } = useDataTransfer();
   const { block } = useDropBlock();
   const { editorTool } = useEditorTool();
+  const { skin } = useConfig();
   useFocusTool();
 
   const [ref, setRef] = useState<Element | null>(null);
@@ -264,6 +266,7 @@ export const useDropContainer = () => {
           selector: "#editor",
           inline: true,
           menubar: false,
+          skin: skin === "light" ? "oxide" : "oxide-dark",
           plugins: "autolink link",
           toolbar: [
             "fontsize forecolor undo redo",

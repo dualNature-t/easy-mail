@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
-import { ConfigProvider } from "antd";
 import { AppDataType } from "./constant";
 
 const appData: AppDataType = {
@@ -297,19 +296,6 @@ const appData: AppDataType = {
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ConfigProvider
-      theme={{
-        token: {
-          colorPrimary: "rgb(19, 194, 194)",
-        },
-        components: {
-          Button: {
-            colorPrimary: "rgb(19, 194, 194)",
-          },
-        },
-      }}
-    >
-      <App width="100vw" height="100vh" value={appData} />
-    </ConfigProvider>
+    <App width="100vw" height="100vh" skin="dark" value={appData} />
   </React.StrictMode>
 );

@@ -11,6 +11,7 @@ import { useTab } from "@/hooks";
 import { Flex, Tabs, TabsProps, theme } from "antd";
 import Blocks from "./components/Blocks";
 import Attributes from "./components/Attributes";
+import { EditOutlined, PlusOutlined } from "@ant-design/icons";
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
@@ -29,11 +30,21 @@ const Aside = (): JSX.Element => {
   const tabItems: TabsProps["items"] = [
     {
       key: "add",
-      label: <div style={{ padding: "19px 0", marginBottom: 0 }}>添加</div>,
+      label: (
+        <Flex vertical align="center" gap={4} style={{ padding: "10px 0" }}>
+          <PlusOutlined />
+          添加
+        </Flex>
+      ),
     },
     {
       key: "edit",
-      label: <div style={{ padding: "19px 0", marginBottom: 0 }}>编辑</div>,
+      label: (
+        <Flex vertical align="center" gap={4} style={{ padding: "10px 0" }}>
+          <EditOutlined />
+          编辑
+        </Flex>
+      ),
     },
   ];
   /* <------------------------------------ **** PARAMETER END **** ------------------------------------ */
@@ -44,7 +55,13 @@ const Aside = (): JSX.Element => {
   /************* This section will include this component general function *************/
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
-    <Flex style={{ width: 406, borderRight: `1px solid ${token.colorBorder}` }}>
+    <Flex
+      style={{
+        width: 406,
+        borderRight: `1px solid ${token.colorBorder}`,
+        backgroundColor: token.colorBgContainer,
+      }}
+    >
       {/* TAB */}
       <div
         style={{

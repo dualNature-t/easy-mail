@@ -6,8 +6,8 @@
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import { useRef, useState } from "react";
-import { Flex } from "antd";
+import { forwardRef, useImperativeHandle, useRef, useState } from "react";
+import { ConfigProvider, Flex, theme } from "antd";
 import { AppDataType, DataTransferType, TabType } from "./constant";
 import {
   AppContext,
@@ -22,16 +22,19 @@ import Main from "./pages/Main";
 import { deepClone } from "./utils";
 import "./App.css";
 
+export interface IRefProps {
+  getData: () => AppDataType;
+}
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
 /* <------------------------------------ **** INTERFACE END **** ------------------------------------ */
 /* <------------------------------------ **** FUNCTION COMPONENT START **** ------------------------------------ */
-const App: React.FC<AppProps> = (props): JSX.Element => {
+const App = forwardRef<IRefProps, AppProps>((props, ref) => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
   const mergeProps = { ...defaultConfig, ...props };
-  const { value, width, height } = mergeProps;
+  const { value, width, height, colorPrimary, skin } = mergeProps;
 
   const [appData, setAppData] = useState<AppDataType>(
     deepClone(value as AppDataType)
@@ -46,9 +49,18 @@ const App: React.FC<AppProps> = (props): JSX.Element => {
   const currentHoverNode = useRef<Element | null>(null);
   const currentFocusNode = useRef<Element | null>(null);
   const currentEmptyNode = useRef<Element | null>(null);
+
+  useImperativeHandle(ref, () => {
+    return {
+      getData: () => {
+        return appData;
+      },
+    };
+  });
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
+  const classNameStr = `easy-mail-container ${skin === "dark" ? "dark" : ""}`;
   /* <------------------------------------ **** PARAMETER END **** ------------------------------------ */
   /* <------------------------------------ **** FUNCTION START **** ------------------------------------ */
   /************* This section will include this component general function *************/
@@ -57,35 +69,46 @@ const App: React.FC<AppProps> = (props): JSX.Element => {
   /************* This section will include this component general function *************/
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
-    <div style={{ height, width }}>
-      <ConfigContext.Provider value={{ ...mergeProps }}>
-        <AppContext.Provider
-          value={{
-            appData,
-            setAppData,
-            tab,
-            setTab,
-            hoverNode,
-            setHoverNode,
-            focusNode,
-            setFocusNode,
-            dataTransfer,
-            setDataTransfer,
-          }}
-        >
-          <NodeContext.Provider
-            value={{ currentHoverNode, currentFocusNode, currentEmptyNode }}
+    <ConfigProvider
+      theme={{
+        algorithm:
+          skin === "light" ? theme.defaultAlgorithm : theme.darkAlgorithm,
+        token: {
+          colorPrimary,
+        },
+      }}
+    >
+      <div className={classNameStr} style={{ height, width }}>
+        <ConfigContext.Provider value={{ ...mergeProps }}>
+          <AppContext.Provider
+            value={{
+              appData,
+              setAppData,
+              tab,
+              setTab,
+              hoverNode,
+              setHoverNode,
+              focusNode,
+              setFocusNode,
+              dataTransfer,
+              setDataTransfer,
+            }}
           >
-            <Header />
-            <Flex style={{ height: "calc(100% - 40px)" }}>
-              <Aside />
-              <Main />
-            </Flex>
-          </NodeContext.Provider>
-        </AppContext.Provider>
-      </ConfigContext.Provider>
-    </div>
+            <NodeContext.Provider
+              value={{ currentHoverNode, currentFocusNode, currentEmptyNode }}
+            >
+              <Header />
+              <Flex style={{ height: "calc(100% - 40px)" }}>
+                <Aside />
+                <Main />
+              </Flex>
+            </NodeContext.Provider>
+          </AppContext.Provider>
+        </ConfigContext.Provider>
+      </div>
+    </ConfigProvider>
   );
-};
+});
+
 export default App;
 /* <------------------------------------ **** FUNCTION COMPONENT END **** ------------------------------------ */

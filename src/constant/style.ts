@@ -8,6 +8,7 @@ export const getStyle = (token: AliasToken) => {
   return `
     html {
       height: 100%;
+      scrollbar-color: rgba(255, 255, 255, 0.25) rgba(253, 253, 253, 0.12);
     }
     *:focus-visible {
       outline: none;
@@ -69,8 +70,10 @@ export const getStyle = (token: AliasToken) => {
     }
     .editor-body {
       user-select: none;
-      border: 22px solid white;
+      border: 22px solid ${token.colorBgContainer};
+      min-width: 275px;
       min-height: calc(100% - 44px);
+      overflow-x: hidden;
     }
     .editor-body .mj-section {
       position: relative;

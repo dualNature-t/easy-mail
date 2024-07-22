@@ -21,19 +21,23 @@ export const defaultAppData: AppDataType = {
 
 export const defaultConfig: AppProps = {
   skin: "light",
+  colorPrimary: "#1677ff",
   lang: "en",
   value: defaultAppData,
   width: "100%",
   height: "100%",
+  ref: undefined,
   onUpload: undefined,
 };
 
 export interface AppProps {
   skin?: "light" | "dark";
+  colorPrimary?: string;
   lang?: "zh" | "en";
   value?: AppDataType;
   width?: string;
   height?: string;
+  ref?: React.RefObject<Element>;
   onUpload?: (file: File) => void;
 }
 

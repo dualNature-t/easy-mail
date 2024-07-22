@@ -109,7 +109,12 @@ const Main = (): JSX.Element => {
   /************* This section will include this component general function *************/
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
-    <div style={{ width: "calc(100% - 406px)" }}>
+    <div
+      style={{
+        width: "calc(100% - 406px)",
+        backgroundColor: token.colorBgContainer,
+      }}
+    >
       <iframe
         srcDoc={html}
         onLoad={onLoad}
@@ -119,11 +124,14 @@ const Main = (): JSX.Element => {
           border: "none",
           outline: "none",
           display: "block",
+          margin: "auto",
         }}
         id={IFRAME_ID}
       ></iframe>
     </div>
   );
 };
+
 export default Main;
+
 /* <------------------------------------ **** FUNCTION COMPONENT END **** ------------------------------------ */

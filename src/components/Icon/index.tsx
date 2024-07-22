@@ -148,6 +148,7 @@ const textSvg = () => (
     <path
       fillRule="evenodd"
       clipRule="evenodd"
+      fill="currentColor"
       d="M17 6.733h-.93c0-1.866-1.87-2.333-4.203-2.333v9.47c0 .763.464 1.45 1.173 1.733l1.16.464V17H5.8v-.933l1.16-.464a1.867 1.867 0 0 0 1.173-1.733V4.4c-2.333 0-4.2.467-4.2 2.333H3V3h14v3.733z"
     ></path>
   </svg>
@@ -161,6 +162,7 @@ const imageSvg = () => (
     <path
       fillRule="evenodd"
       clipRule="evenodd"
+      fill="currentColor"
       d="M18 4.5A2.5 2.5 0 0 0 15.5 2h-11A2.5 2.5 0 0 0 2 4.5v11A2.5 2.5 0 0 0 4.5 18h11a2.5 2.5 0 0 0 2.5-2.5v-11zm-13.5-1a1 1 0 0 0-1 1v9.732l2.66-2.85a1 1 0 0 1 1.3-.14l1.81 1.252a1 1 0 0 0 1.318-.16l2.485-2.817a1 1 0 0 1 1.428-.073l1.999 1.845V4.5a1 1 0 0 0-1-1h-11zm1 3.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0z"
     ></path>
   </svg>
@@ -171,8 +173,14 @@ export const ImageOutlined = (props: Partial<CustomIconComponentProps>) => (
 
 const buttonSvg = () => (
   <svg width="20" height="20" viewBox="0 0 20 20">
-    <path d="M18 5a2.5 2.5 0 0 0-2.5-2.5h-11A2.5 2.5 0 0 0 2 5v5a2.5 2.5 0 0 0 2.5 2.5h3.654L8.038 11H4.5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v5c0 .261-.1.499-.264.677l1.203.902c.35-.43.561-.98.561-1.579V5z"></path>
-    <path d="M9.706 8.116l.929 8.48c.012.109.148.15.22.068L12.62 14.6l1.667 2.887a.833.833 0 1 0 1.443-.833l-1.667-2.887 2.67-.498a.125.125 0 0 0 .051-.223L9.904 8a.125.125 0 0 0-.198.115z"></path>
+    <path
+      fill="currentColor"
+      d="M18 5a2.5 2.5 0 0 0-2.5-2.5h-11A2.5 2.5 0 0 0 2 5v5a2.5 2.5 0 0 0 2.5 2.5h3.654L8.038 11H4.5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v5c0 .261-.1.499-.264.677l1.203.902c.35-.43.561-.98.561-1.579V5z"
+    ></path>
+    <path
+      fill="currentColor"
+      d="M9.706 8.116l.929 8.48c.012.109.148.15.22.068L12.62 14.6l1.667 2.887a.833.833 0 1 0 1.443-.833l-1.667-2.887 2.67-.498a.125.125 0 0 0 .051-.223L9.904 8a.125.125 0 0 0-.198.115z"
+    ></path>
   </svg>
 );
 export const ButtonOutlined = (props: Partial<CustomIconComponentProps>) => (
@@ -181,7 +189,10 @@ export const ButtonOutlined = (props: Partial<CustomIconComponentProps>) => (
 
 const dividerSvg = () => (
   <svg width="20" height="20" viewBox="0 0 20 20">
-    <path d="M9.836 4.561a.25.25 0 0 1 .328 0l1.927 1.67a.25.25 0 0 1-.163.438H8.072a.25.25 0 0 1-.163-.439l1.927-1.669zM2 8.42h16v3H2v-3zM9.836 15.277a.25.25 0 0 0 .328 0l1.927-1.669a.25.25 0 0 0-.163-.439H8.072a.25.25 0 0 0-.163.44l1.927 1.668z"></path>
+    <path
+      fill="currentColor"
+      d="M9.836 4.561a.25.25 0 0 1 .328 0l1.927 1.67a.25.25 0 0 1-.163.438H8.072a.25.25 0 0 1-.163-.439l1.927-1.669zM2 8.42h16v3H2v-3zM9.836 15.277a.25.25 0 0 0 .328 0l1.927-1.669a.25.25 0 0 0-.163-.439H8.072a.25.25 0 0 0-.163.44l1.927 1.668z"
+    ></path>
   </svg>
 );
 export const DividerOutlined = (props: Partial<CustomIconComponentProps>) => (
@@ -190,13 +201,20 @@ export const DividerOutlined = (props: Partial<CustomIconComponentProps>) => (
 
 const spacerSvg = () => (
   <svg width="20" height="20" viewBox="0 0 20 20">
-    <path d="M9.836 2.161a.25.25 0 0 1 .328 0l1.927 1.67a.25.25 0 0 1-.163.438H8.072a.25.25 0 0 1-.163-.439l1.927-1.669z"></path>
+    <path
+      fill="currentColor"
+      d="M9.836 2.161a.25.25 0 0 1 .328 0l1.927 1.67a.25.25 0 0 1-.163.438H8.072a.25.25 0 0 1-.163-.439l1.927-1.669z"
+    ></path>
     <path
       fillRule="evenodd"
       clipRule="evenodd"
+      fill="currentColor"
       d="M18 8.02a2.5 2.5 0 0 0-2.5-2.5h-11A2.5 2.5 0 0 0 2 8.02v4a2.5 2.5 0 0 0 2.5 2.5h11a2.5 2.5 0 0 0 2.5-2.5v-4zm-13.5-1a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-11z"
     ></path>
-    <path d="M9.836 17.878a.25.25 0 0 0 .328 0l1.927-1.67a.25.25 0 0 0-.163-.439H8.072a.25.25 0 0 0-.163.44l1.927 1.669z"></path>
+    <path
+      fill="currentColor"
+      d="M9.836 17.878a.25.25 0 0 0 .328 0l1.927-1.67a.25.25 0 0 0-.163-.439H8.072a.25.25 0 0 0-.163.44l1.927 1.669z"
+    ></path>
   </svg>
 );
 export const SpacerOutlined = (props: Partial<CustomIconComponentProps>) => (
@@ -205,7 +223,10 @@ export const SpacerOutlined = (props: Partial<CustomIconComponentProps>) => (
 
 const socialSvg = () => (
   <svg width="20" height="20" viewBox="0 0 20 20">
-    <path d="M15.5 7.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zM12.22 6.224c.179.48.46.909.816 1.262L9.916 9.23a3.485 3.485 0 0 0-.64-1.361l2.944-1.645zM9 10a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0zM18 15a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0zM9.854 11.005c-.147.491-.4.937-.73 1.31l3.022 1.68c.147-.491.4-.937.73-1.31l-3.022-1.68z"></path>
+    <path
+      fill="currentColor"
+      d="M15.5 7.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zM12.22 6.224c.179.48.46.909.816 1.262L9.916 9.23a3.485 3.485 0 0 0-.64-1.361l2.944-1.645zM9 10a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0zM18 15a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0zM9.854 11.005c-.147.491-.4.937-.73 1.31l3.022 1.68c.147-.491.4-.937.73-1.31l-3.022-1.68z"
+    ></path>
   </svg>
 );
 export const SocialOutlined = (props: Partial<CustomIconComponentProps>) => (
