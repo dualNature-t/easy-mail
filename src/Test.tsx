@@ -353,7 +353,7 @@ const Test = (): JSX.Element => {
         </Button>
       </header>
       <App
-        lang={lang}
+        // lang={lang}
         width="100vw"
         height="calc(100vh - 50px)"
         skin={skin}

@@ -24,7 +24,7 @@ export const defaultAppData: AppDataType = {
 export const defaultConfig: AppProps = {
   skin: "light",
   colorPrimary: "#1677ff",
-  lang: "en_US",
+  lang: undefined,
   value: defaultAppData,
   width: "100%",
   height: "100%",
