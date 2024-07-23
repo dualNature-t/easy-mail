@@ -7,6 +7,7 @@
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
 import { Form, Select, Typography } from "antd";
+import { useTranslation } from "react-i18next";
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
@@ -16,6 +17,7 @@ const { Text } = Typography;
 const FontFamily = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
+  const { t } = useTranslation();
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
@@ -27,7 +29,10 @@ const FontFamily = (): JSX.Element => {
   /************* This section will include this component general function *************/
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
-    <Form.Item name="font-family" label={<Text strong>Font Family</Text>}>
+    <Form.Item
+      name="font-family"
+      label={<Text strong>{t("property.font_family")}</Text>}
+    >
       <Select
         style={{ width: 120, textAlign: "left" }}
         options={[

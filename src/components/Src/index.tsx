@@ -11,6 +11,7 @@ import { Button, Flex, Form, Input, Typography } from "antd";
 import { useProperty } from "@/hooks";
 const { Text } = Typography;
 import "./style.css";
+import { useTranslation } from "react-i18next";
 
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
@@ -25,6 +26,8 @@ interface SrcProps {
 const Src: React.FC<SrcProps> = ({ label, name }): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
+  const { t } = useTranslation();
+
   const { setProperty } = useProperty() as {
     property: { src: string } | undefined;
     setProperty: (property: { src: string }) => void;
@@ -73,7 +76,7 @@ const Src: React.FC<SrcProps> = ({ label, name }): JSX.Element => {
             style={{ padding: 0 }}
             onClick={handleUpload}
           >
-            Upload Image
+            {t("basic.upload_image")}
           </Button>
         </Flex>
       }
@@ -81,7 +84,7 @@ const Src: React.FC<SrcProps> = ({ label, name }): JSX.Element => {
         return value === "" ? undefined : value;
       }}
     >
-      <Input placeholder="Enter a url" />
+      <Input placeholder="https://www.example.com" />
     </Form.Item>
   );
 };

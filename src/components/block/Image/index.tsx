@@ -15,6 +15,7 @@ import {
   Width,
 } from "@/components";
 import { Checkbox, Form, Input, Typography } from "antd";
+import { useTranslation } from "react-i18next";
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
@@ -24,6 +25,7 @@ const { Text } = Typography;
 const ImageBlock = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
+  const { t } = useTranslation();
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
@@ -37,17 +39,17 @@ const ImageBlock = (): JSX.Element => {
   return (
     <>
       <>
-        <EDivider>IMAGE STYLES</EDivider>
+        <EDivider>{t("basic.image_style")}</EDivider>
 
-        <Src name="src" label="Image Source" />
+        <Src name="src" label={t("property.image_source")} />
 
         <Form.Item
           labelCol={{ span: 24 }}
           name="href"
-          label={<Text strong>Image Link</Text>}
+          label={<Text strong>{t("property.image_link")}</Text>}
           style={{ marginBottom: 6 }}
         >
-          <Input placeholder="Enter a link url" />
+          <Input placeholder="https://www.example.com" />
         </Form.Item>
 
         <Form.Item
@@ -58,20 +60,20 @@ const ImageBlock = (): JSX.Element => {
           }}
           style={{ textAlign: "left" }}
         >
-          <Checkbox>Open link in new tab</Checkbox>
+          <Checkbox>{t("basic.open_link_new_tab")}</Checkbox>
         </Form.Item>
 
         <Form.Item
           labelCol={{ span: 24 }}
           name="alt"
-          label={<Text strong>Alt Text</Text>}
+          label={<Text strong>{t("property.alt_text")}</Text>}
         >
-          <Input placeholder="Enter an image description" />
+          <Input placeholder={t("basic.alt_text_plc")} />
         </Form.Item>
       </>
 
       <>
-        <EDivider>SIZE</EDivider>
+        <EDivider>{t("basic.size")}</EDivider>
 
         <Width />
 
@@ -79,7 +81,7 @@ const ImageBlock = (): JSX.Element => {
       </>
 
       <>
-        <EDivider>POSITION</EDivider>
+        <EDivider>{t("basic.position")}</EDivider>
 
         <Align />
 

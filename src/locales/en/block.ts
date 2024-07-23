@@ -1,0 +1,16 @@
+export default {
+  "block.1_column": "1 Column",
+  "block.2_columns": "2 Column",
+  "block.3_columns": "3 Column",
+  "block.4_columns": "4 Column",
+  "block.left_columns": "Left Split",
+  "block.right_columns": "Right Split",
+  "block.text": "Text",
+  "block.image": "Image",
+  "block.button": "Button",
+  "block.divider": "Divider",
+  "block.spacer": "Spacer",
+  "block.social": "Social",
+  "block.body": "Body",
+  "block.section": "Section",
+};

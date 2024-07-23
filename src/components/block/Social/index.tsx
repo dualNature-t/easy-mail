@@ -43,6 +43,7 @@ import {
   Typography,
 } from "antd";
 import { Color } from "antd/es/color-picker";
+import { useTranslation } from "react-i18next";
 const { Text } = Typography;
 
 interface SocialElementAttrType {
@@ -136,6 +137,8 @@ const defaultSocialMap: Record<string, SocialElementAttrType> = {
 const SocialBlock = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
+  const { t } = useTranslation();
+
   const { appData, setAppData } = useAppData();
   const { focusNode } = useFocusNode();
 
@@ -223,7 +226,7 @@ const SocialBlock = (): JSX.Element => {
   return (
     <>
       <>
-        <EDivider>CONTENT</EDivider>
+        <EDivider>{t("basic.content")}</EDivider>
 
         {mjml?.children?.map((item, index) => {
           const attr = item.attributes as SocialElementAttrType;
@@ -269,7 +272,7 @@ const SocialBlock = (): JSX.Element => {
               }
             >
               <Flex justify="space-between" align="center">
-                <Text strong>Network</Text>
+                <Text strong>{t("property.network")}</Text>
                 <Select
                   value={attr.name}
                   style={{ width: 150, textAlign: "left" }}
@@ -291,7 +294,7 @@ const SocialBlock = (): JSX.Element => {
                     { value: "medium", label: "Medium" },
                     { value: "soundcloud", label: "Soundcloud" },
                     { value: "dribbble", label: "Dribbble" },
-                    { value: "custom", label: "Custom" },
+                    { value: "custom", label: t("property.custom") },
                   ]}
                   onChange={(value) => onChange(index, "name", value)}
                 ></Select>
@@ -302,11 +305,11 @@ const SocialBlock = (): JSX.Element => {
                 align="center"
                 style={{ marginTop: 6 }}
               >
-                <Text strong>Label</Text>
+                <Text strong>{t("property.label")}</Text>
                 <Input
                   value={item.content}
                   style={{ width: 150 }}
-                  placeholder="Social label"
+                  placeholder={t("basic.social_label_plc")}
                   onChange={(e) => onChange(index, "content", e.target.value)}
                 />
               </Flex>
@@ -316,11 +319,11 @@ const SocialBlock = (): JSX.Element => {
                 align="center"
                 style={{ marginTop: 6 }}
               >
-                <Text strong>URL</Text>
+                <Text strong>{t("property.url")}</Text>
                 <Input
                   value={attr.href}
                   style={{ width: 150 }}
-                  placeholder="Social url"
+                  placeholder={t("basic.social_url_plc")}
                   onChange={(e) => onChange(index, "href", e.target.value)}
                 />
               </Flex>
@@ -332,11 +335,11 @@ const SocialBlock = (): JSX.Element => {
                     align="center"
                     style={{ marginTop: 6 }}
                   >
-                    <Text strong>Icon</Text>
+                    <Text strong>{t("property.icon")}</Text>
                     <Input
                       value={attr?.src}
                       style={{ width: 150 }}
-                      placeholder="Icon url"
+                      placeholder={t("basic.social_icon")}
                       onChange={(e) => onChange(index, "src", e.target.value)}
                     />
                   </Flex>
@@ -346,7 +349,7 @@ const SocialBlock = (): JSX.Element => {
                     align="center"
                     style={{ marginTop: 6 }}
                   >
-                    <Text strong>Icon Color</Text>
+                    <Text strong>{t("property.icon_color")}</Text>
                     <ColorPicker
                       format="hex"
                       value={attr?.["background-color"]}
@@ -367,23 +370,23 @@ const SocialBlock = (): JSX.Element => {
           type="default"
           onClick={handleAddSocial}
         >
-          Add Social
+          {t("basic.add_social")}
         </Button>
       </>
 
       <>
-        <EDivider>SOCIAL STYLES</EDivider>
+        <EDivider>{t("basic.social_style")}</EDivider>
 
         <EInputNumber
           step={1}
           name="icon-size"
-          label={<Text strong>Icon Size</Text>}
+          label={<Text strong>{t("property.icon_size")}</Text>}
         />
 
         <EInputNumber
           step={1}
           name="icon-padding"
-          label={<Text strong>Icon Padding</Text>}
+          label={<Text strong>{t("property.icon_padding")}</Text>}
         />
 
         <BorderRadius />
@@ -391,24 +394,24 @@ const SocialBlock = (): JSX.Element => {
         <EInputNumber
           step={1}
           name="inner-padding"
-          label={<Text strong>Inner Padding</Text>}
+          label={<Text strong>{t("property.inner_padding")}</Text>}
         />
       </>
 
       <>
-        <EDivider>TEXT STYLES</EDivider>
+        <EDivider>{t("basic.text_style")}</EDivider>
 
         <FontFamily />
 
         <EInputNumber
           step={1}
           name="font-size"
-          label={<Text strong>Font Size</Text>}
+          label={<Text strong>{t("property.font_size")}</Text>}
         />
 
         <Form.Item
           name="color"
-          label={<Text strong>Font Color</Text>}
+          label={<Text strong>{t("property.font_color")}</Text>}
           normalize={(value: Color) => {
             return value.toHexString();
           }}
@@ -418,19 +421,19 @@ const SocialBlock = (): JSX.Element => {
       </>
 
       <>
-        <EDivider>POSITION</EDivider>
+        <EDivider>{t("basic.position")}</EDivider>
 
-        <Form.Item name="mode" label={<Text strong>Mode</Text>}>
+        <Form.Item name="mode" label={<Text strong>{t("property.mode")}</Text>}>
           <Select
             style={{ width: 120, textAlign: "left" }}
             options={[
               {
                 value: "vertical",
-                label: "Vertical",
+                label: t("property.vertical"),
               },
               {
                 value: "horizontal",
-                label: "Horizontal",
+                label: t("property.horizontal"),
               },
             ]}
           ></Select>

@@ -42,7 +42,7 @@ export const useDropContainer = () => {
   const { dataTransfer, setDataTransfer } = useDataTransfer();
   const { block } = useDropBlock();
   const { editorTool } = useEditorTool();
-  const { skin } = useConfig();
+  const { skin, lang } = useConfig();
   useFocusTool();
 
   const [ref, setRef] = useState<Element | null>(null);
@@ -266,6 +266,7 @@ export const useDropContainer = () => {
           selector: "#editor",
           inline: true,
           menubar: false,
+          language: lang,
           skin: skin === "light" ? "oxide" : "oxide-dark",
           plugins: "autolink link",
           toolbar: [
@@ -307,7 +308,7 @@ export const useDropContainer = () => {
     return () => {
       ref.removeEventListener("click", clickFn, false);
     };
-  }, [editorTool, ref]);
+  }, [editorTool, ref, lang, skin]);
 
   useEffect(() => {
     if (!appData || !ref) return;

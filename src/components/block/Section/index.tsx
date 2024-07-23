@@ -22,6 +22,7 @@ import { getIdxByNode, onLayoutChange } from "@/utils";
 import { Button, ColorPicker, Flex, Form, Select, Typography } from "antd";
 import { Color } from "antd/es/color-picker";
 import React from "react";
+import { useTranslation } from "react-i18next";
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
@@ -31,6 +32,7 @@ const { Text } = Typography;
 const SectionBlock = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
+  const { t } = useTranslation();
   const { appData, setAppData } = useAppData();
   const { focusNode } = useFocusNode();
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
@@ -60,7 +62,7 @@ const SectionBlock = (): JSX.Element => {
   return (
     <>
       <>
-        <EDivider>LAYOUT</EDivider>
+        <EDivider>{t("basic.layout")}</EDivider>
 
         <Flex justify="space-around">
           {renderData.map((item) => {
@@ -79,14 +81,14 @@ const SectionBlock = (): JSX.Element => {
       </>
 
       <>
-        <EDivider>SECTION STYLES</EDivider>
+        <EDivider>{t("basic.section_style")}</EDivider>
 
         <BorderRadius />
         <Border />
 
         <Form.Item
           name="background-color"
-          label={<Text strong>Background Color</Text>}
+          label={<Text strong>{t("property.background_color")}</Text>}
           normalize={(value: Color) => {
             return value.toHexString();
           }}
@@ -94,38 +96,38 @@ const SectionBlock = (): JSX.Element => {
           <ColorPicker showText format="hex" />
         </Form.Item>
 
-        <Src name="background-url" label="Background Image" />
+        <Src name="background-url" label={t("property.background_image")} />
 
         <Form.Item
           name="background-repeat"
-          label={<Text strong>Background Repeat</Text>}
+          label={<Text strong>{t("property.background_repeat")}</Text>}
         >
           <Select
             style={{ width: 120, textAlign: "left" }}
             options={[
-              { value: "repeat", label: "Repeat" },
-              { value: "no-repeat", label: "No-Repeat" },
+              { value: "repeat", label: t("property.repeat") },
+              { value: "no-repeat", label: t("property.no_repeat") },
             ]}
           ></Select>
         </Form.Item>
 
         <Form.Item
           name="background-size"
-          label={<Text strong>Background Size</Text>}
+          label={<Text strong>{t("property.background_size")}</Text>}
         >
           <Select
             style={{ width: 120, textAlign: "left" }}
             options={[
-              { value: "auto", label: "Auto" },
-              { value: "cover", label: "Cover" },
-              { value: "contain", label: "Contain" },
+              { value: "auto", label: t("property.auto") },
+              { value: "cover", label: t("property.cover") },
+              { value: "contain", label: t("property.contain") },
             ]}
           ></Select>
         </Form.Item>
       </>
 
       <>
-        <EDivider>POSITION</EDivider>
+        <EDivider>{t("basic.position")}</EDivider>
 
         <Padding />
       </>

@@ -7,6 +7,7 @@
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
 import { Flex, theme } from "antd";
+import { useTranslation } from "react-i18next";
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 
@@ -28,6 +29,7 @@ const ECheckbox: React.FC<ECheckboxProps> = ({
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
   const { token } = theme.useToken();
+  const { t } = useTranslation();
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
@@ -64,7 +66,7 @@ const ECheckbox: React.FC<ECheckboxProps> = ({
             }}
             key={option.value}
           >
-            {option.label}
+            {t(`property.${option.label}`)}
           </div>
         );
       })}

@@ -16,6 +16,7 @@ import {
 } from "../Icon";
 import { useProperty } from "@/hooks";
 import { EInputNumber } from "..";
+import { useTranslation } from "react-i18next";
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
@@ -46,6 +47,8 @@ const radiusIconMap: Record<RadiusType, React.ReactNode> = {
 const BorderRadius = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
+  const { t } = useTranslation();
+
   const [open, setOpen] = useState(false);
   const { property, setProperty } = useProperty();
 
@@ -135,7 +138,7 @@ const BorderRadius = (): JSX.Element => {
   return (
     <div style={{ marginBottom: 24 }}>
       <Flex align="center" justify="space-between" style={{ marginBottom: 12 }}>
-        <Text strong>Border Radius</Text>
+        <Text strong>{t("property.border_radius")}</Text>
         {open ? (
           <Button
             style={{ paddingRight: 0 }}
@@ -148,7 +151,7 @@ const BorderRadius = (): JSX.Element => {
             }}
             type="link"
           >
-            Less Options
+            {t("basic.less_option")}
           </Button>
         ) : (
           <Flex align="center">
@@ -157,7 +160,7 @@ const BorderRadius = (): JSX.Element => {
               onClick={() => setOpen(true)}
               type="link"
             >
-              More Options
+              {t("basic.more_option")}
             </Button>
             <EInputNumber
               hasForm={false}

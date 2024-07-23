@@ -21,6 +21,7 @@ import { BasicEnum } from "@/constant";
 import { useEffect } from "react";
 import { useFocusNode, useProperty } from "@/hooks";
 import { isEmpty } from "@/utils";
+import { useTranslation } from "react-i18next";
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
@@ -39,7 +40,7 @@ const BlockNodeMap = {
 const Attributes = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
-
+  const { t } = useTranslation();
   const { token } = theme.useToken();
   const [form] = Form.useForm();
   const { focusNode } = useFocusNode();
@@ -87,7 +88,7 @@ const Attributes = (): JSX.Element => {
         ></Col>
         <Col>
           <Typography.Title level={4} style={{ margin: 0 }}>
-            {nodeTag?.split("-")[1].toUpperCase()}
+            {t(`block.${nodeTag?.split("-")[1]}`).toUpperCase()}
           </Typography.Title>
         </Col>
       </Row>

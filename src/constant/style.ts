@@ -1,6 +1,16 @@
+import { LangType } from "@/context";
 import { AliasToken } from "antd/es/theme/internal";
+import { TFunction } from "i18next";
 
-export const getStyle = (token: AliasToken) => {
+export const getStyle = ({
+  token,
+  t,
+  lng,
+}: {
+  token: AliasToken;
+  t: TFunction;
+  lng: LangType;
+}) => {
   const primary = token.colorPrimaryHover;
   const primaryHover = token.colorPrimaryBorder;
   const colorWhite = token.colorWhite;
@@ -47,7 +57,7 @@ export const getStyle = (token: AliasToken) => {
       background-image: url(data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%3F%3E%0A%3Csvg%20width%3D%2219px%22%20height%3D%2219px%22%20viewBox%3D%220%200%2019%2019%22%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%3E%0A%20%20%20%20%3Cg%20id%3D%22trash%22%20stroke%3D%22none%22%20stroke-width%3D%221%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%0A%20%20%20%20%20%20%20%20%3Cg%20fill%3D%22%23ffffff%22%20id%3D%22Combined-Shape%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Cpath%20d%3D%22M11%2C2%20C11.5522847%2C2%2012%2C2.44771525%2012%2C3%20L15.0014977%2C3%20C15.5529553%2C3%2016%2C3.44266033%2016%2C3.99895656%20L16%2C5.00104344%20C16%2C5.55275191%2015.5525106%2C6%2015.0014977%2C6%20L15%2C6%20L15%2C15%20C15%2C16.1045695%2014.1045695%2C17%2013%2C17%20L6%2C17%20C4.8954305%2C17%204%2C16.1045695%204%2C15%20L4%2C6%20L3.99850233%2C6%20C3.44704472%2C6%203%2C5.55733967%203%2C5.00104344%20L3%2C3.99895656%20C3%2C3.44724809%203.44748943%2C3%203.99850233%2C3%20L7%2C3%20C7%2C2.44771525%207.44771525%2C2%208%2C2%20L11%2C2%20Z%20M7%2C7%20L6%2C7%20L6%2C15%20L7%2C15%20L7%2C7%20Z%20M10%2C7%20L9%2C7%20L9%2C15%20L10%2C15%20L10%2C7%20Z%20M13%2C7%20L12%2C7%20L12%2C15%20L13%2C15%20L13%2C7%20Z%22%3E%3C%2Fpath%3E%0A%20%20%20%20%20%20%20%20%3C%2Fg%3E%0A%20%20%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E);
     }
     .editor-body .mj-body:empty:before, .mj-column-empty > table:before {
-      content: "Empty Canvas - Drop content here";
+      content: "${t("basic.empty_body", { lng })}";
       display: block;
       padding-top: 20px;
       padding-bottom: 20px;
@@ -63,10 +73,10 @@ export const getStyle = (token: AliasToken) => {
       vertical-align: middle;
     }
     .mj-column-empty > table:before {
-      content: "Empty Column";
+      content: "${t("basic.empty_column", { lng })}";
     }
     .mj-column-empty.mj-column-per-100 > table:before {
-      content: "Empty Section - Drop content here";
+      content: "${t("basic.empty_section", { lng })}";
     }
     .editor-body {
       user-select: none;
@@ -84,7 +94,7 @@ export const getStyle = (token: AliasToken) => {
       z-index: 1;
     }
     .editor-body .mj-section.hover:before, .editor-body .mj-section.focus:before, .editor-body .mj-section.focus-child:before {
-      content: "section";
+      content: "${t("block.section", { lng })}";
       display: block;
       position: absolute;
       left: -2px;
@@ -139,7 +149,7 @@ export const getStyle = (token: AliasToken) => {
       background-color: ${primary};
     }
     .editor-body .mj-text > div:empty:before {
-      content: "Please enter text";
+      content: "${t("basic.empty_text_plc", { lng })}";
       display: block;
       width: 100%;
       height: 14px;
@@ -211,7 +221,7 @@ export const getStyle = (token: AliasToken) => {
       background-color: ${primary};
     }
     .editor-body .mj-button a:empty:before, .editor-body .mj-button p:empty:before, .editor-body .mj-button a > div:empty:before, .editor-body .mj-button p > div:empty:before {
-      content: "Please enter text";
+      content: "${t("basic.empty_text_plc", { lng })}";
       display: block;
       width: 100%;
       height: 14px;

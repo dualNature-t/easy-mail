@@ -11,6 +11,7 @@ import { Card, ColorPicker, Flex, Select, Switch, Typography } from "antd";
 import { ECheckbox, EInputNumber } from "..";
 import { useProperty } from "@/hooks";
 import "./style.css";
+import { useTranslation } from "react-i18next";
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
@@ -25,10 +26,10 @@ type BorderType = `${BorderEnum}`;
 
 const defaultConfig = "1px solid #000";
 const dirOptions = [
-  { label: "Top", value: BorderEnum.Top },
-  { label: "Bottom", value: BorderEnum.Bottom },
-  { label: "Left", value: BorderEnum.Left },
-  { label: "Right", value: BorderEnum.Right },
+  { label: "top", value: BorderEnum.Top },
+  { label: "bottom", value: BorderEnum.Bottom },
+  { label: "left", value: BorderEnum.Left },
+  { label: "right", value: BorderEnum.Right },
 ];
 const borderStyleOptions = [
   { label: "Solid", value: "solid" },
@@ -46,6 +47,8 @@ const borderStyleOptions = [
 const Border = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
+  const { t } = useTranslation();
+
   const [open, setOpen] = useState(false);
   const { property, setProperty } = useProperty() as {
     property: Record<BorderType | "border", string>;
@@ -145,7 +148,7 @@ const Border = (): JSX.Element => {
   return (
     <div style={{ marginBottom: 24 }}>
       <Flex align="center" justify="space-between">
-        <Text strong>Border</Text>
+        <Text strong>{t("property.border")}</Text>
 
         <Switch
           value={!!(property as { border: string })?.border}
@@ -170,7 +173,7 @@ const Border = (): JSX.Element => {
             justify="space-between"
             style={{ marginBottom: 12 }}
           >
-            <Text strong>Border Width</Text>
+            <Text strong>{t("property.border_width")}</Text>
             <EInputNumber
               hasForm={false}
               step={1}
@@ -186,7 +189,7 @@ const Border = (): JSX.Element => {
             justify="space-between"
             style={{ marginBottom: 12 }}
           >
-            <Text strong>Border Style</Text>
+            <Text strong>{t("property.border_style")}</Text>
             <Select
               value={borderStyle}
               style={{ width: 100, textAlign: "left" }}
@@ -198,7 +201,7 @@ const Border = (): JSX.Element => {
           </Flex>
 
           <Flex align="center" justify="space-between">
-            <Text strong>Border Color</Text>
+            <Text strong>{t("property.border_color")}</Text>
             <ColorPicker
               showText
               value={borderColor}

@@ -1,8 +1,8 @@
 /**
  * @file
- * @date 2024-06-27
- * @author haodong.wang
- * @lastModify  2024-06-27
+ * @date
+ * @author
+ * @lastModify
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
@@ -23,6 +23,7 @@ import {
   SpacerOutlined,
   TextOutlined,
 } from "@/components/Icon";
+import { useTranslation } from "react-i18next";
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
@@ -30,66 +31,76 @@ export const columnDataTransferMap: DataTransferMapType<ColumnType>[] = [
   {
     type: "column",
     value: "mj-column-1",
-    label: "1 Column",
+    label: "1_column",
     icon: <Column1Outlined />,
   },
   {
     type: "column",
     value: "mj-column-2",
-    label: "2 Column",
+    label: "2_columns",
     icon: <Column2Outlined />,
   },
   {
     type: "column",
     value: "mj-column-3",
-    label: "3 Column",
+    label: "3_columns",
     icon: <Column3Outlined />,
   },
   {
     type: "column",
     value: "mj-column-4",
-    label: "4 Column",
+    label: "4_columns",
     icon: <Column4Outlined />,
   },
   {
     type: "column",
     value: "mj-column-left",
-    label: "Left Split",
+    label: "left_columns",
     icon: <ColumnLeftOutlined />,
   },
   {
     type: "column",
     value: "mj-column-right",
-    label: "Right Split",
+    label: "right_columns",
     icon: <ColumnRightOutlined />,
   },
 ];
 
 export const basicDataTransferMap: DataTransferMapType<BasicBlockType>[] = [
-  { type: "basic", value: "mj-text", label: "Text", icon: <TextOutlined /> },
-  { type: "basic", value: "mj-image", label: "Image", icon: <ImageOutlined /> },
+  {
+    type: "basic",
+    value: "mj-text",
+    label: "text",
+    icon: <TextOutlined />,
+  },
+  {
+    type: "basic",
+    value: "mj-image",
+    label: "image",
+    icon: <ImageOutlined />,
+  },
   {
     type: "basic",
     value: "mj-button",
-    label: "Button",
+    label: "button",
     icon: <ButtonOutlined />,
   },
   {
     type: "basic",
     value: "mj-divider",
-    label: "Divider",
+    label: "divider",
     icon: <DividerOutlined />,
   },
   {
     type: "basic",
     value: "mj-spacer",
-    label: "Spacer",
+    label: "spacer",
     icon: <SpacerOutlined />,
   },
   {
     type: "basic",
     value: "mj-social",
-    label: "Social",
+    label: "social",
     icon: <SocialOutlined />,
   },
 ];
@@ -98,6 +109,7 @@ export const basicDataTransferMap: DataTransferMapType<BasicBlockType>[] = [
 const Blocks = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
+  const { t } = useTranslation();
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
@@ -110,15 +122,15 @@ const Blocks = (): JSX.Element => {
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
     <div style={{ margin: 10 }}>
-      <Typography.Title level={5}>添加组件</Typography.Title>
+      <Typography.Title level={5}>{t("basic.add_component")}</Typography.Title>
 
       <>
-        <Typography.Text strong>布局组件</Typography.Text>
+        <Typography.Text strong>{t("basic.layout_component")}</Typography.Text>
         <DragBlocks value={columnDataTransferMap} />
       </>
 
       <>
-        <Typography.Text strong>基础组件</Typography.Text>
+        <Typography.Text strong>{t("basic.basic_component")}</Typography.Text>
         <DragBlocks value={basicDataTransferMap} />
       </>
     </div>

@@ -9,6 +9,7 @@
 import { EDivider, EInputNumber, Padding } from "@/components";
 import { ColorPicker, Form, Typography } from "antd";
 import { Color } from "antd/es/color-picker";
+import { useTranslation } from "react-i18next";
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
@@ -18,6 +19,7 @@ const { Text } = Typography;
 const DividerBlock = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
+  const { t } = useTranslation();
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
@@ -31,23 +33,23 @@ const DividerBlock = (): JSX.Element => {
   return (
     <>
       <>
-        <EDivider>DIVIDER STYLES</EDivider>
+        <EDivider>{t("basic.divider_style")}</EDivider>
 
         <EInputNumber
           name="width"
           options={["px", "%"]}
-          label={<Text strong>Width</Text>}
+          label={<Text strong>{t("property.width")}</Text>}
         />
 
         <EInputNumber
           step={1}
           name="border-width"
-          label={<Text strong>Border Width</Text>}
+          label={<Text strong>{t("property.border_width")}</Text>}
         />
 
         <Form.Item
           name="border-color"
-          label={<Text strong>Border Color</Text>}
+          label={<Text strong>{t("property.border_color")}</Text>}
           normalize={(value: Color) => {
             return value.toHexString();
           }}
@@ -56,7 +58,7 @@ const DividerBlock = (): JSX.Element => {
         </Form.Item>
       </>
       <>
-        <EDivider>POSITION</EDivider>
+        <EDivider>{t("basic.position")}</EDivider>
 
         <Padding />
       </>

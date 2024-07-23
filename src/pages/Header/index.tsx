@@ -8,16 +8,12 @@
 /** This section will include all the necessary dependence for this tsx file */
 import { BasicEnum } from "@/constant";
 import { useCurrentNode, useFocusNode } from "@/hooks";
-import {
-  getEditorWindow,
-  getNodeByTarget,
-  isSection,
-  toFirstUpperCase,
-} from "@/utils";
+import { getNodeByTarget, isSection, toFirstUpperCase } from "@/utils";
 import { DesktopOutlined, MobileOutlined } from "@ant-design/icons";
-import { Breadcrumb, Button, Flex, Segmented, theme } from "antd";
+import { Breadcrumb, Flex, Segmented, theme } from "antd";
 import { useState } from "react";
 import { IFRAME_ID } from "../Main";
+import { useTranslation } from "react-i18next";
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
@@ -27,6 +23,7 @@ import { IFRAME_ID } from "../Main";
 const Header = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
+  const { t } = useTranslation();
   const { token } = theme.useToken();
   const { focusNode, setFocusNode } = useFocusNode();
   const { currentFocusNode, setFocusNodeCls } = useCurrentNode();
@@ -48,7 +45,7 @@ const Header = (): JSX.Element => {
             setFocusNode(null);
           }}
         >
-          Body
+          {t("block.body")}
         </a>
       ),
     };
@@ -67,7 +64,7 @@ const Header = (): JSX.Element => {
             setFocusNode(result as HTMLElement);
           }}
         >
-          Section
+          {t("block.section")}
         </a>
       ),
     };
@@ -76,19 +73,19 @@ const Header = (): JSX.Element => {
         return [
           body,
           {
-            title: "Section",
+            title: t("block.section"),
           },
         ];
       } else {
         const block = {
-          title: toFirstUpperCase(focusNode.classList[0].split("-")[1]),
+          title: t(`block.${focusNode.classList[0].split("-")[1]}`),
         };
         return [body, section, block];
       }
     } else {
       return [
         {
-          title: "Body",
+          title: t("block.body"),
         },
       ];
     }

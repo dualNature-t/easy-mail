@@ -10,6 +10,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Flex, Switch, Typography } from "antd";
 import { useProperty } from "@/hooks";
 import { EInputNumber } from "..";
+import { useTranslation } from "react-i18next";
 
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
@@ -20,6 +21,7 @@ const { Text } = Typography;
 const Width = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
+  const { t } = useTranslation();
   const { property, setProperty } = useProperty();
 
   const [open, setOpen] = useState(false);
@@ -47,7 +49,7 @@ const Width = (): JSX.Element => {
   return (
     <div>
       <Flex justify="space-between" style={{ marginBottom: 24 }}>
-        <Text strong>Full Width</Text>
+        <Text strong>{t("property.full_width")}</Text>
         <Switch
           value={width === ""}
           onChange={(value: boolean) => {
@@ -62,7 +64,7 @@ const Width = (): JSX.Element => {
 
       {open && (
         <Flex justify="space-between" style={{ marginBottom: 24 }}>
-          <Text strong>Width</Text>
+          <Text strong>{t("property.width")}</Text>
           <EInputNumber
             hasForm={false}
             value={parseInt(width)}

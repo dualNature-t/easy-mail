@@ -11,6 +11,7 @@ import { Button, Flex, Typography } from "antd";
 import { useProperty } from "@/hooks";
 import { EInputNumber } from "..";
 import { toFirstUpperCase } from "@/utils";
+import { useTranslation } from "react-i18next";
 
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
@@ -35,6 +36,8 @@ const initPaddingValue: Record<PaddingType, number> = {
 const Padding = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
+  const { t } = useTranslation();
+
   const [open, setOpen] = useState(false);
   const { property, setProperty } = useProperty();
 
@@ -123,7 +126,7 @@ const Padding = (): JSX.Element => {
   return (
     <>
       <Flex align="center" justify="space-between">
-        <Text strong>Padding</Text>
+        <Text strong>{t("property.padding")}</Text>
         {open ? (
           <Button
             style={{ paddingRight: 0 }}
@@ -136,7 +139,7 @@ const Padding = (): JSX.Element => {
             }}
             type="link"
           >
-            Less Options
+            {t("basic.less_option")}
           </Button>
         ) : (
           <Flex align="center">
@@ -145,7 +148,7 @@ const Padding = (): JSX.Element => {
               onClick={() => setOpen(true)}
               type="link"
             >
-              More Options
+              {t("basic.more_option")}
             </Button>
             <EInputNumber
               hasForm={false}
@@ -165,7 +168,7 @@ const Padding = (): JSX.Element => {
               return (
                 <Flex align="center" style={{ marginTop: 12 }} key={item}>
                   <Text style={{ width: 50, textAlign: "left" }}>
-                    {toFirstUpperCase(item.split("-")[1])}
+                    {t(`property.${item.split("-")[1]}`)}
                   </Text>
                   <EInputNumber
                     hasForm={false}

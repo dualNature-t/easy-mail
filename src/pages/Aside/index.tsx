@@ -12,6 +12,7 @@ import { Flex, Tabs, TabsProps, theme } from "antd";
 import Blocks from "./components/Blocks";
 import Attributes from "./components/Attributes";
 import { EditOutlined, PlusOutlined } from "@ant-design/icons";
+import { useTranslation } from "react-i18next";
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
@@ -22,6 +23,7 @@ const Aside = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
   const { token } = theme.useToken();
+  const { t } = useTranslation();
 
   const { tab, setTab } = useTab();
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
@@ -33,7 +35,7 @@ const Aside = (): JSX.Element => {
       label: (
         <Flex vertical align="center" gap={4} style={{ padding: "10px 0" }}>
           <PlusOutlined />
-          添加
+          {t("basic.add")}
         </Flex>
       ),
     },
@@ -42,7 +44,7 @@ const Aside = (): JSX.Element => {
       label: (
         <Flex vertical align="center" gap={4} style={{ padding: "10px 0" }}>
           <EditOutlined />
-          编辑
+          {t("basic.edit")}
         </Flex>
       ),
     },

@@ -16,6 +16,7 @@ import {
 } from "@/components";
 import { Form, Typography, ColorPicker } from "antd";
 import { Color } from "antd/es/color-picker";
+import { useTranslation } from "react-i18next";
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
@@ -25,6 +26,7 @@ const { Text } = Typography;
 const TextBlock = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
+  const { t } = useTranslation();
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
@@ -38,25 +40,25 @@ const TextBlock = (): JSX.Element => {
   return (
     <>
       <>
-        <EDivider>TEXT STYLES</EDivider>
+        <EDivider>{t("basic.text_style")}</EDivider>
 
         <FontFamily />
 
         <EInputNumber
           step={1}
           name="font-size"
-          label={<Text strong>Font Size</Text>}
+          label={<Text strong>{t("property.font_size")}</Text>}
         />
         <EInputNumber
           name="line-height"
           options={["px", "%", "-"]}
-          label={<Text strong>Line Height</Text>}
+          label={<Text strong>{t("property.line_height")}</Text>}
           step={0.1}
         />
 
         <Form.Item
           name="color"
-          label={<Text strong>Font Color</Text>}
+          label={<Text strong>{t("property.font_color")}</Text>}
           normalize={(value: Color) => {
             return value.toHexString();
           }}
@@ -66,7 +68,7 @@ const TextBlock = (): JSX.Element => {
       </>
 
       <>
-        <EDivider>POSITION</EDivider>
+        <EDivider>{t("basic.position")}</EDivider>
 
         <Align />
 

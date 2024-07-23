@@ -7,10 +7,12 @@
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
 import { EDITOR_BODY, getStyle } from "@/constant";
-import { useAppData, useDropContainer } from "@/hooks";
-import { getDocByData } from "@/utils";
+import { LangType } from "@/context";
+import { useAppData, useConfig, useDropContainer } from "@/hooks";
+import { getDocByData, getEditorWindow } from "@/utils";
 import { theme } from "antd";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
@@ -60,12 +62,16 @@ export const IFRAME_ID = "easy-mail-iframe";
 const Main = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
+  const { t, i18n } = useTranslation();
+  const { lang, skin } = useConfig();
   const { token } = theme.useToken();
   const { appData } = useAppData();
   const { setRef } = useDropContainer();
+
   if (!appData) {
     return <></>;
   }
+
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
@@ -75,14 +81,24 @@ const Main = (): JSX.Element => {
   }, []);
 
   const setMailStyle = useCallback(
-    (head: HTMLElement) => {
-      const style = document.createElement("style");
-
-      const styleStr = getStyle(token);
-      style.innerHTML = styleStr;
-      head?.appendChild(style);
+    (head?: HTMLHeadElement, lng?: LangType) => {
+      if (!head) return;
+      let style = head.querySelector("#easy-mail-style");
+      const styleStr = getStyle({
+        token,
+        t,
+        lng: lng ?? (i18n.language as LangType),
+      });
+      if (style) {
+        style.innerHTML = styleStr;
+      } else {
+        style = document.createElement("style");
+        style.setAttribute("id", "easy-mail-style");
+        style.innerHTML = styleStr;
+        head?.appendChild(style);
+      }
     },
-    [token]
+    [lang, skin]
   );
 
   /* <------------------------------------ **** PARAMETER END **** ------------------------------------ */
@@ -94,7 +110,7 @@ const Main = (): JSX.Element => {
       const iframeDocument = target.contentWindow.document.documentElement;
       setRef(iframeDocument);
 
-      const head = iframeDocument.querySelector("head") as HTMLElement;
+      const head = iframeDocument.querySelector("head") as HTMLHeadElement;
       const body = iframeDocument.querySelector("body");
       const styles = iframeDocument.querySelectorAll("style");
 
@@ -107,6 +123,12 @@ const Main = (): JSX.Element => {
   /* <------------------------------------ **** FUNCTION END **** ------------------------------------ */
   /* <------------------------------------ **** EFFECT START **** ------------------------------------ */
   /************* This section will include this component general function *************/
+  useEffect(() => {
+    setMailStyle(
+      getEditorWindow().document.querySelector("head") as HTMLHeadElement,
+      lang
+    );
+  }, [lang, skin]);
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
     <div

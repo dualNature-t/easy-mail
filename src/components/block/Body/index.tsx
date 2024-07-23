@@ -9,6 +9,7 @@
 import { EDivider, EInputNumber } from "@/components";
 import { ColorPicker, Form, Typography } from "antd";
 import { Color } from "antd/es/color-picker";
+import { useTranslation } from "react-i18next";
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
@@ -18,6 +19,7 @@ const { Text } = Typography;
 const BodyBlock = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
+  const { t } = useTranslation();
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
@@ -30,11 +32,11 @@ const BodyBlock = (): JSX.Element => {
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
     <>
-      <EDivider>BODY STYLES</EDivider>
+      <EDivider>{t("basic.body_style")}</EDivider>
 
       <Form.Item
         name="background-color"
-        label={<Text strong>Background Color</Text>}
+        label={<Text strong>{t("property.background_color")}</Text>}
         normalize={(value: Color) => {
           return value.toHexString();
         }}
@@ -42,7 +44,10 @@ const BodyBlock = (): JSX.Element => {
         <ColorPicker showText format="hex" />
       </Form.Item>
 
-      <EInputNumber name="width" label={<Text strong>Width</Text>} />
+      <EInputNumber
+        name="width"
+        label={<Text strong>{t("property.width")}</Text>}
+      />
     </>
   );
 };

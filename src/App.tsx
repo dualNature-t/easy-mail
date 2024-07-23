@@ -6,7 +6,14 @@
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import { forwardRef, useImperativeHandle, useRef, useState } from "react";
+import {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { ConfigProvider, Flex, theme } from "antd";
 import { AppDataType, DataTransferType, TabType } from "./constant";
 import {
@@ -21,6 +28,7 @@ import Aside from "./pages/Aside";
 import Main from "./pages/Main";
 import { deepClone } from "./utils";
 import "./App.css";
+import { useTranslation } from "react-i18next";
 
 export interface IRefProps {
   getData: () => AppDataType;
@@ -33,8 +41,9 @@ export interface IRefProps {
 const App = forwardRef<IRefProps, AppProps>((props, ref) => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
+  const { i18n } = useTranslation();
   const mergeProps = { ...defaultConfig, ...props };
-  const { value, width, height, colorPrimary, skin } = mergeProps;
+  const { value, width, height, colorPrimary, skin, lang } = mergeProps;
 
   const [appData, setAppData] = useState<AppDataType>(
     deepClone(value as AppDataType)
@@ -67,6 +76,9 @@ const App = forwardRef<IRefProps, AppProps>((props, ref) => {
   /* <------------------------------------ **** FUNCTION END **** ------------------------------------ */
   /* <------------------------------------ **** EFFECT START **** ------------------------------------ */
   /************* This section will include this component general function *************/
+  useEffect(() => {
+    i18n.changeLanguage(lang);
+  }, [lang]);
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
     <ConfigProvider

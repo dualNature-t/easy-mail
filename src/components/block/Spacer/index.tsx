@@ -8,6 +8,7 @@
 /** This section will include all the necessary dependence for this tsx file */
 import { EDivider, EInputNumber } from "@/components";
 import { Typography } from "antd";
+import { useTranslation } from "react-i18next";
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
@@ -17,6 +18,7 @@ const { Text } = Typography;
 const SpacerBlock = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
+  const { t } = useTranslation();
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
@@ -29,9 +31,12 @@ const SpacerBlock = (): JSX.Element => {
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
     <>
-      <EDivider>SPACER STYLES</EDivider>
+      <EDivider>{t("basic.spacer_style")}</EDivider>
 
-      <EInputNumber name="height" label={<Text strong>Height</Text>} />
+      <EInputNumber
+        name="height"
+        label={<Text strong>{t("property.height")}</Text>}
+      />
     </>
   );
 };

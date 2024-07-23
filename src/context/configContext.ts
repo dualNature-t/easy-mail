@@ -1,6 +1,8 @@
 import { AppDataType } from "@/constant";
 import { createContext } from "react";
 
+export type LangType = "zh_CN" | "en_US";
+
 export const defaultAppData: AppDataType = {
   tagName: "mjml",
   attributes: {
@@ -22,7 +24,7 @@ export const defaultAppData: AppDataType = {
 export const defaultConfig: AppProps = {
   skin: "light",
   colorPrimary: "#1677ff",
-  lang: "en",
+  lang: "en_US",
   value: defaultAppData,
   width: "100%",
   height: "100%",
@@ -33,7 +35,7 @@ export const defaultConfig: AppProps = {
 export interface AppProps {
   skin?: "light" | "dark";
   colorPrimary?: string;
-  lang?: "zh" | "en";
+  lang?: LangType;
   value?: AppDataType;
   width?: string;
   height?: string;

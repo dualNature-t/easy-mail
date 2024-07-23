@@ -16,6 +16,7 @@ import {
 } from "@/components";
 import { Checkbox, ColorPicker, Form, Input, Switch, Typography } from "antd";
 import { Color } from "antd/es/color-picker";
+import { useTranslation } from "react-i18next";
 
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
@@ -26,6 +27,7 @@ const { Text } = Typography;
 const ButtonBlock = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
+  const { t } = useTranslation();
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
@@ -39,12 +41,12 @@ const ButtonBlock = (): JSX.Element => {
   return (
     <>
       <>
-        <EDivider>BUTTON STYLES</EDivider>
+        <EDivider>{t("basic.button_style")}</EDivider>
 
         <Form.Item
           labelCol={{ span: 24 }}
           name="href"
-          label={<Text strong>Button Link</Text>}
+          label={<Text strong>{t("property.button_link")}</Text>}
           style={{ marginBottom: 6 }}
         >
           <Input placeholder="https://www.example.com" />
@@ -58,16 +60,16 @@ const ButtonBlock = (): JSX.Element => {
           }}
           style={{ textAlign: "left" }}
         >
-          <Checkbox>Open link in new tab</Checkbox>
+          <Checkbox>{t("basic.open_link_new_tab")}</Checkbox>
         </Form.Item>
       </>
 
       <>
-        <EDivider>STYLES</EDivider>
+        <EDivider>{t("basic.styles")}</EDivider>
 
         <Form.Item
           name="width"
-          label={<Text strong>Full Width</Text>}
+          label={<Text strong>{t("property.full_width")}</Text>}
           valuePropName="checked"
           normalize={(value: boolean) => {
             return value ? "100%" : "";
@@ -78,7 +80,7 @@ const ButtonBlock = (): JSX.Element => {
 
         <Form.Item
           name="background-color"
-          label={<Text strong>Background Color</Text>}
+          label={<Text strong>{t("property.background_color")}</Text>}
           normalize={(value: Color) => {
             return value.toHexString();
           }}
@@ -92,24 +94,24 @@ const ButtonBlock = (): JSX.Element => {
       </>
 
       <>
-        <EDivider>TEXT STYLES</EDivider>
+        <EDivider>{t("basic.text_style")}</EDivider>
 
         <EInputNumber
           step={1}
           name="font-size"
-          label={<Text strong>Font Size</Text>}
+          label={<Text strong>{t("property.font_size")}</Text>}
         />
 
         <EInputNumber
           name="line-height"
           options={["px", "%", "-"]}
-          label={<Text strong>Line Height</Text>}
+          label={<Text strong>{t("property.line_height")}</Text>}
           step={0.1}
         />
 
         <Form.Item
           name="color"
-          label={<Text strong>Font Color</Text>}
+          label={<Text strong>{t("property.font_color")}</Text>}
           normalize={(value: Color) => {
             return value.toHexString();
           }}
@@ -119,7 +121,7 @@ const ButtonBlock = (): JSX.Element => {
       </>
 
       <>
-        <EDivider>POSITION</EDivider>
+        <EDivider>{t("basic.position")}</EDivider>
 
         <Align />
 

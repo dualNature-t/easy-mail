@@ -1,0 +1,16 @@
+export default {
+  "block.1_column": "一栏",
+  "block.2_columns": "二栏",
+  "block.3_columns": "三栏",
+  "block.4_columns": "四栏",
+  "block.left_columns": "左侧栏",
+  "block.right_columns": "右侧栏",
+  "block.text": "文本",
+  "block.image": "图片",
+  "block.button": "按钮",
+  "block.divider": "分割线",
+  "block.spacer": "间距",
+  "block.social": "社交",
+  "block.body": "正文",
+  "block.section": "区块",
+};

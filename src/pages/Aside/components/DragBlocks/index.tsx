@@ -9,6 +9,7 @@
 import { Card, Flex, Typography } from "antd";
 import { BasicBlockType, ColumnType, DataTransferMapType } from "@/constant";
 import { useDataTransfer } from "@/hooks";
+import { useTranslation } from "react-i18next";
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
@@ -22,6 +23,7 @@ const DragBlocks: React.FC<DragBlocksProps> = ({ value }): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
   const { setDataTransfer } = useDataTransfer();
+  const { t } = useTranslation();
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
@@ -62,7 +64,9 @@ const DragBlocks: React.FC<DragBlocksProps> = ({ value }): JSX.Element => {
             onDragStart={() => onDragStart(item)}
           >
             {item.icon}
-            <Text strong> {item.label}</Text>
+            <Text style={{ marginTop: 4 }} strong>
+              {t(`block.${item.label}`)}
+            </Text>
           </Card>
         );
       })}
