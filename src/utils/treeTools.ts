@@ -36,6 +36,8 @@ export const onPropertyChange = ({
   let { result, tree } = getTargetTree(appData, idx);
   if (!isEmpty(index)) {
     tree = tree.children?.[index ?? 0] as AppDataType;
+    tree.attributes = { ...property };
+    return result;
   }
   tree.attributes = { ...tree.attributes, ...property };
 

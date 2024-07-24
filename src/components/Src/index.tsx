@@ -9,10 +9,9 @@
 import { UploadOutlined } from "@ant-design/icons";
 import { Button, Flex, Form, Input, Typography } from "antd";
 import { useProperty } from "@/hooks";
-const { Text } = Typography;
 import "./style.css";
 import { useTranslation } from "react-i18next";
-
+const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */

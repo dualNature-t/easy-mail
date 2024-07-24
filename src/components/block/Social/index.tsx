@@ -147,6 +147,7 @@ const SocialBlock = (): JSX.Element => {
     appData: appData as AppDataType,
     idx,
   });
+
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
@@ -156,7 +157,8 @@ const SocialBlock = (): JSX.Element => {
   const onChange = (
     index: number,
     key: keyof SocialElementAttrType | "content",
-    value: string
+    value: string,
+    attribute: SocialElementAttrType
   ) => {
     let result = null;
     if (key === "content") {
@@ -167,7 +169,11 @@ const SocialBlock = (): JSX.Element => {
         index,
       });
     } else {
-      const attr = key === "name" ? defaultSocialMap[value] : { [key]: value };
+      const attr =
+        key === "name"
+          ? defaultSocialMap[value]
+          : ({ ...attribute, [key]: value } as Record<string, unknown>);
+
       result = onPropertyChange({
         appData: appData as AppDataType,
         idx,
@@ -296,7 +302,7 @@ const SocialBlock = (): JSX.Element => {
                     { value: "dribbble", label: "Dribbble" },
                     { value: "custom", label: t("property.custom") },
                   ]}
-                  onChange={(value) => onChange(index, "name", value)}
+                  onChange={(value) => onChange(index, "name", value, attr)}
                 ></Select>
               </Flex>
 
@@ -310,7 +316,9 @@ const SocialBlock = (): JSX.Element => {
                   value={item.content}
                   style={{ width: 150 }}
                   placeholder={t("basic.social_label_plc")}
-                  onChange={(e) => onChange(index, "content", e.target.value)}
+                  onChange={(e) =>
+                    onChange(index, "content", e.target.value, attr)
+                  }
                 />
               </Flex>
 
@@ -324,7 +332,9 @@ const SocialBlock = (): JSX.Element => {
                   value={attr.href}
                   style={{ width: 150 }}
                   placeholder={t("basic.social_url_plc")}
-                  onChange={(e) => onChange(index, "href", e.target.value)}
+                  onChange={(e) =>
+                    onChange(index, "href", e.target.value, attr)
+                  }
                 />
               </Flex>
 
@@ -340,7 +350,9 @@ const SocialBlock = (): JSX.Element => {
                       value={attr?.src}
                       style={{ width: 150 }}
                       placeholder={t("basic.social_icon")}
-                      onChange={(e) => onChange(index, "src", e.target.value)}
+                      onChange={(e) =>
+                        onChange(index, "src", e.target.value, attr)
+                      }
                     />
                   </Flex>
 
@@ -354,7 +366,7 @@ const SocialBlock = (): JSX.Element => {
                       format="hex"
                       value={attr?.["background-color"]}
                       onChange={(_, hex) => {
-                        onChange(index, "background-color", hex);
+                        onChange(index, "background-color", hex, attr);
                       }}
                       showText
                     />
