@@ -11,6 +11,7 @@ export default {
   "basic.drop_here": "放置此区域",
 
   "basic.body_style": "画布样式",
+  "basic.public_style": "全局默认样式",
   "basic.more_option": "更多选项",
   "basic.less_option": "更少选项",
   "basic.upload_image": "上传图片",

@@ -1,5 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
-import { getIdxByNode, getJsonByIdx, onPropertyChange } from "@/utils";
+import {
+  getIdxByNode,
+  getJsonByIdx,
+  formatPrefixPublicProperty,
+  onPropertyChange,
+} from "@/utils";
 import { useAppData, useFocusNode } from ".";
 
 export const useProperty = () => {
@@ -19,8 +24,10 @@ export const useProperty = () => {
 
   useEffect(() => {
     if (!appData || !idx) return;
+    const publicProperty =
+      idx === "0" ? formatPrefixPublicProperty(appData) : {};
     const json = getJsonByIdx({ appData, idx });
-    setProperty(json?.attributes);
+    setProperty({ ...json?.attributes, ...publicProperty });
   }, [idx, appData]);
 
   return {

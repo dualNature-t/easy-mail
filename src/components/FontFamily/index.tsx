@@ -12,9 +12,14 @@ const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
+interface FontFamilyProps {
+  name?: string;
+}
 /* <------------------------------------ **** INTERFACE END **** ------------------------------------ */
 /* <------------------------------------ **** FUNCTION COMPONENT START **** ------------------------------------ */
-const FontFamily = (): JSX.Element => {
+const FontFamily: React.FC<FontFamilyProps> = ({
+  name = "font-family",
+}): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
   const { t } = useTranslation();
@@ -30,7 +35,7 @@ const FontFamily = (): JSX.Element => {
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
     <Form.Item
-      name="font-family"
+      name={name}
       label={<Text strong>{t("property.font_family")}</Text>}
     >
       <Select

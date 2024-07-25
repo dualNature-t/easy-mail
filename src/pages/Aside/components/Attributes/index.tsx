@@ -19,8 +19,8 @@ import {
 } from "@/components";
 import { BasicEnum } from "@/constant";
 import { useEffect } from "react";
-import { useFocusNode, useProperty } from "@/hooks";
-import { isEmpty } from "@/utils";
+import { useAppData, useFocusNode, useProperty } from "@/hooks";
+import { formatPrefixPublicProperty, getPublicAttrObj, isEmpty } from "@/utils";
 import { useTranslation } from "react-i18next";
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
@@ -45,6 +45,7 @@ const Attributes = (): JSX.Element => {
   const [form] = Form.useForm();
   const { focusNode } = useFocusNode();
   const { property, setProperty } = useProperty();
+  const { appData } = useAppData();
 
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
@@ -59,7 +60,7 @@ const Attributes = (): JSX.Element => {
   useEffect(() => {
     if (!property) return;
     const keys = Object.keys(property);
-    const result: Record<string, string | number> = {};
+    let result: Record<string, unknown> = {};
     keys.forEach((key) => {
       const value = property[key as keyof typeof property];
       const valueStr = String(value);
@@ -76,6 +77,17 @@ const Attributes = (): JSX.Element => {
         result[key] = value;
       }
     });
+
+    const publicAttr = getPublicAttrObj(formatPrefixPublicProperty(appData));
+    result = { ...publicAttr["mj-all"], ...result };
+
+    if (nodeTag == BasicEnum.MJ_BUTTON) {
+      result = { ...publicAttr[BasicEnum.MJ_BUTTON], ...result };
+    }
+
+    if (nodeTag == BasicEnum.MJ_SECTION) {
+      result = { ...publicAttr[BasicEnum.MJ_SECTION], ...result };
+    }
 
     form.setFieldsValue(result);
   }, [property]);

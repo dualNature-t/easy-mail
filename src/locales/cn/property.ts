@@ -43,4 +43,7 @@ export default {
   "property.auto": "自适应",
   "property.cover": "覆盖",
   "property.contain": "包含",
+  "property.button_background_color": "按钮颜色",
+  "property.button_color": "按钮文本颜色",
+  "property.section_background_color": "区块背景颜色",
 };

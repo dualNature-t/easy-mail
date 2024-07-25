@@ -27,6 +27,58 @@ const getTargetTree = (appData: AppDataType, idx: string, slice?: number) => {
   return { result, tree };
 };
 
+export const formatPrefixPublicProperty = (appData?: AppDataType | null) => {
+  if (!appData) return {};
+  const { tree } = getTargetTree(appData, "1-0");
+
+  let result: Record<string, unknown> = {};
+  tree.children?.forEach((i) => {
+    const attr: Record<string, string> = {};
+    Object.keys(i.attributes).forEach((key) => {
+      attr[`${i.tagName.split("-")[1]}_${key}`] =
+        i.attributes[key as keyof typeof i.attributes];
+    });
+    result = { ...result, ...attr };
+  });
+  return result;
+};
+
+export const getPublicAttrChildren = (
+  appData: AppDataType,
+  property: Record<string, unknown>
+) => {
+  const { tree } = getTargetTree(appData, "1-0");
+  const result = tree.children?.map((i) => {
+    const tagKey = i.tagName.split("-")[1];
+    const attrs: Record<string, unknown> = {};
+    Object.keys(property).forEach((key) => {
+      if (key.includes(tagKey)) {
+        const k = key.split("_")[1];
+        attrs[k] = property[key];
+      }
+    });
+
+    return { ...i, attributes: { ...i.attributes, ...attrs } };
+  });
+
+  return result;
+};
+
+export const getPublicAttrObj = (
+  attr: Record<string, unknown>
+): Record<
+  BasicEnum.MJ_BUTTON | BasicEnum.MJ_SECTION | "mj-all",
+  Record<string, unknown>
+> => {
+  const result: Record<string, Record<string, unknown>> = {};
+  Object.keys(attr).forEach((i) => {
+    const key = `mj-${i.split("_")[0]}`;
+    result[key] = { ...(result[key] ?? {}), [i.split("_")[1]]: attr[i] };
+  });
+
+  return result;
+};
+
 export const onPropertyChange = ({
   appData,
   idx,
@@ -34,6 +86,12 @@ export const onPropertyChange = ({
   index,
 }: PyloadType & { property: Record<string, unknown>; index?: number }) => {
   let { result, tree } = getTargetTree(appData, idx);
+
+  if (idx === "0") {
+    const mjAttr = result.children?.[1]?.children?.[0] as AppDataType;
+    mjAttr.children = getPublicAttrChildren(appData, property);
+  }
+
   if (!isEmpty(index)) {
     tree = tree.children?.[index ?? 0] as AppDataType;
     tree.attributes = { ...property };
@@ -66,19 +124,21 @@ export const addBlock = ({
 }: PyloadType & { dataTransfer: DataTransferType }) => {
   const idArr = idx.split("-").map((i) => Number(i));
   let { result, tree } = getTargetTree(appData, idx, -1);
-
   const propertyResult = deepClone(defaultBlockPropertyJson)[
     dataTransfer.data?.value as BasicBlockType
   ];
+
   if (dataTransfer.data?.type === "basic" && idArr.length === 2) {
     const oneColumn = deepClone(defaultBlockPropertyJson)[
       ColumnEnum.MJ_COLUMN_1
     ];
+
     oneColumn.children?.[0].children?.push(propertyResult);
     tree.children?.splice(idArr[idArr.length - 1], 0, oneColumn);
   } else {
     tree.children?.splice(idArr[idArr.length - 1], 0, propertyResult);
   }
+
   return result;
 };
 

@@ -11,6 +11,7 @@ export default {
   "basic.drop_here": "Drop here",
 
   "basic.body_style": "BODY STYLES",
+  "basic.public_style": "TEMPLATE DEFAULTS",
   "basic.more_option": "More Options",
   "basic.less_option": "Less Options",
   "basic.upload_image": "Upload Image",

@@ -18,6 +18,38 @@ export const defaultAppData: AppDataType = {
       },
       children: [],
     },
+    {
+      tagName: "mj-head",
+      attributes: {},
+      children: [
+        {
+          tagName: "mj-attributes",
+          attributes: {},
+          children: [
+            {
+              tagName: "mj-all",
+              attributes: {
+                "font-family": "arial",
+                color: "#000000",
+              },
+            },
+            {
+              tagName: "mj-button",
+              attributes: {
+                color: "#FFFFFF",
+                "background-color": "#414141",
+              },
+            },
+            {
+              tagName: "mj-section",
+              attributes: {
+                "background-color": "transparent",
+              },
+            },
+          ],
+        },
+      ],
+    },
   ],
 };
 

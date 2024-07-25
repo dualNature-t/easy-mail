@@ -43,4 +43,7 @@ export default {
   "property.auto": "Auto",
   "property.cover": "Cover",
   "property.contain": "Contain",
+  "property.button_background_color": "Button Color",
+  "property.button_color": "Button Text Color",
+  "property.section_background_color": "Section Background Color",
 };

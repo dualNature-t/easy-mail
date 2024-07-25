@@ -10,12 +10,13 @@ import { useRef, useState } from "react";
 import App, { IRefProps } from "./App";
 import { AppDataType } from "./constant";
 import { Button, Select } from "antd";
+import mjml2html from "mjml-browser";
+import { MJMLJsonObject } from "mjml-core";
 
 const appData: AppDataType = {
   tagName: "mjml",
   attributes: {
     "css-class": "mjml",
-    color: "#f40",
   },
   children: [
     {
@@ -299,6 +300,38 @@ const appData: AppDataType = {
         },
       ],
     },
+    {
+      tagName: "mj-head",
+      children: [
+        {
+          tagName: "mj-attributes",
+          children: [
+            {
+              tagName: "mj-all",
+              attributes: {
+                "font-family": "arial",
+                color: "#000000",
+              },
+            },
+            {
+              tagName: "mj-button",
+              attributes: {
+                color: "#FFFFFF",
+                "background-color": "#414141",
+              },
+            },
+            {
+              tagName: "mj-section",
+              attributes: {
+                "background-color": "",
+              },
+            },
+          ],
+          attributes: {},
+        },
+      ],
+      attributes: {},
+    },
   ],
 };
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
@@ -346,14 +379,14 @@ const Test = (): JSX.Element => {
         />
         <Button
           onClick={() => {
-            console.log(ref.current?.getData());
+            console.log(mjml2html(ref.current?.getData() as MJMLJsonObject));
           }}
         >
           查看
         </Button>
       </header>
       <App
-        // lang={lang}
+        lang={lang}
         width="100vw"
         height="calc(100vh - 50px)"
         skin={skin}

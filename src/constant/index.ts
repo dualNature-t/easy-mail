@@ -6,7 +6,7 @@ export * from "./style";
 export type TabType = "add" | "edit";
 
 export interface AppDataType {
-  tagName: BasicType;
+  tagName: BasicType | "mj-head" | "mj-attributes" | "mj-all";
   attributes: object;
   content?: string;
   children?: AppDataType[];
