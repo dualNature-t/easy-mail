@@ -1,0 +1,30 @@
+.eInputNumber-select {
+  width: 100%;
+}
+
+.eInputNumber-select .ant-select-selector {
+  padding: 0 !important;
+}
+
+.eInputNumber-select .ant-select-selection-item {
+  padding: 0 !important;
+  text-align: center !important;
+}
+
+.eInputNumber-select-option {
+  text-align: center !important;
+  padding: 0px !important;
+  line-height: 32px !important;
+}
+
+.eInputNumber-input {
+  text-align: left;
+}
+
+.eInputNumber-input .ant-input-number-input {
+  width: calc(100% - 34px) !important;
+}
+
+.eInputNumber-input .ant-input-number-handler-wrap {
+  opacity: 1 !important;
+}
