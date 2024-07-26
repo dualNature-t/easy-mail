@@ -10,7 +10,6 @@ import { useEffect, useMemo, useState } from "react";
 import { Button, Flex, Typography } from "antd";
 import { useProperty } from "@/hooks";
 import { EInputNumber } from "..";
-import { toFirstUpperCase } from "@/utils";
 import { useTranslation } from "react-i18next";
 
 const { Text } = Typography;

@@ -8,7 +8,7 @@
 /** This section will include all the necessary dependence for this tsx file */
 import { BasicEnum } from "@/constant";
 import { useCurrentNode, useFocusNode } from "@/hooks";
-import { getNodeByTarget, isSection, toFirstUpperCase } from "@/utils";
+import { getNodeByTarget, isSection } from "@/utils";
 import { DesktopOutlined, MobileOutlined } from "@ant-design/icons";
 import { Breadcrumb, Flex, Segmented, theme } from "antd";
 import { useState } from "react";

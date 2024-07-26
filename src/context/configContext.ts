@@ -62,7 +62,7 @@ export const defaultConfig: AppProps = {
   height: "100%",
   ref: undefined,
   onUpload: undefined,
-  onUploadFocusChange: undefined,
+  onUploadFocusChange: () => {},
 };
 
 export interface AppProps {
