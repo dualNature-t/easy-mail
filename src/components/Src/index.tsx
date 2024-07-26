@@ -8,9 +8,11 @@
 /** This section will include all the necessary dependence for this tsx file */
 import { UploadOutlined } from "@ant-design/icons";
 import { Button, Flex, Form, Input, Typography } from "antd";
-import { useProperty } from "@/hooks";
+import { useConfig, useFocusNode, useProperty } from "@/hooks";
 import "./style.css";
 import { useTranslation } from "react-i18next";
+import { fileToBase64 } from "@/utils";
+import { useEffect, useState } from "react";
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
@@ -26,40 +28,56 @@ const Src: React.FC<SrcProps> = ({ label, name }): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
   const { t } = useTranslation();
+  const { onUpload, onUploadFocusChange } = useConfig();
+  const { focusNode } = useFocusNode();
 
   const { setProperty } = useProperty() as {
     property: { src: string } | undefined;
-    setProperty: (property: { src: string }) => void;
+    setProperty: (property: { [key: string]: string }) => void;
   };
+
+  const [loading, setLoading] = useState(false);
+
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
   /* <------------------------------------ **** PARAMETER END **** ------------------------------------ */
   /* <------------------------------------ **** FUNCTION START **** ------------------------------------ */
   /************* This section will include this component general function *************/
-  const upload = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(file.name);
-      }, 2000);
-    });
-  };
-
   const handleUpload = () => {
     const input = document.createElement("input");
     input.setAttribute("type", "file");
     input.setAttribute("accept", ".png,.jpg,.jpeg,.webp");
     input.click();
     input.onchange = async () => {
-      var file = input.files?.[0] as File;
-      const result = await upload(file);
-      setProperty({ src: result });
+      try {
+        var file = input.files?.[0] as File;
+        let url = "";
+        setLoading(true);
+        if (onUpload) {
+          url = (await onUpload(file)).url;
+        } else {
+          url = await fileToBase64(file);
+        }
+        setProperty({ [name]: url });
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        console.error(error);
+      }
     };
   };
 
   /* <------------------------------------ **** FUNCTION END **** ------------------------------------ */
   /* <------------------------------------ **** EFFECT START **** ------------------------------------ */
   /************* This section will include this component general function *************/
+  useEffect(() => {
+    return () => {
+      if (loading) {
+        onUploadFocusChange();
+      }
+    };
+  }, [focusNode, loading]);
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
     <Form.Item
@@ -73,6 +91,7 @@ const Src: React.FC<SrcProps> = ({ label, name }): JSX.Element => {
             type="link"
             icon={<UploadOutlined />}
             style={{ padding: 0 }}
+            loading={loading}
             onClick={handleUpload}
           >
             {t("basic.upload_image")}

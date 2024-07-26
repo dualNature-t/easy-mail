@@ -20,7 +20,13 @@ import {
 import { BasicEnum } from "@/constant";
 import { useEffect } from "react";
 import { useAppData, useFocusNode, useProperty } from "@/hooks";
-import { formatPrefixPublicProperty, getPublicAttrObj, isEmpty } from "@/utils";
+import {
+  formatPrefixPublicProperty,
+  getPublicAttrObj,
+  isBase64Image,
+  isEmpty,
+  isURL,
+} from "@/utils";
 import { useTranslation } from "react-i18next";
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
@@ -59,22 +65,27 @@ const Attributes = (): JSX.Element => {
   /************* This section will include this component general function *************/
   useEffect(() => {
     if (!property) return;
+
     const keys = Object.keys(property);
     let result: Record<string, unknown> = {};
     keys.forEach((key) => {
       const value = property[key as keyof typeof property];
       const valueStr = String(value);
-      if (typeof value === "number") {
+      if (isURL(valueStr) || isBase64Image(valueStr)) {
         result[key] = value;
-        result[`${key}_unit`] = "";
-      } else if (valueStr.includes("px")) {
-        result[key] = parseInt(value);
-        result[`${key}_unit`] = "px";
-      } else if (valueStr.includes("%")) {
-        result[key] = parseInt(value);
-        result[`${key}_unit`] = "%";
       } else {
-        result[key] = value;
+        if (typeof value === "number") {
+          result[key] = value;
+          result[`${key}_unit`] = "";
+        } else if (valueStr.includes("px")) {
+          result[key] = parseInt(value);
+          result[`${key}_unit`] = "px";
+        } else if (valueStr.includes("%")) {
+          result[key] = parseInt(value);
+          result[`${key}_unit`] = "%";
+        } else {
+          result[key] = value;
+        }
       }
     });
 
@@ -91,6 +102,10 @@ const Attributes = (): JSX.Element => {
 
     form.setFieldsValue(result);
   }, [property]);
+
+  useEffect(() => {
+    form.resetFields();
+  }, [focusNode]);
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
     <div style={{ padding: 20 }}>

@@ -19,6 +19,7 @@ export const useProperty = () => {
 
   const onChange = (property: Record<string, unknown>) => {
     if (!appData) return;
+
     setAppData(onPropertyChange({ appData, idx, property }));
   };
 

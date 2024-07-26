@@ -62,6 +62,7 @@ export const defaultConfig: AppProps = {
   height: "100%",
   ref: undefined,
   onUpload: undefined,
+  onUploadFocusChange: undefined,
 };
 
 export interface AppProps {
@@ -72,7 +73,8 @@ export interface AppProps {
   width?: string;
   height?: string;
   ref?: React.RefObject<Element>;
-  onUpload?: (file: File) => void;
+  onUpload?: (file: File) => Promise<{ url: string }>;
+  onUploadFocusChange: () => void;
 }
 
 export const ConfigContext = createContext<AppProps>(defaultConfig);

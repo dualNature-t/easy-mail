@@ -101,6 +101,7 @@ export const getStyle = ({
       top: -22px;
       text-align: left;
       padding: 1px 6px;
+      line-height: 20px;
       font-size: 15px;
       color: ${colorWhite};
       background-color: ${primaryHover};

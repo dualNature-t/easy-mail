@@ -7,12 +7,12 @@ import Test from "./Test.tsx";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     {/* <App
-      lang="zh_CN"
-      width="100vw"
-      height="100vh"
-      skin="dark"
-      value={appData}
-    /> */}
+  //     lang="zh_CN"
+  //     width="100vw"
+  //     height="100vh"
+  //     skin="dark"
+  //     value={appData}
+  //   /> */}
     <Test></Test>
   </React.StrictMode>
 );

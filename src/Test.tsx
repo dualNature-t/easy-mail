@@ -12,6 +12,7 @@ import { AppDataType } from "./constant";
 import { Button, Select } from "antd";
 import mjml2html from "mjml-browser";
 import { MJMLJsonObject } from "mjml-core";
+import { fileToBase64 } from "./utils";
 
 const appData: AppDataType = {
   tagName: "mjml",
@@ -346,6 +347,7 @@ const Test = (): JSX.Element => {
   const [skin, setSkin] = useState<"light" | "dark">("light");
 
   const ref = useRef<IRefProps>(null);
+  const rejectRef = useRef<any>(null);
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
@@ -392,6 +394,23 @@ const Test = (): JSX.Element => {
         skin={skin}
         ref={ref}
         value={appData}
+        onUpload={(file: File) => {
+          return new Promise((resolve, reject) => {
+            rejectRef.current = reject;
+            setTimeout(async () => {
+              try {
+                const url = await fileToBase64(file);
+                resolve({ url });
+              } catch (error) {
+                reject("upload error");
+              }
+            }, 5000);
+          });
+        }}
+        onUploadFocusChange={() => {
+          rejectRef.current("error");
+          rejectRef.current = null;
+        }}
       />
     </>
   );
