@@ -73,6 +73,7 @@ export interface AppProps {
   width?: string;
   height?: string;
   ref?: React.RefObject<Element>;
+  tinymceLink?: string;
   onUpload?: (file: File) => Promise<{ url: string }>;
   onUploadFocusChange: () => void;
 }

@@ -51,9 +51,13 @@ const setMjmlColumnStyle = (
   }
 };
 
-const setTinymceSrc = (head: HTMLElement) => {
+const setTinymceSrc = (head: HTMLElement, link?: string) => {
   const script = document.createElement("script");
-  script.setAttribute("src", "/tinymce/js/tinymce/tinymce.min.js");
+  script.setAttribute(
+    "src",
+    link ??
+      "https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.2.1/tinymce.min.js"
+  );
   head.appendChild(script);
 };
 /* <------------------------------------ **** INTERFACE END **** ------------------------------------ */
@@ -63,7 +67,7 @@ const Main = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
   const { t, i18n } = useTranslation();
-  const { lang, skin } = useConfig();
+  const { lang, skin, tinymceLink } = useConfig();
   const { token } = theme.useToken();
   const { appData } = useAppData();
   const { setRef } = useDropContainer();
@@ -116,7 +120,7 @@ const Main = (): JSX.Element => {
 
       body?.classList.add(EDITOR_BODY);
       setMjmlColumnStyle(head, styles);
-      setTinymceSrc(head);
+      setTinymceSrc(head, tinymceLink);
       setMailStyle(head);
     }
   };

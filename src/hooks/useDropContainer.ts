@@ -230,7 +230,7 @@ export const useDropContainer = () => {
     const iframeWindow = getEditorWindow();
 
     const removeEditor = (node: Element | null) => {
-      iframeWindow?.tinymce.remove();
+      iframeWindow.tinymce?.remove();
       node?.removeAttribute("id");
       node?.removeAttribute("class");
       node?.removeAttribute("contenteditable");
@@ -262,12 +262,12 @@ export const useDropContainer = () => {
         }
         targetNode?.setAttribute("id", "editor");
 
-        iframeWindow?.tinymce.init({
+        iframeWindow.tinymce?.init({
           selector: "#editor",
           inline: true,
           menubar: false,
-          language: lang,
-          skin: skin === "light" ? "oxide" : "oxide-dark",
+          // language: lang,
+          // skin: skin === "light" ? "oxide" : "oxide-dark",
           plugins: "autolink link",
           toolbar: [
             "fontsize forecolor undo redo",

@@ -27,6 +27,7 @@
     "i18next-browser-languagedetector": "^8.0.0",
     "mjml-browser": "^4.15.3",
     "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-i18next": "^15.0.0"
   },
   "devDependencies": {
