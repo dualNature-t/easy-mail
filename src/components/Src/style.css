@@ -1,8 +1,8 @@
-.src-container label {
+.easy-marl-src-container label {
   width: 100%;
 }
 
-.src-container label:after {
+.easy-marl-src-container label:after {
   content: "" !important;
   margin: 0 !important;
 }

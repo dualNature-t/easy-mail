@@ -28,10 +28,10 @@ const initOptions = [
   {
     value: "px",
     label: "px",
-    className: "eInputNumber-select-option",
+    className: "easy-mail-input-number-select-option",
   },
-  { value: "%", label: "%", className: "eInputNumber-select-option" },
-  { value: "", label: "-", className: "eInputNumber-select-option" },
+  { value: "%", label: "%", className: "easy-mail-input-number-select-option" },
+  { value: "", label: "-", className: "easy-mail-input-number-select-option" },
 ];
 const initStep = 10;
 /* <------------------------------------ **** INTERFACE END **** ------------------------------------ */
@@ -80,7 +80,7 @@ const EInputNumber: React.FC<EInputNumberProps> = ({
       max={String(unit)?.includes("%") ? 100 : undefined}
       step={getStep()}
       style={style}
-      className="eInputNumber-input"
+      className="easy-mail-input-number-input"
       value={value}
       onChange={onChange}
     />
@@ -91,7 +91,7 @@ const EInputNumber: React.FC<EInputNumberProps> = ({
       value={"px"}
       allowClear={false}
       suffixIcon={false}
-      className="eInputNumber-select"
+      className="easy-mail-input-number-select"
       variant="borderless"
       options={
         (hasForm ? selectOptions : [initOptions[0]]) as DefaultOptionType[]

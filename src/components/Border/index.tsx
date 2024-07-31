@@ -10,7 +10,6 @@ import { useEffect, useMemo, useState } from "react";
 import { Card, ColorPicker, Flex, Select, Switch, Typography } from "antd";
 import { ECheckbox, EInputNumber } from "..";
 import { useProperty } from "@/hooks";
-import "./style.css";
 import { useTranslation } from "react-i18next";
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */

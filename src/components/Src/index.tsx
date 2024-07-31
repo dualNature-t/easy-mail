@@ -9,10 +9,10 @@
 import { UploadOutlined } from "@ant-design/icons";
 import { Button, Flex, Form, Input, Typography } from "antd";
 import { useConfig, useFocusNode, useProperty } from "@/hooks";
-import "./style.css";
 import { useTranslation } from "react-i18next";
 import { fileToBase64 } from "@/utils";
 import { useEffect, useState } from "react";
+import "./style.css";
 const { Text } = Typography;
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
@@ -67,7 +67,6 @@ const Src: React.FC<SrcProps> = ({ label, name }): JSX.Element => {
       }
     };
   };
-
   /* <------------------------------------ **** FUNCTION END **** ------------------------------------ */
   /* <------------------------------------ **** EFFECT START **** ------------------------------------ */
   /************* This section will include this component general function *************/
@@ -81,7 +80,7 @@ const Src: React.FC<SrcProps> = ({ label, name }): JSX.Element => {
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
     <Form.Item
-      className="src-container"
+      className="easy-marl-src-container"
       labelCol={{ span: 24 }}
       name={name}
       label={
