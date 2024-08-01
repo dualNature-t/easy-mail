@@ -4,7 +4,7 @@ export { getEditorWindow } from "./getEditorWindow";
 export { getIdxByNode } from "./getIdxByNode";
 export { getJsonByIdx } from "./getJsonByIdx";
 export { getNodeByTarget } from "./getNodeByTarget";
-export { getNodeByIdx } from "./getNodeByIdx";
+export { getNodeByIdx } from "./getNodeByIds";
 export { insertEle2Node } from "./insertEle2Node";
 export * from "./isBlockType";
 export { isEmpty } from "./isEmpty";
