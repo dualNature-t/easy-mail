@@ -61,6 +61,7 @@ export const defaultConfig: AppProps = {
   width: "100%",
   height: "100%",
   ref: undefined,
+  tinymceLink: undefined,
   onUpload: undefined,
   onUploadFocusChange: () => {},
 };
