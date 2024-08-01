@@ -34,6 +34,13 @@ export default defineConfig({
         // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
         globals: {
           react: "React",
+          antd: "antd",
+          "react-dom": "ReactDOM",
+          "react-i18next": "ReactI18next",
+          mjmlBrowser: "mjmlBrowser",
+          i18next: "i18next",
+          "i18next-browser-languagedetector": "i18nextBrowserLanguageDetector",
+          "@ant-design/icons": "@ant-design/icons",
         },
       },
     },

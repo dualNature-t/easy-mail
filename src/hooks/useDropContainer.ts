@@ -33,6 +33,7 @@ import {
   useHoverNode,
   useTab,
 } from ".";
+import i18n from "@/i18n";
 
 export const useDropContainer = () => {
   const { setHoverNode } = useHoverNode();
@@ -264,10 +265,11 @@ export const useDropContainer = () => {
 
         iframeWindow.tinymce?.init({
           selector: "#editor",
+          license_key: "gpl",
           inline: true,
           menubar: false,
-          // language: lang,
-          // skin: skin === "light" ? "oxide" : "oxide-dark",
+          language: lang ?? (i18n.language.includes("zh") ? "zh_CN" : "en_US"),
+          skin: skin === "light" ? "oxide" : "oxide-dark",
           plugins: "autolink link",
           toolbar: [
             "fontsize forecolor undo redo",

@@ -14,3 +14,5 @@ export { toFirstUpperCase } from "./toFirstUpperCase";
 export * from "./treeTools";
 export { fileToBase64 } from "./file2base64";
 export * from "./isUrl";
+export * from "./getTinyLangs";
+export { getTinyStyle } from "./getTinyStyle";

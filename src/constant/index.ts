@@ -1,7 +1,6 @@
 import { BasicType } from "./block";
 export * from "./block";
 export * from "./dataTransfer";
-export * from "./style";
 
 export type TabType = "add" | "edit";
 

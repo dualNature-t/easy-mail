@@ -6,10 +6,15 @@
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import { EDITOR_BODY, getStyle } from "@/constant";
+import { EDITOR_BODY } from "@/constant";
 import { LangType } from "@/context";
 import { useAppData, useConfig, useDropContainer } from "@/hooks";
-import { getDocByData, getEditorWindow } from "@/utils";
+import {
+  getDocByData,
+  getEditorWindow,
+  getTinyCNLangs,
+  getTinyStyle,
+} from "@/utils";
 import { theme } from "antd";
 import { useCallback, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -59,7 +64,12 @@ const setTinymceSrc = (head: HTMLElement, link?: string) => {
       "https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.2.1/tinymce.min.js"
   );
   head.appendChild(script);
+
+  script.onload = () => {
+    getEditorWindow().tinymce.addI18n("zh_CN", getTinyCNLangs());
+  };
 };
+
 /* <------------------------------------ **** INTERFACE END **** ------------------------------------ */
 export const IFRAME_ID = "easy-mail-iframe";
 /* <------------------------------------ **** FUNCTION COMPONENT START **** ------------------------------------ */
@@ -88,7 +98,7 @@ const Main = (): JSX.Element => {
     (head?: HTMLHeadElement, lng?: LangType) => {
       if (!head) return;
       let style = head.querySelector("#easy-mail-style");
-      const styleStr = getStyle({
+      const styleStr = getTinyStyle({
         token,
         t,
         lng: lng ?? (i18n.language as LangType),
