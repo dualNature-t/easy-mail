@@ -30,7 +30,6 @@ export const hasChildByColumn = (column: Element) => {
 export const mergeNodeEmpty = <T extends Node>(node: T): T => {
   const nodeClone = node.cloneNode(true) as Element;
   const body = nodeClone.querySelector(`div.${BasicEnum.MJ_BODY}`);
-
   if (body && body.childElementCount === 0) {
     body.innerHTML = "";
   } else {
@@ -39,7 +38,6 @@ export const mergeNodeEmpty = <T extends Node>(node: T): T => {
       if (!hasChildByColumn(item)) item.classList.add(MJ_COLUMN_EMPTY);
     });
   }
-
   return nodeClone as unknown as T;
 };
 
@@ -85,11 +83,14 @@ export const mergeNode = (node: Element, newNode: Element) => {
   let targetNode = newNode;
 
   const isOriginBody = isBody(originNode);
+  const isOriginSection = isSection(originNode);
 
-  if (!isSection(originNode) && !isOriginBody) {
+  // not mj-body or mj-section
+  if (!isOriginSection && !isOriginBody) {
     targetNode = targetNode.children[0];
   }
 
+  // Body style
   if (isOriginBody) {
     originNode.parentElement?.setAttribute(
       "style",

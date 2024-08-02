@@ -25,7 +25,7 @@ import {
 import Header from "./pages/Header";
 import Aside from "./pages/Aside";
 import Main from "./pages/Main";
-import { deepClone } from "./utils";
+import { deepClone, isEmpty } from "./utils";
 import "./App.css";
 import { useTranslation } from "react-i18next";
 
@@ -42,7 +42,11 @@ const App = forwardRef<IRefProps, AppProps>((props, ref) => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
   const { i18n } = useTranslation();
-  const mergeProps = { ...defaultConfig, ...props };
+  const mergeProps = {
+    ...defaultConfig,
+    ...props,
+    value: isEmpty(props.value) ? defaultConfig.value : props.value,
+  };
   const { value, width, height, colorPrimary, skin, lang } = mergeProps;
 
   const [appData, setAppData] = useState<AppDataType>(

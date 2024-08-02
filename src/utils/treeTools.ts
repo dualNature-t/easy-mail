@@ -112,7 +112,7 @@ export const onTextContentChange = ({
   if (!isEmpty(index)) {
     tree = tree.children?.[index ?? 0] as AppDataType;
   }
-  tree.content = content;
+  tree.content = content.replace(/"/g, "'");
 
   return result;
 };

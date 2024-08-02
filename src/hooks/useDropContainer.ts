@@ -372,18 +372,27 @@ export const useDropContainer = () => {
         setFocusNodeCls("add");
       }
     } else {
-      let focusOriginNode = null;
-      if (focusNode) {
-        focusOriginNode = focusNode;
-      } else {
-        focusOriginNode = getEditorWindow().document.body.children[0];
-      }
-      if (focusTargetNode) {
-        setTimeout(() => {
-          mergeNode(focusOriginNode, focusTargetNode);
+      let focusOriginNode =
+        focusNode || getEditorWindow().document.body.children[0];
 
-          mergeTinymceEmptyNode(focusOriginNode);
-        });
+      if (focusTargetNode) {
+        // Section full-width
+        if (
+          isSection(focusOriginNode) &&
+          focusOriginNode.tagName !== focusTargetNode?.tagName
+        ) {
+          focusTargetNode.appendChild(focusOriginNode.lastElementChild);
+          currentFocusNode.current = focusTargetNode;
+
+          focusOriginNode.replaceWith(focusTargetNode);
+          setFocusNodeCls("add");
+          setFocusNode(focusTargetNode);
+        } else {
+          setTimeout(() => {
+            mergeNode(focusOriginNode, focusTargetNode);
+            mergeTinymceEmptyNode(focusOriginNode);
+          });
+        }
       }
     }
 

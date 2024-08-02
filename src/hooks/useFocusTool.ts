@@ -83,7 +83,11 @@ export const useFocusTool = () => {
         setFocusNodeCls("remove");
 
         if (isSectionNode) {
-          focusNode?.remove();
+          if (focusNode.parentNode?.children.length === 1) {
+            focusNode?.parentElement?.replaceChildren();
+          } else {
+            focusNode?.remove();
+          }
         } else {
           const column = getNodeByTarget(
             focusNode,

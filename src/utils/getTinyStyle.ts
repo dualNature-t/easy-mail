@@ -81,6 +81,8 @@ export const getTinyStyle = ({
       .editor-body {
         user-select: none;
         border: 22px solid ${token.colorBgContainer};
+        border-left-width: 30px;
+        border-right-width: 30px;
         min-width: 275px;
         min-height: calc(100% - 44px);
         overflow-x: hidden;

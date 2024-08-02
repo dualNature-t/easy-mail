@@ -19,7 +19,15 @@ import Padding from "@/components/Padding";
 import { AppDataType, ColumnUnitType } from "@/constant";
 import { useAppData, useFocusNode } from "@/hooks";
 import { getIdxByNode, onLayoutChange } from "@/utils";
-import { Button, ColorPicker, Flex, Form, Select, Typography } from "antd";
+import {
+  Button,
+  ColorPicker,
+  Flex,
+  Form,
+  Select,
+  Switch,
+  Typography,
+} from "antd";
 import { Color } from "antd/es/color-picker";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -82,6 +90,17 @@ const SectionBlock = (): JSX.Element => {
 
       <>
         <EDivider>{t("basic.section_style")}</EDivider>
+
+        <Form.Item
+          name="full-width"
+          label={<Text strong>{t("property.full_width")}</Text>}
+          valuePropName="checked"
+          normalize={(value: boolean) => {
+            return value ? "full-width" : "";
+          }}
+        >
+          <Switch />
+        </Form.Item>
 
         <BorderRadius />
         <Border />

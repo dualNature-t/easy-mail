@@ -18,10 +18,11 @@ import {
   TextBlock,
 } from "@/components";
 import { BasicEnum } from "@/constant";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useAppData, useFocusNode, useProperty } from "@/hooks";
 import {
   formatPrefixPublicProperty,
+  getIdxByNode,
   getPublicAttrObj,
   isBase64Image,
   isEmpty,
@@ -53,6 +54,9 @@ const Attributes = (): JSX.Element => {
   const { property, setProperty } = useProperty();
   const { appData } = useAppData();
 
+  const nodeIdx = useMemo(() => {
+    return getIdxByNode({ node: focusNode });
+  }, [focusNode]);
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
@@ -105,7 +109,7 @@ const Attributes = (): JSX.Element => {
 
   useEffect(() => {
     form.resetFields();
-  }, [focusNode]);
+  }, [nodeIdx]);
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
     <div style={{ padding: 20 }}>
