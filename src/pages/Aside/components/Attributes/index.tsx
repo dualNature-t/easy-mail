@@ -94,7 +94,6 @@ const Attributes = (): JSX.Element => {
     });
 
     const publicAttr = getPublicAttrObj(formatPrefixPublicProperty(appData));
-    result = { ...publicAttr["mj-all"], ...result };
 
     if (nodeTag == BasicEnum.MJ_BUTTON) {
       result = { ...publicAttr[BasicEnum.MJ_BUTTON], ...result };
@@ -103,6 +102,7 @@ const Attributes = (): JSX.Element => {
     if (nodeTag == BasicEnum.MJ_SECTION) {
       result = { ...publicAttr[BasicEnum.MJ_SECTION], ...result };
     }
+    result = { ...publicAttr["mj-all"], ...result };
 
     form.setFieldsValue(result);
   }, [property]);

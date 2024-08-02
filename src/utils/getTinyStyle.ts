@@ -72,6 +72,9 @@ export const getTinyStyle = ({
         border-radius: 0px;
         vertical-align: middle;
       }
+      .mj-body a {
+        text-decoration: none;
+      }
       .mj-column-empty > table:before {
         content: "${t("basic.empty_column", { lng })}";
       }
