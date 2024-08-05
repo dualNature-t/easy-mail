@@ -67,6 +67,7 @@ const setTinymceSrc = (head: HTMLElement, link?: string) => {
 
   script.onload = () => {
     getEditorWindow().tinymce.addI18n("zh_CN", getTinyCNLangs());
+    getEditorWindow().tinymce.addI18n("en_US", "");
   };
 };
 

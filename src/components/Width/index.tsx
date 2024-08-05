@@ -53,11 +53,7 @@ const Width = (): JSX.Element => {
         <Switch
           value={width === ""}
           onChange={(value: boolean) => {
-            if (value) {
-              setProperty({ ...property, width: "" });
-            } else {
-              setProperty({ ...property, width: "200px" });
-            }
+            setProperty({ ...property, width: value ? "" : "200px" });
           }}
         />
       </Flex>

@@ -14,7 +14,17 @@ import {
   EInputNumber,
   Padding,
 } from "@/components";
-import { Checkbox, ColorPicker, Form, Input, Switch, Typography } from "antd";
+import { useProperty } from "@/hooks";
+import { isEmpty } from "@/utils";
+import {
+  Checkbox,
+  ColorPicker,
+  Flex,
+  Form,
+  Input,
+  Switch,
+  Typography,
+} from "antd";
 import { Color } from "antd/es/color-picker";
 import { useTranslation } from "react-i18next";
 
@@ -28,6 +38,10 @@ const ButtonBlock = (): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
   const { t } = useTranslation();
+  const { property, setProperty } = useProperty() as {
+    property: { width?: string };
+    setProperty: (property: unknown) => void;
+  };
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
@@ -67,16 +81,15 @@ const ButtonBlock = (): JSX.Element => {
       <>
         <EDivider>{t("basic.styles")}</EDivider>
 
-        <Form.Item
-          name="width"
-          label={<Text strong>{t("property.full_width")}</Text>}
-          valuePropName="checked"
-          normalize={(value: boolean) => {
-            return value ? "100%" : "";
-          }}
-        >
-          <Switch />
-        </Form.Item>
+        <Flex justify="space-between" style={{ marginBottom: 24 }}>
+          <Text strong>{t("property.full_width")}</Text>
+          <Switch
+            value={!isEmpty(property?.width)}
+            onChange={(value: boolean) => {
+              setProperty({ ...property, width: value ? "100%" : "" });
+            }}
+          />
+        </Flex>
 
         <Form.Item
           name="background-color"
