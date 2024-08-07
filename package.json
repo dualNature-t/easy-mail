@@ -5,6 +5,7 @@
   "type": "module",
   "main": "./dist/index.umd.cjs",
   "module": "./dist/index.js",
+  "types": "index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.js",
@@ -12,7 +13,8 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "index.d.ts"
   ],
   "keywords": [
     "email",
