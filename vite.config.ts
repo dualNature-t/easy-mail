@@ -14,7 +14,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, "src/main.tsx"),
-      name: "EasyMail",
+      name: "Easymail",
       // the proper extensions will be added
       fileName: "index",
     },
@@ -37,7 +37,7 @@ export default defineConfig({
           antd: "antd",
           "react-dom": "ReactDOM",
           "react-i18next": "ReactI18next",
-          mjmlBrowser: "mjmlBrowser",
+          "mjml-browser": "mjmlBrowser",
           i18next: "i18next",
           "i18next-browser-languagedetector": "i18nextBrowserLanguageDetector",
           "@ant-design/icons": "@ant-design/icons",

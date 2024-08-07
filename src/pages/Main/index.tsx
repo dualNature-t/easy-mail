@@ -6,8 +6,7 @@
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import { EDITOR_BODY } from "@/constant";
-import { LangType } from "@/context";
+import { EasymailLangType, EDITOR_BODY } from "@/constant";
 import { useAppData, useConfig, useDropContainer } from "@/hooks";
 import {
   getDocByData,
@@ -96,13 +95,13 @@ const Main = (): JSX.Element => {
   }, []);
 
   const setMailStyle = useCallback(
-    (head?: HTMLHeadElement, lng?: LangType) => {
+    (head?: HTMLHeadElement, lng?: EasymailLangType) => {
       if (!head) return;
       let style = head.querySelector("#easy-mail-style");
       const styleStr = getTinyStyle({
         token,
         t,
-        lng: lng ?? (i18n.language as LangType),
+        lng: lng ?? (i18n.language as EasymailLangType),
       });
       if (style) {
         style.innerHTML = styleStr;

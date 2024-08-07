@@ -1,4 +1,4 @@
-import { LangType } from "@/context";
+import { EasymailLangType } from "@/constant";
 import { AliasToken } from "antd/es/theme/internal";
 import { TFunction } from "i18next";
 
@@ -9,7 +9,7 @@ export const getTinyStyle = ({
 }: {
   token: AliasToken;
   t: TFunction;
-  lng: LangType;
+  lng: EasymailLangType;
 }) => {
   const primary = token.colorPrimaryHover;
   const primaryHover = token.colorPrimaryBorder;

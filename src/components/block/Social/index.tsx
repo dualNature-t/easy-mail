@@ -15,7 +15,7 @@ import {
   FontFamily,
   Padding,
 } from "@/components";
-import { AppDataType } from "@/constant";
+import { EasymailValueType } from "@/constant";
 import { useAppData, useFocusNode } from "@/hooks";
 import {
   addSocialBlock,
@@ -144,7 +144,7 @@ const SocialBlock = (): JSX.Element => {
 
   const idx = getIdxByNode({ node: focusNode as HTMLElement });
   const mjml = getJsonByIdx({
-    appData: appData as AppDataType,
+    appData: appData as EasymailValueType,
     idx,
   });
 
@@ -163,7 +163,7 @@ const SocialBlock = (): JSX.Element => {
     let result = null;
     if (key === "content") {
       result = onTextContentChange({
-        appData: appData as AppDataType,
+        appData: appData as EasymailValueType,
         idx,
         content: value,
         index,
@@ -175,7 +175,7 @@ const SocialBlock = (): JSX.Element => {
           : ({ ...attribute, [key]: value } as Record<string, unknown>);
 
       result = onPropertyChange({
-        appData: appData as AppDataType,
+        appData: appData as EasymailValueType,
         idx,
         property: attr as Record<string, unknown>,
         index,
@@ -187,7 +187,7 @@ const SocialBlock = (): JSX.Element => {
   const handleAddSocial = () => {
     setAppData(
       addSocialBlock({
-        appData: appData as AppDataType,
+        appData: appData as EasymailValueType,
         idx,
         value: {
           tagName: "mj-social-element",
@@ -201,7 +201,7 @@ const SocialBlock = (): JSX.Element => {
   const handleUpItem = (index: number) => {
     setAppData(
       moveSocialBlock({
-        appData: appData as AppDataType,
+        appData: appData as EasymailValueType,
         idx,
         originIndex: index,
         targetIndex: index - 1,
@@ -212,7 +212,7 @@ const SocialBlock = (): JSX.Element => {
   const handleDownItem = (index: number) => {
     setAppData(
       moveSocialBlock({
-        appData: appData as AppDataType,
+        appData: appData as EasymailValueType,
         idx,
         originIndex: index,
         targetIndex: index + 1,
@@ -222,7 +222,7 @@ const SocialBlock = (): JSX.Element => {
 
   const handleDeleteItem = (index: number) => {
     setAppData(
-      deleteSocialBlock({ appData: appData as AppDataType, idx, index })
+      deleteSocialBlock({ appData: appData as EasymailValueType, idx, index })
     );
   };
   /* <------------------------------------ **** FUNCTION END **** ------------------------------------ */

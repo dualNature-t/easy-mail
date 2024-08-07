@@ -1,20 +1,24 @@
 import {
-  AppDataType,
   BasicBlockType,
   BasicEnum,
   ColumnEnum,
   ColumnUnitType,
   DataTransferType,
   defaultBlockPropertyJson,
+  EasymailValueType,
 } from "@/constant";
 import { deepClone, isEmpty } from ".";
 
 interface PyloadType {
-  appData: AppDataType;
+  appData: EasymailValueType;
   idx: string;
 }
 
-const getTargetTree = (appData: AppDataType, idx: string, slice?: number) => {
+const getTargetTree = (
+  appData: EasymailValueType,
+  idx: string,
+  slice?: number
+) => {
   let idArr = idx.split("-").map((i) => Number(i));
   if (!isEmpty(slice)) {
     idArr = idArr.slice(0, slice);
@@ -22,12 +26,14 @@ const getTargetTree = (appData: AppDataType, idx: string, slice?: number) => {
 
   const result = deepClone(appData);
   const tree = idArr.reduce((cur, pre) => {
-    return cur?.children?.[pre] as AppDataType;
+    return cur?.children?.[pre] as EasymailValueType;
   }, result);
   return { result, tree };
 };
 
-export const formatPrefixPublicProperty = (appData?: AppDataType | null) => {
+export const formatPrefixPublicProperty = (
+  appData?: EasymailValueType | null
+) => {
   if (!appData) return {};
   const { tree } = getTargetTree(appData, "1-0");
 
@@ -44,7 +50,7 @@ export const formatPrefixPublicProperty = (appData?: AppDataType | null) => {
 };
 
 export const getPublicAttrChildren = (
-  appData: AppDataType,
+  appData: EasymailValueType,
   property: Record<string, unknown>
 ) => {
   const { tree } = getTargetTree(appData, "1-0");
@@ -88,12 +94,12 @@ export const onPropertyChange = ({
   let { result, tree } = getTargetTree(appData, idx);
 
   if (idx === "0") {
-    const mjAttr = result.children?.[1]?.children?.[0] as AppDataType;
+    const mjAttr = result.children?.[1]?.children?.[0] as EasymailValueType;
     mjAttr.children = getPublicAttrChildren(appData, property);
   }
 
   if (!isEmpty(index)) {
-    tree = tree.children?.[index ?? 0] as AppDataType;
+    tree = tree.children?.[index ?? 0] as EasymailValueType;
     tree.attributes = { ...property };
     return result;
   }
@@ -110,7 +116,7 @@ export const onTextContentChange = ({
 }: PyloadType & { content: string; index?: number }) => {
   let { result, tree } = getTargetTree(appData, idx);
   if (!isEmpty(index)) {
-    tree = tree.children?.[index ?? 0] as AppDataType;
+    tree = tree.children?.[index ?? 0] as EasymailValueType;
   }
   tree.content = content.replace(/"/g, "'");
 
@@ -174,10 +180,10 @@ export const moveBlock = ({
   const tmp = tree.children?.splice(
     originIdArr[originIdArr.length - 1],
     1
-  )[0] as AppDataType;
+  )[0] as EasymailValueType;
 
   const treeResult = idArr.slice(0, -1).reduce((cur, pre) => {
-    return cur.children?.[pre] as AppDataType;
+    return cur.children?.[pre] as EasymailValueType;
   }, result);
 
   if (idArr.length === 2 && tmp?.tagName !== BasicEnum.MJ_SECTION) {
@@ -233,7 +239,7 @@ export const addSocialBlock = ({
   appData,
   idx,
   value,
-}: PyloadType & { value: AppDataType }) => {
+}: PyloadType & { value: EasymailValueType }) => {
   const { result, tree } = getTargetTree(appData, idx);
 
   tree.children?.splice(tree.children.length, 0, value);
@@ -259,7 +265,7 @@ export const moveSocialBlock = ({
   targetIndex,
 }: PyloadType & { originIndex: number; targetIndex: number }) => {
   const { result, tree } = getTargetTree(appData, idx);
-  const tmp = tree.children?.splice(originIndex, 1)[0] as AppDataType;
+  const tmp = tree.children?.splice(originIndex, 1)[0] as EasymailValueType;
 
   tree.children?.splice(targetIndex, 0, tmp);
   return result;

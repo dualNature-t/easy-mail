@@ -1,10 +1,12 @@
 import { createContext } from "react";
-import { AppDataType, DataTransferType, TabType } from "../constant";
+import { EasymailValueType, DataTransferType, TabType } from "../constant";
 
 export interface appContextType {
-  appData: AppDataType | null;
+  appData: EasymailValueType | null;
   setAppData: (
-    data: AppDataType | ((preData: AppDataType) => AppDataType)
+    data:
+      | EasymailValueType
+      | ((preData: EasymailValueType) => EasymailValueType)
   ) => void;
   tab: TabType;
   setTab: (tab: TabType) => void;

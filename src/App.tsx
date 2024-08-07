@@ -14,10 +14,14 @@ import {
   useState,
 } from "react";
 import { ConfigProvider, Flex, theme } from "antd";
-import { AppDataType, DataTransferType, TabType } from "./constant";
+import {
+  DataTransferType,
+  EasymailProps,
+  EasymailValueType,
+  TabType,
+} from "./constant";
 import {
   AppContext,
-  AppProps,
   ConfigContext,
   defaultConfig,
   NodeContext,
@@ -30,7 +34,7 @@ import "./App.css";
 import { useTranslation } from "react-i18next";
 
 export interface IRefProps {
-  getData: () => AppDataType;
+  getData: () => EasymailValueType;
 }
 
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
@@ -38,7 +42,7 @@ export interface IRefProps {
 /** This section will include all the interface for this tsx file */
 /* <------------------------------------ **** INTERFACE END **** ------------------------------------ */
 /* <------------------------------------ **** FUNCTION COMPONENT START **** ------------------------------------ */
-const App = forwardRef<IRefProps, AppProps>((props, ref) => {
+const App = forwardRef<IRefProps, EasymailProps>((props, ref) => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
   const { i18n } = useTranslation();
@@ -49,8 +53,8 @@ const App = forwardRef<IRefProps, AppProps>((props, ref) => {
   };
   const { value, width, height, colorPrimary, skin, lang } = mergeProps;
 
-  const [appData, setAppData] = useState<AppDataType>(
-    deepClone(value as AppDataType)
+  const [appData, setAppData] = useState<EasymailValueType>(
+    deepClone(value as EasymailValueType)
   );
   const [tab, setTab] = useState<TabType>("add");
   const [hoverNode, setHoverNode] = useState<HTMLElement | null>(null);

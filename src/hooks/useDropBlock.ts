@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { AppDataType, DROP_BLOCK } from "@/constant";
+import { DROP_BLOCK, EasymailValueType } from "@/constant";
 import { theme } from "antd";
 import { useAppData, useConfig, useDataTransfer, useFocusNode } from ".";
 import { addBlock, getIdxByNode, moveBlock } from "@/utils";
@@ -49,7 +49,7 @@ export const useDropBlock = () => {
       });
       if (dataTransfer.type == "add") {
         setAppData(
-          addBlock({ appData: appData as AppDataType, idx, dataTransfer })
+          addBlock({ appData: appData as EasymailValueType, idx, dataTransfer })
         );
       } else if (dataTransfer.type === "move") {
         const originIdx = getIdxByNode({
@@ -57,7 +57,7 @@ export const useDropBlock = () => {
           transferAction: dataTransfer.type,
         });
         setAppData(
-          moveBlock({ appData: appData as AppDataType, idx, originIdx })
+          moveBlock({ appData: appData as EasymailValueType, idx, originIdx })
         );
       }
     };

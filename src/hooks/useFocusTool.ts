@@ -12,7 +12,7 @@ import {
   isSection,
 } from "@/utils";
 import {
-  AppDataType,
+  EasymailValueType,
   BasicBlockType,
   BasicEnum,
   ColumnType,
@@ -61,7 +61,7 @@ export const useFocusTool = () => {
       const idx = getIdxByNode({ node: focusNode });
 
       if (isFocusCopy(target)) {
-        setAppData(copyBlock({ appData: appData as AppDataType, idx }));
+        setAppData(copyBlock({ appData: appData as EasymailValueType, idx }));
 
         const cloneFocusNode = focusNode.cloneNode(true) as Element;
         cloneFocusNode.classList.remove(FOCUS_CLS, HOVER_CLS);
@@ -79,7 +79,7 @@ export const useFocusTool = () => {
       }
 
       if (isFocusDelete(target)) {
-        setAppData(deleteBlock({ appData: appData as AppDataType, idx }));
+        setAppData(deleteBlock({ appData: appData as EasymailValueType, idx }));
         setFocusNodeCls("remove");
 
         if (isSectionNode) {

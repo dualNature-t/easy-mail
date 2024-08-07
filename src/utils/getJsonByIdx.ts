@@ -1,10 +1,10 @@
-import { AppDataType } from "../constant";
+import { EasymailValueType } from "@/constant";
 
 export const getJsonByIdx = ({
   appData,
   idx,
 }: {
-  appData: AppDataType | undefined;
+  appData: EasymailValueType | undefined;
   idx: string;
 }) => {
   const idxArr = idx.split("-");

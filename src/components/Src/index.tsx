@@ -73,7 +73,7 @@ const Src: React.FC<SrcProps> = ({ label, name }): JSX.Element => {
   useEffect(() => {
     return () => {
       if (loading) {
-        onUploadFocusChange();
+        onUploadFocusChange?.();
       }
     };
   }, [focusNode, loading]);

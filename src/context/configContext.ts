@@ -1,9 +1,7 @@
-import { AppDataType } from "@/constant";
+import { EasymailProps, EasymailValueType } from "@/constant";
 import { createContext } from "react";
 
-export type LangType = "zh_CN" | "en_US";
-
-export const defaultAppData: AppDataType = {
+export const defaultAppData: EasymailValueType = {
   tagName: "mjml",
   attributes: {
     "css-class": "mjml",
@@ -53,7 +51,7 @@ export const defaultAppData: AppDataType = {
   ],
 };
 
-export const defaultConfig: AppProps = {
+export const defaultConfig: EasymailProps = {
   skin: "light",
   colorPrimary: "#1677ff",
   lang: undefined,
@@ -66,17 +64,4 @@ export const defaultConfig: AppProps = {
   onUploadFocusChange: () => {},
 };
 
-export interface AppProps {
-  skin?: "light" | "dark";
-  colorPrimary?: string;
-  lang?: LangType;
-  value?: AppDataType;
-  width?: string;
-  height?: string;
-  ref?: React.RefObject<Element>;
-  tinymceLink?: string;
-  onUpload?: (file: File) => Promise<{ url: string }>;
-  onUploadFocusChange: () => void;
-}
-
-export const ConfigContext = createContext<AppProps>(defaultConfig);
+export const ConfigContext = createContext<EasymailProps>(defaultConfig);

@@ -16,7 +16,7 @@ import {
   ColumnRightOutlined,
 } from "@/components/Icon";
 import Padding from "@/components/Padding";
-import { AppDataType, ColumnUnitType } from "@/constant";
+import { EasymailValueType, ColumnUnitType } from "@/constant";
 import { useAppData, useFocusNode } from "@/hooks";
 import { getIdxByNode, onLayoutChange } from "@/utils";
 import {
@@ -60,7 +60,7 @@ const SectionBlock = (): JSX.Element => {
   const handleLayoutChange = (column: ColumnUnitType) => {
     const idx = getIdxByNode({ node: focusNode as HTMLElement });
     setAppData(
-      onLayoutChange({ appData: appData as AppDataType, idx, column })
+      onLayoutChange({ appData: appData as EasymailValueType, idx, column })
     );
   };
   /* <------------------------------------ **** FUNCTION END **** ------------------------------------ */

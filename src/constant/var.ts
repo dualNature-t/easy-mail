@@ -1,4 +1,16 @@
-import { AppDataType } from ".";
+import { BasicBlockType, BasicType, ColumnType, EasymailValueType } from ".";
+
+export const MJ_COLUMN_EMPTY = "mj-column-empty";
+export const DROP_BLOCK = "drop-block";
+export const FOCUS_CLS = "focus";
+export const FOCUS_CHILD_CLS = "focus-child";
+export const HOVER_CLS = "hover";
+export const FOCUS_TOOL_CLS = "focus-tool";
+export const FOCUS_TOOL_DRAG = "focus-tool-drag";
+export const FOCUS_TOOL_COPY = "focus-tool-copy";
+export const FOCUS_TOOL_DELETE = "focus-tool-delete";
+export const EDITOR_TOOL_BOX = "editor-tool-box";
+export const EDITOR_BODY = "editor-body";
 
 export enum ColumnEnum {
   MJ_COLUMN_1 = "mj-column-1",
@@ -8,7 +20,6 @@ export enum ColumnEnum {
   MJ_COLUMN_LEFT = "mj-column-left",
   MJ_COLUMN_RIGHT = "mj-column-right",
 }
-export type ColumnType = `${ColumnEnum}`;
 
 export enum BasicEnum {
   MJML = "mjml",
@@ -23,15 +34,10 @@ export enum BasicEnum {
   MJ_SOCIAL = "mj-social",
   MJ_SOCIAL_ELEMENT = "mj-social-element",
 }
-export type BasicType = `${BasicEnum}`;
-export type BasicBlockType = Exclude<
-  `${BasicEnum}`,
-  "mjml" | "mj-body" | "mj-column" | "mj-section" | "mj-social-element"
->;
 
 export const defaultBlockPropertyJson: Record<
   BasicBlockType | ColumnType,
-  AppDataType
+  EasymailValueType
 > = {
   [BasicEnum.MJ_BUTTON]: {
     tagName: "mj-button",
@@ -286,6 +292,7 @@ export const basicBlockNameList: Array<BasicBlockType> = [
   "mj-spacer",
   "mj-text",
 ];
+
 export const tagNameList: Array<Exclude<BasicType, "mj-social-element">> = [
   "mjml",
   "mj-body",
@@ -293,16 +300,3 @@ export const tagNameList: Array<Exclude<BasicType, "mj-social-element">> = [
   "mj-section",
   ...basicBlockNameList,
 ];
-export type ColumnUnitType = "1" | "2" | "3" | "4" | "left" | "right";
-
-export const MJ_COLUMN_EMPTY = "mj-column-empty";
-export const DROP_BLOCK = "drop-block";
-export const FOCUS_CLS = "focus";
-export const FOCUS_CHILD_CLS = "focus-child";
-export const HOVER_CLS = "hover";
-export const FOCUS_TOOL_CLS = "focus-tool";
-export const FOCUS_TOOL_DRAG = "focus-tool-drag";
-export const FOCUS_TOOL_COPY = "focus-tool-copy";
-export const FOCUS_TOOL_DELETE = "focus-tool-delete";
-export const EDITOR_TOOL_BOX = "editor-tool-box";
-export const EDITOR_BODY = "editor-body";
