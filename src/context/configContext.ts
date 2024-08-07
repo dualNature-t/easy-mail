@@ -13,7 +13,7 @@ export const defaultAppData: AppDataType = {
       tagName: "mj-body",
       attributes: {
         "css-class": "mj-body",
-        "background-color": "transparent",
+        "background-color": undefined,
         width: "600px",
       },
       children: [],
@@ -43,7 +43,7 @@ export const defaultAppData: AppDataType = {
             {
               tagName: "mj-section",
               attributes: {
-                "background-color": "transparent",
+                "background-color": undefined,
               },
             },
           ],

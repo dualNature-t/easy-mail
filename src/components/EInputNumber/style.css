@@ -26,5 +26,6 @@
 }
 
 .easy-mail-input-number-input .ant-input-number-handler-wrap {
+  width: 22px !important;
   opacity: 1 !important;
 }

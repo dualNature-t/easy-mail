@@ -98,7 +98,7 @@ const ButtonBlock = (): JSX.Element => {
             return value.toHexString();
           }}
         >
-          <ColorPicker format="hex" showText />
+          <ColorPicker showText />
         </Form.Item>
 
         <BorderRadius />
@@ -129,7 +129,7 @@ const ButtonBlock = (): JSX.Element => {
             return value.toHexString();
           }}
         >
-          <ColorPicker format="hex" showText />
+          <ColorPicker showText />
         </Form.Item>
       </>
 

@@ -54,7 +54,7 @@ const DividerBlock = (): JSX.Element => {
             return value.toHexString();
           }}
         >
-          <ColorPicker format="hex" showText />
+          <ColorPicker showText />
         </Form.Item>
       </>
       <>

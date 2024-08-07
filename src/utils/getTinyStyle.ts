@@ -18,7 +18,11 @@ export const getTinyStyle = ({
   return `
       html {
         height: 100%;
-        scrollbar-color: rgba(255, 255, 255, 0.25) rgba(253, 253, 253, 0.12);
+        scrollbar-color: ${
+          token.colorBgBase === "#fff"
+            ? ""
+            : "rgba(255, 255, 255, 0.25) rgba(253, 253, 253, 0.12)"
+        };
       }
       *:focus-visible {
         outline: none;

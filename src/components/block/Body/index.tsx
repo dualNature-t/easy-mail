@@ -41,7 +41,7 @@ const BodyBlock = (): JSX.Element => {
           return value.toHexString();
         }}
       >
-        <ColorPicker showText format="hex" />
+        <ColorPicker showText />
       </Form.Item>
 
       <EInputNumber
@@ -60,7 +60,7 @@ const BodyBlock = (): JSX.Element => {
           return value.toHexString();
         }}
       >
-        <ColorPicker showText format="hex" />
+        <ColorPicker showText />
       </Form.Item>
 
       <Form.Item
@@ -70,7 +70,7 @@ const BodyBlock = (): JSX.Element => {
           return value.toHexString();
         }}
       >
-        <ColorPicker showText format="hex" />
+        <ColorPicker showText />
       </Form.Item>
 
       <Form.Item
@@ -80,7 +80,7 @@ const BodyBlock = (): JSX.Element => {
           return value.toHexString();
         }}
       >
-        <ColorPicker showText format="hex" />
+        <ColorPicker showText />
       </Form.Item>
 
       <Form.Item
@@ -90,7 +90,7 @@ const BodyBlock = (): JSX.Element => {
           return value.toHexString();
         }}
       >
-        <ColorPicker showText format="hex" />
+        <ColorPicker showText />
       </Form.Item>
     </>
   );

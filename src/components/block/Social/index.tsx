@@ -363,7 +363,6 @@ const SocialBlock = (): JSX.Element => {
                   >
                     <Text strong>{t("property.icon_color")}</Text>
                     <ColorPicker
-                      format="hex"
                       value={attr?.["background-color"]}
                       onChange={(_, hex) => {
                         onChange(index, "background-color", hex, attr);
@@ -428,7 +427,7 @@ const SocialBlock = (): JSX.Element => {
             return value.toHexString();
           }}
         >
-          <ColorPicker format="hex" showText />
+          <ColorPicker showText />
         </Form.Item>
       </>
 

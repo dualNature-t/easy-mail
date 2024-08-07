@@ -112,7 +112,7 @@ const SectionBlock = (): JSX.Element => {
             return value.toHexString();
           }}
         >
-          <ColorPicker showText format="hex" />
+          <ColorPicker showText />
         </Form.Item>
 
         <Src name="background-url" label={t("property.background_image")} />
