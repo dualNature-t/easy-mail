@@ -2,54 +2,64 @@
 
 This is a simple email editor built with React and Vite. It allows users to compose and send emails with various features such as drag-and-drop functionality, email templates, and a rich text editor. The project is designed to be easy to use and customize, with a clean and intuitive interface.
 
-## Package
+## 📦 Install
 
-- Here's an package of a use:
-
-```js
-npm i easy-mail-editor
+```bash
+npm install easy-mail-editor
 ```
 
-## Example
+```bash
+yarn add easy-mail-editor
+```
 
-- Here's an example of a use:
+```bash
+pnpm add easy-mail-editor
+```
 
-```js
-const [lang, setLang] = (useState < "en_US") | ("zh_CN" > "zh_CN");
-const [skin, setSkin] = (useState < "light") | ("dark" > "light");
+## 🔨 Usage
 
-const ref = useRef < IRefProps > null;
-const rejectRef = useRef < any > null;
+```tsx
+const [lang, setLang] = useState<EasymailLangType>("zh_CN");
+const [skin, setSkin] = useState<EasymailSkinType>("light");
+
+const ref = useRef<EasymailRefProps | null>(null);
+const rejectRef = useRef<Promise<string> | null>(null);
 
 const getEditorMjmlJson = () => {
   return ref.current?.getData();
 };
 
-<EasyMail
-  lang={lang}
-  width="100vw"
-  height="100vh"
-  skin={skin}
-  colorPrimary={""}
-  ref={ref}
-  value={mjmlJson}
-  tinymceLink={tinymceLink}
-  onUpload={(file: File) => {
-    return new Promise((resolve, reject) => {
-      rejectRef.current = reject;
-      setTimeout(async () => {
-        try {
-          const url = await fileToBase64(file);
-          resolve({ url });
-        } catch (error) {
-          reject("upload error");
-        }
-      }, 5000);
-    });
-  }}
-  onUploadFocusChange={() => {
-    rejectRef.current("error");
-    rejectRef.current = null;
-  }}
-/>;
+return (
+  <EasyMail
+    lang={lang}
+    width="100vw"
+    height="100vh"
+    skin={skin}
+    colorPrimary={""}
+    ref={ref}
+    value={mjmlJson}
+    tinymceLink={tinymceLink}
+    onUpload={(file: File) => {
+      return new Promise((resolve, reject) => {
+        rejectRef.current = reject;
+        setTimeout(async () => {
+          try {
+            const url = await fileToBase64(file);
+            resolve({ url });
+          } catch (error) {
+            reject("upload error");
+          }
+        }, 5000);
+      });
+    }}
+    onUploadFocusChange={() => {
+      rejectRef.current("error");
+      rejectRef.current = null;
+    }}
+  />
+);
 ```
+
+## 🔗 Links
+
+- [Home page](https://dualnature-t.github.io/easy-mail-demo/)
