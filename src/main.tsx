@@ -6,7 +6,7 @@ import "./i18n.ts";
 // ReactDOM.createRoot(document.getElementById("root")!).render(
 //   <React.StrictMode>
 //     <App
-//         lang="zh_CN"
+//       lang="zh_CN"
 //       width="100vw"
 //       height="100vh"
 //       onUploadFocusChange={() => {}}

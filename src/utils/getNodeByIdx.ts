@@ -9,6 +9,7 @@ export const getNodeByIdx = <T extends Element>({
 }): T | null => {
   if (!idx) return null;
   const idxArr = idx.split("-");
+  idxArr.splice(0, 1, "0");
   let index = 0;
   let result = doc.querySelector("body") as Element;
 

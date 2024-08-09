@@ -36,7 +36,7 @@ export enum BasicEnum {
 }
 
 export const defaultBlockPropertyJson: Record<
-  BasicBlockType | ColumnType,
+  BasicBlockType | ColumnType | BasicEnum.MJ_SECTION,
   EasymailValueType
 > = {
   [BasicEnum.MJ_BUTTON]: {
@@ -138,6 +138,16 @@ export const defaultBlockPropertyJson: Record<
       padding: "10px",
     },
     content: "",
+  },
+  [BasicEnum.MJ_SECTION]: {
+    tagName: "mj-section",
+    attributes: {
+      "css-class": "mj-section",
+      "border-radius": "0px",
+      "background-repeat": "repeat",
+      "background-size": "auto",
+      padding: "20px",
+    },
   },
 
   [ColumnEnum.MJ_COLUMN_1]: {

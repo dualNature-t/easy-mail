@@ -57,6 +57,7 @@ const Attributes = (): JSX.Element => {
   const nodeIdx = useMemo(() => {
     return getIdxByNode({ node: focusNode });
   }, [focusNode]);
+
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/

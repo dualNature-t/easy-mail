@@ -16,3 +16,6 @@ export { fileToBase64 } from "./file2base64";
 export * from "./isUrl";
 export * from "./getTinyLangs";
 export { getTinyStyle } from "./getTinyStyle";
+export { transformJsonOrder } from "./transformJsonOrder";
+export { jsonToMjml } from "./jsonToMjml";
+export { formatClassToJson } from "./formatClassToJson";

@@ -28,6 +28,7 @@ const getTargetTree = (
   const tree = idArr.reduce((cur, pre) => {
     return cur?.children?.[pre] as EasymailValueType;
   }, result);
+  tree.children = tree.children ? tree.children : [];
   return { result, tree };
 };
 
@@ -35,7 +36,7 @@ export const formatPrefixPublicProperty = (
   appData?: EasymailValueType | null
 ) => {
   if (!appData) return {};
-  const { tree } = getTargetTree(appData, "1-0");
+  const { tree } = getTargetTree(appData, "0-0");
 
   let result: Record<string, unknown> = {};
   tree.children?.forEach((i) => {
@@ -53,7 +54,7 @@ export const getPublicAttrChildren = (
   appData: EasymailValueType,
   property: Record<string, unknown>
 ) => {
-  const { tree } = getTargetTree(appData, "1-0");
+  const { tree } = getTargetTree(appData, "0-0");
   const result = tree.children?.map((i) => {
     const tagKey = i.tagName.split("-")[1];
     const attrs: Record<string, unknown> = {};
@@ -93,9 +94,16 @@ export const onPropertyChange = ({
 }: PyloadType & { property: Record<string, unknown>; index?: number }) => {
   let { result, tree } = getTargetTree(appData, idx);
 
-  if (idx === "0") {
-    const mjAttr = result.children?.[1]?.children?.[0] as EasymailValueType;
+  if (idx === "1") {
+    const { width, "background-color": backgroundColor } = property;
+    const mjAttr = result.children?.[0]?.children?.[0] as EasymailValueType;
+
     mjAttr.children = getPublicAttrChildren(appData, property);
+    tree.attributes = {
+      ...tree.attributes,
+      ...{ width, "background-color": backgroundColor },
+    };
+    return result;
   }
 
   if (!isEmpty(index)) {

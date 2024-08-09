@@ -1,55 +1,7 @@
-import { EasymailProps, EasymailValueType } from "@/constant";
+import { EasymailProps } from "@/constant";
 import { createContext } from "react";
 
-export const defaultAppData: EasymailValueType = {
-  tagName: "mjml",
-  attributes: {
-    "css-class": "mjml",
-  },
-  children: [
-    {
-      tagName: "mj-body",
-      attributes: {
-        "css-class": "mj-body",
-        "background-color": undefined,
-        width: "600px",
-      },
-      children: [],
-    },
-    {
-      tagName: "mj-head",
-      attributes: {},
-      children: [
-        {
-          tagName: "mj-attributes",
-          attributes: {},
-          children: [
-            {
-              tagName: "mj-all",
-              attributes: {
-                "font-family": "arial",
-                color: "#000000",
-              },
-            },
-            {
-              tagName: "mj-button",
-              attributes: {
-                color: "#FFFFFF",
-                "background-color": "#414141",
-              },
-            },
-            {
-              tagName: "mj-section",
-              attributes: {
-                "background-color": undefined,
-              },
-            },
-          ],
-        },
-      ],
-    },
-  ],
-};
+export const defaultAppData: string = `<mjml><mj-head><mj-attributes><mj-all font-family="arial" color="#000000"></mj-all><mj-button color="#FFFFFF" background-color="#414141"></mj-button><mj-section></mj-section></mj-attributes></mj-head><mj-body  css-class="mj-body" width="600px"></mj-body></mjml>`;
 
 export const defaultConfig: EasymailProps = {
   skin: "light",

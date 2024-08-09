@@ -6,7 +6,7 @@ export type EasymailLangType = "zh_CN" | "en_US";
 export type EasymailSkinType = "light" | "dark";
 
 export interface EasymailRefProps {
-  getData: () => EasymailValueType;
+  getData: () => { json: EasymailValueType; mjml: string };
 }
 
 export type EasymailValueType = {
@@ -38,7 +38,7 @@ export interface EasymailProps {
   /** language */
   lang?: EasymailLangType;
   /** JSON value */
-  value?: EasymailValueType;
+  value?: EasymailValueType | string;
   /** width  */
   width?: string;
   /** height  */

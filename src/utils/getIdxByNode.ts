@@ -8,7 +8,7 @@ export const getIdxByNode = ({
   node: Element | null;
   transferAction?: TransferActionType;
 }) => {
-  let idx = "0";
+  let idx = "1";
   if (!node) return idx;
   if (isBody(node.parentElement)) {
     let id = 0;

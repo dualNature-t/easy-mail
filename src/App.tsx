@@ -30,10 +30,15 @@ import {
 import Header from "./pages/Header";
 import Aside from "./pages/Aside";
 import Main from "./pages/Main";
-import { deepClone, isEmpty } from "./utils";
-import "./App.css";
+import {
+  formatClassToJson,
+  isEmpty,
+  jsonToMjml,
+  transformJsonOrder,
+} from "./utils";
 import { useTranslation } from "react-i18next";
-
+import mjml2html from "mjml-browser";
+import "./App.css";
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
@@ -51,8 +56,15 @@ const App = forwardRef<EasymailRefProps, EasymailProps>((props, ref) => {
   const { value, width, height, colorPrimary, skin, lang } = mergeProps;
 
   const [appData, setAppData] = useState<EasymailValueType>(
-    deepClone(value as EasymailValueType)
+    formatClassToJson(
+      transformJsonOrder(
+        (typeof value === "string"
+          ? mjml2html(value).json
+          : value) as EasymailValueType
+      )
+    )
   );
+
   const [tab, setTab] = useState<TabType>("add");
   const [hoverNode, setHoverNode] = useState<HTMLElement | null>(null);
   const [focusNode, setFocusNode] = useState<HTMLElement | null>(null);
@@ -67,7 +79,7 @@ const App = forwardRef<EasymailRefProps, EasymailProps>((props, ref) => {
   useImperativeHandle(ref, () => {
     return {
       getData: () => {
-        return appData;
+        return { json: appData, mjml: jsonToMjml(appData) };
       },
     };
   });
