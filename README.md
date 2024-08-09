@@ -30,7 +30,7 @@ const getEditorMjmlJson = () => {
 };
 
 return (
-  <EasyMail
+  <Easymail
     lang={lang}
     width="100vw"
     height="100vh"

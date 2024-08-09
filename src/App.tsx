@@ -17,6 +17,7 @@ import { ConfigProvider, Flex, theme } from "antd";
 import {
   DataTransferType,
   EasymailProps,
+  EasymailRefProps,
   EasymailValueType,
   TabType,
 } from "./constant";
@@ -33,16 +34,12 @@ import { deepClone, isEmpty } from "./utils";
 import "./App.css";
 import { useTranslation } from "react-i18next";
 
-export interface IRefProps {
-  getData: () => EasymailValueType;
-}
-
 /* <------------------------------------ **** DEPENDENCE IMPORT END **** ------------------------------------ */
 /* <------------------------------------ **** INTERFACE START **** ------------------------------------ */
 /** This section will include all the interface for this tsx file */
 /* <------------------------------------ **** INTERFACE END **** ------------------------------------ */
 /* <------------------------------------ **** FUNCTION COMPONENT START **** ------------------------------------ */
-const App = forwardRef<IRefProps, EasymailProps>((props, ref) => {
+const App = forwardRef<EasymailRefProps, EasymailProps>((props, ref) => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
   /************* This section will include this component HOOK function *************/
   const { i18n } = useTranslation();
