@@ -53,11 +53,12 @@ const Border = (): JSX.Element => {
     property: Record<BorderType | "border", string>;
     setProperty: (value: Record<string, unknown>) => void;
   };
+  const hasBorder = property?.border && property?.border !== "none";
   /* <------------------------------------ **** STATE END **** ------------------------------------ */
   /* <------------------------------------ **** PARAMETER START **** ------------------------------------ */
   /************* This section will include this component parameter *************/
   const { borderWidth, borderStyle, borderColor } = useMemo(() => {
-    const config = property?.border || defaultConfig;
+    const config = hasBorder ? property?.border : defaultConfig;
     const [borderWidth, borderStyle, borderColor] = config.split(" ");
     return {
       borderWidth,
@@ -141,7 +142,7 @@ const Border = (): JSX.Element => {
   /* <------------------------------------ **** EFFECT START **** ------------------------------------ */
   /************* This section will include this component general function *************/
   useEffect(() => {
-    setOpen(!!(property as { border: string })?.border);
+    setOpen(!!hasBorder);
   }, [property]);
   /* <------------------------------------ **** EFFECT END **** ------------------------------------ */
   return (
@@ -149,10 +150,7 @@ const Border = (): JSX.Element => {
       <Flex align="center" justify="space-between">
         <Text strong>{t("property.border")}</Text>
 
-        <Switch
-          value={!!(property as { border: string })?.border}
-          onChange={onSwitchChange}
-        />
+        <Switch value={!!hasBorder} onChange={onSwitchChange} />
       </Flex>
 
       {open && (

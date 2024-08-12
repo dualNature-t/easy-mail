@@ -288,7 +288,11 @@ export const useDropContainer = () => {
               const idx = getIdxByNode({ node: node as Element });
               setDataTransfer({ type: "tinymce" });
               setAppData((preData) => {
-                return onTextContentChange({ appData: preData, idx, content });
+                return onTextContentChange({
+                  appData: preData,
+                  idx,
+                  content,
+                });
               });
             });
             editor.on("blur", () => {

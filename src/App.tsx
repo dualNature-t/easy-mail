@@ -55,7 +55,7 @@ const App = forwardRef<EasymailRefProps, EasymailProps>((props, ref) => {
   };
   const { value, width, height, colorPrimary, skin, lang } = mergeProps;
 
-  const [appData, setAppData] = useState<EasymailValueType>(
+  const [appData, setAppData] = useState<EasymailValueType>(() =>
     formatClassToJson(
       transformJsonOrder(
         (typeof value === "string"

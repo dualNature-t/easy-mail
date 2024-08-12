@@ -21,6 +21,7 @@ interface EInputNumberProps {
   step?: number;
   label?: React.ReactNode;
   value?: number;
+  percentMax?: number;
   onChange?: (value: number | null) => void;
 }
 
@@ -43,8 +44,8 @@ const EInputNumber: React.FC<EInputNumberProps> = ({
   style,
   step = initStep,
   label,
-
   value,
+  percentMax,
   onChange,
 }): JSX.Element => {
   /* <------------------------------------ **** STATE START **** ------------------------------------ */
@@ -77,7 +78,7 @@ const EInputNumber: React.FC<EInputNumberProps> = ({
   const InputEle = (
     <InputNumber
       min={0}
-      max={String(unit)?.includes("%") ? 100 : undefined}
+      max={percentMax}
       step={getStep()}
       style={style}
       className="easy-mail-input-number-input"

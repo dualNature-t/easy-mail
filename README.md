@@ -22,8 +22,8 @@ pnpm add easy-mail-editor
 const [lang, setLang] = useState<EasymailLangType>("zh_CN");
 const [skin, setSkin] = useState<EasymailSkinType>("light");
 
-const ref = useRef<EasymailRefProps | null>(null);
-const rejectRef = useRef<Promise<string> | null>(null);
+const ref = useRef<EasymailRefProps>(null);
+const rejectRef = useRef<Promise<string>>(null);
 
 const getEditorMjmlJson = () => {
   return ref.current?.getData();

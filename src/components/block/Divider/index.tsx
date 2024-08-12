@@ -37,6 +37,7 @@ const DividerBlock = (): JSX.Element => {
 
         <EInputNumber
           name="width"
+          percentMax={100}
           options={["px", "%"]}
           label={<Text strong>{t("property.width")}</Text>}
         />

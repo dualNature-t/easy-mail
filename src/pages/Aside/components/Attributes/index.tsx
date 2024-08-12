@@ -139,13 +139,7 @@ const Attributes = (): JSX.Element => {
             } else {
               const propertyKey = key.split("_")[0];
               if (!isEmpty(value)) {
-                const propertyValue =
-                  value === "%"
-                    ? Number(result[propertyKey]) > 100
-                      ? 100
-                      : result[propertyKey]
-                    : result[propertyKey];
-                result[propertyKey] = `${propertyValue}${value}`;
+                result[propertyKey] = `${result[propertyKey]}${value}`;
               }
             }
           });
