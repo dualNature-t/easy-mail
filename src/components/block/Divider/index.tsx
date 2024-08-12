@@ -6,7 +6,7 @@
  */
 /* <------------------------------------ **** DEPENDENCE IMPORT START **** ------------------------------------ */
 /** This section will include all the necessary dependence for this tsx file */
-import { EDivider, EInputNumber, Padding } from "@/components";
+import { Align, EDivider, EInputNumber, Padding } from "@/components";
 import { ColorPicker, Form, Typography } from "antd";
 import { Color } from "antd/es/color-picker";
 import { useTranslation } from "react-i18next";
@@ -60,6 +60,8 @@ const DividerBlock = (): JSX.Element => {
       </>
       <>
         <EDivider>{t("basic.position")}</EDivider>
+
+        <Align />
 
         <Padding />
       </>

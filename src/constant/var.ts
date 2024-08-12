@@ -62,6 +62,7 @@ export const defaultBlockPropertyJson: Record<
       "border-style": "solid",
       "border-color": "#000000",
       padding: "10px 25px",
+      align: "center",
     },
   },
   [BasicEnum.MJ_IMAGE]: {
